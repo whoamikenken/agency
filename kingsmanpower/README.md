@@ -32,3 +32,8 @@ $ php artisan storage:link ( do only once )
 $ php artisan serve
 
 ```
+
+
+# Init repo with git flow ( only once )
+$ git flow init
+( press enter for all the default value )
