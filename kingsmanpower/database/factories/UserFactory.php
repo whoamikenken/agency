@@ -17,12 +17,21 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $firstName = fake()->firstName();
+        $lastName = fake()->lastName();
+        $ran = fake()->randomNumber(5, false);
+        $name = $firstName." ".$lastName;
+        $username = $firstName.$ran;
         return [
-            'name' => fake()->name(),
+            'username' => $username,
+            'name' => $name,
+            'fname' => $firstName,
+            'lname' => fake()->lastName(),
             'email' => fake()->safeEmail(),
+            'user_type' => 'admin',
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'password' => bcrypt('a'), // password
+            'remember_token' => Str::random(10)
         ];
     }
 
