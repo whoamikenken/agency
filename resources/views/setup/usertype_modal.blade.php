@@ -1,4 +1,4 @@
-<form id="locationForm" class="row g-2 needs-validation" novalidate>
+<form id="usertypeForm" class="row g-2 needs-validation" novalidate>
     @csrf
     <input type="hidden" name="uid" value="{{($uid)}}">
     <div class="col-md-6 col-sm-12">
@@ -36,9 +36,9 @@
 <script>
     
     $("#saveModal").unbind("click").click(function() {
-        bootstrapForm($("#locationForm"));
+        bootstrapForm($("#usertypeForm"));
         
-        var formdata = $("#locationForm").serialize();
+        var formdata = $("#usertypeForm").serialize();
 
         swal.fire({
             html: '<h4>Loading...</h4>',
@@ -48,7 +48,7 @@
         });
 
         $.ajax({
-            url: "{{ url('location/add') }}",
+            url: "{{ url('usertype/add') }}",
             type: "POST",
             data: formdata,
             dataType: 'json',
@@ -61,7 +61,7 @@
                         time: 2500
                     })
                     $("#modalclose").click();
-                    LocationList();
+                    UsertypeList();
                 }else if (response.status == 2) {
                     Swal.fire({
                         icon: 'info',

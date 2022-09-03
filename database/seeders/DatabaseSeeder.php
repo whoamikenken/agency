@@ -42,7 +42,8 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             JobsiteSeeder::class,
             PrincipalSeeder::class,
-            MenuSeeder::class
+            MenuSeeder::class,
+            UsertypeSeeder::class
         ]);
     }
 }

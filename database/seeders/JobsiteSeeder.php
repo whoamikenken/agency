@@ -24,7 +24,7 @@ class JobsiteSeeder extends Seeder
         ]);
 
         Jobsite::factory()->create([
-            'code' => 'MAY',
+            'code' => 'MY',
             'description' => 'Malaysia',
             'modified_by' => 1,
             'created_by' => 1,
@@ -38,7 +38,7 @@ class JobsiteSeeder extends Seeder
         ]);
 
         Jobsite::factory()->create([
-            'code' => 'MAY',
+            'code' => 'MY',
             'description' => 'Malaysia',
             'modified_by' => 1,
             'created_by' => 1,
@@ -52,7 +52,7 @@ class JobsiteSeeder extends Seeder
         ]);
 
         Jobsite::factory()->create([
-            'code' => 'MAY',
+            'code' => 'MY',
             'description' => 'Malaysia',
             'modified_by' => 1,
             'created_by' => 1,

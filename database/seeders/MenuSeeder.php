@@ -76,6 +76,7 @@ class MenuSeeder extends Seeder
             'root' => '0',
             'title' => 'User type',
             'icon' => 'people',
+            'link' => '/usertype',
             'description' => "Creating new usertype"
         ]);
 

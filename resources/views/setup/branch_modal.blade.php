@@ -4,7 +4,7 @@
     <div class="col-md-6 col-sm-12">
         <label>Code<span class="text-danger">*</span></label>
         <div class="input-group">
-            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+            <div class="input-group-text"><i class="bi bi-pencil-fill"></i></div>
             <input type="text" id="code" name="code"
             class="form-control validate" placeholder="Enter Code" required value="{{ (isset($code))? $code:"" }}">
             <div class="valid-feedback">
@@ -19,7 +19,7 @@
     <div class="col-md-6 col-sm-12">
         <label>Description<span class="text-danger">*</span></label>
         <div class="input-group">
-            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+            <div class="input-group-text"><i class="bi bi-pencil-fill"></i></div>
             <input type="text" id="description" name="description"
             class="form-control validate" placeholder="Enter Description" required value="{{ (isset($description))? $description:"" }}">
             <div class="valid-feedback">

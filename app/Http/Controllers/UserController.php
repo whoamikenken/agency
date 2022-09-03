@@ -8,6 +8,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 
 class UserController extends Controller
 {
@@ -135,7 +137,13 @@ class UserController extends Controller
         }
 
         if ($request->hasFile('user_image')) {
+            
+            // dd(ImageOptimizer::optimize());
+            // $optr = ImageOptimizer::optimize(Storage::path('public') . '/user_image/test.png');
+            // $orig = $request->file('user_image')->store('user_image', 'public');
+            // $newOptPath = str_replace("user_image", "user_image_opt", $orig);
             $formFields['user_image'] = $request->file('user_image')->store('user_image', 'public');
+            // dd($path.$newOptPath);
         }
 
         $formFields['name'] = $formFields['fname']." ".$formFields['lname'];

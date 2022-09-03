@@ -10,6 +10,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\JobsiteController;
 use App\Http\Controllers\MedicalController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\UsertypeController;
 use App\Http\Controllers\PrincipalController;
 
 /*
@@ -71,11 +72,23 @@ Route::post('/user/table', [UserController::class, 'getTable'])->withoutMiddlewa
 Route::post('/user/getModal', [UserController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/user/add', [UserController::class, 'store']);
 Route::post('/user/delete', [UserController::class, 'delete']);
+
+// USER TYPE
+Route::get('/usertype', [UsertypeController::class, 'index'])->name('usertype')->middleware('auth');
+Route::post('/usertype/table', [UsertypeController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/usertype/getModal', [UsertypeController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/usertype/add', [UsertypeController::class, 'store']);
+Route::post('/usertype/delete', [UsertypeController::class, 'delete']);
+
+
 // Logout User
 Route::post('/logout', [UserController::class, 'logout']);
 
 // Loging user
 Route::post('/login/validate', [UserController::class, 'validateLogin']);
 Route::post('/login/register', [UserController::class, 'register']);
+
+// DASHBAORD
+Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 
