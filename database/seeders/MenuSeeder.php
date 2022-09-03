@@ -19,7 +19,7 @@ class MenuSeeder extends Seeder
         menu::factory()->create([
             'root' => '0',
             'title' => 'Dashboard',
-            'link' => '/dashboard',
+            'link' => '/home',
             'icon' => 'motherboard',
             'description' => "Visual display of all of your data"
         ]);

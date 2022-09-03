@@ -113,6 +113,9 @@ class UserController extends Controller
         }
 
         $data['uid'] = $formFields['uid'];
+
+        $data['usertype_select'] = DB::table('usertype')->get();
+
         // dd($data);
         return view('setup/user_modal', $data);
     }

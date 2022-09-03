@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
                 <h3 class="mb-3">Login Now</h3>
-                <div class="bg-white shadow rounded">
+                <div class="bg-white shadow rounded animate__animated animate__fadeInUp">
                     <div class="row">
                         <div class="col-md-7 pe-0">
                             <div class="form-left h-100 py-5 px-5">

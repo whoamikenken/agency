@@ -67,12 +67,12 @@
         <div class="input-group">
             <div class="input-group-text"><i class="bi bi-person-lines-fill"></i></div>
             <select name="user_type" id="user_type" class="form-select validate">
-                {{-- @foreach ($jobsite_select as $item)
-                    <option value="{{$item->code}}" {{ (isset($jobsite) && $jobsite == $item->code)? "selected":"" }} >{{$item->description}}</option>
-                @endforeach --}}
+                @foreach ($usertype_select as $item)
+                    <option value="{{$item->code}}" {{ (isset($user_type) && $user_type == $item->code)? "selected":"" }} >{{$item->code}}</option>
+                @endforeach
 
-                <option value="Admin" {{ (isset($user_type) && $user_type == "Admin")? "selected":"" }} >Admin</option>
-                <option value="Sales" {{ (isset($user_type) && $user_type == "Sales")? "selected":"" }} >Sales</option>
+                {{-- <option value="Admin" {{ (isset($user_type) && $user_type == "Admin")? "selected":"" }} >Admin</option>
+                <option value="Sales" {{ (isset($user_type) && $user_type == "Sales")? "selected":"" }} >Sales</option> --}}
             </select>
             <div class="valid-feedback">
                 Looks good!
