@@ -142,7 +142,7 @@
                             </ul>
                             <form class="d-flex text-end justify-content-between">
                                 @if(Auth::user()->user_image != "")         
-                                <img class="rounded-circle me-lg-2" src="{{ asset('images/no-image.jpg')}}" alt="" style="width: 40px; height: 40px;">         
+                                    <img class="rounded-circle me-lg-2" src="{{ asset('storage/'.Auth::user()->user_image.'')}}" alt="" style="width: 40px; height: 40px;">         
                                 @else
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -291,5 +291,7 @@
         form.submit();
         document.body.removeChild(form);
     }
+
+
 </script>
 </html>

@@ -65,7 +65,7 @@
     <div class="col-md-6 col-sm-12">
         <label>User Type<span class="text-danger">*</span></label>
         <div class="input-group">
-            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+            <div class="input-group-text"><i class="bi bi-person-lines-fill"></i></div>
             <select name="user_type" id="user_type" class="form-select validate">
                 {{-- @foreach ($jobsite_select as $item)
                     <option value="{{$item->code}}" {{ (isset($jobsite) && $jobsite == $item->code)? "selected":"" }} >{{$item->description}}</option>
@@ -86,12 +86,8 @@
     <div class="col-md-6 col-sm-12">
         <label>Status<span class="text-danger">*</span></label>
         <div class="input-group">
-            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+            <div class="input-group-text"><i class="bi bi-pencil-fill"></i></div>
             <select name="status" id="status" class="form-select validate">
-                {{-- @foreach ($location_select as $item)
-                    <option value="{{$item->code}}" {{ (isset($location) && $location == $item->code)? "selected":"" }} >{{$item->description}}</option>
-                @endforeach --}}
-
                 <option value="verified" {{ (isset($status) && $status == "verified")? "selected":"" }} >Verified</option>
                 <option value="unverified" {{ (isset($status) && $status == "unverified")? "selected":"" }} >Unverified</option>
             </select>
@@ -104,10 +100,24 @@
         </div>
     </div>
 
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-md-6">
+        <label>User Image<span class="text-danger"></span></label>
+        <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-image"></i></div>
+            <input type="file" id="user_image" name="user_image" class="form-control" value="">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please input a image.
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
         <label>Password<span class="text-danger"></span></label>
         <div class="input-group">
-            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+            <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
             <input type="password" id="password" name="password"
             class="form-control" placeholder="Update password?" value="">
             <div class="valid-feedback">
@@ -126,8 +136,8 @@
     $("#saveModal").unbind("click").click(function() {
         bootstrapForm($("#userForm"));
         
-        var formdata = $("#userForm").serialize();
-
+        var formdata = processForm($("#userForm"));
+    
         swal.fire({
             html: '<h4>Loading...</h4>',
             didRender: function() {
@@ -139,6 +149,9 @@
             url: "{{ url('user/add') }}",
             type: "POST",
             data: formdata,
+            cache:false,
+            contentType: false,
+            processData: false,
             dataType: 'json',
             success: function(response) {
                 if (response.status == 1) {
@@ -172,4 +185,21 @@
             }
         });
     });
+
+    function processForm(form){
+
+        var formdata = new FormData(); // Creating object of FormData class
+        
+        form.find("select, textarea, input").each(function() {
+            console.log(this);
+            if ($(this).attr('type') == "file") {
+                var user_file = $(this)[0].files[0];
+                formdata.append($(this).attr('name'), user_file);
+            }else{
+                formdata.append($(this).attr('name'), $(this).val());
+            }
+        });
+
+        return formdata;
+    }
 </script>

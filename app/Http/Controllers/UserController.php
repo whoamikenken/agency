@@ -121,6 +121,7 @@ class UserController extends Controller
 
         $formFields = $request->validate([
             'uid' => ['required'],
+            'username' => ['required'],
             'fname' => ['required'],
             'lname' => ['required'],
             'status' => ['required'],
@@ -131,6 +132,10 @@ class UserController extends Controller
         
         if($formFields['password'] === null){
             unset($formFields['password']);
+        }
+
+        if ($request->hasFile('user_image')) {
+            $formFields['user_image'] = $request->file('user_image')->store('user_image', 'public');
         }
 
         $formFields['name'] = $formFields['fname']." ".$formFields['lname'];

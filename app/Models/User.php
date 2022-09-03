@@ -24,6 +24,7 @@ class User extends Authenticatable
         'fname',
         'lname',
         'user_type',
+        'user_image',
         'password',
         'status'
     ];
