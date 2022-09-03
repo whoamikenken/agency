@@ -15,9 +15,67 @@ class MenuSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //Menus
+
         menu::factory()->create([
             'root' => '0',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'title' => 'Main',
+            'link' => '',
+            'icon' => '',
+            'description' => ""
+        ]);
+
+        menu::factory()->create([
+            'root' => '0',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'title' => 'Human Management',
+            'link' => '',
+            'icon' => '',
+            'description' => ""
+        ]);
+
+        menu::factory()->create([
+            'root' => '0',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'title' => 'System Setup',
+            'link' => '',
+            'icon' => '',
+            'description' => ""
+        ]);
+
+        menu::factory()->create([
+            'root' => '0',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'title' => 'System Configuration',
+            'link' => '',
+            'icon' => '',
+            'description' => ""
+        ]);
+        
+
+        menu::factory()->create([
+            'root' => '1',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            }, 
+            'order' => function () {
+                $maxOrder = menu::where('root','=','1')->count('order'); // returns 0 if no records exist.
+                return $maxOrder + 1;
+            },
             'title' => 'Dashboard',
             'link' => '/home',
             'icon' => 'motherboard',
@@ -25,7 +83,15 @@ class MenuSeeder extends Seeder
         ]);
 
         menu::factory()->create([
-            'root' => '0',
+            'root' => '2',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'order' => function () {
+                $maxOrder = menu::where('root','=','2')->count('order'); // returns 0 if no records exist.
+                return $maxOrder + 1;
+            },
             'title' => 'User Management',
             'link' => '/user',
             'icon' => 'person-badge',
@@ -33,7 +99,15 @@ class MenuSeeder extends Seeder
         ]);
 
         menu::factory()->create([
-            'root' => '0',
+            'root' => '3',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'order' => function () {
+                $maxOrder = menu::where('root','=','3')->count('order'); // returns 0 if no records exist.
+                return $maxOrder + 1;
+            },
             'title' => 'Branch',
             'link' => '/branch',
             'icon' => 'inboxes',
@@ -41,7 +115,15 @@ class MenuSeeder extends Seeder
         ]);
 
         menu::factory()->create([
-            'root' => '0',
+            'root' => '3',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'order' => function () {
+                $maxOrder = menu::where('root','=','3')->count('order'); // returns 0 if no records exist.
+                return $maxOrder + 1;
+            },
             'title' => 'Location',
             'link' => '/location',
             'icon' => 'geo-alt',
@@ -49,7 +131,15 @@ class MenuSeeder extends Seeder
         ]);
 
         menu::factory()->create([
-            'root' => '0',
+            'root' => '3',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'order' => function () {
+                $maxOrder = menu::where('root','=','3')->count('order'); // returns 0 if no records exist.
+                return $maxOrder + 1;
+            },
             'title' => 'Medical Clinic',
             'link' => '/medical',
             'icon' => 'hospital',
@@ -57,7 +147,15 @@ class MenuSeeder extends Seeder
         ]);
 
         menu::factory()->create([
-            'root' => '0',
+            'root' => '3',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'order' => function () {
+                $maxOrder = menu::where('root','=','3')->count('order'); // returns 0 if no records exist.
+                return $maxOrder + 1;
+            },
             'title' => 'Principals',
             'link' => '/principal',
             'icon' => 'building',
@@ -65,7 +163,15 @@ class MenuSeeder extends Seeder
         ]);
 
         menu::factory()->create([
-            'root' => '0',
+            'root' => '3',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'order' => function () {
+                $maxOrder = menu::where('root','=','3')->count('order'); // returns 0 if no records exist.
+                return $maxOrder + 1;
+            },
             'title' => 'Jobsites',
             'link' => '/jobsite',
             'icon' => 'airplane-engines',
@@ -73,7 +179,15 @@ class MenuSeeder extends Seeder
         ]);
 
         menu::factory()->create([
-            'root' => '0',
+            'root' => '2',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'order' => function () {
+                $maxOrder = menu::where('root','=','2')->count('order'); // returns 0 if no records exist.
+                return $maxOrder + 1;
+            },
             'title' => 'User type',
             'icon' => 'people',
             'link' => '/usertype',
@@ -81,10 +195,34 @@ class MenuSeeder extends Seeder
         ]);
 
         menu::factory()->create([
-            'root' => '0',
+            'root' => '2',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'order' => function () {
+                $maxOrder = menu::where('root','=','2')->count('order'); // returns 0 if no records exist.
+                return $maxOrder + 1;
+            },
             'title' => 'Applicant List',
             'link' => '/applicant',
             'icon' => 'person-rolodex',
+            'description' => "Creating new applicant and modification"
+        ]);
+
+        menu::factory()->create([
+            'root' => '4',
+            'menu_id' => function () {
+                $max = menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'order' => function () {
+                $maxOrder = menu::where('root', '=', '4')->count('order'); // returns 0 if no records exist.
+                return $maxOrder + 1;
+            },
+            'title' => 'Table Picker',
+            'link' => '/tablepermission',
+            'icon' => 'wrench-adjustable-circle',
             'description' => "Creating new applicant and modification"
         ]);
 

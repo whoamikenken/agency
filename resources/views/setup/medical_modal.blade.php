@@ -67,12 +67,27 @@
         </div>
     </div>
 
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-md-6">
         <label>Contact<span class="text-danger">*</span></label>
         <div class="input-group">
             <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
             <input type="text" id="contact" name="contact"
             class="form-control validate" placeholder="Enter Contact" required value="{{ (isset($contact))? $contact:"" }}">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please input a Contact.
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
+        <label>Expiration Date<span class="text-danger">*</span></label>
+        <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-calendar-x"></i></div>
+            <input type="text" id="contact" name="contact"
+            class="form-control validate datepicker" required value="{{ (isset($expiration_date))? $expiration_date:"" }}">
             <div class="valid-feedback">
                 Looks good!
             </div>
@@ -102,6 +117,11 @@
 <script>
     
     $(document).ready(function () {
+
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        
         $('#jobsite').select2({
             dropdownParent: $('#modal-view'),
             theme: 'bootstrap-5'

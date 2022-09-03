@@ -38,7 +38,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
     {{-- DATATABLE --}}
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-html5-2.2.3/b-print-2.2.3/r-2.3.0/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/r-2.3.0/datatables.min.css"/>
     
     {{-- SELECT2 CSS --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
@@ -66,7 +66,7 @@
     {{-- DATATABLE --}}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-html5-2.2.3/b-print-2.2.3/r-2.3.0/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/r-2.3.0/datatables.min.js"></script> 
     
     {{-- DATE PICKER --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
@@ -104,11 +104,11 @@
             background-color: white;
             border-radius: 5px;
         }
-
+        
         /* Datatable Print Button */
-        button.btn.btn-secondary.buttons-excel.buttons-html5 {
+        /* button.btn.btn-secondary.buttons-excel.buttons-html5 {
             margin-left: 10px;
-        }   
+        }    */
     </style>
     
     <script type="text/javascript">
@@ -133,16 +133,16 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            {{-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 @foreach ($menus as $item)
                                 <li class="nav-item d-block d-sm-none">
                                     <a class="nav-link" aria-current="page" href="{{ url($item->link) }}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
                                 </li>
                                 @endforeach
-                            </ul>
+                            </ul> --}}
                             <form class="d-flex text-end justify-content-between">
                                 @if(Auth::user()->user_image != "")         
-                                    <img class="rounded-circle me-lg-2" src="{{ asset('storage/'.Auth::user()->user_image.'')}}" alt="" style="width: 40px; height: 40px;">         
+                                <img class="rounded-circle me-lg-2" src="{{ asset('storage/'.Auth::user()->user_image.'')}}" alt="" style="width: 40px; height: 40px;">         
                                 @else
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" style="color:white">
                                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -173,10 +173,22 @@
                     </div>
                     <hr class="p-2"> --}}
                     <ul class="nav flex-column">
-                        @foreach ($menus as $item)
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ url($item->link) }}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
-                        </li>
+                        @php
+                            $mainmenu = 1;
+                        @endphp
+                        @foreach ($menus as $title => $item)
+                        <li class="nav-item has-submenu">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#multiCollapseExample{{$mainmenu}}" role="button" aria-expanded="false" aria-controls="multiCollapseExample{{$mainmenu}}">{{$title}}<i class="bi small bi-caret-down-fill"></i> </a>
+                            <ul class="submenu collapse multi-collapse" id="multiCollapseExample{{$mainmenu}}">
+                                @foreach ($item as $val)
+                                    <li><a class="nav-link" href="{{ url($val->link) }}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$val->description}}"><i class="bi bi-{{$val->icon}}"></i> {{$val->title}}</a></li>
+                                @endforeach
+                                
+                            </ul>
+                         </li>
+                        @php
+                            $mainmenu++;
+                        @endphp
                         @endforeach
                     </ul>
                 </div>
@@ -190,7 +202,7 @@
             </main>
         </div>
     </div>
-
+    
     <div class="modal fade" id="modal-view" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="registerLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -224,6 +236,34 @@
 </body>
 
 <script>
+
+//     document.addEventListener("DOMContentLoaded", function(){
+//   document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
+    
+//     element.addEventListener('click', function (e) {
+
+//       let nextEl = element.nextElementSibling;
+//       let parentEl  = element.parentElement;	
+
+//         if(nextEl) {
+//             e.preventDefault();	
+//             let mycollapse = new bootstrap.Collapse(nextEl);
+            
+//             if(nextEl.classList.contains('show')){
+//               mycollapse.hide();
+//             } else {
+//                 mycollapse.show();
+//                 // find other submenus with class=show
+//                 var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+//                 // if it exists, then close all of them
+//                 if(opened_submenu){
+//                   new bootstrap.Collapse(opened_submenu);
+//                 }
+//             }
+//         }
+//     }); // addEventListener
+//   }) // forEach
+// }); 
     
     // Bootstrap tooltip Everywhere
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -263,14 +303,14 @@
         });
         return true;
     }
-
+    
     function openWindowWithPost(url, data) {
         var form = document.createElement("form");
         form.target = "_blank";
         form.method = "POST";
         form.action = url;
         form.style.display = "none";
-
+        
         for (var key in data) {
             var input = document.createElement("input");
             input.type = "hidden";
@@ -278,7 +318,7 @@
             input.value = data[key];
             form.appendChild(input);
         }
-
+        
         // Add CSRF
         // var csrf = document.createElement("input");
         //     csrf.type = "hidden";
@@ -286,12 +326,12 @@
         //     csrf.value = "{{ csrf_token() }}";
         //     form.appendChild(input);
         // form.appendChild(@csrf)
-
+        
         document.body.appendChild(form);
         form.submit();
         document.body.removeChild(form);
     }
-
-
+    
+    
 </script>
 </html>

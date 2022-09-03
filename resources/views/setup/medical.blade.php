@@ -19,19 +19,20 @@
         </div>
         
         <div class="table-responsive">
-            <table id="MedicalTable" class="table table-hover table-responsive">
+            <table id="MedicalTable" class="table table-hover table-responsive responsive">
             <thead>
                 <tr >
-                    <th class="text-center">Action</th>
-                    <th class="text-center">Code</th>
-                    <th class="text-center">Description</th>
-                    <th class="text-center">Job Site</th>
-                    <th class="text-center">Location</th>
-                    <th class="text-center">Contact</th>
-                    <th class="text-center">Modified On</th>
-                    <th class="text-center">Modified By</th>
-                    <th class="text-center">Created On</th>
-                    <th class="text-center">Created By</th>
+                    <th></th>
+                    <th class="text-center" data-priority="1">Action</th>
+                    <th class="text-center" data-priority="1">Code</th>
+                    <th class="text-center" data-priority="1">Description</th>
+                    <th class="text-center" data-priority="1">Job Site</th>
+                    <th class="text-center" data-priority="1">Location</th>
+                    <th class="text-center" data-priority="1">Contact</th>
+                    <th class="text-center none" data-priority="2">Modified On</th>
+                    <th class="text-center none" data-priority="2">Modified By</th>
+                    <th class="text-center none" data-priority="2">Created On</th>
+                    <th class="text-center none" data-priority="2">Created By</th>
                 </tr>
             </thead>
             <tbody id="tableData">
@@ -87,6 +88,12 @@
                 $("#tableData").html(response);
                 tableObj = $("#MedicalTable").DataTable({
                     dom: 'Bfrtip',
+                    "columnDefs": [
+                    { 
+                        "targets": [ ], //first column / numbering column
+                        "orderable": false, //set not orderable
+                    }],
+                    order: [[2, 'desc']],
                     buttons: [
                     {
                         extend: 'pdfHtml5',
@@ -125,6 +132,10 @@
                         exportOptions: {
                             columns: [1,2,3,4,5]
                         }
+                    },
+                    {
+                        extend: 'colvis',
+                        columns: ':not(.noVis)'
                     }
                     ]
                     // responsive: true

@@ -30,7 +30,7 @@ class HomeController extends Controller
         // $request->session()->invalidate();
         // $request->session()->regenerateToken();
         $data['menus'] = DB::table('menus')->get();
-        // dd($users);
+        
         return view('home', $data);
     }
 }

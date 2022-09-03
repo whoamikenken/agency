@@ -17,6 +17,7 @@ class Medical extends Model
         'location',
         'contact',
         'address',
+        'expiration_date',
         'created_by'
     ];
 }

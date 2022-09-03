@@ -46,6 +46,8 @@ class UsertypeController extends Controller
         }
 
         $data['uid'] = $formFields['uid'];
+
+        
         // dd($data);
         return view('setup/usertype_modal', $data);
     }

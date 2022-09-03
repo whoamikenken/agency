@@ -30,9 +30,11 @@
             </div>
         </div>
     </div>
-    
 </form>
 
+    <div class="row">
+        
+    </div>
 <script>
     
     $("#saveModal").unbind("click").click(function() {

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('contact', 100)->nullable()->default('NULL');
             $table->string('location', 20)->nullable()->default('NULL');
             $table->string('jobsite', 20)->nullable()->default('NULL');
+            $table->date('expiration_date')->nullable();
             $table->timestamp('updated_at')->nullable()->useCurrent();
             $table->string('modified_by', 50)->nullable()->default('NULL');
             $table->timestamp('created_at')->nullable()->useCurrent();
