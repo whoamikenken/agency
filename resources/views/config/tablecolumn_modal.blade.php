@@ -1,47 +1,37 @@
-<form id="usertypeForm" class="row g-2 needs-validation" novalidate>
+<form id="tablecolumnForm" class="row g-2 needs-validation" novalidate>
     @csrf
-    <input type="hidden" name="uid" value="{{($uid)}}">
-    <div class="col-md-6 col-sm-12">
-        <label>Code<span class="text-danger">*</span></label>
-        <div class="input-group">
-            <div class="input-group-text"><i class="bi bi-pencil-fill"></i></div>
-            <input type="text" id="code" name="code"
-            class="form-control validate" placeholder="Enter Code" required value="{{ (isset($code))? $code:"" }}">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                Please input a Code.
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-6 col-sm-12">
-        <label>Description<span class="text-danger">*</span></label>
-        <div class="input-group">
-            <div class="input-group-text"><i class="bi bi-pencil-fill"></i></div>
-            <input type="text" id="description" name="description"
-            class="form-control validate" placeholder="Enter Description" required value="{{ (isset($description))? $description:"" }}">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                Please input a Description.
-            </div>
-        </div>
+    <div class="table-responsive">
+        <table id="columnTable" class="table table-striped">
+            <thead>
+                <tr>
+                    @foreach ($column as $item => $val)
+                        <th>{{$val->description}}</th>
+                    @endforeach
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($column as $item => $val)
+                    <th>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="{{$val->code}}" name="{{$val->code}}" value="Show">
+                            <label class="form-check-label" for="{{$val->code}}">
+                                {{$val->description}}
+                            </label>
+                        </div>
+                    </th>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </form>
-
-    <div class="row">
-        
-    </div>
 <script>
     
     $("#saveModal").unbind("click").click(function() {
-        bootstrapForm($("#usertypeForm"));
+        bootstrapForm($("#tablecolumnForm"));
         
-        var formdata = $("#usertypeForm").serialize();
-
+        var formdata = $("#tablecolumnForm").serialize();
+        console.log(formdata);
+        return;
         swal.fire({
             html: '<h4>Loading...</h4>',
             didRender: function() {

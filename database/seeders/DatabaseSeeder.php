@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
             PrincipalSeeder::class,
             MenuSeeder::class,
             TablecolumnSeeder::class,
+            SetupSeeder::class,
             UsertypeSeeder::class
         ]);
     }

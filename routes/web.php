@@ -100,7 +100,6 @@ Route::post('/usertype/delete', [UsertypeController::class, 'delete']);
 Route::post('/tablecolumn/table', [TablecolumnController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/tablecolumn/getModal', [TablecolumnController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/tablecolumn/add', [TablecolumnController::class, 'store']);
-Route::post('/tablecolumn/delete', [TablecolumnController::class, 'delete']);
 
 
 // Logout User

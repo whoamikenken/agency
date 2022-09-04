@@ -12,14 +12,7 @@ class TablecolumnController extends Controller
 {
     public function getTable()
     {
-        $data['result'] = DB::table('tablecolumns')->get();
-
-        // get user creator
-        foreach ($data['result'] as $key => $value) {
-
-            $data['result'][$key]->modified_by = DB::table('users')->where('id', $value->modified_by)->value('name');
-            $data['result'][$key]->created_by = DB::table('users')->where('id', $value->created_by)->value('name');
-        }
+        $data['result'] = DB::table('setups')->get();
 
         return view('config/tablecolumn_table', $data);
     }
@@ -40,7 +33,12 @@ class TablecolumnController extends Controller
 
         $data['uid'] = $formFields['uid'];
 
+        $data['table'] = DB::table('setups')->where('id', $formFields['uid'])->get();
 
+        
+        
+        $column = DB::select('SHOW COLUMNS FROM `principals`');
+        $data['column'] = tablecolumn::processColumnName($column);
         // dd($data);
         return view('config/tablecolumn_modal', $data);
     }
@@ -60,33 +58,17 @@ class TablecolumnController extends Controller
             $formFields['created_by'] = Auth::id();
             $formFields['updated_at'] = "";
             tablecolumn::create($formFields);
-            $return = array('status' => 1, 'msg' => 'Successfully added user type', 'title' => 'Success!');
+            $return = array('status' => 1, 'msg' => 'Successfully added table config', 'title' => 'Success!');
         } else {
             $formFields['updated_at'] = Carbon::now();
             $formFields['modified_by'] = Auth::id();
             $id = $formFields['uid'];
             unset($formFields['uid']);
             DB::table('tablecolumns')->where('id', $id)->update($formFields);
-            $return = array('status' => 1, 'msg' => 'Successfully updated user type', 'title' => 'Success!');
+            $return = array('status' => 1, 'msg' => 'Successfully updated table config', 'title' => 'Success!');
         }
 
         return response()->json($return);
     }
 
-    public function delete(Request $request)
-    {
-        $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
-
-        $formFields = $request->validate([
-            'code' => ['required']
-        ]);
-
-        $delete = DB::table('tablecolumns')->where('id', '=', $formFields['code'])->delete();
-
-        if ($delete) {
-            $return = array('status' => 1, 'msg' => 'Successfully deleted user type', 'title' => 'Success!');
-        }
-
-        return response()->json($return);
-    }
 }
