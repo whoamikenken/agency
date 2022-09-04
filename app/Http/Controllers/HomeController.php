@@ -29,7 +29,11 @@ class HomeController extends Controller
         // auth()->logout();
         // $request->session()->invalidate();
         // $request->session()->regenerateToken();
-        $data['menus'] = DB::table('menus')->get();
+        $menus = DB::table('menus')->where('root', '=', '0')->get();
+        // dd($data['menus']);
+        foreach ($menus as $key => $value) {
+            $data['menus'][$value->title] = json_decode(DB::table('menus')->where("root", "=", $value->menu_id)->orderBy("order", "asc")->get());
+        }
         
         return view('home', $data);
     }

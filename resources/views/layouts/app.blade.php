@@ -88,6 +88,7 @@
         transform: rotate(-360deg) translate(0,0);
         }
     }
+    
     </style>
 
     <script type="text/javascript">

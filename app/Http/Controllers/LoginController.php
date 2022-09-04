@@ -28,7 +28,7 @@ class LoginController extends Controller
         foreach ($menus as $key => $value) {
             $data['menus'][$value->title] = json_decode(DB::table('menus')->where("root", "=", $value->menu_id)->orderBy("order", "asc")->get());
         }
-        
+        // dd($data['menus']);
         return view('home', $data);
     }
 }

@@ -103,12 +103,91 @@
             background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e);
             background-color: white;
             border-radius: 5px;
-        }
+        } 
         
         /* Datatable Print Button */
         /* button.btn.btn-secondary.buttons-excel.buttons-html5 {
             margin-left: 10px;
-        }    */
+        }     */
+        
+        /* SIDENAV */
+        .b-example-divider {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+        
+        .bi {
+            vertical-align: -.125em;
+            pointer-events: none;
+            fill: currentColor;
+        } 
+        
+        .dropdown-toggle { outline: 0; }
+        
+        .nav-flush .nav-link {
+            border-radius: 0;
+        }
+        
+        .btn-toggle {
+            display: inline-flex;
+            align-items: center;
+            padding: .25rem .5rem;
+            font-weight: 600;
+            color: rgb(255, 255, 255);
+            background-color: transparent;
+            border: 0;
+            font-size: 20px;
+            font-weight: 400;
+        }
+        .btn-toggle:hover,
+        .btn-toggle:focus {
+            color: rgba(0, 0, 0, .85);
+            background-color: #d2f4ea;
+        }
+        
+        .btn-toggle::before {
+            width: 1.25em;
+            line-height: 0;
+            content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+            transition: transform .35s ease;
+            transform-origin: .5em 50%;
+        } 
+        
+        .btn-toggle[aria-expanded="true"] {
+            color: rgba(0, 0, 0, .85);
+            
+            background-color: white;
+        }
+        .btn-toggle[aria-expanded="true"]::before {
+            transform: rotate(90deg);
+        }
+        
+        .btn-toggle-nav a {
+            display: inline-flex;
+            padding: .1875rem .5rem;
+            margin-top: .125rem;
+            margin-left: 1.25rem;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        
+        .btn-toggle-nav a:hover,
+        .btn-toggle-nav a:focus {
+            background-color: #d2f4ea;
+        }
+        
+        .scrollarea {
+            overflow-y: auto;
+        }
+        
+        .fw-semibold { font-weight: 600; }
+        .lh-tight { line-height: 1.25; } */
+        
     </style>
     
     <script type="text/javascript">
@@ -132,7 +211,7 @@
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo01" style="flex-grow: 0;">
                             {{-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 @foreach ($menus as $item)
                                 <li class="nav-item d-block d-sm-none">
@@ -168,29 +247,54 @@
         <div class="row flex-grow-1">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse" style="background-color:#212e3a">
                 <div class="position-sticky pt-3">
-                    {{-- <div class="text-center">
-                        <img src="{{ asset('images/logo.png') }}" class="rounded" alt="logo">
+                    <div class="text-center">
+                        <img src="{{ asset('images/logo.png') }}" class="rounded" alt="logo" width="120" height="120">
                     </div>
-                    <hr class="p-2"> --}}
-                    <ul class="nav flex-column">
+                    <hr class="p-2">
+                    
+                    <ul class="list-unstyled ps-0">
                         @php
-                            $mainmenu = 1;
+                        $mainmenu = 1;
+                        @endphp
+                        @foreach ($menus as $title => $item)
+                        <li class="border-top my-3"></li>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded {{(isset($navSelected) && $navSelected == $mainmenu)? "":"collapsed" }}" data-bs-toggle="collapse" data-bs-target="#account-collapse{{$mainmenu}}" aria-expanded="{{(isset($navSelected) && $navSelected == $mainmenu)? "true":"false" }}">
+                                {{$title}}
+                            </button>
+                            <div class="collapse {{(isset($navSelected) && $navSelected == $mainmenu)? "show":"" }}" id="account-collapse{{$mainmenu}}">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    @foreach ($item as $val)
+                                    <li><a class="link-light rounded" href="{{ url('home/'.$val->link.'/'.$mainmenu) }}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$val->description}}"><i class="bi bi-{{$val->icon}}"></i>&nbsp;&nbsp;{{$val->title}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </li>
+                        @php
+                        $mainmenu++;
+                        @endphp
+                        @endforeach
+                    </ul>
+                    
+                    {{-- <ul class="nav flex-column">
+                        @php
+                        $mainmenu = 1;
                         @endphp
                         @foreach ($menus as $title => $item)
                         <li class="nav-item has-submenu">
                             <a class="nav-link" data-bs-toggle="collapse" href="#multiCollapseExample{{$mainmenu}}" role="button" aria-expanded="false" aria-controls="multiCollapseExample{{$mainmenu}}">{{$title}}<i class="bi small bi-caret-down-fill"></i> </a>
                             <ul class="submenu collapse multi-collapse" id="multiCollapseExample{{$mainmenu}}">
                                 @foreach ($item as $val)
-                                    <li><a class="nav-link" href="{{ url($val->link) }}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$val->description}}"><i class="bi bi-{{$val->icon}}"></i> {{$val->title}}</a></li>
+                                <li><a class="nav-link" href="{{ url($val->link) }}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$val->description}}"><i class="bi bi-{{$val->icon}}"></i> {{$val->title}}</a></li>
                                 @endforeach
                                 
                             </ul>
-                         </li>
+                        </li>
                         @php
-                            $mainmenu++;
+                        $mainmenu++;
                         @endphp
                         @endforeach
-                    </ul>
+                    </ul> --}}
                 </div>
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
@@ -236,102 +340,103 @@
 </body>
 
 <script>
-
-//     document.addEventListener("DOMContentLoaded", function(){
-//   document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
     
-//     element.addEventListener('click', function (e) {
-
-//       let nextEl = element.nextElementSibling;
-//       let parentEl  = element.parentElement;	
-
-//         if(nextEl) {
-//             e.preventDefault();	
-//             let mycollapse = new bootstrap.Collapse(nextEl);
+    //     document.addEventListener("DOMContentLoaded", function(){
+        //   document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
             
-//             if(nextEl.classList.contains('show')){
-//               mycollapse.hide();
-//             } else {
-//                 mycollapse.show();
-//                 // find other submenus with class=show
-//                 var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
-//                 // if it exists, then close all of them
-//                 if(opened_submenu){
-//                   new bootstrap.Collapse(opened_submenu);
-//                 }
-//             }
-//         }
-//     }); // addEventListener
-//   }) // forEach
-// }); 
-    
-    // Bootstrap tooltip Everywhere
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-    
-    function bootstrapForm(form) {
-        
-        $(form).find('select.validate').each(function(idx) {
-            $(this).parent().find('input').addClass("is-invalid");
-            if ($(this).val().length == 0) {
-                throw new Error("Something went badly wrong!");
-            } else {
-                $(this).parent().find('input').removeClass("is-invalid");
-                $(this).parent().find('input').addClass("is-valid");
-            }
-        });
-        
-        $(form).find('input.validate').each(function(idx) {
-            if ($(this).val().length == 0) {
-                $(this).addClass("is-invalid");
-                throw new Error("Something went badly wrong!");
-            } else {
-                $(this).removeClass("is-invalid").addClass("is-valid");
-            }
-        });
-        
-        
-        $(form).find('textarea.validate').each(function(idx) {
-            if ($(this).val().length == 0) {
-                $(this).addClass("is-invalid");
-                throw new Error("Something went badly wrong!");
-            } else {
-                $(this).removeClass("is-invalid").addClass("is-valid");
-            }
-        });
-        return true;
-    }
-    
-    function openWindowWithPost(url, data) {
-        var form = document.createElement("form");
-        form.target = "_blank";
-        form.method = "POST";
-        form.action = url;
-        form.style.display = "none";
-        
-        for (var key in data) {
-            var input = document.createElement("input");
-            input.type = "hidden";
-            input.name = key;
-            input.value = data[key];
-            form.appendChild(input);
-        }
-        
-        // Add CSRF
-        // var csrf = document.createElement("input");
-        //     csrf.type = "hidden";
-        //     csrf.name = "_token";
-        //     csrf.value = "{{ csrf_token() }}";
-        //     form.appendChild(input);
-        // form.appendChild(@csrf)
-        
-        document.body.appendChild(form);
-        form.submit();
-        document.body.removeChild(form);
-    }
-    
-    
-</script>
-</html>
+            //     element.addEventListener('click', function (e) {
+                
+                //       let nextEl = element.nextElementSibling;
+                //       let parentEl  = element.parentElement;	
+                
+                //         if(nextEl) {
+                    //             e.preventDefault();	
+                    //             let mycollapse = new bootstrap.Collapse(nextEl);
+                    
+                    //             if(nextEl.classList.contains('show')){
+                        //               mycollapse.hide();
+                        //             } else {
+                            //                 mycollapse.show();
+                            //                 // find other submenus with class=show
+                            //                 var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+                            //                 // if it exists, then close all of them
+                            //                 if(opened_submenu){
+                                //                   new bootstrap.Collapse(opened_submenu);
+                                //                 }
+                                //             }
+                                //         }
+                                //     }); // addEventListener
+                                //   }) // forEach
+                                // }); 
+                                
+                                // Bootstrap tooltip Everywhere
+                                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                                    return new bootstrap.Tooltip(tooltipTriggerEl)
+                                })
+                                
+                                function bootstrapForm(form) {
+                                    
+                                    $(form).find('select.validate').each(function(idx) {
+                                        $(this).parent().find('input').addClass("is-invalid");
+                                        if ($(this).val().length == 0) {
+                                            throw new Error("Something went badly wrong!");
+                                        } else {
+                                            $(this).parent().find('input').removeClass("is-invalid");
+                                            $(this).parent().find('input').addClass("is-valid");
+                                        }
+                                    });
+                                    
+                                    $(form).find('input.validate').each(function(idx) {
+                                        if ($(this).val().length == 0) {
+                                            $(this).addClass("is-invalid");
+                                            throw new Error("Something went badly wrong!");
+                                        } else {
+                                            $(this).removeClass("is-invalid").addClass("is-valid");
+                                        }
+                                    });
+                                    
+                                    
+                                    $(form).find('textarea.validate').each(function(idx) {
+                                        if ($(this).val().length == 0) {
+                                            $(this).addClass("is-invalid");
+                                            throw new Error("Something went badly wrong!");
+                                        } else {
+                                            $(this).removeClass("is-invalid").addClass("is-valid");
+                                        }
+                                    });
+                                    return true;
+                                }
+                                
+                                function openWindowWithPost(url, data) {
+                                    var form = document.createElement("form");
+                                    form.target = "_blank";
+                                    form.method = "POST";
+                                    form.action = url;
+                                    form.style.display = "none";
+                                    
+                                    for (var key in data) {
+                                        var input = document.createElement("input");
+                                        input.type = "hidden";
+                                        input.name = key;
+                                        input.value = data[key];
+                                        form.appendChild(input);
+                                    }
+                                    
+                                    // Add CSRF
+                                    // var csrf = document.createElement("input");
+                                    //     csrf.type = "hidden";
+                                    //     csrf.name = "_token";
+                                    //     csrf.value = "{{ csrf_token() }}";
+                                    //     form.appendChild(input);
+                                    // form.appendChild(@csrf)
+                                    
+                                    document.body.appendChild(form);
+                                    form.submit();
+                                    document.body.removeChild(form);
+                                }
+                                
+                                
+                            </script>
+                            </html>
+                            

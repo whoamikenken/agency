@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('menu_id')->nullable();
             $table->string('root', 20)->nullable()->default('NULL');
             $table->string('title', 20)->nullable()->default('NULL');
-            $table->string('link', 20)->nullable()->default('NULL');
+            $table->string('link', 50)->nullable()->default('NULL');
             $table->string('description', 100)->nullable()->default('NULL');
             $table->string('icon', 40)->nullable()->default('<i class="bi bi-motherboard"></i>');
             $table->string('status', 20)->nullable()->default('show');

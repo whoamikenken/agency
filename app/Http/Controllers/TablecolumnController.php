@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\usertype;
-use Carbon\Carbon;
+use App\Models\tablecolumn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class UsertypeController extends Controller
+class TablecolumnController extends Controller
 {
-    
     public function getTable()
     {
-        $data['result'] = DB::table('usertype')->get();
+        $data['result'] = DB::table('tablecolumns')->get();
 
         // get user creator
         foreach ($data['result'] as $key => $value) {
@@ -22,7 +21,7 @@ class UsertypeController extends Controller
             $data['result'][$key]->created_by = DB::table('users')->where('id', $value->created_by)->value('name');
         }
 
-        return view('user/usertype_table', $data);
+        return view('config/tablecolumn_table', $data);
     }
 
     public function getModal(Request $request)
@@ -34,16 +33,16 @@ class UsertypeController extends Controller
         ]);
 
         if ($formFields['uid'] != "add") {
-            $data['record'] = DB::table('usertype')->where('id', $formFields['uid'])->get();
+            $data['record'] = DB::table('tablecolumns')->where('id', $formFields['uid'])->get();
             $data = $data['record'][0];
             $data = json_decode(json_encode($data), true);
         }
 
         $data['uid'] = $formFields['uid'];
 
-        
+
         // dd($data);
-        return view('user/usertype_modal', $data);
+        return view('config/tablecolumn_modal', $data);
     }
 
     public function store(Request $request)
@@ -60,14 +59,14 @@ class UsertypeController extends Controller
             unset($formFields['uid']);
             $formFields['created_by'] = Auth::id();
             $formFields['updated_at'] = "";
-            usertype::create($formFields);
+            tablecolumn::create($formFields);
             $return = array('status' => 1, 'msg' => 'Successfully added user type', 'title' => 'Success!');
         } else {
             $formFields['updated_at'] = Carbon::now();
             $formFields['modified_by'] = Auth::id();
             $id = $formFields['uid'];
             unset($formFields['uid']);
-            DB::table('usertype')->where('id', $id)->update($formFields);
+            DB::table('tablecolumns')->where('id', $id)->update($formFields);
             $return = array('status' => 1, 'msg' => 'Successfully updated user type', 'title' => 'Success!');
         }
 
@@ -82,7 +81,7 @@ class UsertypeController extends Controller
             'code' => ['required']
         ]);
 
-        $delete = DB::table('usertype')->where('id', '=', $formFields['code'])->delete();
+        $delete = DB::table('tablecolumns')->where('id', '=', $formFields['code'])->delete();
 
         if ($delete) {
             $return = array('status' => 1, 'msg' => 'Successfully deleted user type', 'title' => 'Success!');

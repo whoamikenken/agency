@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
             JobsiteSeeder::class,
             PrincipalSeeder::class,
             MenuSeeder::class,
+            TablecolumnSeeder::class,
             UsertypeSeeder::class
         ]);
     }

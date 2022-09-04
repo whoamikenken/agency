@@ -77,7 +77,7 @@ class MenuSeeder extends Seeder
                 return $maxOrder + 1;
             },
             'title' => 'Dashboard',
-            'link' => '/home',
+            'link' => 'home',
             'icon' => 'motherboard',
             'description' => "Visual display of all of your data"
         ]);
@@ -93,7 +93,7 @@ class MenuSeeder extends Seeder
                 return $maxOrder + 1;
             },
             'title' => 'User Management',
-            'link' => '/user',
+            'link' => 'user/user',
             'icon' => 'person-badge',
             'description' => "User management add and edit permission"
         ]);
@@ -109,7 +109,7 @@ class MenuSeeder extends Seeder
                 return $maxOrder + 1;
             },
             'title' => 'Branch',
-            'link' => '/branch',
+            'link' => 'setup/branch',
             'icon' => 'inboxes',
             'description' => "Creating new branches"
         ]);
@@ -125,7 +125,7 @@ class MenuSeeder extends Seeder
                 return $maxOrder + 1;
             },
             'title' => 'Location',
-            'link' => '/location',
+            'link' => 'setup/location',
             'icon' => 'geo-alt',
             'description' => "Creating new locations"
         ]);
@@ -141,7 +141,7 @@ class MenuSeeder extends Seeder
                 return $maxOrder + 1;
             },
             'title' => 'Medical Clinic',
-            'link' => '/medical',
+            'link' => 'setup/medical',
             'icon' => 'hospital',
             'description' => "Creating new medical clinic"
         ]);
@@ -157,7 +157,7 @@ class MenuSeeder extends Seeder
                 return $maxOrder + 1;
             },
             'title' => 'Principals',
-            'link' => '/principal',
+            'link' => 'setup/principal',
             'icon' => 'building',
             'description' => "Creating new principals"
         ]);
@@ -173,7 +173,7 @@ class MenuSeeder extends Seeder
                 return $maxOrder + 1;
             },
             'title' => 'Jobsites',
-            'link' => '/jobsite',
+            'link' => 'setup/jobsite',
             'icon' => 'airplane-engines',
             'description' => "Creating new jobsites"
         ]);
@@ -190,7 +190,7 @@ class MenuSeeder extends Seeder
             },
             'title' => 'User type',
             'icon' => 'people',
-            'link' => '/usertype',
+            'link' => 'user/usertype',
             'description' => "Creating new usertype"
         ]);
 
@@ -205,7 +205,7 @@ class MenuSeeder extends Seeder
                 return $maxOrder + 1;
             },
             'title' => 'Applicant List',
-            'link' => '/applicant',
+            'link' => 'user/applicant',
             'icon' => 'person-rolodex',
             'description' => "Creating new applicant and modification"
         ]);
@@ -221,9 +221,9 @@ class MenuSeeder extends Seeder
                 return $maxOrder + 1;
             },
             'title' => 'Table Picker',
-            'link' => '/tablepermission',
+            'link' => 'config/tablecolumn',
             'icon' => 'wrench-adjustable-circle',
-            'description' => "Creating new applicant and modification"
+            'description' => "Modification of setup column."
         ]);
 
     }

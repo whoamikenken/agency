@@ -81,7 +81,7 @@ class UserController extends Controller
         // $request->session()->regenerateToken();
         $data['menus'] = DB::table('menus')->get();
         // dd($users);
-        return view('setup/user', $data);
+        return view('user/user', $data);
     }
 
     public function getTable()
@@ -95,7 +95,7 @@ class UserController extends Controller
             // $data['result'][$key]->created_by = DB::table('users')->where('id', $value->created_by)->value('name');
         }
 
-        return view('setup/user_table', $data);
+        return view('user/user_table', $data);
     }
 
     public function getModal(Request $request)
@@ -117,7 +117,7 @@ class UserController extends Controller
         $data['usertype_select'] = DB::table('usertype')->get();
 
         // dd($data);
-        return view('setup/user_modal', $data);
+        return view('user/user_modal', $data);
     }
 
     public function store(Request $request)
