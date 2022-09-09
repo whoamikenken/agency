@@ -28,7 +28,9 @@ class UserFactory extends Factory
             'fname' => $firstName,
             'lname' => fake()->lastName(),
             'email' => fake()->safeEmail(),
-            'user_type' => 'admin',
+            'user_type' => fake()->randomElement(['admin', 'sales']),
+            'branch' => fake()->randomElement(['001', '002', '005', '004']),
+            'status' => fake()->randomElement(['verified', 'unverified']),
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
             'remember_token' => Str::random(10)

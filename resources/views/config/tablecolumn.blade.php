@@ -71,7 +71,6 @@
             tableObj.destroy();
         }
 
-
         $.ajax({
             type: "POST",
             url: "{{ url('tablecolumn/table')}}",

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medical;
+use App\Models\tablecolumn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +34,8 @@ class MedicalController extends Controller
             $data['result'][$key]->jobsite = DB::table('jobsites')->where('code', $value->jobsite)->value('description');
             $data['result'][$key]->location = DB::table('location')->where('code', $value->location)->value('description');
         }
+
+        $data['columns'] = tablecolumn::getColumn("medical");
 
         return view('setup/medical_table', $data);
     }

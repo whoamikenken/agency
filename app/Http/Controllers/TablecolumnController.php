@@ -22,51 +22,55 @@ class TablecolumnController extends Controller
         $data = array();
 
         $formFields = $request->validate([
-            'uid' => ['required'],
+            'uid' => ['required']
         ]);
-
+        
         if ($formFields['uid'] != "add") {
-            $data['record'] = DB::table('tablecolumns')->where('id', $formFields['uid'])->get();
-            $data = $data['record'][0];
-            $data = json_decode(json_encode($data), true);
+            $record = DB::table('tablecolumns')->where('table_id', $formFields['uid'])->get();
+            
+            if (isset($record[0])) {
+                foreach ($record as $key => $value) {
+                    $data['record'][] = $value->title;
+                }
+            }else{
+                $data['record'] = array();
+            }
         }
-
+        
+        
         $data['uid'] = $formFields['uid'];
 
-        $data['table'] = DB::table('setups')->where('id', $formFields['uid'])->get();
-
+        $table = DB::table('setups')->where('id', $formFields['uid'])->get();
+        $table = $table[0]->table;
         
-        
-        $column = DB::select('SHOW COLUMNS FROM `principals`');
+        $column = DB::select('SHOW COLUMNS FROM '. $table);
         $data['column'] = tablecolumn::processColumnName($column);
-        // dd($data);
+
         return view('config/tablecolumn_modal', $data);
     }
 
     public function store(Request $request)
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
+        $formFields = $request->input();
+        unset($formFields['_token']);
 
-        $formFields = $request->validate([
-            'uid' => ['required'],
-            'code' => ['required'],
-            'description' => ['required']
-        ]);
-
-        if ($formFields['uid'] == "add") {
-            unset($formFields['uid']);
-            $formFields['created_by'] = Auth::id();
-            $formFields['updated_at'] = "";
-            tablecolumn::create($formFields);
-            $return = array('status' => 1, 'msg' => 'Successfully added table config', 'title' => 'Success!');
-        } else {
-            $formFields['updated_at'] = Carbon::now();
-            $formFields['modified_by'] = Auth::id();
-            $id = $formFields['uid'];
-            unset($formFields['uid']);
-            DB::table('tablecolumns')->where('id', $id)->update($formFields);
-            $return = array('status' => 1, 'msg' => 'Successfully updated table config', 'title' => 'Success!');
+        $table_id = $formFields['uid'];
+        tablecolumn::where('table_id', $table_id)->delete();
+        unset($formFields['uid']);
+        
+        foreach ($formFields as $key => $value) {
+            $insert = array();
+            $insert['column'] = $key;
+            $insert['title'] = tablecolumn::getColumnDescription($key);
+            $insert['table_id'] = $table_id;
+            $insert['table'] = tablecolumn::getTableName($table_id);
+            $insert['status'] = "Show";
+            $insert['created_by'] = Auth::id();
+            tablecolumn::create($insert);
         }
+
+        $return = array('status' => 1, 'msg' => 'Successfully updated table config', 'title' => 'Success!');
 
         return response()->json($return);
     }

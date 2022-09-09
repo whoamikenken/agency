@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Jobsite;
+use App\Models\tablecolumn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,9 @@ class JobsiteController extends Controller
             $data['result'][$key]->modified_by = DB::table('users')->where('id', $value->modified_by)->value('name');
             $data['result'][$key]->created_by = DB::table('users')->where('id', $value->created_by)->value('name');
         }
-        
+
+        $data['columns'] = tablecolumn::getColumn("jobsites");
+
         return view('setup/jobsite_table', $data);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\tablecolumn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -32,6 +33,8 @@ class LocationController extends Controller
             $data['result'][$key]->created_by = DB::table('users')->where('id', $value->created_by)->value('name');
         }
 
+        $data['columns'] = tablecolumn::getColumn("location");
+        
         return view('setup/location_table', $data);
     }
 

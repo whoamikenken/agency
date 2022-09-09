@@ -20,20 +20,6 @@
         
         <div class="table-responsive">
             <table id="PrincipalTable" class="table table-hover table-responsive">
-            <thead>
-                <tr >
-                    <th class="text-center">Action</th>
-                    <th class="text-center">Code</th>
-                    <th class="text-center">Description</th>
-                    <th class="text-center">Job Site</th>
-                    <th class="text-center">Modified On</th>
-                    <th class="text-center">Modified By</th>
-                    <th class="text-center">Created On</th>
-                    <th class="text-center">Created By</th>
-                </tr>
-            </thead>
-            <tbody id="tableData">
-            </tbody>
         </table>
         </div>
     </div> <!-- end card-body-->
@@ -82,7 +68,7 @@
             data: {},
             async: false,
             success:function(response){
-                $("#tableData").html(response);
+                $("#PrincipalTable").html(response);
                 tableObj = $("#PrincipalTable").DataTable({
                     dom: 'Bfrtip',
                     buttons: [

@@ -30,33 +30,5 @@ class JobsiteSeeder extends Seeder
             'created_by' => 1,
         ]);
 
-        Jobsite::factory()->create([
-            'code' => 'HK',
-            'description' => 'Hong Kong',
-            'modified_by' => 1,
-            'created_by' => 1,
-        ]);
-
-        Jobsite::factory()->create([
-            'code' => 'MY',
-            'description' => 'Malaysia',
-            'modified_by' => 1,
-            'created_by' => 1,
-        ]);
-
-        Jobsite::factory()->create([
-            'code' => 'HK',
-            'description' => 'Hong Kong',
-            'modified_by' => 1,
-            'created_by' => 1,
-        ]);
-
-        Jobsite::factory()->create([
-            'code' => 'MY',
-            'description' => 'Malaysia',
-            'modified_by' => 1,
-            'created_by' => 1,
-        ]);
-
     }
 }

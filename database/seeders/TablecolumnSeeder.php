@@ -16,41 +16,42 @@ class TablecolumnSeeder extends Seeder
     public function run()
     {
         //Table Permission
-        tablecolumn::factory()->create([
-            'title' => 'code',
-            'status' => 'Show',
-            'table' => 'branches'
-        ]);
+        
+        // tablecolumn::factory()->create([
+        //     'title' => 'code',
+        //     'status' => 'Show',
+        //     'table_id' => '4'
+        // ]);
 
-        tablecolumn::factory()->create([
-            'title' => 'description',
-            'status' => 'Show',
-            'table' => 'branches'
-        ]);
+        // tablecolumn::factory()->create([
+        //     'title' => 'description',
+        //     'status' => 'Show',
+        //     'table_id' => '4'
+        // ]);
 
-        tablecolumn::factory()->create([
-            'title' => 'updated_at',
-            'status' => 'Show',
-            'table' => 'branches'
-        ]);
+        // tablecolumn::factory()->create([
+        //     'title' => 'updated_at',
+        //     'status' => 'Show',
+        //     'table_id' => '4'
+        // ]);
 
-        tablecolumn::factory()->create([
-            'title' => 'modified_by',
-            'status' => 'Show',
-            'table' => 'branches'
-        ]);
+        // tablecolumn::factory()->create([
+        //     'title' => 'modified_by',
+        //     'status' => 'Show',
+        //     'table_id' => '4'
+        // ]);
 
-        tablecolumn::factory()->create([
-            'title' => 'created_at',
-            'status' => 'Show',
-            'table' => 'branches'
-        ]);
+        // tablecolumn::factory()->create([
+        //     'title' => 'created_at',
+        //     'status' => 'Show',
+        //     'table_id' => '4'
+        // ]);
 
-        tablecolumn::factory()->create([
-            'title' => 'created_by',
-            'status' => 'Show',
-            'table' => 'branches'
-        ]);
+        // tablecolumn::factory()->create([
+        //     'title' => 'created_by',
+        //     'status' => 'Show',
+        //     'table_id' => '4'
+        // ]);
         
     }
 }

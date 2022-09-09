@@ -20,23 +20,6 @@
         
         <div class="table-responsive">
             <table id="MedicalTable" class="table table-hover table-responsive responsive">
-            <thead>
-                <tr >
-                    <th></th>
-                    <th class="text-center" data-priority="1">Action</th>
-                    <th class="text-center" data-priority="1">Code</th>
-                    <th class="text-center" data-priority="1">Description</th>
-                    <th class="text-center" data-priority="1">Job Site</th>
-                    <th class="text-center" data-priority="1">Location</th>
-                    <th class="text-center" data-priority="1">Contact</th>
-                    <th class="text-center none" data-priority="2">Modified On</th>
-                    <th class="text-center none" data-priority="2">Modified By</th>
-                    <th class="text-center none" data-priority="2">Created On</th>
-                    <th class="text-center none" data-priority="2">Created By</th>
-                </tr>
-            </thead>
-            <tbody id="tableData">
-            </tbody>
         </table>
         </div>
     </div> <!-- end card-body-->
@@ -85,7 +68,7 @@
             data: {},
             async: false,
             success:function(response){
-                $("#tableData").html(response);
+                $("#MedicalTable").html(response);
                 tableObj = $("#MedicalTable").DataTable({
                     dom: 'Bfrtip',
                     "columnDefs": [

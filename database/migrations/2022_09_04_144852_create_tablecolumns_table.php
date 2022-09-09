@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('tablecolumns', function (Blueprint $table) {
             $table->id();
             $table->string("title");
+            $table->string("column");
             $table->string("status");
+            $table->string("table_id");
             $table->string("table");
-            $table->timestamp('updated_at')->nullable()->useCurrent();
-            $table->string('modified_by', 50)->nullable()->default('NULL');
             $table->timestamp('created_at')->nullable()->useCurrent();
             $table->string('created_by', 50)->nullable()->default(1);
         });

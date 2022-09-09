@@ -186,7 +186,12 @@
         }
         
         .fw-semibold { font-weight: 600; }
-        .lh-tight { line-height: 1.25; } */
+        .lh-tight { line-height: 1.25; } 
+
+        a.link-light.rounded.menuLink.active {
+            background-color: darkgrey;
+            color: black;
+        }
         
     </style>
     
@@ -212,13 +217,16 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarTogglerDemo01" style="flex-grow: 0;">
-                            {{-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                @foreach ($menus as $item)
-                                <li class="nav-item d-block d-sm-none">
-                                    <a class="nav-link" aria-current="page" href="{{ url($item->link) }}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
-                                </li>
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                @foreach ($menus as $key => $items)
+                                    @foreach ($items as $item)
+                                        <li class="nav-item d-block d-sm-none">
+                                            <a class="nav-link menuMobile" menu="{{$item->link}}" aria-current="page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
+                                        </li>
+                                    @endforeach
+                                    <hr>
                                 @endforeach
-                            </ul> --}}
+                            </ul>
                             <form class="d-flex text-end justify-content-between">
                                 @if(Auth::user()->user_image != "")         
                                 <img class="rounded-circle me-lg-2" src="{{ asset('storage/'.Auth::user()->user_image.'')}}" alt="" style="width: 40px; height: 40px;">         
@@ -265,7 +273,7 @@
                             <div class="collapse {{(isset($navSelected) && $navSelected == $mainmenu)? "show":"" }}" id="account-collapse{{$mainmenu}}">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     @foreach ($item as $val)
-                                    <li><a class="link-light rounded" href="{{ url('home/'.$val->link.'/'.$mainmenu) }}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$val->description}}"><i class="bi bi-{{$val->icon}}"></i>&nbsp;&nbsp;{{$val->title}}</a></li>
+                                    <li><a class="link-light rounded menuLink {{($menuSelected == $val->menu_id) ? "active":"" }}" menu="{{$val->link}}" nav="{{$mainmenu}}" menu_id="{{$val->menu_id}}" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$val->description}}"><i class="bi bi-{{$val->icon}}"></i>&nbsp;&nbsp;{{$val->title}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -275,26 +283,6 @@
                         @endphp
                         @endforeach
                     </ul>
-                    
-                    {{-- <ul class="nav flex-column">
-                        @php
-                        $mainmenu = 1;
-                        @endphp
-                        @foreach ($menus as $title => $item)
-                        <li class="nav-item has-submenu">
-                            <a class="nav-link" data-bs-toggle="collapse" href="#multiCollapseExample{{$mainmenu}}" role="button" aria-expanded="false" aria-controls="multiCollapseExample{{$mainmenu}}">{{$title}}<i class="bi small bi-caret-down-fill"></i> </a>
-                            <ul class="submenu collapse multi-collapse" id="multiCollapseExample{{$mainmenu}}">
-                                @foreach ($item as $val)
-                                <li><a class="nav-link" href="{{ url($val->link) }}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$val->description}}"><i class="bi bi-{{$val->icon}}"></i> {{$val->title}}</a></li>
-                                @endforeach
-                                
-                            </ul>
-                        </li>
-                        @php
-                        $mainmenu++;
-                        @endphp
-                        @endforeach
-                    </ul> --}}
                 </div>
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
@@ -306,6 +294,14 @@
             </main>
         </div>
     </div>
+    
+    <form id="menu-form" action="/home" method="POST" style="display: none;">
+        @csrf
+        <input type="hidden" name="route" value="" />
+        <input type="hidden" name="nav" value="" />
+        <input type="hidden" name="menu_id" value="" />
+        <!-- other fields -->
+    </form>
     
     <div class="modal fade" id="modal-view" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="registerLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -435,7 +431,16 @@
                                     form.submit();
                                     document.body.removeChild(form);
                                 }
-                                
+
+                                $("#sidebarMenu").on("click", ".menuLink", function() {
+                                    var menu = $(this).attr('menu');
+                                    var nav = $(this).attr('nav');
+                                    var menu_id = $(this).attr('menu_id');
+                                    $("#menu-form").find('input[name="route"]').val(menu);
+                                    $("#menu-form").find('input[name="nav"]').val(nav);
+                                    $("#menu-form").find('input[name="menu_id"]').val(menu_id);
+                                    $("#menu-form").submit();
+                                });
                                 
                             </script>
                             </html>

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('fname');
             $table->string('lname');
             $table->string('user_type');
+            $table->string('branch')->nullable();
             $table->string('status')->default('unverified');
             $table->string('email')->unique();
             $table->string('user_image')->nullable();

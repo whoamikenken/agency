@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\applicant;
 use App\Models\User;
 use App\Models\Branch;
 use App\Models\Jobsite;
@@ -35,6 +37,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory(10)->create();
+        applicant::factory(10)->create();
         Medical::factory(10)->create();
         
         $this->call([

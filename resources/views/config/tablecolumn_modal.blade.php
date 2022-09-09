@@ -1,5 +1,6 @@
 <form id="tablecolumnForm" class="row g-2 needs-validation" novalidate>
     @csrf
+    <input type="hidden" name="uid" value="{{$uid}}">
     <div class="table-responsive">
         <table id="columnTable" class="table table-striped">
             <thead>
@@ -13,7 +14,7 @@
                 @foreach ($column as $item => $val)
                     <th>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="{{$val->code}}" name="{{$val->code}}" value="Show">
+                            <input class="form-check-input" type="checkbox" id="{{$val->code}}" name="{{$val->code}}" value="Show" {{(in_array($val->description, $record)? "checked":"")}}>
                             <label class="form-check-label" for="{{$val->code}}">
                                 {{$val->description}}
                             </label>
@@ -30,8 +31,7 @@
         bootstrapForm($("#tablecolumnForm"));
         
         var formdata = $("#tablecolumnForm").serialize();
-        console.log(formdata);
-        return;
+
         swal.fire({
             html: '<h4>Loading...</h4>',
             didRender: function() {
@@ -40,7 +40,7 @@
         });
 
         $.ajax({
-            url: "{{ url('usertype/add') }}",
+            url: "{{ url('tablecolumn/add') }}",
             type: "POST",
             data: formdata,
             dataType: 'json',
@@ -53,7 +53,7 @@
                         time: 2500
                     })
                     $("#modalclose").click();
-                    UsertypeList();
+                    TablecolumnList();
                 }else if (response.status == 2) {
                     Swal.fire({
                         icon: 'info',

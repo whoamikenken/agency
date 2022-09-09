@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApplicantController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,20 +39,23 @@ Route::get('/home', function(){
         $data['menus'][$value->title] = json_decode(DB::table('menus')->where("root", "=", $value->menu_id)->orderBy("order", "asc")->get());
     }
 
+    $data['navSelected'] = 1;
+    $data['menuSelected'] = 5;
     return view('home', $data);
 
 })->name('home')->middleware('auth');
 
-Route::get('/home/{link}/{to}/{nav}', function ($link, $to, $nav) {
-
+Route::post('/home', function (Request $request) {
     $menus = DB::table('menus')->where('root', '=', '0')->get();
     foreach ($menus as $key => $value) {
         $data['menus'][$value->title] = json_decode(DB::table('menus')->where("root", "=", $value->menu_id)->orderBy("order", "asc")->get());
     }
 
-    $data['navSelected'] = $nav;
-    return view($link."/".$to, $data);
-
+    $data['navSelected'] = $request->nav;
+    $data['menuSelected'] = $request->menu_id;
+    // dd($nav);
+    return view($request->route, $data);
+    
 })->middleware('auth');
 
 // JobSite
@@ -111,5 +116,19 @@ Route::post('/login/register', [UserController::class, 'register']);
 
 // DASHBAORD
 Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
+
+// APPLICANT
+Route::post('/applicant/list', [ApplicantController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/applicant/getModal', [ApplicantController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/applicant/add', [ApplicantController::class, 'store']);
+
+
+
+Route::get('/credits', function(){
+    echo "Created by kennedy hipolito<br>";
+    echo "Email: whoamikenken@gmail.com<br>";
+    echo "Contact: 09226361316<br>";
+});
 
 

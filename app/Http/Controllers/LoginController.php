@@ -24,11 +24,13 @@ class LoginController extends Controller
     public function index(Request $request){
         // dd(Auth::check());
         $menus = DB::table('menus')->where('root', '=', '0')->get();
-        // dd($data['menus']);
         foreach ($menus as $key => $value) {
             $data['menus'][$value->title] = json_decode(DB::table('menus')->where("root", "=", $value->menu_id)->orderBy("order", "asc")->get());
         }
-        // dd($data['menus']);
+
+        $data['navSelected'] = 1;
+        $data['menuSelected'] = 5;
         return view('home', $data);
+
     }
 }
