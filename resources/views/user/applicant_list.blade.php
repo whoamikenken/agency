@@ -13,7 +13,7 @@
                                 <p class="card-text">Jobsite: {{$item->jobsite}}</p>
                                 <p class="card-text">Branch: {{$item->branch}}</p>
                                 <p class="card-text">Status: <span style="color:green">{{$item->isactive}}</span></p>
-                                <button class="btn btn-info text-white" uid="{{$item->applicant_id}}"><i class="bi bi-eye"></i>&nbsp;&nbsp;View</button>
+                                <button class="btn btn-info text-white applicantView" uid="{{$item->applicant_id}}"><i class="bi bi-eye"></i>&nbsp;&nbsp;View</button>
                             </div>
                         </div>
                     </div>

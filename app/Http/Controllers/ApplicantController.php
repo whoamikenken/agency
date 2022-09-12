@@ -47,6 +47,41 @@ class ApplicantController extends Controller
         return view('user/applicant_modal', $data);
     }
 
+    public function profileTab(Request $request)
+    {
+        $data = array();
+
+        $formFields = $request->validate([
+            'uid' => ['required'],
+        ]);
+
+        $data['uid'] = $formFields['uid'];
+
+        // dd($data);
+        return view('user/applicant_tab', $data);
+    }
+
+    public function profile(Request $request)
+    {
+        $data = array();
+
+        $formFields = $request->validate([
+            'uid' => ['required'],
+        ]);
+
+        $data['uid'] = $formFields['uid'];
+
+        $data['record'] = DB::table('applicants')->where("applicant_id", $data['uid'])->get();
+        $data = json_decode($data['record'], true)[0];
+        $data['jobsite_select'] = DB::table('jobsites')->get();
+        $data['branch_select'] = DB::table('branches')->get();
+        $data['country_select'] = DB::table('countries')->get();
+        $data['medical_select'] = DB::table('medical')->get();
+        $data['users_select'] = DB::table('users')->where("user_type", "sales")->get();
+
+        return view('user/applicant_profile', $data);
+    }
+
     public function store(Request $request)
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');

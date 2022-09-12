@@ -30,7 +30,7 @@ use App\Http\Controllers\TablecolumnController;
 
 Auth::routes();
 
-Route::get('/', [LoginController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->name('login')->withoutMiddleware([VerifyCsrfToken::class]);
 
 Route::get('/home', function(){
 
@@ -115,15 +115,15 @@ Route::post('/login/validate', [UserController::class, 'validateLogin']);
 Route::post('/login/register', [UserController::class, 'register']);
 
 // DASHBAORD
-Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/dashboard', [HomeController::class, 'index'])->middleware('auth');
 
 
 // APPLICANT
 Route::post('/applicant/list', [ApplicantController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/applicant/getModal', [ApplicantController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/applicant/getApplicantProfileTab', [ApplicantController::class, 'profileTab'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/applicant/add', [ApplicantController::class, 'store']);
-
-
+Route::post('/applicant/profile', [ApplicantController::class, 'profile'])->withoutMiddleware([VerifyCsrfToken::class]);
 
 Route::get('/credits', function(){
     echo "Created by kennedy hipolito<br>";

@@ -94,10 +94,6 @@
         body {
             min-height: 100%;
         }
-        .nav-link{
-            color: #fff !important;
-            font-size: 20px !important;
-        }
         /* NavBar Color */
         .navbar-light .navbar-toggler-icon {
             background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e);
@@ -192,7 +188,12 @@
             background-color: darkgrey;
             color: black;
         }
-        
+
+        /* SELECT 2 icon */
+        .select2-container--bootstrap-5 .select2-selection--single {
+            background-position: right 0.75rem center;
+            padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+        }
     </style>
     
     <script type="text/javascript">
@@ -221,7 +222,7 @@
                                 @foreach ($menus as $key => $items)
                                     @foreach ($items as $item)
                                         <li class="nav-item d-block d-sm-none">
-                                            <a class="nav-link menuMobile" menu="{{$item->link}}" aria-current="page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
+                                            <a class="nav-link menuMobile" style="color: #fff !important;font-size: 20px !important;" menu="{{$item->link}}" aria-current="page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
                                         </li>
                                     @endforeach
                                     <hr>
@@ -236,7 +237,7 @@
                                     <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                                 </svg>
                                 @endif
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #fff !important;font-size: 20px !important;">
                                     {{Auth::user()->name}}
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

@@ -15,19 +15,19 @@ return new class extends Migration
     {
         Schema::create('applicants', function (Blueprint $table) {
             $table->id();
-            $table->string('applicant_id', 30)->default('NULL');
-            $table->string('er_ref', 30)->nullable()->default('NULL');
-            $table->string('maid_ref', 30)->nullable()->default('NULL');
-            $table->string('jobsite', 30)->nullable()->default('NULL');
-            $table->string('branch', 30)->nullable()->default('NULL');
+            $table->string('applicant_id', 30)->nullable();
+            $table->string('er_ref', 30)->nullable();
+            $table->string('maid_ref', 30)->nullable();
+            $table->string('jobsite', 30)->nullable();
+            $table->string('branch', 30)->nullable();
             $table->string('sales_manager', 30)->nullable();
-            $table->string('fname', 30)->nullable()->default('NULL');
-            $table->string('mname', 30)->nullable()->default('NULL');
-            $table->string('lname', 30)->nullable()->default('NULL');
-            $table->string('contact', 30)->nullable()->default('NULL');
-            $table->string('address', 50)->nullable()->default('NULL');
-            $table->string('family_contact_name', 30)->nullable()->default('NULL');
-            $table->string('family_contact', 30)->nullable()->default('NULL');
+            $table->string('fname', 30)->nullable();
+            $table->string('mname', 30)->nullable();
+            $table->string('lname', 30)->nullable();
+            $table->string('contact', 30)->nullable();
+            $table->string('address', 50)->nullable();
+            $table->string('family_contact_name', 30)->nullable();
+            $table->string('family_contact', 30)->nullable();
             $table->string('is_ex_abroad', 30)->default('No');
             $table->integer('abroad_experience')->default(0);
             $table->string('is_first', 30)->default('Yes');
@@ -100,9 +100,9 @@ return new class extends Migration
             $table->string('user_video', 30)->nullable();
             $table->string('isactive', 30)->nullable()->default('Active');
             $table->timestamp('updated_at')->nullable()->useCurrent();
-            $table->string('modified_by', 30)->nullable()->default('NULL');
+            $table->string('modified_by', 30)->nullable();
             $table->timestamp('created_at')->nullable()->useCurrent();
-            $table->string('created_by', 30)->nullable()->default('NULL');
+            $table->string('created_by', 30)->nullable();
         });
     }
 

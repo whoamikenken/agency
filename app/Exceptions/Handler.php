@@ -45,6 +45,14 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+            dd($e);
         });
+    }
+
+    public function report(Throwable $e)
+    {
+        if ($e instanceof \Illuminate\Session\TokenMismatchException) {
+            return redirect()->to('http://kingsmanpower.test/login')->send();
+        }
     }
 }
