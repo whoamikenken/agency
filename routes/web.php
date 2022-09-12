@@ -30,7 +30,7 @@ use App\Http\Controllers\TablecolumnController;
 
 Auth::routes();
 
-Route::get('/', [LoginController::class, 'index'])->name('login')->withoutMiddleware([VerifyCsrfToken::class]);
+Route::get('/', [LoginController::class, 'index']);
 
 Route::get('/home', function(){
 
