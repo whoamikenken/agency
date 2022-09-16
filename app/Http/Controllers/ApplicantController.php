@@ -85,7 +85,7 @@ class ApplicantController extends Controller
     public function store(Request $request)
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
-
+        dd($request->input());
         $formFields = $request->validate([
             'applicant_id' => ['required'],
             'fname' => ['required'],
@@ -101,6 +101,22 @@ class ApplicantController extends Controller
         applicant::create($formFields);
         $return = array('status' => 1, 'msg' => 'Successfully added applicant', 'title' => 'Success!');
 
+        return response()->json($return);
+    }
+
+    public function updateApplicantData(Request $request)
+    {
+        $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
+        
+        $applicant_id = $request->input("applicant_id");
+        $column = $request->input("column");
+        $value = $request->input("value");
+        $formFields = array($column => $value);
+        $query = DB::table('applicants')->where('applicant_id', $applicant_id)->update($formFields);
+        if ($query) {
+            $return = array('status' => 1, 'msg' => 'Successfully updated applicant', 'title' => 'Success!');
+        }
+        
         return response()->json($return);
     }
 }

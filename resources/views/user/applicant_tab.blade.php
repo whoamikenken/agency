@@ -21,11 +21,15 @@
         Document
     </div>
 </div>
-
+<form id="profileForm" enctype="multipart/form-data">
+@csrf
+<input type="hidden" name="applicant_id" value="{{$uid}}">
+</form>
 <script>
     $(document).ready(function () {
         $("#pills-profile-tab").click();
     });
+
     $("#pills-tab").on("click",".nav-link",function(){
         var link = $(this).attr('link');
         $.ajax({
@@ -41,5 +45,59 @@
             }
         });
     })
+
+    const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+    })
+
+    function saveSingleProfileColumn(tags){
+        console.log(tags.val());
+        $("#column").remove();
+        $("#columnVal").remove();
+        if(tags.val()){
+            $("<input type='text'/>")
+            .attr("name", "column")
+            .attr("id", "column")
+            .attr("value", tags.attr("name"))
+            .prependTo("#profileForm");
+
+            $("<input type='text'/>")
+            .attr("name", "value")
+            .attr("id", "columnVal")
+            .attr("value", tags.val())
+            .prependTo("#profileForm");
+
+            var formdata = $("#profileForm").serialize();
+
+            $.ajax({
+                url : "{{ url('applicant/store') }}",
+                type : "POST",
+                data : formdata,
+                dataType: "JSON",
+                success : function(response){
+                    console.log(response);
+                    if (response.status == 1) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Updated'
+                        });
+                    }else{
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Error please contact kennedy.'
+                        });
+                    }
+                }
+            });
+        }
+    }
 
 </script>

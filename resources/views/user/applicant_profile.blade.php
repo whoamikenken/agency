@@ -237,7 +237,7 @@
                         <div class="input-group">
                             <div class="input-group-text"><i class="bi bi-person"></i></div>
                             <input type="text" id="family_contact_name" name="family_contact_name"
-                            class="form-control" placeholder="Enter Family Contact Name" value="">
+                            class="form-control" placeholder="Enter Family Contact Name" value="{{$family_contact_name}}">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -809,24 +809,7 @@
     </div>
 </div>
 
-<form id="profileForm" enctype="multipart/form-data">
-@csrf
-<input type="hidden" name="applicant_id" value="{{$applicant_id}}">
-</form>
-
 <script>
-    const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-    })
-
     $(document).ready(function () {
         
         $('.datepicker').datepicker({
@@ -838,34 +821,14 @@
         });
         
     });
+    
 
-    $("input:text, textarea").on("change", function(){
+    $("input[type=text], input[type=number], textarea, select").on("change", function(){
+        
         if ($(this).val()) {
             saveSingleProfileColumn($(this));
         }else return;   
     });
 
-    function saveSingleProfileColumn(tags){
-        if(tags.val()){
-            $("<input type='text'/>")
-            .attr("name", tags.attr("name"))
-            .attr("value", tags.val())
-            .prependTo("#profileForm");
-
-            var formdata = $("#profileForm").serialize();
-
-            $.ajax({
-                url : "{{ url('applicant/store') }}",
-                type : "POST",
-                data : formdata,
-                success : function(response){
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Updated'
-                    });
-                }
-            });
-        }
-    }
 
 </script>

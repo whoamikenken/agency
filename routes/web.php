@@ -123,6 +123,7 @@ Route::post('/applicant/list', [ApplicantController::class, 'getTable'])->withou
 Route::post('/applicant/getModal', [ApplicantController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/applicant/getApplicantProfileTab', [ApplicantController::class, 'profileTab'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/applicant/add', [ApplicantController::class, 'store']);
+Route::post('/applicant/store', [ApplicantController::class, 'updateApplicantData']);
 Route::post('/applicant/profile', [ApplicantController::class, 'profile'])->withoutMiddleware([VerifyCsrfToken::class]);
 
 Route::get('/credits', function(){
