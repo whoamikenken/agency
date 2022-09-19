@@ -70,6 +70,12 @@
     
     {{-- DATE PICKER --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
+    <link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@videojs/themes@1/dist/sea/index.css" rel="stylesheet">
+
+    
     
     <style type="text/css">
         .sweet_loader {
@@ -183,12 +189,12 @@
         
         .fw-semibold { font-weight: 600; }
         .lh-tight { line-height: 1.25; } 
-
+        
         a.link-light.rounded.menuLink.active {
             background-color: darkgrey;
             color: black;
         }
-
+        
         /* SELECT 2 icon */
         .select2-container--bootstrap-5 .select2-selection--single {
             background-position: right 0.75rem center;
@@ -220,12 +226,12 @@
                         <div class="collapse navbar-collapse" id="navbarTogglerDemo01" style="flex-grow: 0;">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 @foreach ($menus as $key => $items)
-                                    @foreach ($items as $item)
-                                        <li class="nav-item d-block d-sm-none">
-                                            <a class="nav-link menuMobile" style="color: #fff !important;font-size: 20px !important;" menu="{{$item->link}}" aria-current="page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
-                                        </li>
-                                    @endforeach
-                                    <hr>
+                                @foreach ($items as $item)
+                                <li class="nav-item d-block d-sm-none">
+                                    <a class="nav-link menuMobile" style="color: #fff !important;font-size: 20px !important;" menu="{{$item->link}}" aria-current="page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
+                                </li>
+                                @endforeach
+                                <hr>
                                 @endforeach
                             </ul>
                             <form class="d-flex text-end justify-content-between">
@@ -338,111 +344,98 @@
 
 <script>
     
-    //     document.addEventListener("DOMContentLoaded", function(){
-        //   document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
-            
-            //     element.addEventListener('click', function (e) {
-                
-                //       let nextEl = element.nextElementSibling;
-                //       let parentEl  = element.parentElement;	
-                
-                //         if(nextEl) {
-                    //             e.preventDefault();	
-                    //             let mycollapse = new bootstrap.Collapse(nextEl);
-                    
-                    //             if(nextEl.classList.contains('show')){
-                        //               mycollapse.hide();
-                        //             } else {
-                            //                 mycollapse.show();
-                            //                 // find other submenus with class=show
-                            //                 var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
-                            //                 // if it exists, then close all of them
-                            //                 if(opened_submenu){
-                                //                   new bootstrap.Collapse(opened_submenu);
-                                //                 }
-                                //             }
-                                //         }
-                                //     }); // addEventListener
-                                //   }) // forEach
-                                // }); 
-                                
-                                // Bootstrap tooltip Everywhere
-                                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-                                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                                    return new bootstrap.Tooltip(tooltipTriggerEl)
-                                })
-                                
-                                function bootstrapForm(form) {
-                                    
-                                    $(form).find('select.validate').each(function(idx) {
-                                        $(this).parent().find('input').addClass("is-invalid");
-                                        if ($(this).val().length == 0) {
-                                            throw new Error("Something went badly wrong!");
-                                        } else {
-                                            $(this).parent().find('input').removeClass("is-invalid");
-                                            $(this).parent().find('input').addClass("is-valid");
-                                        }
-                                    });
-                                    
-                                    $(form).find('input.validate').each(function(idx) {
-                                        if ($(this).val().length == 0) {
-                                            $(this).addClass("is-invalid");
-                                            throw new Error("Something went badly wrong!");
-                                        } else {
-                                            $(this).removeClass("is-invalid").addClass("is-valid");
-                                        }
-                                    });
-                                    
-                                    
-                                    $(form).find('textarea.validate').each(function(idx) {
-                                        if ($(this).val().length == 0) {
-                                            $(this).addClass("is-invalid");
-                                            throw new Error("Something went badly wrong!");
-                                        } else {
-                                            $(this).removeClass("is-invalid").addClass("is-valid");
-                                        }
-                                    });
-                                    return true;
-                                }
-                                
-                                function openWindowWithPost(url, data) {
-                                    var form = document.createElement("form");
-                                    form.target = "_blank";
-                                    form.method = "POST";
-                                    form.action = url;
-                                    form.style.display = "none";
-                                    
-                                    for (var key in data) {
-                                        var input = document.createElement("input");
-                                        input.type = "hidden";
-                                        input.name = key;
-                                        input.value = data[key];
-                                        form.appendChild(input);
-                                    }
-                                    
-                                    // Add CSRF
-                                    // var csrf = document.createElement("input");
-                                    //     csrf.type = "hidden";
-                                    //     csrf.name = "_token";
-                                    //     csrf.value = "{{ csrf_token() }}";
-                                    //     form.appendChild(input);
-                                    // form.appendChild(@csrf)
-                                    
-                                    document.body.appendChild(form);
-                                    form.submit();
-                                    document.body.removeChild(form);
-                                }
-
-                                $("#sidebarMenu").on("click", ".menuLink", function() {
-                                    var menu = $(this).attr('menu');
-                                    var nav = $(this).attr('nav');
-                                    var menu_id = $(this).attr('menu_id');
-                                    $("#menu-form").find('input[name="route"]').val(menu);
-                                    $("#menu-form").find('input[name="nav"]').val(nav);
-                                    $("#menu-form").find('input[name="menu_id"]').val(menu_id);
-                                    $("#menu-form").submit();
-                                });
-                                
-                            </script>
-                            </html>
-                            
+    // Bootstrap tooltip Everywhere
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+    
+    function bootstrapForm(form) {
+        
+        $(form).find('select.validate').each(function(idx) {
+            $(this).parent().find('input').addClass("is-invalid");
+            if ($(this).val().length == 0) {
+                throw new Error("Something went badly wrong!");
+            } else {
+                $(this).parent().find('input').removeClass("is-invalid");
+                $(this).parent().find('input').addClass("is-valid");
+            }
+        });
+        
+        $(form).find('input.validate').each(function(idx) {
+            if ($(this).val().length == 0) {
+                $(this).addClass("is-invalid");
+                throw new Error("Something went badly wrong!");
+            } else {
+                $(this).removeClass("is-invalid").addClass("is-valid");
+            }
+        });
+        
+        
+        $(form).find('textarea.validate').each(function(idx) {
+            if ($(this).val().length == 0) {
+                $(this).addClass("is-invalid");
+                throw new Error("Something went badly wrong!");
+            } else {
+                $(this).removeClass("is-invalid").addClass("is-valid");
+            }
+        });
+        return true;
+    }
+    
+    function openWindowWithPost(url, data) {
+        var form = document.createElement("form");
+        form.target = "_blank";
+        form.method = "POST";
+        form.action = url;
+        form.style.display = "none";
+        
+        for (var key in data) {
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = key;
+            input.value = data[key];
+            form.appendChild(input);
+        }
+        
+        // Add CSRF
+        // var csrf = document.createElement("input");
+        //     csrf.type = "hidden";
+        //     csrf.name = "_token";
+        //     csrf.value = "{{ csrf_token() }}";
+        //     form.appendChild(input);
+        // form.appendChild(@csrf)
+        
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+    }
+    
+    $("#sidebarMenu").on("click", ".menuLink", function() {
+        var menu = $(this).attr('menu');
+        var nav = $(this).attr('nav');
+        var menu_id = $(this).attr('menu_id');
+        $("#menu-form").find('input[name="route"]').val(menu);
+        $("#menu-form").find('input[name="nav"]').val(nav);
+        $("#menu-form").find('input[name="menu_id"]').val(menu_id);
+        $("#menu-form").submit();
+    });
+    
+    function processForm(form){
+        
+        var formdata = new FormData(); // Creating object of FormData class
+        
+        form.find("select, textarea, input").each(function() {
+            if ($(this).attr('type') == "file") {
+                var user_file = $(this)[0].files[0];
+                formdata.append($(this).attr('name'), user_file);
+            }else{
+                formdata.append($(this).attr('name'), $(this).val());
+            }
+        });
+        
+        return formdata;
+    }
+    
+</script>
+</html>

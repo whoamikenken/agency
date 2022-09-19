@@ -125,6 +125,7 @@ Route::post('/applicant/getApplicantProfileTab', [ApplicantController::class, 'p
 Route::post('/applicant/add', [ApplicantController::class, 'store']);
 Route::post('/applicant/store', [ApplicantController::class, 'updateApplicantData']);
 Route::post('/applicant/profile', [ApplicantController::class, 'profile'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/applicant/record', [ApplicantController::class, 'record'])->withoutMiddleware([VerifyCsrfToken::class]);
 
 Route::get('/credits', function(){
     echo "Created by kennedy hipolito<br>";

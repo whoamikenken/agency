@@ -15,16 +15,18 @@
         
     </div>
     <div class="tab-pane fade" id="pills-record" role="tabpanel" aria-labelledby="pills-record-tab">
-        Record
+        
     </div>
     <div class="tab-pane fade" id="pills-document" role="tabpanel" aria-labelledby="pills-document-tab">
-        Document
+        
     </div>
 </div>
+<div class="visually-hidden">
 <form id="profileForm" enctype="multipart/form-data">
 @csrf
 <input type="hidden" name="applicant_id" value="{{$uid}}">
 </form>
+</div>
 <script>
     $(document).ready(function () {
         $("#pills-profile-tab").click();
@@ -39,9 +41,9 @@
                 uid: $("#uid").val()
             },
             success: function(response) {
-                // setTimeout(() => {
+                setTimeout(() => {
                     $("#pills-tabContent").find(".active").html(response);
-                // }, 1000);
+                }, 500);
             }
         });
     })
@@ -59,10 +61,46 @@
     })
 
     function saveSingleProfileColumn(tags){
-        console.log(tags.val());
         $("#column").remove();
         $("#columnVal").remove();
-        if(tags.val()){
+        if(tags.attr("type") != "file"){
+            if(tags.val()){
+                $("<input type='text'/>")
+                .attr("name", "column")
+                .attr("id", "column")
+                .attr("value", tags.attr("name"))
+                .prependTo("#profileForm");
+
+                $("<input type='text'/>")
+                .attr("name", "value")
+                .attr("id", "columnVal")
+                .attr("value", tags.val())
+                .prependTo("#profileForm");
+
+                var formdata = $("#profileForm").serialize();
+
+                $.ajax({
+                    url : "{{ url('applicant/store') }}",
+                    type : "POST",
+                    data : formdata,
+                    dataType: "JSON",
+                    success : function(response){
+                        console.log(response);
+                        if (response.status == 1) {
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Updated'
+                            });
+                        }else{
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'Error please contact kennedy.'
+                            });
+                        }
+                    }
+                });
+            }
+        }else{
             $("<input type='text'/>")
             .attr("name", "column")
             .attr("id", "column")
@@ -72,18 +110,23 @@
             $("<input type='text'/>")
             .attr("name", "value")
             .attr("id", "columnVal")
-            .attr("value", tags.val())
+            .attr("value", "file")
             .prependTo("#profileForm");
 
-            var formdata = $("#profileForm").serialize();
+            var formdata = processForm($("#profileForm"));
+
+            var user_file = tags[0].files[0];
+            formdata.append("file", user_file);
 
             $.ajax({
                 url : "{{ url('applicant/store') }}",
                 type : "POST",
                 data : formdata,
-                dataType: "JSON",
+                cache:false,
+                contentType: false,
+                processData: false,
+                dataType: 'json',
                 success : function(response){
-                    console.log(response);
                     if (response.status == 1) {
                         Toast.fire({
                             icon: 'success',
@@ -98,6 +141,7 @@
                 }
             });
         }
+        
     }
 
 </script>

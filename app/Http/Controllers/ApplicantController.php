@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\applicant;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicantController extends Controller
 {
@@ -82,6 +82,23 @@ class ApplicantController extends Controller
         return view('user/applicant_profile', $data);
     }
 
+    public function record(Request $request)
+    {
+        $data = array();
+
+        $formFields = $request->validate([
+            'uid' => ['required'],
+        ]);
+
+        $data['uid'] = $formFields['uid'];
+
+        $data['record'] = DB::table('applicants')->where("applicant_id", $data['uid'])->get();
+        $data = json_decode($data['record'], true)[0];
+        $data['country_select'] = DB::table('countries')->get();
+
+        return view('user/applicant_record', $data);
+    }
+
     public function store(Request $request)
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
@@ -107,10 +124,29 @@ class ApplicantController extends Controller
     public function updateApplicantData(Request $request)
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
-        
+        // dd($request->input());
         $applicant_id = $request->input("applicant_id");
         $column = $request->input("column");
         $value = $request->input("value");
+        if ($request->hasFile('file')) {
+            $users = DB::table('applicants')->where('applicant_id', $applicant_id)->first();
+            if($column == "user_profile"){
+                if($users->{$column}){
+                    Storage::disk('public')->delete($users->{$column});
+                }
+                $value = $request->file('file')->store($column, 'public');
+            }elseif ($column == "user_video") {
+                if ($users->{$column}) {
+                    Storage::disk('public')->delete($users->{$column});
+                }
+                $value = $request->file('file')->store($column, 'public');
+            }else{
+                if ($users->{$column}) {
+                    Storage::disk('public')->delete($users->{$column});
+                }
+                $value = $request->file('file')->store($column, 'public');
+            }
+        }
         $formFields = array($column => $value);
         $query = DB::table('applicants')->where('applicant_id', $applicant_id)->update($formFields);
         if ($query) {

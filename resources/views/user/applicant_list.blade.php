@@ -1,11 +1,15 @@
 <div class="row animate__animated animate__fadeInUp" id="pagination_data">
     @unless (count($result) == 0)
         @foreach ($result as $item)
-            <div class="col-sm-12 col-md-4 col-lg-3">
-                <div class="card mb-3 shadow-sm" style="max-width: 540px;">
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                <div class="card mb-3 shadow-sm" >
                     <div class="row g-0">
                         <div class="col-4">
-                            <img src="{{ asset('images/user.png')}}" class="img-fluid rounded-start animate__animated animate__fadeIn animate__delay-1s" alt="...">
+                            @if ($item->user_profile)
+                                <img src="{{ asset('storage/'.$item->user_profile.'')}}"  class="img-fluid rounded animate__animated animate__fadeIn animate__delay-1s m-2" alt="..." style="height: -webkit-fill-available;">
+                            @else
+                                <img src="{{ asset('images/user.png')}}" class="img-fluid rounded animate__animated animate__fadeIn animate__delay-1s" alt="...">
+                            @endif
                         </div>
                         <div class="col-8">
                             <div class="card-body">

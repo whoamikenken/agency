@@ -71,5 +71,21 @@ class PrincipalSeeder extends Seeder
             'modified_by' => 1,
             'created_by' => 1,
         ]);
+
+        Principal::factory()->create([
+            'code' => 'EAL',
+            'description' => 'E-Job Agency Limited',
+            'jobsite' => 'HK',
+            'modified_by' => 1,
+            'created_by' => 1,
+        ]);
+
+        Principal::factory()->create([
+            'code' => 'CES',
+            'description' => 'CABLE EMPLOYMMENT SERVICE LIMITED',
+            'jobsite' => 'HK',
+            'modified_by' => 1,
+            'created_by' => 1,
+        ]);
     }
 }
