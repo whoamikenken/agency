@@ -126,6 +126,7 @@ Route::post('/applicant/add', [ApplicantController::class, 'store']);
 Route::post('/applicant/store', [ApplicantController::class, 'updateApplicantData']);
 Route::post('/applicant/profile', [ApplicantController::class, 'profile'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/applicant/record', [ApplicantController::class, 'record'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/applicant/document', [ApplicantController::class, 'document'])->withoutMiddleware([VerifyCsrfToken::class]);
 
 Route::get('/credits', function(){
     echo "Created by kennedy hipolito<br>";

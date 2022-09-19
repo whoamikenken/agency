@@ -325,74 +325,6 @@
         </div>
     </div>
     <div class="card border-secondary mb-3 mt-4">
-        <div class="card-header" style="font-size: 23px;background: #0d6cf9;color: white;">Passport Information</div>
-        <div class="card-body text-secondary">
-            <div class="row">
-                <div class="col-sm-12 col-lg-6">
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Passport No.</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-person"></i></div>
-                            <input type="text" id="passport_no" name="passport_no"
-                            class="form-control" placeholder="Enter Passport No" value="{{$passport_no}}">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Issued On</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
-                            <input type="text" id="passport_issued" name="passport_issued" class="form-control datepicker" value="{{ $passport_issued }}" placeholder="Select date passport issued">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-6">
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Country Issued</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-geo-alt"></i></div>
-                            <select name="passport_place_issued" id="passport_place_issued" class="form-control form-select">
-                                @foreach ($country_select as $item)
-                                <option value="{{$item->code}}" {{ (isset($passport_place_issued) && $passport_place_issued == $item->code)? "selected":"" }} >{{$item->description}}</option>
-                                @endforeach
-                            </select>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Expiration</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
-                            <input type="text" id="passport_validity" name="passport_validity" class="form-control datepicker" value="{{ $passport_validity }}" placeholder="Select date expiration">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card border-secondary mb-3 mt-4">
         <div class="card-header" style="font-size: 23px;background: #0d6cf9;color: white;">Vaccination Information</div>
         <div class="card-body text-secondary">
             <h5 class="text-center mt-2">First Vaccination</h5>
@@ -640,313 +572,302 @@
     </div>
 </div>
 <div class="card border-secondary mb-3 mt-4">
-    <div class="card-header" style="font-size: 23px;background: #0d6cf9;color: white;">Job Order</div>
-    <div class="card-body text-secondary">
-        <div class="row">
-            <div class="col-sm-12 col-lg-6">
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Job Order Receive</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
-                        <input type="text" id="jo_received" name="jo_received" class="form-control datepicker" value="{{ $jo_received }}" placeholder="Select date">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Job Order Confirm</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
-                        <input type="text" id="jo_confirmed" name="jo_confirmed" class="form-control datepicker" value="{{ $jo_confirmed }}" placeholder="Select date">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-lg-6">
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Job Order Cancel?</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-option"></i></div>
-                        <select name="jo_er_iscancel" id="jo_er_iscancel" class="form-control form-select">
-                            <option value="Yes" {{ (isset($jo_er_iscancel) && $jo_er_iscancel == "Yes")? "selected":"" }} >Yes</option>
-                            <option value="No" {{ (isset($jo_er_iscancel) && $jo_er_iscancel == "No")? "selected":"" }} >No</option>
-                        </select>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Job Order Maid Cancel?</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-option"></i></div>
-                        <select name="jo_maid_iscancel" id="jo_maid_iscancel" class="form-control form-select">
-                            <option value="Yes" {{ (isset($jo_maid_iscancel) && $jo_maid_iscancel == "Yes")? "selected":"" }} >Yes</option>
-                            <option value="No" {{ (isset($jo_maid_iscancel) && $jo_maid_iscancel == "No")? "selected":"" }} >No</option>
-                        </select>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card border-secondary mb-3 mt-4">
     <div class="card-header" style="font-size: 23px;background: #0d6cf9;color: white;">Medical Information</div>
     <div class="card-body text-secondary">
         <h5 class="text-center">First Medical</h5>
         <hr>
         <div class="row">
-            <div class="col-sm-12 col-lg-6">
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Date</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
-                        <input type="text" id="med_first_date" name="med_first_date" class="form-control datepicker" value="{{ $med_first_date }}" placeholder="Select date">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Medical Date</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                    <input type="text" id="med_first_date" name="med_first_date" class="form-control datepicker" value="{{ $med_first_date }}" placeholder="Select date">
+                    <div class="valid-feedback">
+                        Looks good!
                     </div>
-                </div>
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Result</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-option"></i></div>
-                        <input type="text" id="med_first_result" name="med_first_result" class="form-control" list="datalistOptionsResult" value="{{ $med_first_result }}">
+                    <div class="invalid-feedback">
+                        Please input.
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-lg-6">
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Clinic</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-option"></i></div>
-                        <select name="med_first_clinic" id="med_first_clinic" class="form-control form-select">
-                            @foreach ($medical_select as $item)
-                            <option value="{{$item->code}}" {{ (isset($med_first_clinic) && $med_first_clinic == $item->code)? "selected":"" }} >{{$item->description}}</option>
-                            @endforeach
-                        </select>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Medical Result</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <input type="text" id="med_first_result" name="med_first_result" class="form-control" list="datalistOptionsResult" value="{{ $med_first_result }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                <label style="font-weight:600">Medical Clinic</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <select name="med_first_clinic" id="med_first_clinic" class="form-control form-select">
+                        @foreach ($medical_select as $item)
+                        <option value="{{$item->code}}" {{ (isset($med_first_clinic) && $med_first_clinic == $item->code)? "selected":"" }} >{{$item->description}}</option>
+                        @endforeach
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
                     </div>
                 </div>
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Cost</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-receipt"></i></div>
-                        <input type="number" id="med_first_cost" name="med_first_cost" class="form-control" placeholder="Enter Medical Cost" value="{{$med_first_cost}}">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                <label style="font-weight:600">Medical Cost</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-receipt"></i></div>
+                    <input type="number" id="med_first_cost" name="med_first_cost" class="form-control" placeholder="Enter Medical Cost" value="{{$med_first_cost}}">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <label style="font-weight:600">Medical Certificate</label>
+                <div class="input-group custom-file-button">
+                    <label class="input-group-text" for="med_first_cert"><i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;{{($med_first_cert != "")? "Replace":"Upload"}} Certificate</label>
+                    <input type="file" class="form-control form-control-sm" id="med_first_cert" name="med_first_cert">
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                @if ($med_first_cert != "")
+                <label style="font-weight:600">Medical Certificate</label>
+                <div class="input-group">
+                    <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$med_first_cert.'')}}"><i class="bi bi-eye"></i> View</a>
+                </div>
+                @endif
             </div>
         </div>
         <h5 class="text-center mt-2">Second Medical</h5>
         <hr>
         <div class="row">
-            <div class="col-sm-12 col-lg-6">
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Date</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
-                        <input type="text" id="med_second_date" name="med_second_date" class="form-control datepicker" value="{{ $med_second_date }}" placeholder="Select date">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
+            <div class="col-md-12 col-lg-6">
+                <label style="font-weight:600">Medical Date</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                    <input type="text" id="med_second_date" name="med_second_date" class="form-control datepicker" value="{{ $med_second_date }}" placeholder="Select date">
+                    <div class="valid-feedback">
+                        Looks good!
                     </div>
-                </div>
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Result</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-option"></i></div>
-                        <input type="text" id="med_second_result" name="med_second_result" class="form-control" list="datalistOptionsResult" value="{{ $med_second_result }}">
+                    <div class="invalid-feedback">
+                        Please input.
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-lg-6">
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Clinic</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-option"></i></div>
-                        <select name="med_second_clinic" id="med_second_clinic" class="form-control form-select">
-                            @foreach ($medical_select as $item)
-                            <option value="{{$item->code}}" {{ (isset($med_second_clinic) && $med_second_clinic == $item->code)? "selected":"" }} >{{$item->description}}</option>
-                            @endforeach
-                        </select>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
+            <div class="col-md-12 col-lg-6">
+                <label style="font-weight:600">Medical Result</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <input type="text" id="med_second_result" name="med_second_result" class="form-control" list="datalistOptionsResult" value="{{ $med_second_result }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Medical Clinic</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <select name="med_second_clinic" id="med_second_clinic" class="form-control form-select">
+                        @foreach ($medical_select as $item)
+                        <option value="{{$item->code}}" {{ (isset($med_second_clinic) && $med_second_clinic == $item->code)? "selected":"" }} >{{$item->description}}</option>
+                        @endforeach
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
                     </div>
                 </div>
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Cost</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-receipt"></i></div>
-                        <input type="number" id="med_second_cost" name="med_second_cost" class="form-control" placeholder="Enter Medical Cost" value="{{$med_second_cost}}">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Medical Cost</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-receipt"></i></div>
+                    <input type="number" id="med_second_cost" name="med_second_cost" class="form-control" placeholder="Enter Medical Cost" value="{{$med_second_cost}}">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <label style="font-weight:600">Medical Certificate</label>
+                <div class="input-group custom-file-button">
+                    <label class="input-group-text" for="med_second_cert"><i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;{{($med_second_cert != "")? "Replace":"Upload"}} Certificate</label>
+                    <input type="file" class="form-control form-control-sm" id="med_second_cert" name="med_second_cert">
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                @if ($med_second_cert != "")
+                <label style="font-weight:600">Medical Certificate</label>
+                <div class="input-group">
+                    <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$med_second_cert.'')}}"><i class="bi bi-eye"></i> View</a>
+                </div>
+                @endif
             </div>
         </div>
         <h5 class="text-center mt-2">Third Medical</h5>
         <hr>
         <div class="row">
-            <div class="col-sm-12 col-lg-6">
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Date</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
-                        <input type="text" id="med_third_date" name="med_third_date" class="form-control datepicker" value="{{ $med_third_date }}" placeholder="Select date">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
+            <div class="col-md-12 col-lg-6">
+                <label style="font-weight:600">Medical Date</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                    <input type="text" id="med_third_date" name="med_third_date" class="form-control datepicker" value="{{ $med_third_date }}" placeholder="Select date">
+                    <div class="valid-feedback">
+                        Looks good!
                     </div>
-                </div>
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Result</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-option"></i></div>
-                        <input type="text" id="med_third_result" name="med_third_result" class="form-control" list="datalistOptionsResult" value="{{ $med_third_result }}">
+                    <div class="invalid-feedback">
+                        Please input.
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-lg-6">
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Clinic</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-option"></i></div>
-                        <select name="med_third_clinic" id="med_third_clinic" class="form-control form-select">
-                            @foreach ($medical_select as $item)
-                            <option value="{{$item->code}}" {{ (isset($med_third_clinic) && $med_third_clinic == $item->code)? "selected":"" }} >{{$item->description}}</option>
-                            @endforeach
-                        </select>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
+            <div class="col-md-12 col-lg-6">
+                <label style="font-weight:600">Medical Result</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <input type="text" id="med_third_result" name="med_third_result" class="form-control" list="datalistOptionsResult" value="{{ $med_third_result }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Medical Clinic</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <select name="med_third_clinic" id="med_third_clinic" class="form-control form-select">
+                        @foreach ($medical_select as $item)
+                        <option value="{{$item->code}}" {{ (isset($med_third_clinic) && $med_third_clinic == $item->code)? "selected":"" }} >{{$item->description}}</option>
+                        @endforeach
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
                     </div>
                 </div>
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Cost</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-receipt"></i></div>
-                        <input type="number" id="med_third_cost" name="med_third_cost" class="form-control" placeholder="Enter Medical Cost" value="{{$med_third_cost}}">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Medical Cost</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-receipt"></i></div>
+                    <input type="number" id="med_third_cost" name="med_third_cost" class="form-control" placeholder="Enter Medical Cost" value="{{$med_third_cost}}">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <label style="font-weight:600">Medical Certificate</label>
+                <div class="input-group custom-file-button">
+                    <label class="input-group-text" for="med_third_cert"><i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;{{($med_third_cert != "")? "Replace":"Upload"}} Certificate</label>
+                    <input type="file" class="form-control form-control-sm" id="med_third_cert" name="med_third_cert">
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                @if ($med_third_cert != "")
+                <label style="font-weight:600">Medical Certificate</label>
+                <div class="input-group">
+                    <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$med_third_cert.'')}}"><i class="bi bi-eye"></i> View</a>
+                </div>
+                @endif
             </div>
         </div>
         <h5 class="text-center mt-2">Fourth Medical</h5>
         <hr>
         <div class="row">
-            <div class="col-sm-12 col-lg-6">
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Date</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
-                        <input type="text" id="med_fourth_date" name="med_fourth_date" class="form-control datepicker" value="{{ $med_fourth_date }}" placeholder="Select date">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Medical Date</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                    <input type="text" id="med_fourth_date" name="med_fourth_date" class="form-control datepicker" value="{{ $med_fourth_date }}" placeholder="Select date">
+                    <div class="valid-feedback">
+                        Looks good!
                     </div>
-                </div>
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Result</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-option"></i></div>
-                        <input type="text" id="med_fourth_result" name="med_fourth_result" class="form-control" list="datalistOptionsResult" value="{{ $med_fourth_result }}">
+                    <div class="invalid-feedback">
+                        Please input.
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-lg-6">
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Clinic</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-option"></i></div>
-                        <select name="med_fourth_clinic" id="med_fourth_clinic" class="form-control form-select">
-                            @foreach ($medical_select as $item)
-                            <option value="{{$item->code}}" {{ (isset($med_fourth_clinic) && $med_fourth_clinic == $item->code)? "selected":"" }} >{{$item->description}}</option>
-                            @endforeach
-                        </select>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Medical Result</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <input type="text" id="med_fourth_result" name="med_fourth_result" class="form-control" list="datalistOptionsResult" value="{{ $med_fourth_result }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Medical Clinic</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <select name="med_fourth_clinic" id="med_fourth_clinic" class="form-control form-select">
+                        @foreach ($medical_select as $item)
+                        <option value="{{$item->code}}" {{ (isset($med_fourth_clinic) && $med_fourth_clinic == $item->code)? "selected":"" }} >{{$item->description}}</option>
+                        @endforeach
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
                     </div>
                 </div>
-                <div class="col-md-12 col-sm-12">
-                    <label style="font-weight:600">Medical Cost</label>
-                    <div class="input-group">
-                        <div class="input-group-text"><i class="bi bi-receipt"></i></div>
-                        <input type="number" id="med_fourth_cost" name="med_fourth_cost" class="form-control" placeholder="Enter Medical Cost" value="{{$med_fourth_cost}}">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please input.
-                        </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Medical Cost</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-receipt"></i></div>
+                    <input type="number" id="med_fourth_cost" name="med_fourth_cost" class="form-control" placeholder="Enter Medical Cost" value="{{$med_fourth_cost}}">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <label style="font-weight:600">Medical Certificate</label>
+                <div class="input-group custom-file-button">
+                    <label class="input-group-text" for="med_fourth_cert"><i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;{{($med_fourth_cert != "")? "Replace":"Upload"}} Certificate</label>
+                    <input type="file" class="form-control form-control-sm" id="med_fourth_cert" name="med_fourth_cert">
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                @if ($med_fourth_cert != "")
+                <label style="font-weight:600">Medical Certificate</label>
+                <div class="input-group">
+                    <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$med_fourth_cert.'')}}"><i class="bi bi-eye"></i> View</a>
+                </div>
+                @endif
+            </div>
+        </div>
     </div>
-</div>
-</div>
-
+</div>   
 <div class="modal fade" id="userVideo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userVideoLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -981,9 +902,9 @@
     </div>
 </div>
 <datalist id="datalistOptionsResult">
-  <option value="Fit to work">
-  <option value="Unfit">
-  <option value="Pending">
+    <option value="Fit to work">
+    <option value="Unfit">
+    <option value="Pending">
 </datalist>
 <script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
 <script>

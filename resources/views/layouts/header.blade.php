@@ -71,6 +71,7 @@
     {{-- DATE PICKER --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/watermarkjs@2.1.1/dist/watermark.min.js"></script>
 
     <link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
     <link href="https://unpkg.com/@videojs/themes@1/dist/sea/index.css" rel="stylesheet">

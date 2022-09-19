@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory(10)->create();
-        applicant::factory(10000)->create();
+        applicant::factory(50)->create();
         Medical::factory(10)->create();
         
         $this->call([
