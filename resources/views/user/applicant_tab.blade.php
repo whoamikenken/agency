@@ -9,6 +9,9 @@
     <li class="nav-item" role="presentation">
         <button class="nav-link" link="{{ url('applicant/document') }}" id="pills-document-tab" data-bs-toggle="pill" data-bs-target="#pills-document" type="button" role="tab" aria-controls="pills-document" aria-selected="false">Documents</button>
     </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" link="{{ url('applicant/oec') }}" id="pills-oec-tab" data-bs-toggle="pill" data-bs-target="#pills-oec" type="button" role="tab" aria-controls="pills-oec" aria-selected="false">OEC</button>
+    </li>
 </ul>
 <div class="tab-content" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -20,6 +23,9 @@
     <div class="tab-pane fade" id="pills-document" role="tabpanel" aria-labelledby="pills-document-tab">
         
     </div>
+    <div class="tab-pane fade" id="pills-oec" role="tabpanel" aria-labelledby="pills-oec-tab">
+        
+    </div>
 </div>
 <div class="visually-hidden">
 <form id="profileForm" enctype="multipart/form-data">
@@ -28,6 +34,7 @@
 </form>
 </div>
 <script>
+    
     $(document).ready(function () {
         $("#pills-profile-tab").click();
     });

@@ -117,6 +117,7 @@ return new class extends Migration
             $table->string('oec_swab_test')->nullable();
             $table->date('oec_flight_departure')->nullable();
             $table->text('user_profile')->nullable();
+            $table->text('user_profile_face')->nullable();
             $table->text('user_video')->nullable();
             $table->integer('total_cost')->nullable()->default(0);
             $table->string('isactive', 30)->nullable()->default('Active');

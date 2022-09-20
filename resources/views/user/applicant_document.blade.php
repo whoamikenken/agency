@@ -232,6 +232,25 @@
                     @endif
                 </div>
             </div>
+            <h5 class="text-center mt-2">Infosheet</h5>
+            <hr>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <label style="font-weight:600">Infosheet</label>
+                    <div class="input-group custom-file-button">
+                        <label class="input-group-text" for="sup_infosheet"><i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;{{($sup_infosheet != "")? "Replace":"Upload"}} Infosheet</label>
+                        <input type="file" class="form-control form-control-sm" id="sup_infosheet" name="sup_infosheet">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    @if ($sup_infosheet != "")
+                    <label style="font-weight:600">Current PEOS</label>
+                    <div class="input-group">
+                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$sup_infosheet.'')}}"><i class="bi bi-eye"></i> View</a>
+                    </div>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </div>

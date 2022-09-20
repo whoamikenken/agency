@@ -115,6 +115,22 @@ class ApplicantController extends Controller
         return view('user/applicant_document', $data);
     }
 
+    public function oec(Request $request)
+    {
+        $data = array();
+
+        $formFields = $request->validate([
+            'uid' => ['required'],
+        ]);
+
+        $data['uid'] = $formFields['uid'];
+
+        $data['record'] = DB::table('applicants')->where("applicant_id", $data['uid'])->get();
+        $data = json_decode($data['record'], true)[0];
+
+        return view('user/applicant_oec', $data);
+    }
+
     public function store(Request $request)
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');

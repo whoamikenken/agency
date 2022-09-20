@@ -20,6 +20,22 @@
         <div class="card-body text-secondary">
             <div class="row">
                 <div class="col-sm-12 col-lg-2 text-center">
+                    @if ($user_profile_face != "")
+                    <img src="{{ asset('storage/'.$user_profile_face.'')}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
+                    @else
+                    <img src="{{ asset('images/user.png')}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
+                    @endif
+                    <br>
+                    <div class="input-group custom-file-button mt-2">
+                        <label class="input-group-text" for="user_profile_face">{{($user_profile_face != "")? "Replace":"Upload"}} Picture</label>
+                        <input type="file" class="form-control form-control-sm" id="user_profile_face" name="user_profile_face">
+                    </div><br>
+                    <div class="input-group custom-file-button mb-2">
+                        <label class="input-group-text" for="user_video">{{($user_video != "")? "Replace":"Upload"}} Video</label>
+                        <input type="file" class="form-control form-control-sm" id="user_video" name="user_video">
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-2 text-center">
                     <form id="PictureForm" enctype="multipart/form-data">
                         @if ($user_profile != "")
                         <img src="{{ asset('storage/'.$user_profile.'')}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
@@ -31,16 +47,12 @@
                             <label class="input-group-text" for="user_profile">{{($user_profile != "")? "Replace":"Upload"}} Picture</label>
                             <input type="file" class="form-control form-control-sm" id="user_profile" name="user_profile">
                         </div><br>
-                        <div class="input-group custom-file-button">
-                            <label class="input-group-text" for="user_video">{{($user_video != "")? "Replace":"Upload"}} Video</label>
-                            <input type="file" class="form-control form-control-sm" id="user_video" name="user_video">
-                        </div>
                         @if ($user_video != "")
-                        <a class="btn btn-info mt-2 text-white" data-bs-toggle="modal" data-bs-target="#userVideo">View Video</a>
+                        <a class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#userVideo">View Video</a>
                         @endif
                     </form>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-5">
+                <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="col-md-12 col-sm-12">
                         <label style="font-weight:600">ER Ref.</label>
                         <div class="input-group">
@@ -128,8 +140,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label style="font-weight:600">Total Cost</label>
+                        <div class="input-group">
+                            <div class="input-group-text"><i class="bi bi-geo-alt"></i></div>
+                            <input type="number" id="total_cost" name="total_cost" class="form-control validate" placeholder="Enter total_cost" value="{{ $total_cost }}" readonly>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input a cost.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-5">
+                <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="col-md-12 col-sm-12">
                         <label style="font-weight:600">Maid Ref</label>
                         <div class="input-group">
