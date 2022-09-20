@@ -37,19 +37,19 @@
 
 <script>
     $(document).ready(function () {
-        $(".user_photo_list").each(function() {  
-            imgsrc = this.src;
-            console.log(imgsrc);
-            var imgID = $(this).attr("id");
-            watermark([imgsrc, "{{ asset('Icon/favicon-96x96.png') }}"])
-            // .image(watermark.text.lowerRight('KINGSMANPOWER', '28px serif', '#fff', 0.5))
-            .image(watermark.image.upperRight(0.5))
-            .then(function (img) {
-                $(img).addClass("img-fluid user_photo_list rounded animate__animated animate__fadeIn animate__delay-1s m-2");
-                $(img).css("height", "-webkit-fill-available");
-                console.log($("#"+imgID));
-                $("#"+imgID).replaceWith(img);
-            });
-        });  
+        // $(".user_photo_list").each(function() {  
+        //     imgsrc = this.src;
+        //     console.log(imgsrc);
+        //     var imgID = $(this).attr("id");
+        //     watermark([imgsrc, "{{ asset('Icon/favicon-96x96.png') }}"])
+        //     // .image(watermark.text.lowerRight('KINGSMANPOWER', '28px serif', '#fff', 0.5))
+        //     .image(watermark.image.upperRight(0.5))
+        //     .then(function (img) {
+        //         $(img).addClass("img-fluid user_photo_list rounded animate__animated animate__fadeIn animate__delay-1s m-2");
+        //         $(img).css("height", "-webkit-fill-available");
+        //         console.log($("#"+imgID));
+        //         $("#"+imgID).replaceWith(img);
+        //     });
+        // });  
     });
 </script>
