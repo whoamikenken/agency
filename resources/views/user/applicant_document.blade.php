@@ -273,11 +273,6 @@
         
         if ($(this).val()) {
             saveSingleProfileColumn($(this));
-            if($(this).attr("type") == "file"){
-                setTimeout(() => {
-                    $("#pills-document-tab").click();
-                }, 2000);
-            }
         }else return;   
     });
 </script>

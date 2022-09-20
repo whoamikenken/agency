@@ -139,6 +139,10 @@
                             icon: 'success',
                             title: 'Updated'
                         });
+
+                        setTimeout(() => {
+                            $("#pills-tab").find(".active").click();
+                        }, 2000);
                     }else{
                         Toast.fire({
                             icon: 'error',

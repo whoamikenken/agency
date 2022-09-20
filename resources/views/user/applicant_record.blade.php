@@ -463,11 +463,6 @@
         
         if ($(this).val()) {
             saveSingleProfileColumn($(this));
-            if($(this).attr("type") == "file"){
-                setTimeout(() => {
-                    $("#pills-record-tab").click();
-                }, 2000);
-            }
         }else return;   
     });
 </script>

@@ -79,7 +79,8 @@ class ApplicantFactory extends Factory
             'med_fourth_clinic' => fake()->randomElement(['Q3Y', 'ZV0', 'DDT', 'AG4', 'IKB', 'CH4']),
             'med_fourth_cost' => $medFourthCost,
             'user_video' => 'user_video/Meson46663fjfaFHEyR5Zvo5ClkQjG01vuQuLQzr.mp4',
-            'user_profile' => 'user_profile/7nPjgGZeNXptTPNBXcAoyB4WLdudrZZGuGUCRDr8.png',
+            'user_profile' => 'user_profile/fVSRsIcbaKG1QOAMtfdSGZIx5BMCbCgSrFtHNAvg.png',
+            'user_profile_face' => 'user_profile_face/tEQ96rDsOICnXj7RsGbcrfFINGZSvCmQZiSft2By.png',
             'total_cost' => $totalCost,
             'gender' => $gender,
         ];
