@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-sm-12 col-lg-2 text-center">
                     @if ($user_profile_face != "")
-                    <img src="{{ asset('storage/'.$user_profile_face.'')}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
+                    <img src="{{  Storage::disk('s3')->url($user_profile_face)}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
                     @else
                     <img src="{{ asset('images/user.png')}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
                     @endif
@@ -38,7 +38,7 @@
                 <div class="col-sm-12 col-lg-2 text-center">
                     <form id="PictureForm" enctype="multipart/form-data">
                         @if ($user_profile != "")
-                        <img src="{{ asset('storage/'.$user_profile.'')}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
+                        <img src="{{  Storage::disk('s3')->url($user_profile)}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
                         @else
                         <img src="{{ asset('images/user.png')}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
                         @endif
@@ -667,7 +667,7 @@
                 @if ($med_first_cert != "")
                 <label style="font-weight:600">Medical Certificate</label>
                 <div class="input-group">
-                    <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$med_first_cert.'')}}"><i class="bi bi-eye"></i> View</a>
+                    <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($med_first_cert)}}"><i class="bi bi-eye"></i> View</a>
                 </div>
                 @endif
             </div>
@@ -740,7 +740,7 @@
                 @if ($med_second_cert != "")
                 <label style="font-weight:600">Medical Certificate</label>
                 <div class="input-group">
-                    <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$med_second_cert.'')}}"><i class="bi bi-eye"></i> View</a>
+                    <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($med_second_cert)}}"><i class="bi bi-eye"></i> View</a>
                 </div>
                 @endif
             </div>
@@ -813,7 +813,7 @@
                 @if ($med_third_cert != "")
                 <label style="font-weight:600">Medical Certificate</label>
                 <div class="input-group">
-                    <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$med_third_cert.'')}}"><i class="bi bi-eye"></i> View</a>
+                    <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($med_third_cert)}}"><i class="bi bi-eye"></i> View</a>
                 </div>
                 @endif
             </div>
@@ -886,7 +886,7 @@
                 @if ($med_fourth_cert != "")
                 <label style="font-weight:600">Medical Certificate</label>
                 <div class="input-group">
-                    <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$med_fourth_cert.'')}}"><i class="bi bi-eye"></i> View</a>
+                    <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($med_fourth_cert)}}"><i class="bi bi-eye"></i> View</a>
                 </div>
                 @endif
             </div>
@@ -908,14 +908,14 @@
                 preload="auto"
                 width="336"
                 height="656"
-                poster="{{ asset('storage/'.$user_profile.'')}}"
+                poster="{{  Storage::disk('s3')->url($user_profile)}}"
                 data-setup="{}"
                 >
-                <source src="{{ asset('storage/'.$user_video.'')}}" type="video/mp4" />
+                <source src="{{  Storage::disk('s3')->url($user_video)}}" type="video/mp4" />
                 <p class="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a
                     web browser that
-                    <a href="{{ asset('storage/'.$user_video.'')}}" target="_blank"
+                    <a href="{{  Storage::disk('s3')->url($user_video)}}" target="_blank"
                     >supports HTML5 video</a
                     >
                 </p>

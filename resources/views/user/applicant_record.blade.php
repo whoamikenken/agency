@@ -91,7 +91,7 @@
                     @if ($passsport != "")
                     <label style="font-weight:600">Current Passport</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$passsport.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{Storage::disk('s3')->url($passsport)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -190,7 +190,7 @@
                     @if ($visa != "")
                     <label style="font-weight:600">Current VISA</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$visa.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($visa)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -318,7 +318,7 @@
                     @if ($cert_pdos != "")
                     <label style="font-weight:600">Current Certificate Document</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$cert_pdos.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($cert_pdos)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -368,7 +368,7 @@
                     @if ($cert_owwa != "")
                     <label style="font-weight:600">Current Certificate Document</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$cert_owwa.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($cert_owwa)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -434,7 +434,7 @@
                     @if ($cert_nc2 != "")
                     <label style="font-weight:600">Current Certificate Document</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$cert_nc2.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($cert_nc2)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>

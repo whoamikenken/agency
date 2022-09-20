@@ -32,7 +32,7 @@
                     @if ($cert_ereg != "")
                     <label style="font-weight:600">Current E-REG</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$cert_ereg.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($cert_ereg)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -51,7 +51,7 @@
                     @if ($cert_peos != "")
                     <label style="font-weight:600">Current PEOS</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$cert_peos.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($cert_peos)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -70,7 +70,7 @@
                     @if ($cert_ofw_infosheet != "")
                     <label style="font-weight:600">Current PEOS</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$cert_ofw_infosheet.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($cert_ofw_infosheet)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -94,7 +94,7 @@
                     @if ($sup_doc_id988a != "")
                     <label style="font-weight:600">Current EC/ID988A</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$sup_doc_id988a.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($sup_doc_id988a)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -113,7 +113,7 @@
                     @if ($sup_pt6 != "")
                     <label style="font-weight:600">Current EC pt6 p4</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$sup_pt6.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($sup_pt6)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -132,7 +132,7 @@
                     @if ($sup_coe != "")
                     <label style="font-weight:600">Current COE</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$sup_coe.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($sup_coe)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -151,7 +151,7 @@
                     @if ($sup_hq != "")
                     <label style="font-weight:600">Current HQ</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$sup_hq.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($sup_hq)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -170,7 +170,7 @@
                     @if ($sup_polohk != "")
                     <label style="font-weight:600">Current POLOHKSar</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$sup_polohk.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($sup_polohk)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -189,7 +189,7 @@
                     @if ($sup_privacy_policy != "")
                     <label style="font-weight:600">Current Privacy Policy</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$sup_privacy_policy.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($sup_privacy_policy)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -208,7 +208,7 @@
                     @if ($sup_affidavit != "")
                     <label style="font-weight:600">Current Affidavit</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$sup_affidavit.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($sup_affidavit)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -227,7 +227,7 @@
                     @if ($sup_mmr_vac != "")
                     <label style="font-weight:600">Current MMR Vaccination</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$sup_mmr_vac.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($sup_mmr_vac)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -246,7 +246,7 @@
                     @if ($sup_infosheet != "")
                     <label style="font-weight:600">Current PEOS</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{ asset('storage/'.$sup_infosheet.'')}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($sup_infosheet)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>

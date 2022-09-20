@@ -174,9 +174,9 @@ class ApplicantController extends Controller
             //     $value = $request->file('file')->store($column, 'public');
             // }else{
                 if ($users->{$column}) {
-                    Storage::disk('public')->delete($users->{$column});
+                    Storage::disk('s3')->delete($users->{$column});
                 }
-                $value = $request->file('file')->store($column, 'public');
+                $value = $request->file('file')->store($column, 's3');
             // }
         }
         $formFields = array($column => $value);
