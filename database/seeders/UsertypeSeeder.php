@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\usertype;
+use App\Models\Usertype;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,14 +15,14 @@ class UsertypeSeeder extends Seeder
      */
     public function run()
     {
-        usertype::factory()->create([
+        Usertype::factory()->create([
             'code' => 'Admin',
             'description' => 'Administrator has all the permission on modules',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
 
-        usertype::factory()->create([
+        Usertype::factory()->create([
             'code' => 'Sales',
             'description' => 'Sales can only view and create applicants',
             'modified_by' => 1,
