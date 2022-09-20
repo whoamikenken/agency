@@ -41,7 +41,7 @@
             imgsrc = this.src;
             console.log(imgsrc);
             var imgID = $(this).attr("id");
-            watermark([imgsrc, "{{ asset('icon/favicon-96x96.png') }}"])
+            watermark([imgsrc, "{{ asset('Icon/favicon-96x96.png') }}"])
             // .image(watermark.text.lowerRight('KINGSMANPOWER', '28px serif', '#fff', 0.5))
             .image(watermark.image.upperRight(0.5))
             .then(function (img) {
