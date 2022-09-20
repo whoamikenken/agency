@@ -18,10 +18,11 @@ class ApplicantFactory extends Factory
     {
         $firstName = fake()->firstName();
         $gender = fake()->randomElement(['male', 'female']);
-        $medFirstCost = 
-        $medSecondCost = 
-        $medThirdCost = 
-        $medFoirthCost = 
+        $medFirstCost = fake()->randomElement(['500', '1000', '1500']);
+        $medSecondCost = fake()->randomElement(['500', '1000', '1500']);
+        $medThirdCost = fake()->randomElement(['500', '1000', '1500']);
+        $medFourthCost = fake()->randomElement(['500', '1000', '1500']);
+        $totalCost = $medFirstCost + $medSecondCost + $medThirdCost + $medFourthCost;
         return [
             'applicant_id' => fake()->randomNumber(6, false),
             'fname' => $firstName,
@@ -64,21 +65,22 @@ class ApplicantFactory extends Factory
             'med_first_date' => fake()->date(),
             'med_first_result' => fake()->randomElement(['Fit to work','Unfit', 'Pending']),
             'med_first_clinic' => fake()->randomElement(['Q3Y', 'ZV0', 'DDT', 'AG4', 'IKB', 'CH4']),
-            'med_first_cost' => fake()->randomElement(['500', '1000', '1500']),
+            'med_first_cost' => $medFirstCost,
             'med_second_date' => fake()->date(),
             'med_second_result' => fake()->randomElement(['Fit to work', 'Unfit', 'Pending']),
             'med_second_clinic' => fake()->randomElement(['Q3Y', 'ZV0', 'DDT', 'AG4', 'IKB', 'CH4']),
-            'med_second_cost' => fake()->randomElement(['500', '1000', '1500']),
+            'med_second_cost' => $medSecondCost,
             'med_third_date' => fake()->date(),
             'med_third_result' => fake()->randomElement(['Fit to work', 'Unfit', 'Pending']),
             'med_third_clinic' => fake()->randomElement(['Q3Y', 'ZV0', 'DDT', 'AG4', 'IKB', 'CH4']),
-            'med_third_cost' => fake()->randomElement(['500', '1000', '1500']),
+            'med_third_cost' => $medThirdCost,
             'med_fourth_date' => fake()->date(),
             'med_fourth_result' => fake()->randomElement(['Fit to work', 'Unfit', 'Pending']),
             'med_fourth_clinic' => fake()->randomElement(['Q3Y', 'ZV0', 'DDT', 'AG4', 'IKB', 'CH4']),
-            'med_fourth_cost' => fake()->randomElement(['500', '1000', '1500']),
+            'med_fourth_cost' => $medFourthCost,
             'user_video' => 'user_video/Meson46663fjfaFHEyR5Zvo5ClkQjG01vuQuLQzr.mp4',
             'user_profile' => 'user_profile/7nPjgGZeNXptTPNBXcAoyB4WLdudrZZGuGUCRDr8.png',
+            'total_cost' => $totalCost,
             'gender' => $gender,
         ];
     }
