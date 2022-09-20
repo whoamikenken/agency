@@ -18,6 +18,10 @@ class ApplicantFactory extends Factory
     {
         $firstName = fake()->firstName();
         $gender = fake()->randomElement(['male', 'female']);
+        $medFirstCost = 
+        $medSecondCost = 
+        $medThirdCost = 
+        $medFoirthCost = 
         return [
             'applicant_id' => fake()->randomNumber(6, false),
             'fname' => $firstName,
