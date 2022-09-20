@@ -4,12 +4,12 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\applicant;
 use App\Models\User;
 use App\Models\Branch;
 use App\Models\Jobsite;
 use App\Models\Medical;
 use App\Models\Location;
+use App\Models\Applicant;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Database\Seeders\LocationSeeder;
@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory(10)->create();
-        applicant::factory(50)->create();
+        Applicant::factory(50)->create();
         Medical::factory(10)->create();
         
         $this->call([

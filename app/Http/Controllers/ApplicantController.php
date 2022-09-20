@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\applicant;
+use App\Models\Applicant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -131,7 +131,7 @@ class ApplicantController extends Controller
         ]);
 
         unset($formFields['uid']);
-        applicant::create($formFields);
+        Applicant::create($formFields);
         $return = array('status' => 1, 'msg' => 'Successfully added applicant', 'title' => 'Success!');
 
         return response()->json($return);
