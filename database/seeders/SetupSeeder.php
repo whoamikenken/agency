@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\setup;
+use App\Models\Setup;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,27 +16,27 @@ class SetupSeeder extends Seeder
     public function run()
     {
         //
-        setup::factory()->create([
+        Setup::factory()->create([
             'description' => 'Medical Clinic',
             'table' => 'medical'
         ]);
 
-        setup::factory()->create([
+        Setup::factory()->create([
             'description' => 'Job Site',
             'table' => 'jobsites'
         ]);
 
-        setup::factory()->create([
+        Setup::factory()->create([
             'description' => 'Location',
             'table' => 'location'
         ]);
 
-        setup::factory()->create([
+        Setup::factory()->create([
             'description' => 'Branches',
             'table' => 'branches'
         ]);
 
-        setup::factory()->create([
+        Setup::factory()->create([
             'description' => 'Principals',
             'table' => 'principals'
         ]);
