@@ -96,6 +96,14 @@
                     @endif
                 </div>
             </div>
+            <h5 class="text-center mt-2">Passport Chops</h5>
+            <hr>
+            <div class="row">
+                <div class="table-responsive">
+                    <table id="passportchopTable" class="table table-hover table-responsive">
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card border-secondary mb-3 mt-4">
@@ -447,6 +455,8 @@
 
 <script>
     
+    var passportTable = null;
+
     $(document).ready(function () {
         
         $('.datepicker').datepicker({
@@ -456,6 +466,8 @@
         $('.form-select').select2({
             theme: 'bootstrap-5'
         });
+
+        passportchopList();
         
     });
     
@@ -465,4 +477,26 @@
             saveSingleProfileColumn($(this));
         }else return;   
     });
+
+
+    function passportchopList(){
+
+        if(passportTable!=null){
+            passportTable.destroy();
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "{{ url('passport/table')}}",
+            data: {applicant:$("#uid").val()},
+            async: false,
+            success:function(response){
+                $("#passportchopTable").html(response);
+                passportTable = $("#passportchopTable").DataTable({
+                    responsive: true
+                });
+                passportTable.draw();
+            }
+        });
+    }
 </script>

@@ -20,7 +20,7 @@
         
         <div class="table-responsive">
             <table id="LocationTable" class="table table-hover table-responsive">
-        </table>
+            </table>
         </div>
     </div> <!-- end card-body-->
 </div>

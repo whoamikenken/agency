@@ -13,6 +13,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\JobsiteController;
 use App\Http\Controllers\MedicalController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\PassportchopController;
 use App\Http\Controllers\UsertypeController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\TablecolumnController;
@@ -128,6 +129,9 @@ Route::post('/applicant/profile', [ApplicantController::class, 'profile'])->with
 Route::post('/applicant/record', [ApplicantController::class, 'record'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/applicant/document', [ApplicantController::class, 'document'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/applicant/oec', [ApplicantController::class, 'oec'])->withoutMiddleware([VerifyCsrfToken::class]);
+
+// Passport Chop
+Route::post('/passport/table', [PassportchopController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
 
 Route::get('/credits', function(){
     echo "Created by kennedy hipolito<br>";
