@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branch;
-use App\Models\tablecolumn;
+use App\Models\Tablecolumn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +33,7 @@ class BranchController extends Controller
             $data['result'][$key]->created_by = DB::table('users')->where('id', $value->created_by)->value('name');
         }
 
-        $data['columns'] = tablecolumn::getColumn("branches");
+        $data['columns'] = Tablecolumn::getColumn("branches");
         // dd($data);
         return view('setup/branch_table', $data);
     }

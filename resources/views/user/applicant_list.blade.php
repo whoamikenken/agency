@@ -30,10 +30,9 @@
     @endunless
 </div>
 
-<div id="pagination" class="justify-content-center">
+<div id="paginationApplicant" class="justify-content-center">
   {{ $result->links() }}
 </div>
-
 
 <script>
     $(document).ready(function () {

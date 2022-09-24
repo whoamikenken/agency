@@ -144,7 +144,7 @@ $applicant_select = DB::table('applicants')->where("isactive","Active")->get();
         });
     });
     
-    $(document).on("click","#pagination a, #search_btn",function(){
+    $(document).on("click","#paginationApplicant a, #search_btn",function(){
         //get url and make final url for ajax 
         var url=$(this).attr("href");
         var mystr = url.split("=");

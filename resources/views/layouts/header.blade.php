@@ -423,7 +423,7 @@
     });
     
     function processForm(form){
-        
+
         var formdata = new FormData(); // Creating object of FormData class
         
         form.find("select, textarea, input").each(function() {
@@ -434,7 +434,7 @@
                 formdata.append($(this).attr('name'), $(this).val());
             }
         });
-        
+
         return formdata;
     }
     

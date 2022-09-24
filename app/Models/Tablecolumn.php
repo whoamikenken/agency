@@ -41,6 +41,9 @@ class tablecolumn extends Model
         $colDescription = array(
             'code' => 'Code',
             'description' => 'Description',
+            'applicant_id' => 'Applicant ID',
+            'remarks' => 'Remarks',
+            'chops' => 'Passport Chops',
             'jobsite' => 'Jobsite',
             'updated_at' => 'Modified On',
             'address' => 'Address',

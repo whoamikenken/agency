@@ -132,6 +132,9 @@ Route::post('/applicant/oec', [ApplicantController::class, 'oec'])->withoutMiddl
 
 // Passport Chop
 Route::post('/passport/table', [PassportchopController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/passport/getModal', [PassportchopController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/passport/add', [PassportchopController::class, 'store']);
+Route::post('/passport/delete', [PassportchopController::class, 'delete']);
 
 Route::get('/credits', function(){
     echo "Created by kennedy hipolito<br>";

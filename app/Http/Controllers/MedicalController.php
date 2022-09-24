@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medical;
-use App\Models\tablecolumn;
+use App\Models\Tablecolumn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +35,7 @@ class MedicalController extends Controller
             $data['result'][$key]->location = DB::table('location')->where('code', $value->location)->value('description');
         }
 
-        $data['columns'] = tablecolumn::getColumn("medical");
+        $data['columns'] = Tablecolumn::getColumn("medical");
 
         return view('setup/medical_table', $data);
     }

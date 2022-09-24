@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Principal;
-use App\Models\tablecolumn;
+use App\Models\Tablecolumn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +34,7 @@ class PrincipalController extends Controller
             $data['result'][$key]->jobsite = DB::table('jobsites')->where('code', $value->jobsite)->value('description');
         }
 
-        $data['columns'] = tablecolumn::getColumn("principals");
+        $data['columns'] = Tablecolumn::getColumn("principals");
         
         return view('setup/principal_table', $data);
     }
