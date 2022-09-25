@@ -181,7 +181,7 @@
         
         .btn-toggle-nav a:hover,
         .btn-toggle-nav a:focus {
-            background-color: #d2f4ea;
+            background-color: #0d6efd;
         }
         
         .scrollarea {

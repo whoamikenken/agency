@@ -57,7 +57,7 @@ class PassportchopController extends Controller
             'uid' => ['required'],
             'applicant_id' => ['required'],
             'remarks' => ['required'],
-            'chops' => ['required', File::types(['jpg','png', 'jpeg'])],
+            'chops' => ['required', File::types(['jpg','png','jpeg', 'pdf'])],
         ]);
         // dd($request->hasFile('chops'));
         if ($formFields['uid'] == "add") {

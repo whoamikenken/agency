@@ -247,6 +247,26 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label style="font-weight:600">Availability Status</label>
+                        <div class="input-group">
+                            <div class="input-group-text"><i class="bi bi-person-check"></i></div>
+                            <select name="bio_availability" id="bio_availability" class="form-control form-select">
+                                <option value="Sold" {{ (isset($bio_availability) && $bio_availability == "Sold")? "selected":"" }} >Sold</option>
+                                <option value="Available" {{ (isset($bio_availability) && $bio_availability == "Available")? "selected":"" }} >Available</option>
+                                <option value="Signed Up" {{ (isset($bio_availability) && $bio_availability == "Signed Up")? "selected":"" }} >Signed Up</option>
+                                <option value="Pending" {{ (isset($bio_availability) && $bio_availability == "Pending")? "selected":"" }} >Pending</option>
+                                <option value="Backed out" {{ (isset($bio_availability) && $bio_availability == "Backed out")? "selected":"" }} >Backed out</option>
+                                <option value="Resell/Push" {{ (isset($bio_availability) && $bio_availability == "Resell/Push")? "selected":"" }} >Resell/Push</option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
