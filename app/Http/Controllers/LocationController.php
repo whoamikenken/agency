@@ -13,12 +13,7 @@ class LocationController extends Controller
 {
     public function index()
     {
-        // dd(Auth::user()->user_image);
-        // auth()->logout();
-        // $request->session()->invalidate();
-        // $request->session()->regenerateToken();
         $data['menus'] = DB::table('menus')->get();
-        // dd($users);
         return view('setup/location', $data);
     }
 
