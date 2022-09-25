@@ -162,25 +162,23 @@ class ApplicantController extends Controller
         $value = $request->input("value");
         if ($request->hasFile('file')) {
             $users = DB::table('applicants')->where('applicant_id', $applicant_id)->first();
-            // if($column == "user_profile"){
-            //     if($users->{$column}){
-            //         Storage::disk('public')->delete($users->{$column});
-            //     }
-            //     $value = $request->file('file')->store($column, 'public');
-            // }elseif ($column == "user_video") {
-            //     if ($users->{$column}) {
-            //         Storage::disk('public')->delete($users->{$column});
-            //     }
-            //     $value = $request->file('file')->store($column, 'public');
-            // }else{
                 if ($users->{$column}) {
                     Storage::disk('s3')->delete($users->{$column});
                 }
                 $value = $request->file('file')->store($column, 's3');
-            // }
         }
+
+        
         $formFields = array($column => $value);
         $query = DB::table('applicants')->where('applicant_id', $applicant_id)->update($formFields);
+
+        if ($column == "med_first_cost" || $column == "med_second_cost" || $column == "med_third_cost" || $column == "med_fourth_cost" || $column == "cert_nc2_cost") {
+            $users = DB::table('applicants')->where('applicant_id', $applicant_id)->first();
+            $total_cost = $users->med_first_cost + $users->med_second_cost + $users->med_third_cost + $users->med_fourth_cost + $users->cert_nc2_cost;
+            $NewTotalCost = array('total_cost' => $total_cost);
+            DB::table('applicants')->where('applicant_id', $applicant_id)->update($NewTotalCost);
+        }
+
         if ($query) {
             $return = array('status' => 1, 'msg' => 'Successfully updated applicant', 'title' => 'Success!');
         }
