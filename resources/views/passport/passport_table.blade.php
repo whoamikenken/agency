@@ -23,7 +23,7 @@
         @endforeach
         @else
         <tr class="align-center text-center">
-            <td class="align-center" rowspan="4">
+            <td class="align-center" colspan="4">
                 <h2>No data</h2>
             </td>
         </tr>

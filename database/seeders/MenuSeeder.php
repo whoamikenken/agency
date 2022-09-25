@@ -64,8 +64,7 @@ class MenuSeeder extends Seeder
             'icon' => '',
             'description' => ""
         ]);
-        
-
+    
         Menu::factory()->create([
             'root' => '1',
             'menu_id' => function () {
@@ -208,6 +207,22 @@ class MenuSeeder extends Seeder
             'link' => 'user/applicant',
             'icon' => 'person-rolodex',
             'description' => "Creating new applicant and modification"
+        ]);
+
+        Menu::factory()->create([
+            'root' => '2',
+            'menu_id' => function () {
+                $max = Menu::count('id'); // returns 0 if no records exist.
+                return $max + 1;
+            },
+            'order' => function () {
+                $maxOrder = Menu::where('root', '=', '2')->count('order'); // returns 0 if no records exist.
+                return $maxOrder + 1;
+            },
+            'title' => 'Reports',
+            'link' => 'report/reports',
+            'icon' => 'printer',
+            'description' => "List of reports"
         ]);
 
         Menu::factory()->create([
