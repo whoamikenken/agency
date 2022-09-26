@@ -131,22 +131,11 @@ class UserController extends Controller
             'lname' => ['required'],
             'status' => ['required'],
             'user_type' => ['required'],
-            'email' => ['required'],
-            'password' => ['']
+            'email' => ['required']
         ]);
         
         if($formFields['password'] === null){
             unset($formFields['password']);
-        }
-
-        if ($request->hasFile('user_image')) {
-            
-            // dd(ImageOptimizer::optimize());
-            // $optr = ImageOptimizer::optimize(Storage::path('public') . '/user_image/test.png');
-            // $orig = $request->file('user_image')->store('user_image', 'public');
-            // $newOptPath = str_replace("user_image", "user_image_opt", $orig);
-            $formFields['user_image'] = $request->file('user_image')->store('user_image', 'public');
-            // dd($path.$newOptPath);
         }
 
         $formFields['name'] = $formFields['fname']." ".$formFields['lname'];
@@ -154,12 +143,26 @@ class UserController extends Controller
         if ($formFields['uid'] == "add") {
             unset($formFields['uid']);
             $formFields['updated_at'] = "";
+
+            if ($request->hasFile('user_image')) {
+                $formFields['user_image'] = $request->file('user_image')->store('user_image', 's3');
+            }
+
             User::create($formFields);
             $return = array('status' => 1, 'msg' => 'Successfully added user', 'title' => 'Success!');
         } else {
             $formFields['updated_at'] = Carbon::now();
             $id = $formFields['uid'];
             unset($formFields['uid']);
+
+            if ($request->hasFile('user_image')) {
+                $users = DB::table('users')->where('id', $id)->first();
+                if ($users->user_image) {
+                    Storage::disk('s3')->delete($users->user_image);
+                }
+                $formFields['user_image'] = $request->file('user_image')->store('user_image', 's3');
+            }
+            
             DB::table('users')->where('id', $id)->update($formFields);
             $return = array('status' => 1, 'msg' => 'Successfully updated user', 'title' => 'Success!');
         }
