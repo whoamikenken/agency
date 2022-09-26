@@ -16,6 +16,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PassportchopController;
 use App\Http\Controllers\UsertypeController;
 use App\Http\Controllers\PrincipalController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\TablecolumnController;
 
 /*
@@ -107,6 +108,9 @@ Route::post('/tablecolumn/table', [TablecolumnController::class, 'getTable'])->w
 Route::post('/tablecolumn/getModal', [TablecolumnController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/tablecolumn/add', [TablecolumnController::class, 'store']);
 
+// Reports
+Route::post('/report/getModalFilter', [ReportsController::class, 'getModalFilter'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/report/generateReport', [ReportsController::class, 'generateReport'])->middleware('auth');
 
 // Logout User
 Route::post('/logout', [UserController::class, 'logout']);
@@ -132,6 +136,9 @@ Route::post('/applicant/oec', [ApplicantController::class, 'oec'])->withoutMiddl
 
 // Passport Chop
 Route::post('/passport/table', [PassportchopController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/passport/getModal', [PassportchopController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/passport/add', [PassportchopController::class, 'store']);
+Route::post('/passport/delete', [PassportchopController::class, 'delete']);
 
 Route::get('/credits', function(){
     echo "Created by kennedy hipolito<br>";

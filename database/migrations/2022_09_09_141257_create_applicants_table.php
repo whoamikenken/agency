@@ -51,7 +51,7 @@ return new class extends Migration
             $table->date('bio_trans_date')->nullable();
             $table->date('bio_lunch_date')->nullable();
             $table->string('bio_status', 30)->nullable()->default('Pending');
-            $table->string('bio_availability', 30)->nullable()->default('Available');
+            $table->string('bio_availability', 30)->nullable()->default('Signed Up');
             $table->date('jo_received')->nullable();
             $table->date('jo_confirmed')->nullable();
             $table->string('jo_er_iscancel', 30)->default('No');

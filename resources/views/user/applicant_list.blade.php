@@ -1,6 +1,14 @@
 <div class="row animate__animated animate__fadeInUp" id="pagination_data">
     @unless (count($result) == 0)
         @foreach ($result as $item)
+        @php
+            $color = "red";
+            if($item->bio_availability == "Available") $color = "green";
+            if($item->bio_availability == "Signed Up") $color = "teal";
+            if($item->bio_availability == "Resell/Push") $color = "teal";
+            if($item->bio_availability == "Pending") $color = "blue";
+            if($item->bio_availability == "Backed out") $color = "#ffc107";
+        @endphp
             <div class="col-sm-12 col-md-6 col-lg-3">
                 <div class="card mb-3 shadow-sm" >
                     <div class="row g-0">
@@ -17,7 +25,7 @@
                                 <p >Jobsite: {{$item->jobsite}}<br>
                                 Branch: {{$item->branch}}<br>
                                 Status: <span style="color:{{ ($item->isactive == "Active") ? "green":"red"  }}">{{$item->isactive}}</span><br>
-                                Availability: <span style="color:{{ ($item->bio_availability == "Available") ? "green":"red"  }}">{{$item->bio_availability}}</span></p>
+                                Availability: <span style="color:{{ $color  }}">{{$item->bio_availability}}</span></p>
                                 <button class="btn btn-info text-white applicantView" uid="{{$item->applicant_id}}"><i class="bi bi-eye"></i>&nbsp;&nbsp;View</button>
                             </div>
                         </div>
@@ -30,10 +38,9 @@
     @endunless
 </div>
 
-<div id="pagination" class="justify-content-center">
+<div id="paginationApplicant" class="justify-content-center">
   {{ $result->links() }}
 </div>
-
 
 <script>
     $(document).ready(function () {

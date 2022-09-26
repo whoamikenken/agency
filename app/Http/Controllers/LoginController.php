@@ -22,7 +22,10 @@ class LoginController extends Controller
     }
 
     public function index(Request $request){
-        dd(Auth::check());
+        if(Auth::check()){
+            return redirect()->route('home');
+        }
+        // dd(Auth::check());
         // $menus = DB::table('menus')->where('root', '=', '0')->get();
         // foreach ($menus as $key => $value) {
         //     $data['menus'][$value->title] = json_decode(DB::table('menus')->where("root", "=", $value->menu_id)->orderBy("order", "asc")->get());

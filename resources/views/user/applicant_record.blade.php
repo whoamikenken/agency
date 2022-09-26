@@ -98,10 +98,14 @@
             </div>
             <h5 class="text-center mt-2">Passport Chops</h5>
             <hr>
+            <div class="row mt-2">
+                <div class="col-sm-12">
+                    <a href="javascript:void(0);" class="btn btn-primary mb-2 addbtnPassport"><i class="bi bi-plus-circle"></i> Add Passport Chop</a>
+                </div>
+            </div>
             <div class="row">
-                <div class="table-responsive">
-                    <table id="passportchopTable" class="table table-hover table-responsive">
-                    </table>
+                <div class="table-responsive" id="passportchopTable">
+                    
                 </div>
             </div>
         </div>
@@ -454,10 +458,10 @@
 </div>
 
 <script>
-    
-    var passportTable = null;
 
     $(document).ready(function () {
+        
+        passportchopList();
         
         $('.datepicker').datepicker({
             format: 'yyyy-mm-dd'
@@ -466,9 +470,6 @@
         $('.form-select').select2({
             theme: 'bootstrap-5'
         });
-
-        passportchopList();
-        
     });
     
     $("input[type=text], input[type=file], input[type=number], textarea, select").on("change", function(){
@@ -479,24 +480,39 @@
     });
 
 
-    function passportchopList(){
-
-        if(passportTable!=null){
-            passportTable.destroy();
-        }
-
+    function passportchopList(page = 1){
         $.ajax({
             type: "POST",
             url: "{{ url('passport/table')}}",
-            data: {applicant:$("#uid").val()},
+            data: {applicant_id:$("#uid").val(), page:page},
             async: false,
             success:function(response){
                 $("#passportchopTable").html(response);
-                passportTable = $("#passportchopTable").DataTable({
-                    responsive: true
-                });
-                passportTable.draw();
             }
         });
     }
+
+    $(".addbtnPassport").click(function() {
+        var uid = "add";
+        $.ajax({
+            type: "POST",
+            url: "{{ url('passport/getModal')}}",
+            data: {
+                uid: uid
+            },
+            success: function(response) {
+                $("#modal-view").modal('toggle');
+                $("#modal-view").find(".modal-title").text("Add Passport Chop");
+                $("#modal-view").find("#modal-display").html(response);
+            }
+        });
+    });
+
+    $(document).on("click","#paginationPassport a",function(){
+        //get url and make final url for ajax 
+        var url=$(this).attr("href");
+        var mystr = url.split("=");
+        passportchopList(mystr[1]);
+        return false;
+    })
 </script>
