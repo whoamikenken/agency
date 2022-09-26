@@ -133,9 +133,10 @@ class UserController extends Controller
             'user_type' => ['required'],
             'email' => ['required']
         ]);
-        
-        if($formFields['password'] === null){
+        if($request->input("password") === null){
             unset($formFields['password']);
+        }else{
+            $formFields['password'] = bcrypt($request->input("password"));
         }
 
         $formFields['name'] = $formFields['fname']." ".$formFields['lname'];
