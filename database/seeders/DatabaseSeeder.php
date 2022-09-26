@@ -49,6 +49,32 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10)
         ]);
 
+        User::factory()->create([
+            'username' => "juliet",
+            'name' => "Juliet Lingon",
+            'fname' => "Juliet",
+            'lname' => "Lingon",
+            'email' => "julietlingon@icloud.com",
+            'user_type' => 'admin',
+            'status' => 'verified',
+            'email_verified_at' => now(),
+            'password' => bcrypt('a'), // password
+            'remember_token' => Str::random(10)
+        ]);
+
+        User::factory()->create([
+            'username' => "kevin",
+            'name' => "Kevin Wong",
+            'fname' => "Kevin",
+            'lname' => "Wong",
+            'email' => "kevinktwong@gmail.com ",
+            'user_type' => 'admin',
+            'status' => 'verified',
+            'email_verified_at' => now(),
+            'password' => bcrypt('a'), // password
+            'remember_token' => Str::random(10)
+        ]);
+
         User::factory(10)->create();
         Applicant::factory(200)->create();
         Medical::factory(10)->create();
