@@ -78,6 +78,7 @@ class ApplicantFactory extends Factory
             'med_fourth_result' => fake()->randomElement(['Fit to work', 'Unfit', 'Pending']),
             'med_fourth_clinic' => fake()->randomElement(['Q3Y', 'ZV0', 'DDT', 'AG4', 'IKB', 'CH4']),
             'med_fourth_cost' => $medFourthCost,
+            'oec_flight_departure' => fake()->date(),
             'user_video' => 'user_video/rboKUqmdLcZFS64SRvqiPlZQ1xaVv3KCXAbdFIuU.mp4',
             'user_profile' => 'user_profile/fVSRsIcbaKG1QOAMtfdSGZIx5BMCbCgSrFtHNAvg.png',
             'user_profile_face' => 'user_profile_face/tEQ96rDsOICnXj7RsGbcrfFINGZSvCmQZiSft2By.png',
