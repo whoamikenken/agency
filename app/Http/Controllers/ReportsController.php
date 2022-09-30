@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Extras;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,24 @@ class ReportsController extends Controller
         ]);
 
         $data['tag'] = $formFields['tag'];
-        // dd($data);
+
+        $column = array();
+        $showColumn = "";
+        if($data['tag'] == "hrreport"){
+            $column = array();
+            $showColumn .= Extras::returnApplicantCols("General Information");
+            $showColumn .= Extras::returnApplicantCols("Medical Record");
+            $showColumn .= Extras::returnApplicantCols("Vaccination");
+            $showColumn .= Extras::returnApplicantCols("OEC");
+            $showColumn .= Extras::returnApplicantCols("Passport");
+            $showColumn .= Extras::returnApplicantCols("Bio Status");
+            $showColumn .= Extras::returnApplicantCols("Certificate");
+            $showColumn .= Extras::returnApplicantCols("VISA");
+            $showColumn .= Extras::returnApplicantCols("Job Order");
+            
+            $data['showColumn'] = $showColumn;
+        }
+        // dd($showColumn);
         return view('report/report_filter_modal', $data);
     }
 

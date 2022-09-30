@@ -113,8 +113,8 @@ return new class extends Migration
             $table->text('oec_insurance')->nullable();
             $table->date('oec_date_filed')->nullable();
             $table->date('oec_date_expiration')->nullable();
-            $table->string('oec_pregnancy_test')->nullable();
-            $table->string('oec_swab_test')->nullable();
+            $table->text('oec_pregnancy_test')->nullable();
+            $table->text('oec_swab_test')->nullable();
             $table->date('oec_flight_departure')->nullable();
             $table->text('user_profile')->nullable();
             $table->text('user_profile_face')->nullable();
