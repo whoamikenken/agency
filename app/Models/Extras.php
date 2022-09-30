@@ -13,7 +13,7 @@ class Extras extends Model
     {
         
         if ($desc == "General Information") {
-            $arrcol = array("applicant_id","er_ref", "maid_ref", "fullname", "fname", "lname", "mname", "contact", "address", "family_contact_name","family_contact","gender", "jobsite","branch", "sales_manager","date_applied","is_first", "abroad_experience","is_walkin", "total_cost");
+            $arrcol = array("applicant_id","er_ref", "maid_ref", "fullname", "fname", "lname", "mname", "contact", "address", "family_contact_name","family_contact","gender", "jobsite","branch", "sales_manager","date_applied","is_first", "abroad_experience","is_walkin", "total_cost", "user_profile", "user_profile_face");
         }elseif($desc == "Passport"){
             $arrcol = array("passport_no", "passport_issued", "passport_validity", "passport_place_issued");
         }elseif($desc == "Vaccination") {
@@ -36,7 +36,7 @@ class Extras extends Model
         
         foreach ($arrcol as $row) {
             $col = Extras::showDesc($row);
-            $return .= '<div class="form-check"><input class="form-check-input" type="checkbox" value="'.$row.'"><label class="form-check-label">'.$col.'</label></div>';
+            $return .= '<div class="form-check"><input class="form-check-input" type="checkbox" name="edata" value="'.$row.'"><label class="form-check-label">'.$col.'</label></div>';
         }
         $return .= "</div>";
         return $return;
@@ -45,13 +45,13 @@ class Extras extends Model
     public static function showDesc($data)
     {
         $return = array (
-            "applicant_id" => "APPLICANT ID",
+            "applicant_id" => "Applicant ID",
             "er_ref" => "E.R No",
             "maid_ref" => "MAID No",
-            "fullname" => "FULL NAME",
-            "lname" => "LAST NAME",
-            "fname" => "FIRST NAME",
-            "mname" => "MIDDLE NAME",
+            "fullname" => "Name",
+            "lname" => "Last Name",
+            "fname" => "First Name",
+            "mname" => "Middle Name",
             "contact" => "Contact",
             "address" => "Address",
             "family_contact_name" => "Family Contact Name",
@@ -108,7 +108,7 @@ class Extras extends Model
             "cert_owwa_release_date" => "OWWA Release",
             "cert_nc2_by_applicant" => "NCII By Applicant",
             "cert_nc2_payment_status" => "NCII Payment Status",
-            "cert_nc2_cost" => "NCII Cose",
+            "cert_nc2_cost" => "NCII Cost",
             "visa_number" => "VISA No",
             "visa_date_received" => "VISA Eeceive",
             "visa_date_expired" => "VISA Expiration",
@@ -121,7 +121,9 @@ class Extras extends Model
             "oec_pagibig" => "OEC Pag-ibig",
             "oec_date_filed" => "OEC Filed",
             "oec_date_expiration" => "OEC Expiration",
-            "oec_flight_departure" => "OEC Departure"
+            "oec_flight_departure" => "OEC Departure",
+            "user_profile_face" => "Face Photo",
+            "user_profile" => "Body Photo"
         );
         
         return $return[$data];

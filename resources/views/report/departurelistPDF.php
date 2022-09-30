@@ -43,7 +43,7 @@ $info .= "
     <div>
         <table width='60%'  >
             <tr>
-                <td rowspan='4' style='text-align: right;' width='60%'><img src='images/logo.png' style='width: 60px;text-align: center;' /></td>
+                <td rowspan='4' style='text-align: right;' width='60%'><img src='images/logo.png' style='width: 70px;text-align: center;' /></td>
                 <td valign='middle' width='90%' style='padding: 0;text-align: center;' width='45%'><span style='font-size: 13px;'><b>KINGS MANPOWER SERVICES</b></span></td>
             </tr>
             <tr>
@@ -51,7 +51,7 @@ $info .= "
 </strong></span></td>
             </tr>
             <tr>
-                <td valign='middle' style='padding: 0;text-align: center;'><span style='font-size: 13px;' width='45%'><strong>". $reportName. "</strong></span></td>
+                <td valign='middle' style='padding: 0;text-align: center;'><span style='font-size: 13px;' width='45%'><strong>" . $reportName . "</strong></span></td>
             </tr>
             <tr>
                 <td valign='middle' style='padding: 0;text-align: center;'><span style='font-size: 11px;' width='45%'><strong></strong>" . $dateof . "</span></td>
@@ -70,6 +70,7 @@ $info .= "
             foreach ($edatalist as $key => $value) {
                 $info .= "<th style='padding: 5px;text-align: center;font-size: 20px;font-weight: bold;'>". $value."</th>";
             }
+            $info .= "<th style='padding: 5px;text-align: center;font-size: 20px;font-weight: bold;'>Days Until Departure</th>";
 $info .= "</thead>";
 $info .= "<tbody>";
 if(count($result) > 0 ){
@@ -85,12 +86,22 @@ if(count($result) > 0 ){
                         }else{
                             $info .= "<td style='padding: 2px;text-align: center;font-size: 13px;'>" . $value->{$row}. "</td>";
                         }
-                        
-                    }        
+                    }
+        $date1 = new DateTime($value->oec_flight_departure);
+        $date2 = new DateTime(date("Y-m-d"));
+        $interval = $date1->diff($date2);
+        if($value->oec_flight_departure > date("Y-m-d")){
+            $desc = $interval->days;
+        }else{
+            $desc = "Already Left";
+        }
+        // $interval->days;
+        $info .= "<td style='padding: 2px;text-align: center;font-size: 13px;'>" . $desc . "</td>";  
+
         $info .= "</tr>";
         }
 }else{
-    $info .= "<tr><td colspan='" . count($edatalist) . "' style='text-align:center;font-size:20px;'>No Data</td></tr>";
+    $info .= "<tr><td colspan='".count($edatalist)."' style='text-align:center;font-size:20px;'>No Data</td></tr>";
 }
 $info .= "      
             </tbody>
@@ -107,7 +118,7 @@ $info .= "
 ";
 $pdf->WriteHTML($info);
 
-$pdf->Output($reportName . '.pdf', 'I');
+$pdf->Output($reportName.'.pdf', 'I');
 ?>
 
 

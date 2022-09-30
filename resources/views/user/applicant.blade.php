@@ -4,8 +4,8 @@
 
 @php
 $jobsite_select = DB::table('jobsites')->get();
-$branch_select = DB::table('branches')->get();
 $users_select = DB::table('users')->where("user_type","sales")->get();
+$branch_select = DB::table('branches')->get();
 $applicant_select = DB::table('applicants')->where("isactive","Active")->get();
 @endphp
 

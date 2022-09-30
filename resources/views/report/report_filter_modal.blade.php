@@ -1,7 +1,79 @@
 <form id="reportForm" class="row g-2" action="{{ url('report/generateReport') }}" method="POST" target="_blank">
     @csrf
-    <input type="hidden" name="tag" value="{{($tag)}}">
-    @if ($tag == "hrreport")
+    <input type="hidden" name="tag" id="tag" value="{{($tag)}}">
+    <input type="hidden" name="reportName" id="reportName" value="{{($reportName)}}">
+    <div class="col-md-6 col-sm-12">
+        <label style="font-weight:600">Branch</label>
+        <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-option"></i></div>
+            <select name="branch" id="branch" class="form-select">
+                <option value="" selected>All Branch</option>
+                @foreach ($branch_select as $item)
+                <option value="{{$item->code}}" >{{$item->description}}</option>
+                @endforeach
+            </select>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please input.
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <label style="font-weight:600">Jobsite</label>
+        <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-option"></i></div>
+            <select name="jobsite" id="jobsite" class="form-select">
+                <option value="" selected>All Jobsite</option>
+                @foreach ($jobsite_select as $item)
+                <option value="{{$item->code}}" >{{$item->description}}</option>
+                @endforeach
+            </select>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please input.
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <label style="font-weight:600">Sales</label>
+        <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-option"></i></div>
+            <select name="sales" id="sales" class="form-select">
+                <option value="" selected>All Sales</option>
+                @foreach ($users_select as $item)
+                <option value="{{$item->id}}" >{{$item->lname." ".$item->fname}}</option>
+                @endforeach
+            </select>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please input.
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <label style="font-weight:600">Applicant</label>
+        <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-option"></i></div>
+            <select name="applicant_id" id="applicant_id" class="form-select">
+                <option value="" selected>All Applicant</option>
+                @foreach ($applicant_select as $item)
+                <option value="{{$item->applicant_id}}" >{{$item->lname." ".$item->fname}}</option>
+                @endforeach
+            </select>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please input.
+            </div>
+        </div>
+    </div>
     <div class="col-md-6 col-sm-12">
         <label style="font-weight:600">Biodata Availability</label>
         <div class="input-group">
@@ -40,13 +112,41 @@
             </div>
         </div>
     </div>
-    <br>
-    <hr>
+    @if ($tag == "hrreport")
+    <hr class="mt-4">
     <br>
     <h4 class="text-center p-1">Select Data</h4>
     @php
-        echo $showColumn;
+    echo $showColumn;
     @endphp
+    <input type="hidden" name="edatalist" id="edatalist">
+    @elseif ($tag == "departure")
+    <div class="col-md-12 col-sm-12 col-lg-6">
+        <label style="font-weight:600">From</label>
+        <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+            <input type="text" id="from" name="from" class="form-control datepicker" value="{{ date("Y-m-d") }}" placeholder="Select date from">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please input.
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-6">
+        <label style="font-weight:600">To</label>
+        <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+            <input type="text" id="to" name="to" class="form-control datepicker" value="{{ date("Y-m-d") }}" placeholder="Select date to">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please input.
+            </div>
+        </div>
+    </div>
     @else
     
     @endif
@@ -68,6 +168,11 @@
     });
     
     $("#saveModal").unbind("click").click(function(){
+        if($("#tag").val() == "hrreport"){
+            var edata = $("input[name=edata]:checked").map(function () {return this.value;}).get().join(","); 
+            var input = document.createElement("input");
+            $("#edatalist").val(edata);
+        }
         jQuery('#reportForm').submit();
     });
     

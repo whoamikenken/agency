@@ -19,7 +19,7 @@
                                 <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Master List Report</h5>
                                 </div>
-                                <p class="mb-1">Print All Applicant.</p>
+                                <p class="mb-1">Print All Applicant Info.</p>
                             </div>
                             <div class="col-sm-12 col-md-8 text-end d-sm-none d-md-block fs-2">
                                 <i class="bi bi-printer"></i>
@@ -36,7 +36,21 @@
                 System Reports
             </div>
             <div class="card-body">
-                
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action printReport" tag="departure" report="Departure List Report" aria-current="true">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4">
+                                <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Departure List</h5>
+                                </div>
+                                <p class="mb-1">List of applicant departure.</p>
+                            </div>
+                            <div class="col-sm-12 col-md-8 text-end d-sm-none d-md-block fs-2">
+                                <i class="bi bi-airplane-engines"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -54,7 +68,7 @@
         $.ajax({
             type: "POST",
             url: "{{ url('report/getModalFilter')}}",
-            data: {tag:tag},
+            data: {tag:tag, reportName:reportName},
             success: function(response) {
                 $("#modal-view").modal('toggle');
                 $("#modal-view").find(".modal-title").text(reportName);
