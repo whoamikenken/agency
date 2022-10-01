@@ -83,15 +83,15 @@
                 <div class="col-lg-6 col-sm-12">
                     <label style="font-weight:600">Passport</label>
                     <div class="input-group custom-file-button">
-                        <label class="input-group-text" for="passsport"><i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;{{($passsport != "")? "Replace":"Upload"}} Passport</label>
-                        <input type="file" class="form-control form-control-sm" id="passsport" name="passsport">
+                        <label class="input-group-text" for="passport"><i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;{{($passport != "")? "Replace":"Upload"}} Passport</label>
+                        <input type="file" class="form-control form-control-sm" id="passport" name="passport">
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12">
-                    @if ($passsport != "")
+                    @if ($passport != "")
                     <label style="font-weight:600">Current Passport</label>
                     <div class="input-group">
-                        <a class="btn btn-info text-white" target="_blank" href="{{Storage::disk('s3')->url($passsport)}}"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-info text-white" target="_blank" href="{{Storage::disk('s3')->url($passport)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>
@@ -506,6 +506,95 @@
                 $("#modal-view").find("#modal-display").html(response);
             }
         });
+    });
+
+    $("#passportchopTable").on("click", ".editbtn", function() {
+        var uid = $(this).attr('id');
+        $.ajax({
+            type: "POST",
+            url: "{{ url('passport/getModal')}}",
+            data: {
+                uid: uid
+            },
+            success: function(response) {
+                $("#modal-view").modal('toggle');
+                $("#modal-view").find(".modal-title").text("Edit Passport Chops");
+                $("#modal-view").find("#modal-display").html(response);
+            }
+        });
+    });
+
+    $("#passportchopTable").on("click", ".delbtn", function() {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, proceed!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+
+                var code = $(this).attr('id');
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('passport/delete')}}",
+                    dataType: 'json',
+                    data: {
+                        code: code,
+                        '_token': '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.status == 1) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: response.title,
+                                text: response.msg,
+                                timer: 2500
+                            })
+
+                            passportchopList();
+                        }else if (response.status == 2) {
+                            Swal.fire({
+                                icon: 'info',
+                                title: response.title,
+                                text: response.msg
+                            })
+                        }else if (response.status == 0) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: response.title,
+                                text: response.msg
+                            })
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: "System Error",
+                                text: "Please contact developer."
+                            })
+                        }
+                    }
+                });
+
+            } else if (
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Data is safe.',
+                    'error'
+                )
+            }
+        })
     });
 
     $(document).on("click","#paginationPassport a",function(){

@@ -126,6 +126,129 @@ class ReportsController extends Controller
             }
             // dd(DB::getQueryLog());
             return response()->view('report/departurelistPDF', $data, 200)->header('Content-Type', 'application/pdf');
+        } elseif ($formFields['tag'] == "expiration") {
+            foreach ($whereFilter as $key => $value) {
+                if ($value) {
+                    $where[] = array($key, '=', $value);
+                }
+            }
+
+            $data['dateof'] = "As of " . date("F j, Y");
+
+
+            $table = "applicants";
+
+            $data['edatalist']['applicant_id'] = Extras::showDesc('applicant_id');
+            $data['edatalist']['fullname'] = Extras::showDesc('fullname');
+            if($formFields['edatalist'] == "all"){
+                $data['edatalist']['passport_no'] = Extras::showDesc('passport_no');
+                $data['edatalist']['passport_validity'] = Extras::showDesc('passport_validity');
+                $data['edatalist']['visa_number'] = Extras::showDesc('visa_number');
+                $data['edatalist']['visa_date_expired'] = Extras::showDesc('visa_date_expired');
+            }elseif($formFields['edatalist'] == "Visa"){
+                $data['reportName'] = "Visa Expiration Report";
+                $data['edatalist']['visa_number'] = Extras::showDesc('visa_number');
+                $data['edatalist']['visa_status'] = Extras::showDesc('visa_status');
+                $data['edatalist']['visa_date_received'] = Extras::showDesc('visa_date_received');
+                $data['edatalist']['visa_date_expired'] = Extras::showDesc('visa_date_expired');
+            } elseif ($formFields['edatalist'] == "Passport") {
+                $data['reportName'] = "Passport Expiration Report";
+                $data['edatalist']['passport_no'] = Extras::showDesc('passport_no');
+                $data['edatalist']['passport_issued'] = Extras::showDesc('passport_issued');
+                $data['edatalist']['passport_place_issued'] = Extras::showDesc('passport_place_issued');
+                $data['edatalist']['passport_validity'] = Extras::showDesc('passport_validity');
+            }
+            
+
+            if ($table) {
+                $data['result'] = DB::table($table)->where($where)->orWhere('passport_validity', '<', date("Y-m-d"))->orWhere('visa_date_expired', '<', date("Y-m-d"))->orderBy('passport_validity', 'desc')->orderBy('visa_date_expired', 'desc')->get();
+            }
+
+            foreach ($data['result'] as $key => $value) {
+                if (isset($data['result'][$key]->sales_manager)) $data['result'][$key]->sales_manager = DB::table('users')->where('id', $value->sales_manager)->value('name');
+                if (isset($data['result'][$key]->jobsite)) $data['result'][$key]->jobsite = DB::table('jobsites')->where('code', $value->jobsite)->value('description');
+                if (isset($data['result'][$key]->passport_place_issued)) $data['result'][$key]->passport_place_issued = DB::table('countries')->where('code', $value->passport_place_issued)->value('description');
+                if (isset($data['result'][$key]->branch)) $data['result'][$key]->branch = DB::table('branches')->where('code', $value->branch)->value('description');
+                if (isset($data['result'][$key]->user_profile_face)) $data['result'][$key]->user_profile_face = Storage::disk('s3')->url($value->user_profile_face);
+                if (isset($data['result'][$key]->user_profile)) $data['result'][$key]->user_profile = Storage::disk('s3')->url($value->user_profile);
+            }
+
+            // dd($data);
+            return response()->view('report/masterlistPDF', $data, 200)->header('Content-Type', 'application/pdf');
+        } elseif ($formFields['tag'] == "costbreakdown") {
+            $between = array();
+            foreach ($whereFilter as $key => $value) {
+                if ($key == "from" || $key == "to") {
+                    $between[] = $value;
+                } else {
+                    if ($value) {
+                        $where[] = array($key, '=', $value);
+                    }
+                }
+            }
+
+            $data['dateof'] = "As of " . date("F j, Y");
+
+            $table = "applicants";
+            // DB::enableQueryLog();
+            if ($table) {
+                $data['result'] = DB::table($table)->where($where)->orderBy('lname', 'desc')->get();
+            }
+
+            $data['edatalist']['fullname'] = Extras::showDesc('fullname');
+            $data['edatalist']['applicant_id'] = Extras::showDesc('applicant_id');
+            $data['edatalist']['er_ref'] = Extras::showDesc('er_ref');
+            $data['edatalist']['maid_ref'] = Extras::showDesc('maid_ref');
+            $data['edatalist']['branch'] = Extras::showDesc('branch');
+            $data['edatalist']['jobsite'] = Extras::showDesc('jobsite');
+            $data['edatalist']['med_first_cost'] = Extras::showDesc('med_first_cost');
+            $data['edatalist']['med_second_cost'] = Extras::showDesc('med_second_cost');
+            $data['edatalist']['med_third_cost'] = Extras::showDesc('med_third_cost');
+            $data['edatalist']['med_fourth_cost'] = Extras::showDesc('med_fourth_cost');
+            $data['edatalist']['cert_nc2_cost'] = Extras::showDesc('cert_nc2_cost');
+            $data['edatalist']['total_cost'] = Extras::showDesc('total_cost');
+            
+
+            foreach ($data['result'] as $key => $value) {
+                if (isset($data['result'][$key]->sales_manager)) $data['result'][$key]->sales_manager = DB::table('users')->where('id', $value->sales_manager)->value('name');
+                if (isset($data['result'][$key]->jobsite)) $data['result'][$key]->jobsite = DB::table('jobsites')->where('code', $value->jobsite)->value('description');
+                if (isset($data['result'][$key]->branch)) $data['result'][$key]->branch = DB::table('branches')->where('code', $value->branch)->value('description');
+                if (isset($data['result'][$key]->user_profile_face)) $data['result'][$key]->user_profile_face = Storage::disk('s3')->url($value->user_profile_face);
+                if (isset($data['result'][$key]->user_profile)) $data['result'][$key]->user_profile = Storage::disk('s3')->url($value->user_profile);
+            }
+            // dd(DB::getQueryLog());
+            return response()->view('report/costbreakdownPDF', $data, 200)->header('Content-Type', 'application/pdf');
+        } elseif ($formFields['tag'] == "infosheet") {
+            $between = array();
+            foreach ($whereFilter as $key => $value) {
+                if ($key == "from" || $key == "to") {
+                    $between[] = $value;
+                } else {
+                    if ($value) {
+                        $where[] = array($key, '=', $value);
+                    }
+                }
+            }
+
+            $data['dateof'] = "As of " . date("F j, Y");
+
+            $table = "applicants";
+            // DB::enableQueryLog();
+            if ($table) {
+                $data['result'] = DB::table($table)->where($where)->orderBy('lname', 'desc')->get();
+            }
+
+            foreach ($data['result'] as $key => $value) {
+                if (isset($data['result'][$key]->sales_manager)) $data['result'][$key]->sales_manager = DB::table('users')->where('id', $value->sales_manager)->value('name');
+                if (isset($data['result'][$key]->jobsite)) $data['result'][$key]->jobsite = DB::table('jobsites')->where('code', $value->jobsite)->value('description');
+                if (isset($data['result'][$key]->branch)) $data['result'][$key]->branch = DB::table('branches')->where('code', $value->branch)->value('description');
+                if (isset($data['result'][$key]->user_profile_face)) $data['result'][$key]->user_profile_face = Storage::disk('s3')->url($value->user_profile_face);
+                if (isset($data['result'][$key]->user_profile)) $data['result'][$key]->user_profile = Storage::disk('s3')->url($value->user_profile);
+            }
+            // dd(DB::getQueryLog());
+            // $data = $data['result'];
+            
+            return response()->view('report/infosheetPDF', $data, 200)->header('Content-Type', 'application/pdf');
         }
         
     }

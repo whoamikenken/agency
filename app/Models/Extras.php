@@ -67,7 +67,7 @@ class Extras extends Model
             "abroad_experience" => "Experience",
             "passport_no" => "Passport No",
             "passport_issued" => "Date Issued",
-            "passport_validity" => "Validity",
+            "passport_validity" => "Passport Validity",
             "passport_place_issued" => "Country Issued",
             "vac_first_dose_date" => "First Dose Date",
             "vac_first_brand" => "First Dose Brand",

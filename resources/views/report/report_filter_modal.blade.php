@@ -147,6 +147,24 @@
             </div>
         </div>
     </div>
+    @elseif ($tag == "expiration")
+    <div class="col-sm-12">
+        <label style="font-weight:600">Type</label>
+        <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-option"></i></div>
+            <select name="edatalist" id="edatalist" class="form-control form-select">
+                <option value="all" >All</option>
+                <option value="Visa">Visa Expiration</option>
+                <option value="Passport">Passport Expiration</option>
+            </select>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please input.
+            </div>
+        </div>
+    </div>
     @else
     
     @endif

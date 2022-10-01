@@ -75,6 +75,18 @@
                     @endif
                 </div>
             </div>
+            <h5 class="text-center mt-2">OFW Infosheet</h5>
+            <hr>
+            <div class="row mt-2">
+                <div class="col-sm-12">
+                    <a href="javascript:void(0);" class="btn btn-primary mb-2 addbtnDiploma"><i class="bi bi-plus-circle"></i> Add Diploma</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="table-responsive" id="diplomaTable">
+                    
+                </div>
+            </div>
         </div>
     </div>
     <div class="card border-secondary mb-3 mt-4">
@@ -259,6 +271,8 @@
     
     $(document).ready(function () {
         
+        diplomaList();
+
         $('.datepicker').datepicker({
             format: 'yyyy-mm-dd'
         });
@@ -274,5 +288,130 @@
         if ($(this).val()) {
             saveSingleProfileColumn($(this));
         }else return;   
+    });
+
+    function diplomaList(page = 1){
+        $.ajax({
+            type: "POST",
+            url: "{{ url('diploma/table')}}",
+            data: {applicant_id:$("#uid").val(), page:page},
+            async: false,
+            success:function(response){
+                $("#diplomaTable").html(response);
+            }
+        });
+    }
+
+    $(".addbtnDiploma").click(function() {
+        var uid = "add";
+        $.ajax({
+            type: "POST",
+            url: "{{ url('diploma/getModal')}}",
+            data: {
+                uid: uid
+            },
+            success: function(response) {
+                $("#modal-view").modal('toggle');
+                $("#modal-view").find(".modal-title").text("Add Diploma");
+                $("#modal-view").find("#modal-display").html(response);
+            }
+        });
+    });
+
+    $(document).on("click","#paginationDiploma a",function(){
+        //get url and make final url for ajax 
+        var url=$(this).attr("href");
+        var mystr = url.split("=");
+        diplomaList(mystr[1]);
+        return false;
+    })
+
+    $("#diplomaTable").on("click", ".editbtn", function() {
+        var uid = $(this).attr('id');
+        $.ajax({
+            type: "POST",
+            url: "{{ url('diploma/getModal')}}",
+            data: {
+                uid: uid
+            },
+            success: function(response) {
+                $("#modal-view").modal('toggle');
+                $("#modal-view").find(".modal-title").text("Edit Diploma");
+                $("#modal-view").find("#modal-display").html(response);
+            }
+        });
+    });
+
+    $("#diplomaTable").on("click", ".delbtn", function() {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, proceed!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+
+                var code = $(this).attr('id');
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('diploma/delete')}}",
+                    dataType: 'json',
+                    data: {
+                        code: code,
+                        '_token': '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.status == 1) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: response.title,
+                                text: response.msg,
+                                timer: 2500
+                            })
+
+                            diplomaList();
+                        }else if (response.status == 2) {
+                            Swal.fire({
+                                icon: 'info',
+                                title: response.title,
+                                text: response.msg
+                            })
+                        }else if (response.status == 0) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: response.title,
+                                text: response.msg
+                            })
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: "System Error",
+                                text: "Please contact developer."
+                            })
+                        }
+                    }
+                });
+
+            } else if (
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Data is safe.',
+                    'error'
+                )
+            }
+        })
     });
 </script>

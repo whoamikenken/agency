@@ -15,13 +15,52 @@
                 <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-action printReport" tag="hrreport" report="Master List Report" aria-current="true">
                         <div class="row">
-                            <div class="col-sm-12 col-md-4">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Master List Report</h5>
                                 </div>
                                 <p class="mb-1">Print All Applicant Info.</p>
                             </div>
-                            <div class="col-sm-12 col-md-8 text-end d-sm-none d-md-block fs-2">
+                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
+                                <i class="bi bi-printer"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action printReport" tag="costbreakdown" report="Cost Breakdown Report" aria-current="true">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Cost Report</h5>
+                                </div>
+                                <p class="mb-1">Pring All Applicant Cost.</p>
+                            </div>
+                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
+                                <i class="bi bi-printer"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action printReport" tag="infosheet" report="Information Sheet" aria-current="true">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Infosheet</h5>
+                                </div>
+                                <p class="mb-1">Print applicant infosheet</p>
+                            </div>
+                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
+                                <i class="bi bi-printer"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action printReport" tag="performance" report="Branch Performance Report" aria-current="true">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Branch Performance Report</h5>
+                                </div>
+                                <p class="mb-1">Print Branch Performance</p>
+                            </div>
+                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
                                 <i class="bi bi-printer"></i>
                             </div>
                         </div>
@@ -39,14 +78,27 @@
                 <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-action printReport" tag="departure" report="Departure List Report" aria-current="true">
                         <div class="row">
-                            <div class="col-sm-12 col-md-4">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Departure List</h5>
                                 </div>
                                 <p class="mb-1">List of applicant departure.</p>
                             </div>
-                            <div class="col-sm-12 col-md-8 text-end d-sm-none d-md-block fs-2">
+                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
                                 <i class="bi bi-airplane-engines"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action printReport" tag="expiration" report="Expiration List Report" aria-current="true">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Expiration List</h5>
+                                </div>
+                                <p class="mb-1">Applicant Passport/Visa expired.</p>
+                            </div>
+                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
+                                <i class="bi bi-bookmark-x"></i>
                             </div>
                         </div>
                     </a>
@@ -64,7 +116,6 @@
     $(document).on("click", ".printReport", function() {
         var tag = $(this).attr('tag');
         var reportName = $(this).attr('report');
-        console.log(tag);
         $.ajax({
             type: "POST",
             url: "{{ url('report/getModalFilter')}}",

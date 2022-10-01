@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\DiplomaController;
 use App\Http\Controllers\JobsiteController;
 use App\Http\Controllers\MedicalController;
 use App\Http\Controllers\LocationController;
@@ -139,6 +140,12 @@ Route::post('/passport/table', [PassportchopController::class, 'getTable'])->wit
 Route::post('/passport/getModal', [PassportchopController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/passport/add', [PassportchopController::class, 'store']);
 Route::post('/passport/delete', [PassportchopController::class, 'delete']);
+
+// Diploma
+Route::post('/diploma/table', [DiplomaController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/diploma/getModal', [DiplomaController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/diploma/add', [DiplomaController::class, 'store']);
+Route::post('/diploma/delete', [DiplomaController::class, 'delete']);
 
 Route::get('/credits', function(){
     echo "Created by kennedy hipolito<br>";

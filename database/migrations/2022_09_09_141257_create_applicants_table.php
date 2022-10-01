@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('is_first', 30)->default('Yes');
             $table->string('is_walkin', 30)->default('Yes');
             $table->date('date_applied')->nullable();
-            $table->text('passsport')->nullable();
+            $table->text('passport')->nullable();
             $table->string('passport_no', 30)->nullable();
             $table->date('passport_issued')->nullable();
             $table->date('passport_validity')->nullable();

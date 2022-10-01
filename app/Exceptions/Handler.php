@@ -2,8 +2,9 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -52,7 +53,7 @@ class Handler extends ExceptionHandler
     public function report(Throwable $e)
     {
         if ($e instanceof \Illuminate\Session\TokenMismatchException) {
-            return redirect()->to('http://kingsmanpower.test/login')->send();
+            return redirect()->to(URL::current().'/login')->send();
         }
     }
 }
