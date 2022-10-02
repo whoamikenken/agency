@@ -75,7 +75,7 @@
                     @endif
                 </div>
             </div>
-            <h5 class="text-center mt-2">OFW Infosheet</h5>
+            <h5 class="text-center mt-2">Diplomas</h5>
             <hr>
             <div class="row mt-2">
                 <div class="col-sm-12">

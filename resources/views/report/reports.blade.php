@@ -15,53 +15,53 @@
                 <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-action printReport" tag="hrreport" report="Master List Report" aria-current="true">
                         <div class="row">
-                            <div class="col-sm-12 col-md-6">
+                            <div class="col-sm-12 col-md-8">
                                 <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Master List Report</h5>
                                 </div>
                                 <p class="mb-1">Print All Applicant Info.</p>
                             </div>
-                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
+                            <div class="col-sm-12 col-md-4 text-end d-sm-none d-md-block fs-2">
                                 <i class="bi bi-printer"></i>
                             </div>
                         </div>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action printReport" tag="costbreakdown" report="Cost Breakdown Report" aria-current="true">
                         <div class="row">
-                            <div class="col-sm-12 col-md-6">
+                            <div class="col-sm-12 col-md-8">
                                 <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Cost Report</h5>
                                 </div>
                                 <p class="mb-1">Pring All Applicant Cost.</p>
                             </div>
-                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
+                            <div class="col-sm-12 col-md-4 text-end d-sm-none d-md-block fs-2">
                                 <i class="bi bi-printer"></i>
                             </div>
                         </div>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action printReport" tag="infosheet" report="Information Sheet" aria-current="true">
                         <div class="row">
-                            <div class="col-sm-12 col-md-6">
+                            <div class="col-sm-12 col-md-8">
                                 <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Infosheet</h5>
                                 </div>
                                 <p class="mb-1">Print applicant infosheet</p>
                             </div>
-                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
+                            <div class="col-sm-12 col-md-4 text-end d-sm-none d-md-block fs-2">
                                 <i class="bi bi-printer"></i>
                             </div>
                         </div>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action printReport" tag="performance" report="Branch Performance Report" aria-current="true">
+                    <a href="#" class="list-group-item list-group-item-action printReport" tag="lacking" report="Document Lacking List Report" aria-current="true">
                         <div class="row">
-                            <div class="col-sm-12 col-md-6">
+                            <div class="col-sm-12 col-md-8">
                                 <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Branch Performance Report</h5>
+                                <h5 class="mb-1">Lacking Document List</h5>
                                 </div>
-                                <p class="mb-1">Print Branch Performance</p>
+                                <p class="mb-1">List of applicant that lacks documents and certificate.</p>
                             </div>
-                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
-                                <i class="bi bi-printer"></i>
+                            <div class="col-sm-12 col-md-4 text-end d-sm-none d-md-block fs-2">
+                                <i class="bi bi-paperclip"></i>
                             </div>
                         </div>
                     </a>
@@ -99,6 +99,19 @@
                             </div>
                             <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
                                 <i class="bi bi-bookmark-x"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action printReport" tag="performance" report="Branch Performance Report" aria-current="true">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Branch Performance Report</h5>
+                                </div>
+                                <p class="mb-1">Print Branch Performance</p>
+                            </div>
+                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
+                                <i class="bi bi-building"></i>
                             </div>
                         </div>
                     </a>

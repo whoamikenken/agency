@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'fname' => "Kennedy",
             'lname' => "Hipolito",
             'email' => "whoamikenken@gmail.com",
-            'user_type' => 'admin',
+            'user_type' => 'Admin',
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             'fname' => "Ethan",
             'lname' => "Liew",
             'email' => "ethanliew.now@gmail.com",
-            'user_type' => 'admin',
+            'user_type' => 'Admin',
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
             'fname' => "Juliet",
             'lname' => "Lingon",
             'email' => "julietlingon@icloud.com",
-            'user_type' => 'admin',
+            'user_type' => 'Admin',
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
             'fname' => "Kevin",
             'lname' => "Wong",
             'email' => "kevinktwong@gmail.com ",
-            'user_type' => 'admin',
+            'user_type' => 'Admin',
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password

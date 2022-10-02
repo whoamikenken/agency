@@ -77,7 +77,6 @@
     <link href="https://unpkg.com/@videojs/themes@1/dist/sea/index.css" rel="stylesheet">
 
     
-    
     <style type="text/css">
         .sweet_loader {
             width: 140px;
@@ -207,7 +206,9 @@
         var sweet_loader = '<div class="sweet_loader"><svg viewBox="0 0 140 140" width="140" height="140"><g class="outline"><path d="m 70 28 a 1 1 0 0 0 0 84 a 1 1 0 0 0 0 -84" stroke="rgba(0,0,0,0.1)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></g><g class="circle"><path d="m 70 28 a 1 1 0 0 0 0 84 a 1 1 0 0 0 0 -84" stroke="#71BBFF" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dashoffset="200" stroke-dasharray="300"></path></g></svg></div>';
     </script>
 </head>
-
+@php
+$mainmenu = 1;
+@endphp
 <body>
     <form class="inline" method="POST" action="/logout" id="logoutForm">
         @csrf
@@ -221,18 +222,19 @@
                             {{-- <img src="{{ asset('images/logo.png')}}" alt="" width="30" height="24" class="d-inline-block align-text-top"> --}}
                             KING'S MANPOWER SERVICES
                         </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMobile" aria-controls="navbarMobile" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarTogglerDemo01" style="flex-grow: 0;">
+                        <div class="collapse navbar-collapse" id="navbarMobile" style="flex-grow: 0;">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 @foreach ($menus as $key => $items)
-                                @foreach ($items as $item)
-                                <li class="nav-item d-block d-sm-none">
-                                    <a class="nav-link menuMobile" style="color: #fff !important;font-size: 20px !important;" menu="{{$item->link}}" aria-current="page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
-                                </li>
-                                @endforeach
-                                <hr>
+                                
+                                    @foreach ($items as $item)
+                                    <li class="nav-item d-block d-sm-none">
+                                        <a class="nav-link menuMobile" style="color: #fff !important;font-size: 20px !important;" menu="{{$item->link}}" nav="{{$mainmenu}}" menu_id="{{$item->menu_id}}" aria-current="page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
+                                    </li>
+                                    @endforeach
+                                    <hr class="text-white">
                                 @endforeach
                             </ul>
                             <form class="d-flex text-end justify-content-between">
@@ -269,9 +271,6 @@
                     <hr class="p-2">
                     
                     <ul class="list-unstyled ps-0">
-                        @php
-                        $mainmenu = 1;
-                        @endphp
                         @foreach ($menus as $title => $item)
                         <li class="border-top my-3"></li>
                         <li class="mb-1">
@@ -413,6 +412,16 @@
     }
     
     $("#sidebarMenu").on("click", ".menuLink", function() {
+        var menu = $(this).attr('menu');
+        var nav = $(this).attr('nav');
+        var menu_id = $(this).attr('menu_id');
+        $("#menu-form").find('input[name="route"]').val(menu);
+        $("#menu-form").find('input[name="nav"]').val(nav);
+        $("#menu-form").find('input[name="menu_id"]').val(menu_id);
+        $("#menu-form").submit();
+    });
+
+    $("#navbarMobile").on("click", ".menuMobile", function() {
         var menu = $(this).attr('menu');
         var nav = $(this).attr('nav');
         var menu_id = $(this).attr('menu_id');

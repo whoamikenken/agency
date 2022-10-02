@@ -61,7 +61,7 @@
         <div class="input-group">
             <div class="input-group-text"><i class="bi bi-option"></i></div>
             <select name="applicant_id" id="applicant_id" class="form-select">
-                <option value="" selected>All Applicant</option>
+                <option value="" selected> {{($tag == "infosheet")? "Select":"All"}} Applicant</option>
                 @foreach ($applicant_select as $item)
                 <option value="{{$item->applicant_id}}" >{{$item->lname." ".$item->fname}}</option>
                 @endforeach
@@ -190,6 +190,17 @@
             var edata = $("input[name=edata]:checked").map(function () {return this.value;}).get().join(","); 
             var input = document.createElement("input");
             $("#edatalist").val(edata);
+        }
+
+        if($("#tag").val() == "infosheet"){
+            if($("#applicant_id").val() == ""){
+                Swal.fire({
+                    icon: 'info',
+                    title: "Please Select An Applicant",
+                    text: "Please contact developer."
+                })
+                return false;
+            }
         }
         jQuery('#reportForm').submit();
     });
