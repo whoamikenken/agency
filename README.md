@@ -21,7 +21,6 @@ php artisan sail:install --devcontainer
 ./vendor/bin/sail stop
 
 ./vendor/bin/sail artisan migrate
-
 ./vendor/bin/sail artisan db:seed --force
 ./vendor/bin/sail artisan migrate:fresh --seed
 
