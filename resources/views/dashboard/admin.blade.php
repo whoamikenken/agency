@@ -83,7 +83,7 @@
 <div class="row">
     <div class="col-sm-12 col-md-8">
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header bg-info">
                 <i class="bi bi-bar-chart me-1"></i>
                 Total Departure Per Month
             </div>
@@ -92,7 +92,7 @@
     </div>
     <div class="col-sm-12 col-md-4">
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header bg-info">
                 <i class="bi bi-bar-chart me-1"></i>
                 Branches Applicants
             </div>
