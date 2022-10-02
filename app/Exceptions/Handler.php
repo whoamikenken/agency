@@ -53,7 +53,8 @@ class Handler extends ExceptionHandler
     public function report(Throwable $e)
     {
         if ($e instanceof \Illuminate\Session\TokenMismatchException) {
-            return redirect()->to(URL::current().'/login')->send();
+            $url = action([LoginController::class, 'index']);
+            return redirect()->to($url)->send();
         }
     }
 }

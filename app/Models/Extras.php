@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Extras extends Model
 {
@@ -127,5 +128,67 @@ class Extras extends Model
         );
         
         return $return[$data];
+    }
+
+    public static function getMedical(String $code = null)
+    {
+        return DB::table('medical')->where('code', $code)->value('description');
+    }
+
+    public static function getCountry(String $code = null)
+    {
+        return DB::table('countries')->where('code', $code)->value('description');
+    }
+
+    public static function filledDiploma(String $applicant_id = null)
+    {
+        $diplomaResult =  DB::table('diplomas')->where('applicant_id', $applicant_id)->get();
+        if(count($diplomaResult) > 0){
+            return "Filed";
+        }else{
+            return "Not Filed";
+        }
+    }
+
+    public static function countLackingApplicant()
+    {
+        $result = DB::select("SELECT a.applicant_id FROM applicants a LEFT JOIN diplomas b ON a.applicant_id = b.applicant_id WHERE a.`passport` IS NULL OR a.`med_first_cert` IS NULL OR a.`med_second_cert` IS NULL OR a.`med_third_cert` IS NULL OR a.`med_fourth_cert` IS NULL OR a.`sup_doc_id988a` IS NULL OR a.`sup_pt6` IS NULL OR a.`sup_coe` IS NULL OR a.`sup_hq` IS NULL OR a.`sup_polohk` IS NULL OR a.`sup_infosheet` IS NULL OR a.`sup_privacy_policy` IS NULL OR a.`sup_affidavit` IS NULL OR a.`sup_mmr_vac` IS NULL OR a.`cert_ereg` IS NULL OR a.`cert_peos` IS NULL OR a.`cert_pdos` IS NULL OR a.`cert_owwa` IS NULL OR a.`cert_nc2` IS NULL OR a.`cert_ofw_infosheet` IS NULL OR a.`visa` IS NULL OR a.`oec_covid_dec` IS NULL OR a.`oec_insurance` IS NULL OR a.`oec_pregnancy_test` IS NULL OR a.`oec_swab_test` IS NULL OR a.`user_profile` IS NULL OR a.`user_profile_face` IS NULL OR a.`user_video` IS NULL OR b.`diploma`");
+
+        return count($result);
+    }
+
+    public static function countUpcomingMonthDeparture()
+    {
+        $result = DB::select("SELECT oec_flight_departure FROM applicants WHERE oec_flight_departure BETWEEN CURDATE() AND LAST_DAY(CURDATE())");
+
+        return count($result);
+    }
+
+    public static function countActiveApplicant()
+    {
+        $result = DB::select("SELECT oec_flight_departure FROM applicants WHERE isactive = 'Active'");
+
+        return count($result);
+    }
+
+    public static function countExpiredPassportAndVisa()
+    {
+        $result = DB::select("SELECT visa_date_expired, passport_validity FROM applicants WHERE `visa_date_expired` < CURDATE() OR passport_validity < CURDATE()");
+
+        return count($result);
+    }
+
+    public static function getDepartureMonth($month = null)
+    {
+        $result = DB::select("SELECT visa_date_expired, passport_validity,oec_flight_departure FROM applicants WHERE MONTH(oec_flight_departure) = $month AND YEAR(oec_flight_departure) = YEAR(CURDATE()) AND isactive = 'Active'");
+
+        return count($result);
+    }
+
+    public static function getApplicantInBranch($branch = null)
+    {
+        $result = DB::select("SELECT visa_date_expired, passport_validity,oec_flight_departure FROM applicants WHERE branch = '$branch' AND isactive = 'Active'");
+
+        return count($result);
     }
 }

@@ -77,6 +77,7 @@ class ApplicantController extends Controller
         $data['branch_select'] = DB::table('branches')->get();
         $data['country_select'] = DB::table('countries')->get();
         $data['medical_select'] = DB::table('medical')->get();
+        $data['principal_select'] = DB::table('principals')->get();
         $data['users_select'] = DB::table('users')->where("user_type", "sales")->get();
 
         return view('user/applicant_profile', $data);

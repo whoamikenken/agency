@@ -247,6 +247,23 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label style="font-weight:600">Principal</label>
+                        <div class="input-group">
+                            <div class="input-group-text"><i class="bi bi-building"></i></div>
+                            <select name="principal" id="principal" class="form-control form-select">
+                                @foreach ($principal_select as $item)
+                                <option value="{{$item->code}}" {{ (isset($principal) && $principal == $item->code)? "selected":"" }} >{{$item->description}}</option>
+                                @endforeach
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

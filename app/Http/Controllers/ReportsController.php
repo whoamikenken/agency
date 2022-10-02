@@ -230,25 +230,50 @@ class ReportsController extends Controller
                 }
             }
 
+            // dd($where);
             $data['dateof'] = "As of " . date("F j, Y");
 
             $table = "applicants";
-            // DB::enableQueryLog();
             if ($table) {
                 $data['result'] = DB::table($table)->where($where)->orderBy('lname', 'desc')->get();
             }
 
             foreach ($data['result'] as $key => $value) {
+                $name = $data['result'][$key]->lname." ".$data['result'][$key]->fname;
                 if (isset($data['result'][$key]->sales_manager)) $data['result'][$key]->sales_manager = DB::table('users')->where('id', $value->sales_manager)->value('name');
                 if (isset($data['result'][$key]->jobsite)) $data['result'][$key]->jobsite = DB::table('jobsites')->where('code', $value->jobsite)->value('description');
                 if (isset($data['result'][$key]->branch)) $data['result'][$key]->branch = DB::table('branches')->where('code', $value->branch)->value('description');
+                if (isset($data['result'][$key]->passport_place_issued)) $data['result'][$key]->passport_place_issued = DB::table('countries')->where('code', $value->passport_place_issued)->value('description');
+                if (isset($data['result'][$key]->passport)) $data['result'][$key]->passport = Storage::disk('s3')->url($value->passport);
                 if (isset($data['result'][$key]->user_profile_face)) $data['result'][$key]->user_profile_face = Storage::disk('s3')->url($value->user_profile_face);
                 if (isset($data['result'][$key]->user_profile)) $data['result'][$key]->user_profile = Storage::disk('s3')->url($value->user_profile);
             }
-            // dd(DB::getQueryLog());
-            // $data = $data['result'];
-            
+
+            $data['reportName'] = $name;
+
             return response()->view('report/infosheetPDF', $data, 200)->header('Content-Type', 'application/pdf');
+        } elseif ($formFields['tag'] == "lacking") {
+            $between = array();
+            foreach ($whereFilter as $key => $value) {
+                if ($key == "from" || $key == "to") {
+                    $between[] = $value;
+                } else {
+                    if ($value) {
+                        $where[] = array($key, '=', $value);
+                    }
+                }
+            }
+
+            $data['dateof'] = "As of " . date("F j, Y");
+
+            $table = "applicants";
+            // DB::enableQueryLog();
+            if ($table) {
+                $data['result'] = DB::select("SELECT a.lname, a.fname, a.applicant_id, a.er_ref, a.maid_ref, a.`passport`,a.`med_first_cert`,a.`med_second_cert`,a.`med_third_cert`,a.`med_fourth_cert`,a.`sup_doc_id988a`,a.`sup_pt6`,a.`sup_coe`,a.`sup_hq`,a.`sup_polohk`,a.`sup_infosheet`,a.`sup_privacy_policy`,a.`sup_affidavit`,a.`sup_mmr_vac`,a.`cert_ereg`,a.`cert_peos`,a.`cert_pdos`,a.`cert_owwa`,a.`cert_nc2`,a.`cert_ofw_infosheet`,a.`visa`,a.`oec_covid_dec`,a.`oec_insurance`,a.`oec_pregnancy_test`,a.`oec_swab_test`,a.`user_profile`,a.`user_profile_face`,a.`user_video`,b.`diploma` FROM applicants a LEFT JOIN diplomas b ON a.applicant_id = b.applicant_id WHERE a.`passport` IS NULL OR a.`med_first_cert` IS NULL OR a.`med_second_cert` IS NULL OR a.`med_third_cert` IS NULL OR a.`med_fourth_cert` IS NULL OR a.`sup_doc_id988a` IS NULL OR a.`sup_pt6` IS NULL OR a.`sup_coe` IS NULL OR a.`sup_hq` IS NULL OR a.`sup_polohk` IS NULL OR a.`sup_infosheet` IS NULL OR a.`sup_privacy_policy` IS NULL OR a.`sup_affidavit` IS NULL OR a.`sup_mmr_vac` IS NULL OR a.`cert_ereg` IS NULL OR a.`cert_peos` IS NULL OR a.`cert_pdos` IS NULL OR a.`cert_owwa` IS NULL OR a.`cert_nc2` IS NULL OR a.`cert_ofw_infosheet` IS NULL OR a.`visa` IS NULL OR a.`oec_covid_dec` IS NULL OR a.`oec_insurance` IS NULL OR a.`oec_pregnancy_test` IS NULL OR a.`oec_swab_test` IS NULL OR a.`user_profile` IS NULL OR a.`user_profile_face` IS NULL OR a.`user_video` IS NULL OR b.`diploma` ORDER BY a.`lname` ASC");
+            }
+
+            // dd(DB::getQueryLog());
+            return response()->view('report/lackingdocumentPDF', $data, 200)->header('Content-Type', 'application/pdf');
         }
         
     }

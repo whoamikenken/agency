@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -35,6 +36,7 @@ class ApplicantFactory extends Factory
             'branch' => fake()->randomElement(['001', '002', '005', '004']),
             'sales_manager' => fake()->randomElement(['1', '2', '5', '4']),
             'jobsite' => fake()->randomElement(['MY', 'HK']),
+            'address' => fake()->streetAddress()." ". fake()->cityPrefix(),
             'family_contact_name' => fake()->firstName($gender)." ". fake()->lastName($gender),
             'family_contact' => fake()->e164PhoneNumber(),
             'is_ex_abroad' => fake()->randomElement(['Yes', 'No']),
@@ -44,7 +46,7 @@ class ApplicantFactory extends Factory
             'date_applied' => fake()->date(),
             'passport_no' => fake()->randomNumber(9, true),
             'passport_issued' => fake()->date(),
-            'passport_validity' => fake()->date(),
+            'passport_validity' => Carbon::createFromTimestamp(rand(strtotime("2020-12-01"), strtotime("2025-08-01")))->format('Y-m-d'),
             'passport_place_issued' => fake()->randomElement(['MY', 'HK', 'PH']),
             'vac_first_dose_date' => fake()->date(),
             'vac_first_brand' => fake()->randomElement(['Pfizer', 'AstraZeneca','Sputnik', 'Moderna']),
@@ -80,14 +82,15 @@ class ApplicantFactory extends Factory
             'med_fourth_clinic' => fake()->randomElement(['Q3Y', 'ZV0', 'DDT', 'AG4', 'IKB', 'CH4']),
             'med_fourth_cost' => $medFourthCost,
             'cert_nc2_cost' => $nc2Cost,
-            'oec_flight_departure' => fake()->date(),
+            'oec_flight_departure' => Carbon::createFromTimestamp(rand(strtotime("2022-12-01"), strtotime("2022-08-01")))->format('Y-m-d'),
             'passport_no' => fake()->randomNumber(9, true),
-            'visa_date_expired' => fake()->date(),
+            'visa_date_expired' => Carbon::createFromTimestamp(rand(strtotime("2020-12-01"), strtotime("2025-08-01")))->format('Y-m-d'),
             'user_video' => 'user_video/rboKUqmdLcZFS64SRvqiPlZQ1xaVv3KCXAbdFIuU.mp4',
             'user_profile' => 'user_profile/fVSRsIcbaKG1QOAMtfdSGZIx5BMCbCgSrFtHNAvg.png',
             'user_profile_face' => 'user_profile_face/tEQ96rDsOICnXj7RsGbcrfFINGZSvCmQZiSft2By.png',
             'total_cost' => $totalCost,
             'gender' => $gender,
+            'isactive' => fake()->randomElement(['Active', 'Inactive']),
         ];
     }
 }
