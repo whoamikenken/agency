@@ -237,7 +237,7 @@
                             <div class="input-group-text"><i class="bi bi-person-check"></i></div>
                             <select name="isactive" id="isactive" class="form-control form-select">
                                 <option value="Active" {{ (isset($isactive) && $isactive == "Active")? "selected":"" }} >Active</option>
-                                <option value="Inactive" {{ (isset($isactive) && $isactive == "Inactive")? "selected":"" }} >Inactive</option>
+                                <option value="Inactive" {{ (isset($isactive) && $isactive == "Inactive")? "selected":"" }} >Terminated</option>
                             </select>
                             <div class="valid-feedback">
                                 Looks good!
