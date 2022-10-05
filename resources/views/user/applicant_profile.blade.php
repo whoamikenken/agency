@@ -637,10 +637,16 @@
                 </div>
             </div>
             <div class="col-md-12 col-sm-12 col-lg-6">
-                <label style="font-weight:600">Medical Result</label>
+                <label style="font-weight:600">Expiration Date</label>
                 <div class="input-group">
-                    <div class="input-group-text"><i class="bi bi-option"></i></div>
-                    <input type="text" id="med_first_result" name="med_first_result" class="form-control" list="datalistOptionsResult" value="{{ $med_first_result }}">
+                    <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                    <input type="text" id="med_first_expiration" name="med_first_expiration" class="form-control datepicker" value="{{ $med_first_expiration }}" placeholder="Select date">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
+                    </div>
                 </div>
             </div>
         </div>
@@ -653,6 +659,31 @@
                         @foreach ($medical_select as $item)
                         <option value="{{$item->code}}" {{ (isset($med_first_clinic) && $med_first_clinic == $item->code)? "selected":"" }} >{{$item->description}}</option>
                         @endforeach
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Medical Result</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <input type="text" id="med_first_result" name="med_first_result" class="form-control" list="datalistOptionsResult" value="{{ $med_first_result }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <label style="font-weight:600">Is Done?</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <select name="med_first_done" id="med_first_done" class="form-control form-select">
+                        <option value="Yes" {{ (isset($med_first_done) && $med_first_done == "Yes")? "selected":"" }} >Yes</option>
+                        <option value="No" {{ (isset($med_first_done) && $med_first_done == "No")? "selected":"" }} >No</option>
                     </select>
                     <div class="valid-feedback">
                         Looks good!
@@ -709,11 +740,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-6">
-                <label style="font-weight:600">Medical Result</label>
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Expiration Date</label>
                 <div class="input-group">
-                    <div class="input-group-text"><i class="bi bi-option"></i></div>
-                    <input type="text" id="med_second_result" name="med_second_result" class="form-control" list="datalistOptionsResult" value="{{ $med_second_result }}">
+                    <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                    <input type="text" id="med_second_expiration" name="med_second_expiration" class="form-control datepicker" value="{{ $med_second_expiration }}" placeholder="Select date">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
+                    </div>
                 </div>
             </div>
         </div>
@@ -726,6 +763,31 @@
                         @foreach ($medical_select as $item)
                         <option value="{{$item->code}}" {{ (isset($med_second_clinic) && $med_second_clinic == $item->code)? "selected":"" }} >{{$item->description}}</option>
                         @endforeach
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                <label style="font-weight:600">Medical Result</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <input type="text" id="med_second_result" name="med_second_result" class="form-control" list="datalistOptionsResult" value="{{ $med_second_result }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <label style="font-weight:600">Is Done?</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <select name="med_second_done" id="med_second_done" class="form-control form-select">
+                        <option value="Yes" {{ (isset($med_second_done) && $med_second_done == "Yes")? "selected":"" }} >Yes</option>
+                        <option value="No" {{ (isset($med_second_done) && $med_second_done == "No")? "selected":"" }} >No</option>
                     </select>
                     <div class="valid-feedback">
                         Looks good!
@@ -782,11 +844,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-6">
-                <label style="font-weight:600">Medical Result</label>
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Expiration Date</label>
                 <div class="input-group">
-                    <div class="input-group-text"><i class="bi bi-option"></i></div>
-                    <input type="text" id="med_third_result" name="med_third_result" class="form-control" list="datalistOptionsResult" value="{{ $med_third_result }}">
+                    <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                    <input type="text" id="med_third_expiration" name="med_third_expiration" class="form-control datepicker" value="{{ $med_third_expiration }}" placeholder="Select date">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
+                    </div>
                 </div>
             </div>
         </div>
@@ -799,6 +867,31 @@
                         @foreach ($medical_select as $item)
                         <option value="{{$item->code}}" {{ (isset($med_third_clinic) && $med_third_clinic == $item->code)? "selected":"" }} >{{$item->description}}</option>
                         @endforeach
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                <label style="font-weight:600">Medical Result</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <input type="text" id="med_third_result" name="med_third_result" class="form-control" list="datalistOptionsResult" value="{{ $med_third_result }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <label style="font-weight:600">Is Done?</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <select name="med_third_done" id="med_third_done" class="form-control form-select">
+                        <option value="Yes" {{ (isset($med_third_done) && $med_third_done == "Yes")? "selected":"" }} >Yes</option>
+                        <option value="No" {{ (isset($med_third_done) && $med_third_done == "No")? "selected":"" }} >No</option>
                     </select>
                     <div class="valid-feedback">
                         Looks good!
@@ -856,10 +949,16 @@
                 </div>
             </div>
             <div class="col-md-12 col-sm-12 col-lg-6">
-                <label style="font-weight:600">Medical Result</label>
+                <label style="font-weight:600">Expiration Date</label>
                 <div class="input-group">
-                    <div class="input-group-text"><i class="bi bi-option"></i></div>
-                    <input type="text" id="med_fourth_result" name="med_fourth_result" class="form-control" list="datalistOptionsResult" value="{{ $med_fourth_result }}">
+                    <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                    <input type="text" id="med_fourth_expiration" name="med_fourth_expiration" class="form-control datepicker" value="{{ $med_fourth_expiration }}" placeholder="Select date">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
+                    </div>
                 </div>
             </div>
         </div>
@@ -872,6 +971,31 @@
                         @foreach ($medical_select as $item)
                         <option value="{{$item->code}}" {{ (isset($med_fourth_clinic) && $med_fourth_clinic == $item->code)? "selected":"" }} >{{$item->description}}</option>
                         @endforeach
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <label style="font-weight:600">Medical Result</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <input type="text" id="med_fourth_result" name="med_fourth_result" class="form-control" list="datalistOptionsResult" value="{{ $med_fourth_result }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <label style="font-weight:600">Is Done?</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <select name="med_fourth_done" id="med_fourth_done" class="form-control form-select">
+                        <option value="Yes" {{ (isset($med_fourth_done) && $med_fourth_done == "Yes")? "selected":"" }} >Yes</option>
+                        <option value="No" {{ (isset($med_fourth_done) && $med_fourth_done == "No")? "selected":"" }} >No</option>
                     </select>
                     <div class="valid-feedback">
                         Looks good!
@@ -933,48 +1057,48 @@
                 data-setup="{}"
                 >
                 <source src="{{  Storage::disk('s3')->url($user_video)}}" type="video/mp4" />
-                <p class="vjs-no-js">
-                    To view this video please enable JavaScript, and consider upgrading to a
-                    web browser that
-                    <a href="{{  Storage::disk('s3')->url($user_video)}}" target="_blank"
-                    >supports HTML5 video</a
-                    >
-                </p>
-            </video>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        <a href="{{  Storage::disk('s3')->url($user_video)}}" target="_blank"
+                            >supports HTML5 video</a
+                            >
+                        </p>
+                    </video>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-    </div>
-</div>
-<datalist id="datalistOptionsResult">
-    <option value="Fit to work">
-    <option value="Unfit">
-    <option value="Pending">
-</datalist>
-<script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
-<script>
-    $(document).ready(function () {
-        
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd'
-        });
-        
-        $('.form-select').select2({
-            theme: 'bootstrap-5'
-        });
-    });
-
-    $('#userVideo').on('hidden.bs.modal', function (e) {
-        $('video').trigger('pause');
-    })
-    
-    
-    $("input[type=text], input[type=file], input[type=number], textarea, select").on("change", function(){
-        
-        if ($(this).val()) {
-            saveSingleProfileColumn($(this));
-        }else return;   
-    });
-    
-</script>
+        <datalist id="datalistOptionsResult">
+            <option value="Fit to work">
+                <option value="Unfit">
+                    <option value="Pending">
+                    </datalist>
+                    <script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            
+                            $('.datepicker').datepicker({
+                                format: 'yyyy-mm-dd'
+                            });
+                            
+                            $('.form-select').select2({
+                                theme: 'bootstrap-5'
+                            });
+                        });
+                        
+                        $('#userVideo').on('hidden.bs.modal', function (e) {
+                            $('video').trigger('pause');
+                        })
+                        
+                        
+                        $("input[type=text], input[type=file], input[type=number], textarea, select").on("change", function(){
+                            
+                            if ($(this).val()) {
+                                saveSingleProfileColumn($(this));
+                            }else return;   
+                        });
+                        
+                    </script>
