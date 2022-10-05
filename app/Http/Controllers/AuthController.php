@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -11,7 +12,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login','register']]);
     }
 
     public function login(Request $request)
@@ -22,7 +23,7 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
 
-        $token = Auth::attempt($credentials);
+        $token = Auth::guard('api')->attempt($credentials);
         if (!$token) {
             return response()->json([
                 'status' => 'error',
@@ -30,7 +31,7 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
         return response()->json([
             'status' => 'success',
             'user' => $user,
@@ -55,11 +56,10 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $token = Auth::login($user);
+        $token = Auth::guard('api')->login($user);
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
-            'user' => $user,
             'authorisation' => [
                 'token' => $token,
                 'type' => 'bearer',
@@ -69,8 +69,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        dd("wew");
-        Auth::logout();
+        Auth::guard('api')->logout();
         return response()->json([
             'status' => 'success',
             'message' => 'Successfully logged out',
@@ -81,11 +80,48 @@ class AuthController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'user' => Auth::user(),
+            'user' => Auth::guard('api')->user(),
             'authorisation' => [
-                'token' => Auth::refresh(),
+                'token' => Auth::guard('api')->refresh(),
                 'type' => 'bearer',
             ]
         ]);
+    }
+
+    public function getmaid(Request $request)
+    {
+        
+        $data = json_decode($request->getContent());
+        // dd($data);
+        if(Auth::guard('api')->user()->user_type == "Api" || Auth::guard('api')->user()->user_type == "Admin"){
+            $id = "";
+            $con = false;
+            if(isset($data->er_id) && $data->er_id != ""){
+                $con = true;
+                $id = $data->er_id;
+            }elseif (isset($data->maid_id) && $data->maid_id != "") {
+                $con = true;
+                $id = $data->maid_id;
+            }
+
+            if($con == false){
+                return response()->json([
+                    'status' => 'false',
+                    'msg' => 'Please check your payload'
+                ]);
+            }else{
+                $record = DB::select("SELECT * FROM applicants WHERE er_ref = '$id' or maid_ref = '$id'");
+                return response()->json([
+                    'status' => 'success',
+                    'msg' => $record
+                ]);
+            }
+        }else{
+            Auth::guard('api')->logout();
+            return response()->json([
+                'status' => 'success',
+                'msg' => 'Your account does not have permission to use this.' 
+            ]);
+        }
     }
 }
