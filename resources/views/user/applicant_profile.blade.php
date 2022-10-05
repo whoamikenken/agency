@@ -963,8 +963,11 @@
         $('.form-select').select2({
             theme: 'bootstrap-5'
         });
-        
     });
+
+    $('#userVideo').on('hidden.bs.modal', function (e) {
+        $('video').trigger('pause');
+    })
     
     
     $("input[type=text], input[type=file], input[type=number], textarea, select").on("change", function(){
