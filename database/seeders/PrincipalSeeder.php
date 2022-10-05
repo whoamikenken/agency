@@ -20,6 +20,7 @@ class PrincipalSeeder extends Seeder
             'code' => 'APM',
             'description' => 'AGENSI PEKERJAAN MALINDO SDN BHD',
             'jobsite' => 'MAY',
+            'email' => 'whoamikenken@gmail.com',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
@@ -28,6 +29,7 @@ class PrincipalSeeder extends Seeder
             'code' => 'EHEL',
             'description' => 'EMPIRE HILL EMPLOYMENT LIMITED ',
             'jobsite' => 'HK',
+            'email' => 'whoamikenken@gmail.com',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
@@ -36,6 +38,7 @@ class PrincipalSeeder extends Seeder
             'code' => 'TESC',
             'description' => 'TECHNIC EMPLOYMENT SERVICE CENTRE',
             'jobsite' => 'HK',
+            'email' => 'whoamikenken@gmail.com',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
@@ -44,6 +47,7 @@ class PrincipalSeeder extends Seeder
             'code' => 'DEA',
             'description' => 'DICKSON EMPLOYMENT AGENCY',
             'jobsite' => 'HK',
+            'email' => 'whoamikenken@gmail.com',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
@@ -52,6 +56,7 @@ class PrincipalSeeder extends Seeder
             'code' => 'GES',
             'description' => 'GRACEFIELD EMPLOYMENT SERVICE LTD.',
             'jobsite' => 'HK',
+            'email' => 'whoamikenken@gmail.com',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
@@ -60,6 +65,7 @@ class PrincipalSeeder extends Seeder
             'code' => 'HFEC',
             'description' => 'HOME FIRST EMPLOYMENT CENTRE.',
             'jobsite' => 'HK',
+            'email' => 'whoamikenken@gmail.com',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
@@ -68,6 +74,7 @@ class PrincipalSeeder extends Seeder
             'code' => 'BEC',
             'description' => 'BRIGHTWAY EMPLOYMENT CENTRE.',
             'jobsite' => 'HK',
+            'email' => 'whoamikenken@gmail.com',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
@@ -76,6 +83,7 @@ class PrincipalSeeder extends Seeder
             'code' => 'EAL',
             'description' => 'E-Job Agency Limited',
             'jobsite' => 'HK',
+            'email' => 'whoamikenken@gmail.com',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
@@ -84,6 +92,7 @@ class PrincipalSeeder extends Seeder
             'code' => 'CES',
             'description' => 'CABLE EMPLOYMMENT SERVICE LIMITED',
             'jobsite' => 'HK',
+            'email' => 'whoamikenken@gmail.com',
             'modified_by' => 1,
             'created_by' => 1,
         ]);

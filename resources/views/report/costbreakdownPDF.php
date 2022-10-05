@@ -2,7 +2,7 @@
 
 $pdf = new \Mpdf\Mpdf(array('mode' => 'utf-8','format' => 'LETTER-L', 'orientation' => 'L'));
 $pdf->SetTitle($reportName);
-$pdf->SetProtection(array('print', 'copy'), "KMSI", "KMSIOWN"); 
+$pdf->SetProtection(array('print', 'copy'), "KMSI001", "KMSIOWN"); 
 
 $info  = "  <style>
                 @page{            
