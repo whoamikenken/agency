@@ -68,9 +68,47 @@
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     @if ($cert_ofw_infosheet != "")
-                    <label style="font-weight:600">Current PEOS</label>
+                    <label style="font-weight:600">Current Infosheet</label>
                     <div class="input-group">
                         <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($cert_ofw_infosheet)}}"><i class="bi bi-eye"></i> View</a>
+                    </div>
+                    @endif
+                </div>
+            </div>
+            <h5 class="text-center mt-2">PRC</h5>
+            <hr>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <label style="font-weight:600">PRC</label>
+                    <div class="input-group custom-file-button">
+                        <label class="input-group-text" for="cert_prc"><i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;{{($cert_prc != "")? "Replace":"Upload"}} PRC</label>
+                        <input type="file" class="form-control form-control-sm" id="cert_prc" name="cert_prc">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    @if ($cert_prc != "")
+                    <label style="font-weight:600">Current PRC</label>
+                    <div class="input-group">
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($cert_prc)}}"><i class="bi bi-eye"></i> View</a>
+                    </div>
+                    @endif
+                </div>
+            </div>
+            <h5 class="text-center mt-2">Driver License</h5>
+            <hr>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <label style="font-weight:600">Driver License</label>
+                    <div class="input-group custom-file-button">
+                        <label class="input-group-text" for="cert_driver_license"><i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;{{($cert_driver_license != "")? "Replace":"Upload"}} Driver License</label>
+                        <input type="file" class="form-control form-control-sm" id="cert_driver_license" name="cert_driver_license">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    @if ($cert_driver_license != "")
+                    <label style="font-weight:600">Current Driver License</label>
+                    <div class="input-group">
+                        <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($cert_driver_license)}}"><i class="bi bi-eye"></i> View</a>
                     </div>
                     @endif
                 </div>

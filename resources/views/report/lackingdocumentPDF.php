@@ -91,6 +91,8 @@ $info .= "
             <th style='padding: 5px;text-align: center;font-size: 12px;font-weight: bold;'>Swab Test</th>
             <th style='padding: 5px;text-align: center;font-size: 12px;font-weight: bold;'>Insurance</th>
             <th style='padding: 5px;text-align: center;font-size: 12px;font-weight: bold;'>Diploma</th>
+            <th style='padding: 5px;text-align: center;font-size: 12px;font-weight: bold;'>Driver License</th>
+            <th style='padding: 5px;text-align: center;font-size: 12px;font-weight: bold;'>PRC</th>
             </tr>";
 
 $info .= "</thead>";
@@ -117,6 +119,8 @@ if (count($result) > 0) {
         $value->sup_privacy_policy = ($value->sup_privacy_policy) ? '<b style="color:green">Filed</b>' : '<b style="color:red">Not Filed</b>';
         $value->sup_affidavit = ($value->sup_affidavit) ? '<b style="color:green">Filed</b>' : '<b style="color:red">Not Filed</b>';
         $value->sup_mmr_vac = ($value->sup_mmr_vac) ? '<b style="color:green">Filed</b>' : '<b style="color:red">Not Filed</b>';
+        $value->cert_prc = ($value->cert_prc) ? '<b style="color:green">Filed</b>' : '<b style="color:red">Not Filed</b>';
+        $value->cert_driver_license = ($value->cert_driver_license) ? '<b style="color:green">Filed</b>' : '<b style="color:red">Not Filed</b>';
 
         // OEC DOCUMENT
         $value->oec_covid_dec = ($value->oec_covid_dec) ? '<b style="color:green">Filed</b>' : '<b style="color:red">Not Filed</b>';

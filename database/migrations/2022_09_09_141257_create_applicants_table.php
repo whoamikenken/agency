@@ -89,6 +89,8 @@ return new class extends Migration
             $table->text('cert_ereg')->nullable();
             $table->text('cert_peos')->nullable();
             $table->text('cert_pdos')->nullable();
+            $table->text('cert_prc')->nullable();
+            $table->text('cert_driver_license')->nullable();
             $table->date('cert_pdos_date')->nullable();
             $table->date('cert_pdos_release_date')->nullable();
             $table->text('cert_owwa')->nullable();

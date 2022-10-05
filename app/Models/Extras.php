@@ -26,7 +26,7 @@ class Extras extends Model
         } elseif ($desc == "Medical Record") {
             $arrcol = array("med_first_date", "med_first_result", "med_first_clinic", "med_first_cost", "med_second_date", "med_second_result", "med_second_clinic","med_second_cost", "med_third_date", "med_third_result", "med_third_clinic","med_third_cost", "med_fourth_date", "med_fourth_result", "med_fourth_clinic", "med_fourth_cost");
         } elseif ($desc == "Certificate") {
-            $arrcol = array("cert_pdos_date", "cert_pdos_release_date", "cert_owwa_date","cert_owwa_release_date", "cert_nc2_by_applicant", "cert_nc2_payment_status", "cert_nc2_cost");
+            $arrcol = array("cert_pdos_date", "cert_pdos_release_date", "cert_owwa_date","cert_owwa_release_date", "cert_nc2_by_applicant", "cert_nc2_payment_status","cert_nc2_cost","cert_prc", "cert_driver_license");
         } elseif ($desc == "VISA") {
             $arrcol = array("visa_number", "visa_date_received", "visa_date_expired", "visa_reactive_date", "visa_status", "visa_er_iscancel", "visa_maid_iscancel");
         } elseif ($desc == "OEC") {
