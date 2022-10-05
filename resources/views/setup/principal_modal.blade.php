@@ -31,6 +31,21 @@
         </div>
     </div>
 
+    <div class="col-md-6 col-sm-12">
+        <label>Email<span class="text-danger">*</span></label>
+        <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-mailbox"></i></div>
+            <input type="email" id="email" name="email"
+            class="form-control validate" placeholder="Enter Email" required value="{{ (isset($email))? $email:"" }}">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please input a Email.
+            </div>
+        </div>
+    </div>
+
     <div class="col-sm-12">
         <label>Job Site<span class="text-danger">*</span></label>
         <div class="input-group">

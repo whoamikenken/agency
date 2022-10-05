@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('code', 20)->nullable()->default('NULL');
             $table->string('description', 100)->nullable()->default('NULL');
             $table->string('jobsite', 20)->nullable()->default('NULL');
+            $table->string('email', 20)->nullable()->default('NULL');
             $table->timestamp('updated_at')->nullable()->useCurrent();
             $table->string('modified_by', 50)->nullable()->default('NULL');
             $table->timestamp('created_at')->nullable()->useCurrent();
