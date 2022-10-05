@@ -74,6 +74,7 @@ $info .= "
 $info .= "</thead>";
 $info .= "<tbody>";
 $totalCost = $med1 = $med2 = $med3 = $med4 = $nc2 = 0;
+$currencyArray = array('med_first_cost', 'med_second_cost', 'med_third_cost', 'med_fourth_cost', 'cert_nc2_cost','total_cost');
 if(count($result) > 0 ){
             foreach($result as $value){
             $info .= "<tr>";
@@ -85,7 +86,12 @@ if(count($result) > 0 ){
                         }elseif ($row == "user_profile") {
                             $info .= "<td style='padding: 2px;text-align: center;font-size: 13px;'><img src='" . $value->user_profile . "' style='width: 60px;text-align: center;' /></td>";
                         }else{
-                            $info .= "<td style='padding: 2px;text-align: center;font-size: 13px;'>" . $value->{$row}. "</td>";
+                            if(in_array($row, $currencyArray)){
+                                $info .= "<td style='padding: 2px;text-align: center;font-size: 13px;'>₱" . $value->{$row} . ".00</td>";
+                            }else{
+                                $info .= "<td style='padding: 2px;text-align: center;font-size: 13px;'>" . $value->{$row} . "</td>";
+                            }
+                            
                         }
                     }
                     $totalCost += $value->total_cost;
@@ -102,12 +108,12 @@ if(count($result) > 0 ){
 }
 $info .= "<tr>
 <td colspan='" . (count($edatalist) - 6) . "' style='text-align:right;font-size:20px;'>TOTAL:</td>
-<td style='text-align:center;font-size:20px;'>". $med1. "</td>
-<td style='text-align:center;font-size:20px;'>" . $med2 . "</td>
-<td style='text-align:center;font-size:20px;'>" . $med3 . "</td>
-<td style='text-align:center;font-size:20px;'>" . $med4 . "</td>
-<td style='text-align:center;font-size:20px;'>" . $nc2 . "</td>
-<td style='text-align:center;font-size:20px;'>" . $totalCost . "</td>
+<td style='text-align:center;font-size:20px;'>₱". $med1. ".00</td>
+<td style='text-align:center;font-size:20px;'>₱" . $med2 . ".00</td>
+<td style='text-align:center;font-size:20px;'>₱" . $med3 . ".00</td>
+<td style='text-align:center;font-size:20px;'>₱" . $med4 . ".00</td>
+<td style='text-align:center;font-size:20px;'>₱" . $nc2 . ".00</td>
+<td style='text-align:center;font-size:20px;'>₱" . $totalCost . ".00</td>
 </tr>";
 $info .= "      
             </tbody>
