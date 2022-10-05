@@ -677,10 +677,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 col-sm-12">
+            <div class="col-md-12 col-lg-6">
                 <label style="font-weight:600">Is Done?</label>
                 <div class="input-group">
-                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <div class="input-group-text"><i class="bi bi-question-circle-fill"></i></div>
                     <select name="med_first_done" id="med_first_done" class="form-control form-select">
                         <option value="Yes" {{ (isset($med_first_done) && $med_first_done == "Yes")? "selected":"" }} >Yes</option>
                         <option value="No" {{ (isset($med_first_done) && $med_first_done == "No")? "selected":"" }} >No</option>
@@ -781,10 +781,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 col-sm-12">
+            <div class="col-md-12 col-lg-6">
                 <label style="font-weight:600">Is Done?</label>
                 <div class="input-group">
-                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <div class="input-group-text"><i class="bi bi-question-circle-fill"></i></div>
                     <select name="med_second_done" id="med_second_done" class="form-control form-select">
                         <option value="Yes" {{ (isset($med_second_done) && $med_second_done == "Yes")? "selected":"" }} >Yes</option>
                         <option value="No" {{ (isset($med_second_done) && $med_second_done == "No")? "selected":"" }} >No</option>
@@ -885,10 +885,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 col-sm-12">
+            <div class="col-md-12 col-sm-12 col-lg-6">
                 <label style="font-weight:600">Is Done?</label>
                 <div class="input-group">
-                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <div class="input-group-text"><i class="bi bi-question-circle-fill"></i></div>
                     <select name="med_third_done" id="med_third_done" class="form-control form-select">
                         <option value="Yes" {{ (isset($med_third_done) && $med_third_done == "Yes")? "selected":"" }} >Yes</option>
                         <option value="No" {{ (isset($med_third_done) && $med_third_done == "No")? "selected":"" }} >No</option>
@@ -989,10 +989,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 col-sm-12">
+            <div class="col-md-12 col-sm-12 col-lg-6">
                 <label style="font-weight:600">Is Done?</label>
                 <div class="input-group">
-                    <div class="input-group-text"><i class="bi bi-option"></i></div>
+                    <div class="input-group-text"><i class="bi bi-question-circle-fill"></i></div>
                     <select name="med_fourth_done" id="med_fourth_done" class="form-control form-select">
                         <option value="Yes" {{ (isset($med_fourth_done) && $med_fourth_done == "Yes")? "selected":"" }} >Yes</option>
                         <option value="No" {{ (isset($med_fourth_done) && $med_fourth_done == "No")? "selected":"" }} >No</option>
