@@ -159,6 +159,14 @@ class Extras extends Model
         return count($result);
     }
 
+    public static function countApplicantRegistered()
+    {
+        $month = date("m");
+        $result = DB::select("SELECT applicant_id FROM applicants WHERE MONTH(`date_applied`) = $month");
+
+        return count($result);
+    }
+
     public static function countUpcomingMonthDeparture()
     {
         $result = DB::select("SELECT oec_flight_departure FROM applicants WHERE oec_flight_departure BETWEEN CURDATE() AND LAST_DAY(CURDATE())");

@@ -45,7 +45,7 @@ class HomeController extends Controller
     public function dashboard(){
     
         if(Auth::user()->user_type == "Admin"){
-        $data['applicantPending'] = Extras::countLackingApplicant();
+        $data['registeredApplicantMonth'] = Extras::countApplicantRegistered();
         $data['upcomingDeparture'] = Extras::countUpcomingMonthDeparture();
         $data['active_applicant'] = Extras::countActiveApplicant();
         $data['expired_applicant'] = Extras::countExpiredPassportAndVisa();
