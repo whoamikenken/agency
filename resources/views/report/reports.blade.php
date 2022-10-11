@@ -115,6 +115,19 @@
                             </div>
                         </div>
                     </a>
+                    <a href="#" class="list-group-item list-group-item-action printReport" tag="termination" report="Applicant Termination Report" aria-current="true">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Termination Report</h5>
+                                </div>
+                                <p class="mb-1">Print Applicant Termination</p>
+                            </div>
+                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
+                                <i class="bi bi-person-x"></i>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

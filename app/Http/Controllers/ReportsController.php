@@ -274,6 +274,40 @@ class ReportsController extends Controller
 
             // dd(DB::getQueryLog());
             return response()->view('report/lackingdocumentPDF', $data, 200)->header('Content-Type', 'application/pdf');
+        } elseif ($formFields['tag'] == "termination") {
+            foreach ($whereFilter as $key => $value) {
+                if ($value) {
+                    $where[] = array($key, '=', $value);
+                }
+            }
+
+            $data['dateof'] = "As of " . date("F j, Y");
+
+
+            $table = "applicants";
+
+            $data['edatalist']['applicant_id'] = Extras::showDesc('applicant_id');
+            $data['edatalist']['maid_ref'] = Extras::showDesc('passport_no');
+            $data['edatalist']['er_ref'] = Extras::showDesc('passport_validity');
+            $data['edatalist']['fullname'] = Extras::showDesc('fullname');
+            $data['edatalist']['jobsite'] = Extras::showDesc('jobsite');
+            $data['edatalist']['branch'] = Extras::showDesc('branch');
+    
+            if ($table) {
+                $data['result'] = DB::table($table)->where($where)->orderBy('jobsite', 'ASC')->orderBy('branch', 'ASC')->orderBy('lname', 'ASC')->get();
+            }
+
+            foreach ($data['result'] as $key => $value) {
+                if (isset($data['result'][$key]->sales_manager)) $data['result'][$key]->sales_manager = DB::table('users')->where('id', $value->sales_manager)->value('name');
+                if (isset($data['result'][$key]->jobsite)) $data['result'][$key]->jobsite = DB::table('jobsites')->where('code', $value->jobsite)->value('description');
+                if (isset($data['result'][$key]->passport_place_issued)) $data['result'][$key]->passport_place_issued = DB::table('countries')->where('code', $value->passport_place_issued)->value('description');
+                if (isset($data['result'][$key]->branch)) $data['result'][$key]->branch = DB::table('branches')->where('code', $value->branch)->value('description');
+                if (isset($data['result'][$key]->user_profile_face)) $data['result'][$key]->user_profile_face = Storage::disk('s3')->url($value->user_profile_face);
+                if (isset($data['result'][$key]->user_profile)) $data['result'][$key]->user_profile = Storage::disk('s3')->url($value->user_profile);
+            }
+
+            // dd($data);
+            return response()->view('report/masterlistPDF', $data, 200)->header('Content-Type', 'application/pdf');
         }
         
     }

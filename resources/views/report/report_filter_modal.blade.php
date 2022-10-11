@@ -1,3 +1,10 @@
+@php
+    $hidden = "";
+    if($tag == "termination"){
+        $hidden = "style=display:none";
+    }
+@endphp
+
 <form id="reportForm" class="row g-2" action="{{ url('report/generateReport') }}" method="POST" target="_blank">
     @csrf
     <input type="hidden" name="tag" id="tag" value="{{($tag)}}">
@@ -38,7 +45,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12" {{ $hidden }}>
         <label style="font-weight:600">Sales</label>
         <div class="input-group">
             <div class="input-group-text"><i class="bi bi-option"></i></div>
@@ -56,7 +63,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12" {{ $hidden }}>
         <label style="font-weight:600">Applicant</label>
         <div class="input-group">
             <div class="input-group-text"><i class="bi bi-option"></i></div>
@@ -102,7 +109,7 @@
             <select name="isactive" id="isactive" class="form-control form-select">
                 <option value="" >All</option>
                 <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
+                <option value="Inactive" {{($tag == "termination")? "selected":""}}>Terminated</option>
             </select>
             <div class="valid-feedback">
                 Looks good!
