@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('jobsite', 30)->nullable();
             $table->string('branch', 30)->nullable();
             $table->string('principal', 30)->nullable();
+            $table->string('applicant_type', 30)->nullable();
             $table->string('sales_manager', 30)->nullable();
             $table->string('fname', 30)->nullable();
             $table->string('mname', 30)->nullable();

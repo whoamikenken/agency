@@ -110,6 +110,8 @@ class Extras extends Model
             "cert_nc2_by_applicant" => "NCII By Applicant",
             "cert_nc2_payment_status" => "NCII Payment Status",
             "cert_nc2_cost" => "NCII Cost",
+            "cert_driver_license" => "Driver Lic.",
+            "cert_prc" => "PRC",
             "visa_number" => "VISA No",
             "visa_date_received" => "VISA Eeceive",
             "visa_date_expired" => "VISA Expiration",
@@ -124,7 +126,7 @@ class Extras extends Model
             "oec_date_expiration" => "OEC Expiration",
             "oec_flight_departure" => "OEC Departure",
             "user_profile_face" => "Face Photo",
-            "user_profile" => "Body Photo"
+            "user_profile" => "Body Photo",
         );
         
         return $return[$data];

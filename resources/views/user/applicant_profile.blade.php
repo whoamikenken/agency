@@ -99,6 +99,23 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-sm-12">
+                        <label style="font-weight:600">Applicant Type</label>
+                        <div class="input-group">
+                            <div class="input-group-text"><i class="bi bi-person-rolodex"></i></div>
+                            <select name="applicant_type" id="applicant_type" class="form-control form-select">
+                                <option value="Maid" {{ (isset($applicant_type) && $applicant_type == "Maid")? "selected":"" }} >Maid</option>
+                                <option value="Caregiver" {{ (isset($applicant_type) && $applicant_type == "Caregiver")? "selected":"" }} >Care Giver</option>
+                                <option value="Driver" {{ (isset($applicant_type) && $applicant_type == "Driver")? "selected":"" }} >Driver</option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
                         <label style="font-weight:600">First Name</label>
                         <div class="input-group">
                             <div class="input-group-text"><i class="bi bi-person"></i></div>
@@ -204,6 +221,23 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-sm-12">
+                        <label style="font-weight:600">Principal</label>
+                        <div class="input-group">
+                            <div class="input-group-text"><i class="bi bi-building"></i></div>
+                            <select name="principal" id="principal" class="form-control form-select">
+                                @foreach ($principal_select as $item)
+                                <option value="{{$item->code}}" {{ (isset($principal) && $principal == $item->code)? "selected":"" }} >{{$item->description}}</option>
+                                @endforeach
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
                         <label style="font-weight:600">Last Name</label>
                         <div class="input-group">
                             <div class="input-group-text"><i class="bi bi-person"></i></div>
@@ -238,23 +272,6 @@
                             <select name="isactive" id="isactive" class="form-control form-select">
                                 <option value="Active" {{ (isset($isactive) && $isactive == "Active")? "selected":"" }} >Active</option>
                                 <option value="Inactive" {{ (isset($isactive) && $isactive == "Inactive")? "selected":"" }} >Terminated</option>
-                            </select>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Principal</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-building"></i></div>
-                            <select name="principal" id="principal" class="form-control form-select">
-                                @foreach ($principal_select as $item)
-                                <option value="{{$item->code}}" {{ (isset($principal) && $principal == $item->code)? "selected":"" }} >{{$item->description}}</option>
-                                @endforeach
                             </select>
                             <div class="valid-feedback">
                                 Looks good!
