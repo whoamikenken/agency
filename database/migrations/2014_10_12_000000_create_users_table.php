@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('fname');
             $table->string('lname');
+            $table->string('gender')->nullable();
             $table->string('user_type');
             $table->string('branch')->nullable();
             $table->string('status')->default('unverified');

@@ -231,4 +231,37 @@ class Extras extends Model
 
         return $result;
     }
+
+    public static function getBioStatusDesc()
+    {
+        $result = DB::select("SELECT bio_status FROM applicants GROUP BY bio_status");
+
+        return $result;
+    }
+
+    public static function getMenusList()
+    {
+        $result = DB::table('menus')->where('root',"=", 0)->where('status', "=", "show")->get();
+        return $result;
+    }
+
+    public static function getSubMenus($rootMenu = null)
+    {
+        $result = DB::table('menus')->where('root', "=", $rootMenu)->where('status', "=", "show")->get();
+        return $result;
+    }
+
+    public static function getApplicantCountWithBioStatus($bio_status = null)
+    {
+        $result = DB::select("SELECT visa_date_expired, passport_validity FROM applicants WHERE bio_status = '$bio_status' AND isactive = 'Active'");
+
+        return count($result);
+    }
+
+    public static function getTopPerformingSales()
+    {
+        $result = DB::select("SELECT users.*, (SELECT COUNT(*) FROM applicants  WHERE MONTH(oec_flight_departure) = '10' AND YEAR(oec_flight_departure) = YEAR(CURDATE()) AND isactive = 'Active' AND sales_manager = a.id ) AS counter FROM users a WHERE a.`user_type` = 'Sales' ORDER BY counter DESC");
+
+        return $result;
+    }
 }

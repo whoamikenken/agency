@@ -128,6 +128,7 @@ Route::get('/dashboard/getDepartureMontly', [HomeController::class, 'departureMo
 Route::get('/dashboard/getPerformanceMontly', [HomeController::class, 'performanceMontlyBarChart'])->withoutMiddleware([VerifyCsrfToken::class])->middleware('auth');
 Route::get('/dashboard/getPerformanceBranchMontly', [HomeController::class, 'branchMontlyBarChart'])->withoutMiddleware([VerifyCsrfToken::class])->middleware('auth');
 Route::get('/dashboard/getBranchPie', [HomeController::class, 'branchPieApplicant'])->withoutMiddleware([VerifyCsrfToken::class])->middleware('auth');
+Route::get('/dashboard/getBiostatusPie', [HomeController::class, 'biostatusPieApplicant'])->withoutMiddleware([VerifyCsrfToken::class])->middleware('auth');
 
 // APPLICANT
 Route::post('/applicant/list', [ApplicantController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);

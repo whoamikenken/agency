@@ -34,7 +34,7 @@ class ApplicantFactory extends Factory
             'mname' => fake()->lastName($gender),
             'contact' => fake()->e164PhoneNumber(),
             'branch' => fake()->randomElement(['001', '002', '005','004','003','006', '007']),
-            'sales_manager' => fake()->randomElement(['1', '2', '5', '4']),
+            'sales_manager' => fake()->randomElement(['5', '6', '7','8', '9', '10','11','12','13', '14']),
             'jobsite' => fake()->randomElement(['MY', 'HK']),
             'address' => fake()->streetAddress()." ". fake()->cityPrefix(),
             'family_contact_name' => fake()->firstName($gender)." ". fake()->lastName($gender),

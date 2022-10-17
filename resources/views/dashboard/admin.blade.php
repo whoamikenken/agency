@@ -81,7 +81,7 @@
 </div>
 
 <div class="row animate__animated animate__fadeInRight">
-    <div class="col-sm-12 col-md-12 col-lg-8">
+    <div class="col-sm-12 col-md-12 col-xl-8">
         <div class="card mb-4">
             <div class="card-header bg-info">
                 <i class="bi bi-bar-chart-line-fill me-1"></i>
@@ -91,7 +91,7 @@
         </div>
     </div>
 
-    <div class="col-sm-12 col-md-12 col-lg-4">
+    <div class="col-sm-12 col-md-12 col-xl-4">
         <div class="card mb-4">
             <div class="card-header bg-info">
                 <i class="bi bi-bar-chart-line-fill me-1"></i>
@@ -103,7 +103,7 @@
 </div>
 
 <div class="row animate__animated animate__fadeInRight">
-    <div class="col-sm-12 col-lg-8">
+    <div class="col-sm-12 col-md-12 col-xl-8">
         <div class="card mb-4">
             <div class="card-header bg-info">
                 <i class="bi bi-bar-chart-line-fill me-1"></i>
@@ -112,7 +112,7 @@
             <div class="card-body"><canvas id="branchBarChart" width="100%" height="47"></canvas></div>
         </div>
     </div>
-    <div class="col-sm-12 col-md-12 col-lg-4 animate__animated animate__backInRight">
+    <div class="col-sm-12 col-md-12 col-xl-4 animate__animated animate__backInRight">
         <div class="card mb-4">
             <div class="card-header bg-info">
                 <i class="bi bi-pie-chart-fill me-1"></i>
@@ -127,10 +127,51 @@
     <div class="col-sm-12">
         <div class="card mb-4">
             <div class="card-header bg-info">
-                <i class="bi bi-bar-chart-line-fill me-1"></i>
-                Branch Performance
+                <i class="bi bi-award-fill me-1"></i>
+                Top Performing Sales Of  {{ date("F")}}
             </div>
-            <div class="card-body"><canvas id="branchBarChart" width="100%" height="47"></canvas></div>
+            <div class="card-body">
+                <div class="row animate__animated animate__fadeInUp">
+                    @unless (count($top_sales) == 0)
+                    @php
+                        $counter = 1;
+                    @endphp
+                    @foreach ($top_sales as $item)
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="card mb-3 shadow" >
+                                <div class="row g-0">
+                                    <div class="col-4">
+                                        @if ($item->user_image)
+                                            <img src="{{  Storage::disk('s3')->url($item->user_image)}}" class="img-fluid user_photo_list rounded animate__animated animate__fadeIn animate__delay-1s m-2" alt="..." style="height: -webkit-fill-available;">
+                                        @else
+                                            @if ($item->gender == "male")
+                                                <img src="{{ asset('images/male_sales.png')}}" class="img-fluid user_photo_list rounded animate__animated animate__fadeIn animate__delay-1s" alt="...">
+                                            @elseif ($item->gender == "female")
+                                                <img src="{{ asset('images/female_sales.png')}}" class="img-fluid user_photo_list rounded animate__animated animate__fadeIn animate__delay-1s" alt="...">
+                                            @else
+                                                <img src="{{ asset('images/user.png')}}" class="img-fluid user_photo_list rounded animate__animated animate__fadeIn animate__delay-1s" alt="..."> 
+                                            @endif
+                                        @endif
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{$item->fname." ".$item->lname}} <span class="float-end">{{$counter}}</span></h5>
+                                            Branch: {{$item->branch}}<br>
+                                            Applicant Processed: {{$item->total_sales}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @php
+                            $counter++;
+                        @endphp
+                    @endforeach
+                @else
+                        <h2 class="text-center">No Applicant</h2>
+                @endunless
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -142,9 +183,54 @@ let delayed;
     $(document).ready(function () {
         // getDeparturePerMonth();
         getBranchApplicant();
+        getBioStatusApplicant();
         getPerformancePerMonth();
         getBranchPerformancePerMonth();
     });
+
+    function getBioStatusApplicant(){
+        $.ajax({
+            type: "GET",
+            url: "{{ url('dashboard/getBiostatusPie')}}",
+            data: {},
+            dataType: "json",
+            success:function(response){
+
+                const config = {
+                    type: 'pie',
+                    data: {
+                        labels: JSON.parse(response.label),
+                        datasets: [{
+                        label: "Bio Status",
+                        backgroundColor: [
+                        'rgb(0, 255, 25)',
+                        'rgb(255, 0, 21)',
+                        'rgb(0, 153, 255)'
+                        ],
+                        data: JSON.parse(response.data),
+                        }],
+                    },
+                    options: {
+                    responsive: true,
+                    plugins: {
+                      legend: {
+                        position: 'top',
+                      },
+                      title: {
+                        display: true,
+                        text: 'Bio Status'
+                      }
+                    }
+                  }
+                };
+
+                const myChart = new Chart(
+                    document.getElementById('myBioChart'),
+                    config
+                );
+            }
+        });
+    }
 
     function getBranchApplicant(){
         $.ajax({

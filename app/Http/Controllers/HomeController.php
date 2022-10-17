@@ -49,9 +49,13 @@ class HomeController extends Controller
         $data['upcomingDeparture'] = Extras::countUpcomingMonthDeparture();
         $data['active_applicant'] = Extras::countActiveApplicant();
         $data['expired_applicant'] = Extras::countExpiredPassportAndVisa();
-            
-        // dd($data);
-            return view('dashboard/admin', $data);
+        $data['top_sales'] = DB::table('users')->select("*", DB::raw('(SELECT COUNT(*) FROM applicants  WHERE MONTH(oec_flight_departure) = "10" AND YEAR(oec_flight_departure) = YEAR(CURDATE()) AND isactive = "Active" AND sales_manager = users.id) as total_sales'))->where("user_type", "=", 'Sales')->orderBy("total_sales", "desc")->paginate(8);
+        
+        foreach ($data['top_sales'] as $key => $value) {
+            $data['top_sales'][$key]->branch = DB::table('branches')->where('code', $value->branch)->value('description');
+        }
+
+        return view('dashboard/admin', $data);
         }else{
 
         }
@@ -218,6 +222,33 @@ class HomeController extends Controller
             }
 
             $label = $label . '"' . $value->description . '",';
+        }
+
+        $data = substr($data, 0, -1);
+        $data = $data . "]";
+        $label = substr($label, 0, -1);
+        $label = $label . "]";
+        $return['data'] = $data;
+        $return['label'] = $label;
+        echo json_encode($return);
+    }
+
+    public function biostatusPieApplicant()
+    {
+        $bioStatus = Extras::getBioStatusDesc();
+
+        $data = "[";
+        $label = "[";
+        foreach ($bioStatus as $key => $value) {
+
+            $val = Extras::getApplicantCountWithBioStatus($value->bio_status);
+            if ($val != 0) {
+                $data = $data . $val . ",";
+            } else {
+                $data = $data . "0,";
+            }
+
+            $label = $label . '"' . $value->bio_status . ': '. $val.'",';
         }
 
         $data = substr($data, 0, -1);
