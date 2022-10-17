@@ -195,10 +195,40 @@ class Extras extends Model
         return count($result);
     }
 
+    public static function getJobOrderMonth($month = null)
+    {
+        $result = DB::select("SELECT visa_date_expired, passport_validity,jo_received FROM applicants WHERE MONTH(jo_received) = $month AND YEAR(jo_received) = YEAR(CURDATE()) AND isactive = 'Active'");
+
+        return count($result);
+    }
+
+    public static function getApplicantRegistered($month = null)
+    {
+        $result = DB::select("SELECT visa_date_expired, passport_validity,date_applied FROM applicants WHERE MONTH(date_applied) = $month AND YEAR(date_applied) = YEAR(CURDATE()) AND isactive = 'Active'");
+
+        return count($result);
+    }
+
     public static function getApplicantInBranch($branch = null)
     {
         $result = DB::select("SELECT visa_date_expired, passport_validity,oec_flight_departure FROM applicants WHERE branch = '$branch' AND isactive = 'Active'");
 
         return count($result);
+    }
+
+    public static function getBranchDeployedMonth($month = null, $branch = null)
+    {
+        $result = DB::select("SELECT * FROM applicants WHERE branch = '$branch' AND MONTH(oec_flight_departure) = $month AND YEAR(oec_flight_departure) = YEAR(CURDATE()) AND isactive = 'Active'");
+
+        return count($result);
+    }
+
+    public static function getBranchList($branch = null)
+    {   
+        $wh = "WHERE 1";
+        if($branch) $wh .= " AND code = '$branch'"; 
+        $result = DB::select("SELECT * FROM branches $wh");
+
+        return $result;
     }
 }

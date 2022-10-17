@@ -12,7 +12,7 @@
         border-left: 0.25rem solid #18ff5d!important;
     }
 </style>
-<div class="row">
+<div class="row animate__animated animate__backInRight">
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
@@ -80,20 +80,42 @@
     </div>  
 </div>
 
-<div class="row">
-    <div class="col-sm-12 col-md-8">
+<div class="row animate__animated animate__fadeInRight">
+    <div class="col-sm-12 col-md-12 col-lg-8">
         <div class="card mb-4">
             <div class="card-header bg-info">
-                <i class="bi bi-bar-chart me-1"></i>
-                Total Departure Per Month
+                <i class="bi bi-bar-chart-line-fill me-1"></i>
+                Performance Report
             </div>
             <div class="card-body"><canvas id="myBarChart" width="100%" height="47"></canvas></div>
         </div>
     </div>
-    <div class="col-sm-12 col-md-4">
+
+    <div class="col-sm-12 col-md-12 col-lg-4">
         <div class="card mb-4">
             <div class="card-header bg-info">
-                <i class="bi bi-bar-chart me-1"></i>
+                <i class="bi bi-bar-chart-line-fill me-1"></i>
+                Bio Status
+            </div>
+            <div class="card-body"><canvas id="myBioChart" width="100%" height="47"></canvas></div>
+        </div>
+    </div>
+</div>
+
+<div class="row animate__animated animate__fadeInRight">
+    <div class="col-sm-12 col-lg-8">
+        <div class="card mb-4">
+            <div class="card-header bg-info">
+                <i class="bi bi-bar-chart-line-fill me-1"></i>
+                Branch Performance
+            </div>
+            <div class="card-body"><canvas id="branchBarChart" width="100%" height="47"></canvas></div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-4 animate__animated animate__backInRight">
+        <div class="card mb-4">
+            <div class="card-header bg-info">
+                <i class="bi bi-pie-chart-fill me-1"></i>
                 Branches Applicants
             </div>
             <div class="card-body"><canvas id="pieChartBranch" width="100%" height="40"></canvas></div>
@@ -101,13 +123,27 @@
     </div>
 </div>
 
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script> --}}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card mb-4">
+            <div class="card-header bg-info">
+                <i class="bi bi-bar-chart-line-fill me-1"></i>
+                Branch Performance
+            </div>
+            <div class="card-body"><canvas id="branchBarChart" width="100%" height="47"></canvas></div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 <script>
+let delayed;
 
     $(document).ready(function () {
-        getDeparturePerMonth();
+        // getDeparturePerMonth();
         getBranchApplicant();
+        getPerformancePerMonth();
+        getBranchPerformancePerMonth();
     });
 
     function getBranchApplicant(){
@@ -131,7 +167,7 @@
                         'rgb(21, 0, 255)',
                         'rgb(0, 153, 255)',
                         'rgb(0, 255, 25)',
-                        'rgb(204, 255, 0)'
+                        'rgb(234, 255, 5)'
                         ],
                         data: JSON.parse(response.data),
                         }],
@@ -205,6 +241,85 @@
                 };
 
                 const myChart = new Chart(
+                    document.getElementById('branchBarChart'),
+                    config
+                );
+
+            }
+        });
+    }
+
+    function getPerformancePerMonth(){
+        $.ajax({
+            type: "GET",
+            url: "{{ url('dashboard/getPerformanceMontly')}}",
+            data: {},
+            dataType: "json",
+            success:function(response){
+                
+                const config = {
+                    type: 'bar',
+                    data: {
+                        labels: JSON.parse(response.month),
+                        datasets: [
+                            {
+                            label: "Departure",
+                            backgroundColor: "rgb(0, 255, 25)",
+                            borderColor: "rgb(214, 252, 0)",
+                            data: JSON.parse(response.departure.data),
+                            borderRadius: 5,
+                            borderWidth: 2,
+                            },
+                            {
+                            label: "Job Order",
+                            backgroundColor: "rgba(2,117,216,1)",
+                            borderColor: "rgb(0, 0, 0)",
+                            data: JSON.parse(response.joborder.data),
+                            borderRadius: 5,
+                            borderWidth: 2,
+                            },  
+                            {
+                            label: "Applicant Registered",
+                            backgroundColor: "rgb(54, 185, 204)",
+                            borderColor: "rgb(23, 79, 86)",
+                            data: JSON.parse(response.applicant.data),
+                            borderRadius: 5,
+                            borderWidth: 2,
+                            },
+                        ],
+                    },
+                    options: {
+                        animation: {
+                            onComplete: () => {
+                                delayed = true;
+                            },
+                            delay: (context) => {
+                                let delay = 0;
+                                if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                                delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                                }
+                                return delay;
+                            },
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Performance Chart'
+                            },
+                        },
+                        responsive: true,
+                        scales: {
+                            x: {
+                                // stacked: true,
+                            },
+                            y: {
+                                // stacked: true
+                            }
+                        }
+                    },
+                };
+
+                const myChart = new Chart(
                     document.getElementById('myBarChart'),
                     config
                 );
@@ -212,4 +327,62 @@
             }
         });
     }
+
+    function getBranchPerformancePerMonth(){
+        $.ajax({
+            type: "GET",
+            url: "{{ url('dashboard/getPerformanceBranchMontly')}}",
+            data: {},
+            dataType: "json",
+            success:function(response){
+                const config = {
+                    type: 'bar',
+                    data: {
+                        labels: JSON.parse(response.month),
+                        datasets: 
+                                response.dataset
+                        
+                        ,
+                    },
+                    options: {
+                        animation: {
+                            onComplete: () => {
+                                delayed = true;
+                            },
+                            delay: (context) => {
+                                let delay = 0;
+                                if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                                delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                                }
+                                return delay;
+                            },
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Deployed Applicant Per Branch'
+                            },
+                        },
+                        responsive: true,
+                        scales: {
+                            x: {
+                                // stacked: true,
+                            },
+                            y: {
+                                // stacked: true
+                            }
+                        }
+                    },
+                };
+
+                const myChart = new Chart(
+                    document.getElementById('branchBarChart'),
+                    config
+                );
+
+            }
+        });
+    }
+
+
 </script>

@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\DiplomaController;
 use App\Http\Controllers\JobsiteController;
 use App\Http\Controllers\MedicalController;
@@ -124,6 +125,8 @@ Route::post('/login/register', [UserController::class, 'register']);
 Route::get('/dashboard', [HomeController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/getDashboard', [HomeController::class, 'dashboard'])->withoutMiddleware([VerifyCsrfToken::class])->middleware('auth');
 Route::get('/dashboard/getDepartureMontly', [HomeController::class, 'departureMontlyBarChart'])->withoutMiddleware([VerifyCsrfToken::class])->middleware('auth');
+Route::get('/dashboard/getPerformanceMontly', [HomeController::class, 'performanceMontlyBarChart'])->withoutMiddleware([VerifyCsrfToken::class])->middleware('auth');
+Route::get('/dashboard/getPerformanceBranchMontly', [HomeController::class, 'branchMontlyBarChart'])->withoutMiddleware([VerifyCsrfToken::class])->middleware('auth');
 Route::get('/dashboard/getBranchPie', [HomeController::class, 'branchPieApplicant'])->withoutMiddleware([VerifyCsrfToken::class])->middleware('auth');
 
 // APPLICANT
@@ -148,6 +151,12 @@ Route::post('/diploma/table', [DiplomaController::class, 'getTable'])->withoutMi
 Route::post('/diploma/getModal', [DiplomaController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/diploma/add', [DiplomaController::class, 'store']);
 Route::post('/diploma/delete', [DiplomaController::class, 'delete']);
+
+// Certificate
+Route::post('/certificate/table', [CertificateController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/certificate/getModal', [CertificateController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/certificate/add', [CertificateController::class, 'store']);
+Route::post('/certificate/delete', [CertificateController::class, 'delete']);
 
 Route::get('/credits', function(){
     echo "Created by kennedy hipolito<br>";

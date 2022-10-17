@@ -70,7 +70,6 @@ $info .= "
             foreach ($edatalist as $key => $value) {
                 $info .= "<th style='padding: 5px;text-align: center;font-size: 20px;font-weight: bold;'>". $value."</th>";
             }
-            $info .= "<th style='padding: 5px;text-align: center;font-size: 20px;font-weight: bold;'>Days Until Departure</th>";
 $info .= "</thead>";
 $info .= "<tbody>";
 if(count($result) > 0 ){
@@ -87,17 +86,6 @@ if(count($result) > 0 ){
                             $info .= "<td style='padding: 2px;text-align: center;font-size: 13px;'>" . $value->{$row}. "</td>";
                         }
                     }
-        $date1 = new DateTime($value->oec_flight_departure);
-        $date2 = new DateTime(date("Y-m-d"));
-        $interval = $date1->diff($date2);
-        if($value->oec_flight_departure > date("Y-m-d")){
-            $desc = $interval->days;
-        }else{
-            $desc = "Already Left";
-        }
-        // $interval->days;
-        $info .= "<td style='padding: 2px;text-align: center;font-size: 13px;'>" . $desc . "</td>";  
-
         $info .= "</tr>";
         }
 }else{

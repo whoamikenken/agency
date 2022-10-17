@@ -119,7 +119,7 @@
             </div>
         </div>
     </div>
-    @if ($tag == "hrreport")
+    @if ($tag == "hrreport" || $tag == "infosheet")
     <hr class="mt-4">
     <br>
     <h4 class="text-center p-1">Select Data</h4>
@@ -127,7 +127,7 @@
     echo $showColumn;
     @endphp
     <input type="hidden" name="edatalist" id="edatalist">
-    @elseif ($tag == "departure")
+    @elseif ($tag == "departure" || $tag == "deployment")
     <div class="col-md-12 col-sm-12 col-lg-6">
         <label style="font-weight:600">From</label>
         <div class="input-group">
@@ -193,7 +193,7 @@
     });
     
     $("#saveModal").unbind("click").click(function(){
-        if($("#tag").val() == "hrreport"){
+        if($("#tag").val() == "hrreport" || $("#tag").val() == "infosheet"){
             var edata = $("input[name=edata]:checked").map(function () {return this.value;}).get().join(","); 
             var input = document.createElement("input");
             $("#edatalist").val(edata);
@@ -204,7 +204,7 @@
                 Swal.fire({
                     icon: 'info',
                     title: "Please Select An Applicant",
-                    text: "Please contact developer."
+                    // text: "Please contact developer."
                 })
                 return false;
             }

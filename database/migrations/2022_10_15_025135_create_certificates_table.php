@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('branches', function (Blueprint $table) {
+        Schema::create('certificates', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 20)->nullable()->default('NULL');
-            $table->string('description', 100)->nullable()->default('NULL');
-            $table->string('color', 100)->nullable()->default('NULL');
+            $table->string('applicant_id', 30)->nullable();
+            $table->string('description', 50)->nullable();
+            $table->text('certificate')->nullable();
             $table->timestamp('updated_at')->nullable()->useCurrent();
-            $table->string('modified_by', 50)->nullable()->default('NULL');
+            $table->string('modified_by', 30)->nullable();
             $table->timestamp('created_at')->nullable()->useCurrent();
-            $table->string('created_by', 50)->nullable()->default('NULL');
+            $table->string('created_by', 30)->nullable();
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('branches');
+        Schema::dropIfExists('certificates');
     }
 };

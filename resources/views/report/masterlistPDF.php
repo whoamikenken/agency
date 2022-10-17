@@ -68,7 +68,7 @@ $info .= "
             <tr style='background-color: black;'>
             ";
             foreach ($edatalist as $key => $value) {
-                $info .= "<th style='padding: 5px;text-align: center;font-size: 20px;font-weight: bold;'>". $value."</th>";
+                $info .= "<th style='padding: 5px;text-align: center;font-size: 15;font-weight: bold;'>". $value."</th>";
             }
 $info .= "</thead>";
 $info .= "<tbody>";

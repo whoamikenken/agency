@@ -160,7 +160,7 @@
                     <div class="col-md-12 col-sm-12">
                         <label style="font-weight:600">Total Cost</label>
                         <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-geo-alt"></i></div>
+                            <div class="input-group-text"><i class="bi bi-receipt"></i></div>
                             <input type="number" id="total_cost" name="total_cost" class="form-control validate" placeholder="Enter total_cost" value="{{ $total_cost }}" readonly>
                             <div class="valid-feedback">
                                 Looks good!

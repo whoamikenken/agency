@@ -113,7 +113,10 @@
                     @endif
                 </div>
             </div>
-            <h5 class="text-center mt-2">Diplomas</h5>
+            <div class="progress mt-4">
+                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <h2 class="text-center mt-2 fw-bold text-dark">Diplomas</h2>
             <hr>
             <div class="row mt-2">
                 <div class="col-sm-12">
@@ -122,6 +125,21 @@
             </div>
             <div class="row">
                 <div class="table-responsive" id="diplomaTable">
+                    
+                </div>
+            </div>
+            <div class="progress mt-4">
+                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <h2 class="text-center mt-2 fw-bold text-dark">Training Certificates</h2>
+            <hr>
+            <div class="row mt-2">
+                <div class="col-sm-12">
+                    <a href="javascript:void(0);" class="btn btn-primary mb-2 addbtnCertificate"><i class="bi bi-plus-circle"></i> Add Certificate</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="table-responsive" id="certificateTable">
                     
                 </div>
             </div>
@@ -310,6 +328,7 @@
     $(document).ready(function () {
         
         diplomaList();
+        certificateList();
 
         $('.datepicker').datepicker({
             format: 'yyyy-mm-dd'
@@ -327,6 +346,132 @@
             saveSingleProfileColumn($(this));
         }else return;   
     });
+
+    function certificateList(page = 1){
+        $.ajax({
+            type: "POST",
+            url: "{{ url('certificate/table')}}",
+            data: {applicant_id:$("#uid").val(), page:page},
+            async: false,
+            success:function(response){
+                $("#certificateTable").html(response);
+            }
+        });
+    }
+
+    $(".addbtnCertificate").click(function() {
+        var uid = "add";
+        $.ajax({
+            type: "POST",
+            url: "{{ url('certificate/getModal')}}",
+            data: {
+                uid: uid
+            },
+            success: function(response) {
+                $("#modal-view").modal('toggle');
+                $("#modal-view").find(".modal-title").text("Add Certificate");
+                $("#modal-view").find("#modal-display").html(response);
+            }
+        });
+    });
+
+    $(document).on("click","#paginationCertificate a",function(){
+        //get url and make final url for ajax 
+        var url=$(this).attr("href");
+        var mystr = url.split("=");
+        certificateList(mystr[1]);
+        return false;
+    })
+
+    $("#certificateTable").on("click", ".editbtn", function() {
+        var uid = $(this).attr('id');
+        $.ajax({
+            type: "POST",
+            url: "{{ url('certificate/getModal')}}",
+            data: {
+                uid: uid
+            },
+            success: function(response) {
+                $("#modal-view").modal('toggle');
+                $("#modal-view").find(".modal-title").text("Edit Certificate");
+                $("#modal-view").find("#modal-display").html(response);
+            }
+        });
+    });
+
+    $("#certificateTable").on("click", ".delbtn", function() {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, proceed!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+
+                var code = $(this).attr('id');
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('certificate/delete')}}",
+                    dataType: 'json',
+                    data: {
+                        code: code,
+                        '_token': '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.status == 1) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: response.title,
+                                text: response.msg,
+                                timer: 2500
+                            })
+
+                            certificateList();
+                        }else if (response.status == 2) {
+                            Swal.fire({
+                                icon: 'info',
+                                title: response.title,
+                                text: response.msg
+                            })
+                        }else if (response.status == 0) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: response.title,
+                                text: response.msg
+                            })
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: "System Error",
+                                text: "Please contact developer."
+                            })
+                        }
+                    }
+                });
+
+            } else if (
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Data is safe.',
+                    'error'
+                )
+            }
+        })
+    });
+
 
     function diplomaList(page = 1){
         $.ajax({

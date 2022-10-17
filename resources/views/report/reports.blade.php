@@ -128,6 +128,45 @@
                             </div>
                         </div>
                     </a>
+                    <a href="#" class="list-group-item list-group-item-action printReport" tag="deployment" report="Applicant Deployment Report" aria-current="true">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Deployment Report</h5>
+                                </div>
+                                <p class="mb-1">Print Applicant Deployment</p>
+                            </div>
+                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
+                                <i class="bi bi-person-check"></i>  
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action printReport" tag="joborder" report="Job Order Status Report" aria-current="true">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Job Order Status Report</h5>
+                                </div>
+                                <p class="mb-1">Print Job Order Status</p>
+                            </div>
+                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
+                                <i class="bi bi-person-badge"></i>  
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action printReport" tag="biodata" report="Biodata Report" aria-current="true">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Biodata Report</h5>
+                                </div>
+                                <p class="mb-1">Print Biodata Report</p>
+                            </div>
+                            <div class="col-sm-12 col-md-6 text-end d-sm-none d-md-block fs-2">
+                                <i class="bi bi-folder-symlink"></i>  
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

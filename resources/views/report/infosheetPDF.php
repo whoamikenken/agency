@@ -5,7 +5,8 @@ use App\Models\Extras;
 $pdf = new \Mpdf\Mpdf(array('mode' => 'utf-8', 'format' => 'LETTER', 'orientation' => 'P'));
 $pdf->SetTitle($reportName);
 $pdf->SetMargins(0, 0, 8);
-// $pdf->SetProtection(array('print', 'copy'), "KMSI", "KMSIOWN"); 
+// $pdf->SetProtection(array('print', 'copy'), "KMSI", "KMSIOWN");
+
 
 extract((array) $result[0]);
 
@@ -99,7 +100,10 @@ $info .= "
 						<td valign='middle' style='padding: 0;text-align: center;'><span style='font-size: 13px;' width='75%'><strong>Infosheet</strong></span></td>
 					</tr>
 				</table>
-			</div>
+			</div>";
+
+if(in_array("GI", $edatalist)){
+$info .= "
 			<div class='content' style='margin-top:.4cm;'>
 				<table  style='background-color: black;'>
 					<tr>
@@ -151,9 +155,11 @@ $info .= "
 					<td align='right'><img src='" . $user_profile_face . "' height='155px' width='140px' style='border: 1px solid #a1a1a1;margin-top:1px' /></td>
 					</tr>
 				</table>
-			</div>
+			</div>";
+}
 
-			<div class='content' style='margin-top:.4cm;'>
+if (in_array("AI", $edatalist)) {
+$info .= "	<div class='content' style='margin-top:.4cm;'>
 				<table width='100%' style='background-color: black;'>
 					<tr>
 						<td>
@@ -187,9 +193,10 @@ $info .= "
 						</td>
 					</tr>
 				</table>
-			</div>
-
-			<div class='content' style='margin-top:.4cm;'>
+			</div>";
+}
+if (in_array("BS", $edatalist)) {
+$info .= "	<div class='content' style='margin-top:.4cm;'>
 				<table width='100%' style='background-color: black;'>
 					<tr>
 						<td>
@@ -206,16 +213,15 @@ $info .= "
 									<td width='25%' style='font-size: 15px;'>" . $bio_status . "</td>
 									<td width='25%' style='font-size: 15px;color:black;'><b>Availability:</b></td>
 									<td width='25%' style='font-size: 15px;'>" . $bio_availability . "</td>
-								</tr>";
-
-						$info .= "
+								</tr>
 							</table>
 						</td>
 					</tr>
 				</table>
-			</div>
-			
-			<div class='content' style='margin-top:.4cm;'>
+			</div>";
+}
+if (in_array("PI", $edatalist)) {
+$info .= "	<div class='content' style='margin-top:.4cm;'>
 				<table width='100%' style='background-color: black;'>
 					<tr>
 						<td>
@@ -234,24 +240,15 @@ $info .= "
 									<td width='10%'></td>
 									<td width='20%' style='font-size: 15px;color:black;'><b>Expiration:</b></td>
 									<td width='20%' style='font-size: 15px;'>" . $passport_validity . "</td>
-								</tr>";
-								// if($passport != ""){
-								// $info .= "
-								// <tr>
-								// 	<td width='20%' style='font-size: 15px;color:black;'><b>Passport File:</b></td>
-								// 	<td width='20%' style='font-size: 15px;'>
-								// 	<a class='btn btn-primary' target='_blank' href='". $passport."'>View</a>
-								// 	</td>
-								// </tr>";
-								// }
-							$info .= "
+								</tr>
 							</table>
 						</td>
 					</tr>
 				</table>
-			</div>
-
-			<div class='content' style='margin-top:.4cm;'>
+			</div>";
+}
+if (in_array("VR", $edatalist)) {
+$info .= "	<div class='content' style='margin-top:.4cm;'>
 				<table width='100%' style='background-color: black;'>
 					<tr>
 						<td>
@@ -294,9 +291,10 @@ $info .= "
 						</td>
 					</tr>
 				</table>
-			</div>
-		
-			<div class='content' style='margin-top:.4cm;'>
+			</div>";
+}
+if (in_array("MR", $edatalist)) {
+$info .= "	<div class='content' style='margin-top:.4cm;'>
 				<table width='100%' style='background-color: black;'>
 					<tr>
 						<td>
@@ -390,9 +388,11 @@ $info .= "
 						</td>
 					</tr>
 				</table>
-			</div>
-			
-			<div class='content' style='margin-top:.4cm;'>
+			</div>";
+}
+
+if (in_array("JO", $edatalist)) {
+$info .= "	<div class='content' style='margin-top:.4cm;'>
 				<table width='100%' style='background-color: black;'>
 					<tr>
 						<td>
@@ -414,9 +414,10 @@ $info .= "
 						</td>
 					</tr>
 				</table>
-			</div>
-
-			<div class='content' style='margin-top:.4cm;'>
+			</div>";
+}
+if (in_array("VI", $edatalist)) {
+$info .= "	<div class='content' style='margin-top:.4cm;'>
 				<table width='100%' style='background-color: black;'>
 					<tr>
 						<td>
@@ -449,9 +450,10 @@ $info .= "
 						</td>
 					</tr>
 				</table>
-			</div>
-			
-			<div class='content' style='margin-top:.4cm;'>
+			</div>";
+}
+if (in_array("CR", $edatalist)) {
+$info .= "	<div class='content' style='margin-top:.4cm;'>
 				<table width='100%' style='background-color: black;'>
 					<tr>
 						<td>
@@ -521,10 +523,10 @@ $info .= "
 						</td>
 					</tr>
 				</table>
-			</div>
-			
-			
-			<div class='content' style='margin-top:.4cm;'>
+			</div>";
+}
+if (in_array("SD", $edatalist)) {
+$info .= "	<div class='content' style='margin-top:.4cm;'>
 				<table width='100%' style='background-color: black;'>
 					<tr>
 						<td>
@@ -567,9 +569,10 @@ $info .= "
 						</td>
 					</tr>
 				</table>
-			</div>
-			
-			<div class='content' style='margin-top:.4cm;'>
+			</div>";
+}
+if (in_array("OEC", $edatalist)) {
+$info .= "	<div class='content' style='margin-top:.4cm;'>
 				<table width='100%' style='background-color: black;'>
 					<tr>
 						<td>
@@ -613,7 +616,7 @@ $info .= "
 					</tr>
 				</table>
 			</div>";
-
+}
 // echo $info; die;
 $pdf->WriteHTML($info);
 

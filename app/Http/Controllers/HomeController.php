@@ -93,6 +93,115 @@ class HomeController extends Controller
         echo json_encode($return);
     }
 
+    public function performanceMontlyBarChart()
+    {
+        $start    = (new DateTime(date("Y-") . "01-01"))->modify('first day of this month');
+        $end      = (new DateTime(date("Y-") . "12-31"))->modify('first day of next month');
+        $interval = DateInterval::createFromDateString('1 month');
+        $period   = new DatePeriod($start, $interval, $end);
+
+        $highest = 0;
+        $dataDeparture = $dataJo = $dataApplicant = "[";
+        $month = "[";
+        foreach ($period as $dt) {
+
+            // Departure
+            $valDept = Extras::getDepartureMonth($dt->format("m"));
+            if ($valDept != 0) {
+                $dataDeparture = $dataDeparture . $valDept . ",";
+                if ($valDept > $highest) $highest = $valDept;
+            } else {
+                $dataDeparture = $dataDeparture . "0,";
+            }
+
+            // JobOrder
+            $joDept = Extras::getJobOrderMonth($dt->format("m"));
+            if ($joDept != 0) {
+                $dataJo = $dataJo . $joDept . ",";
+                if ($joDept > $highest) $highest = $joDept;
+            } else {
+                $dataJo = $dataJo . "0,";
+            }
+
+            // Applicant
+            $applicantDept = Extras::getApplicantRegistered($dt->format("m"));
+            if ($applicantDept != 0) {
+                $dataApplicant = $dataApplicant . $applicantDept . ",";
+                if ($applicantDept > $highest) $highest = $applicantDept;
+            } else {
+                $dataApplicant = $dataApplicant . "0,";
+            }
+
+            $month = $month . '"' . $dt->format("F") . '",';
+        }
+
+        // Departure
+        $dataDeparture = substr($dataDeparture, 0, -1);
+        $dataDeparture = $dataDeparture . "]";
+
+        // JobOrder
+        $dataJo = substr($dataJo, 0, -1);
+        $dataJo = $dataJo . "]";
+
+        // Applicant
+        $dataApplicant = substr($dataApplicant, 0, -1);
+        $dataApplicant = $dataApplicant . "]";
+
+        $month = substr($month, 0, -1);
+        $month = $month . "]";
+        $return['departure']['data'] = $dataDeparture;
+        $return['joborder']['data'] = $dataJo;
+        $return['applicant']['data'] = $dataApplicant;
+
+        $return['month'] = $month;
+        $percentageAdded = (30 / 100) * $highest;
+        $return['high'] = $highest + $percentageAdded;
+        // echo '<pre>'; print_r(;die;
+        echo json_encode($return);
+    }
+
+    public function branchMontlyBarChart()
+    {
+        $start    = (new DateTime(date("Y-") . "01-01"))->modify('first day of this month');
+        $end      = (new DateTime(date("Y-") . "12-31"))->modify('first day of next month');
+        $interval = DateInterval::createFromDateString('1 month');
+        $period   = new DatePeriod($start, $interval, $end);
+        
+        $getBranchList = Extras::getBranchList();
+
+        $return = $data = array();
+        $highest = 0;
+        $month = "[";
+        
+        foreach ($period as $dt) {
+            $month = $month . '"' . $dt->format("F") . '",';
+            foreach ($getBranchList as $key => $value) {
+                $count = Extras::getBranchDeployedMonth($dt->format("m"), $value->code);
+                $data['dataset'][$value->code]['label'] = $value->description;
+                $data['dataset'][$value->code]['backgroundColor'] = $value->color;
+                $data['dataset'][$value->code]['borderRadius'] = 5;
+                $data['dataset'][$value->code]['borderWidth'] = 2;
+                $data['dataset'][$value->code]['borderColor'] = $value->color;
+                $data['dataset'][$value->code]['data'][] = $count;
+                if ($count > $highest) $highest = $count;
+            }
+        }
+
+        foreach ($data['dataset'] as $key => $value) {
+            $return['dataset'][] = $value;
+        }
+        // dd($return);
+        // dd($return['']);
+        $month = substr($month, 0, -1);
+        $month = $month . "]";
+
+        $return['month'] = $month;
+        $percentageAdded = (30 / 100) * $highest;
+        $return['high'] = $highest + $percentageAdded;
+        // echo '<pre>'; print_r(;die;
+        echo json_encode($return);
+    }
+
     public function branchPieApplicant()
     {
         $branchesResult = DB::table('branches')->get();
