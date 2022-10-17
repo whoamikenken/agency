@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\usertype;
 use Carbon\Carbon;
+use App\Models\Extras;
+use App\Models\usertype;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -41,8 +42,15 @@ class UsertypeController extends Controller
 
         $data['uid'] = $formFields['uid'];
 
+        $menus = Extras::getMenusList();
+        $data['access'] = "";
+        foreach ($menus as $key => $value) {
+            $getSubmenus = Extras::getSubMenus($value->menu_id);
+            // dd($getSubmenus[0]->menu_id);
+            $data['access'][$value->title][] = array('root_id' => $value->menu_id, "menu_id" => $getSubmenus[0]->menu_id, "title" => $getSubmenus[0]->title);
+
+        }
         
-        // dd($data);
         return view('user/usertype_modal', $data);
     }
 
