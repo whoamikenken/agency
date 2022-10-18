@@ -48,6 +48,7 @@ class tablecolumn extends Model
             'updated_at' => 'Modified On',
             'address' => 'Address',
             'contact' => 'Contact',
+            'color' => 'Color',
             'location' => 'Location',
             'expiration_date' => 'Expiration Date',
             'modified_by' => 'Modified By',

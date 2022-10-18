@@ -128,14 +128,34 @@
             </div>
         </div>
     </div>
-    
+    <input type="hidden" name="edatalistRead" id="edatalistRead">
+    <input type="hidden" name="edatalistAdd" id="edatalistAdd">
+    <input type="hidden" name="edatalistEdit" id="edatalistEdit">
+    <input type="hidden" name="edatalistDel" id="edatalistDel">
 </form>
-
+<hr class="mt-2">
+<h2 class="text-center">System Access</h2>
+<hr>
+@php
+    echo $showAccess;
+@endphp
 <script>
     
     $("#saveModal").unbind("click").click(function() {
         bootstrapForm($("#userForm"));
         
+        var rAccess = $("input[name=rAccess]:checked").map(function () {return this.value;}).get().join(","); 
+        $("#edatalistRead").val(rAccess);
+
+        var aAccess = $("input[name=aAccess]:checked").map(function () {return this.value;}).get().join(","); 
+        $("#edatalistAdd").val(aAccess);
+
+        var eAccess = $("input[name=eAccess]:checked").map(function () {return this.value;}).get().join(","); 
+        $("#edatalistEdit").val(eAccess);
+
+        var dAccess = $("input[name=dAccess]:checked").map(function () {return this.value;}).get().join(","); 
+        $("#edatalistDel").val(dAccess);
+
         var formdata = processForm($("#userForm"));
     
         swal.fire({

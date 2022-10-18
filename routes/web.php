@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ApplicantController;
+use App\Models\Extras;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -10,16 +10,17 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BranchController;
-use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\DiplomaController;
 use App\Http\Controllers\JobsiteController;
 use App\Http\Controllers\MedicalController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\PassportchopController;
-use App\Http\Controllers\UsertypeController;
-use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\UsertypeController;
+use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\PrincipalController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\TablecolumnController;
+use App\Http\Controllers\PassportchopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,12 @@ Route::get('/home', function(){
 
     $data['navSelected'] = 1;
     $data['menuSelected'] = 5;
+
+    $data['readAccess'] = explode(",", Extras::getAccessList("read", Auth::user()->username));
+    $data['addAccess'] = explode(",", Extras::getAccessList("add", Auth::user()->username));
+    $data['editAccess'] = explode(",", Extras::getAccessList("edit", Auth::user()->username));
+    $data['deleteAccess'] = explode(",", Extras::getAccessList("delete", Auth::user()->username));
+
     return view('home', $data);
 
 })->name('home')->middleware('auth');
@@ -57,7 +64,11 @@ Route::post('/home', function (Request $request) {
 
     $data['navSelected'] = $request->nav;
     $data['menuSelected'] = $request->menu_id;
-    // dd($nav);
+
+    $data['readAccess'] = explode(",", Extras::getAccessList("read", Auth::user()->username));
+    $data['addAccess'] = explode(",", Extras::getAccessList("add", Auth::user()->username));
+    $data['editAccess'] = explode(",", Extras::getAccessList("edit", Auth::user()->username));
+    $data['deleteAccess'] = explode(",", Extras::getAccessList("delete", Auth::user()->username));
     return view($request->route, $data);
     
 })->middleware('auth');

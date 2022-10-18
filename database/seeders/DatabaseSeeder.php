@@ -33,6 +33,10 @@ class DatabaseSeeder extends Seeder
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
+            'read' => "5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
+            'add' => "6,12,13,7,8,9,10,11",
+            'delete' => "6,12,13,7,8,9,10,11",
+            'edit' => "6,12,13,7,8,9,10,11,801,802,803,804,15,999",
             'remember_token' => Str::random(10)
         ]);
 
@@ -46,6 +50,10 @@ class DatabaseSeeder extends Seeder
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
+            'read' => "5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
+            'add' => "6,12,13,7,8,9,10,11",
+            'delete' => "6,12,13,7,8,9,10,11",
+            'edit' => "6,12,13,7,8,9,10,11,801,802,803,804,15,999",
             'remember_token' => Str::random(10)
         ]);
 
@@ -59,6 +67,10 @@ class DatabaseSeeder extends Seeder
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
+            'read' => "5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
+            'add' => "6,12,13,7,8,9,10,11",
+            'delete' => "6,12,13,7,8,9,10,11",
+            'edit' => "6,12,13,7,8,9,10,11,801,802,803,804,15,999",
             'remember_token' => Str::random(10)
         ]);
 
@@ -72,6 +84,10 @@ class DatabaseSeeder extends Seeder
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
+            'read' => "5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
+            'add' => "6,12,13,7,8,9,10,11",
+            'delete' => "6,12,13,7,8,9,10,11",
+            'edit' => "6,12,13,7,8,9,10,11,801,802,803,804,15,999",
             'remember_token' => Str::random(10)
         ]);
 

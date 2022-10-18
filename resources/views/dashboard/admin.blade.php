@@ -181,7 +181,6 @@
 let delayed;
 
     $(document).ready(function () {
-        // getDeparturePerMonth();
         getBranchApplicant();
         getBioStatusApplicant();
         getPerformancePerMonth();

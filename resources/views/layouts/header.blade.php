@@ -228,11 +228,12 @@ $mainmenu = 1;
                         <div class="collapse navbar-collapse" id="navbarMobile" style="flex-grow: 0;">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 @foreach ($menus as $key => $items)
-                                
                                     @foreach ($items as $item)
-                                    <li class="nav-item d-block d-sm-none">
-                                        <a class="nav-link menuMobile" style="color: #fff !important;font-size: 20px !important;" menu="{{$item->link}}" nav="{{$mainmenu}}" menu_id="{{$item->menu_id}}" aria-current="page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
-                                    </li>
+                                    @if (in_array($item->menu_id, $readAccess))
+                                        <li class="nav-item d-block d-sm-none">
+                                            <a class="nav-link menuMobile" style="color: #fff !important;font-size: 20px !important;" menu="{{$item->link}}" nav="{{$mainmenu}}" menu_id="{{$item->menu_id}}" aria-current="page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
+                                        </li>
+                                    @endif
                                     @endforeach
                                     <hr class="text-white">
                                 @endforeach
@@ -280,7 +281,9 @@ $mainmenu = 1;
                             <div class="collapse {{(isset($navSelected) && $navSelected == $mainmenu)? "show":"" }}" id="account-collapse{{$mainmenu}}">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     @foreach ($item as $val)
-                                    <li><a class="link-light rounded menuLink {{($menuSelected == $val->menu_id) ? "active":"" }}" menu="{{$val->link}}" nav="{{$mainmenu}}" menu_id="{{$val->menu_id}}" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$val->description}}"><i class="bi bi-{{$val->icon}}"></i>&nbsp;&nbsp;{{$val->title}}</a></li>
+                                    @if (in_array($val->menu_id, $readAccess))
+                                        <li><a class="link-light rounded menuLink {{($menuSelected == $val->menu_id) ? "active":"" }}" menu="{{$val->link}}" nav="{{$mainmenu}}" menu_id="{{$val->menu_id}}" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$val->description}}"><i class="bi bi-{{$val->icon}}"></i>&nbsp;&nbsp;{{$val->title}}</a></li>
+                                    @endif
                                     @endforeach
                                 </ul>
                             </div>
@@ -344,6 +347,38 @@ $mainmenu = 1;
 
 <script>
     
+    @if (!in_array($menuSelected, $addAccess))
+        $(".addbtn").remove();
+    @endif
+
+    @if (!in_array($menuSelected, $editAccess))
+        $(document).ajaxStop(function() {
+            $(".editbtn").remove();
+            $(document).on("click", ".editbtn", function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: "You have no edit permission",
+                    text: "This will be recorded."
+                })
+                return false;
+            });
+        });
+    @endif
+
+    @if (!in_array($menuSelected, $deleteAccess))
+        $(document).ajaxStop(function() {
+            $(".delbtn").remove();
+            $(document).on("click", ".delbtn", function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: "You have no delete permission",
+                    text: "This will be recorded."
+                })
+                return false;
+            });
+        });
+    @endif
+
     // Bootstrap tooltip Everywhere
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {

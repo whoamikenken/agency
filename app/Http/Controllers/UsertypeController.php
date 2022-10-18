@@ -49,9 +49,9 @@ class UsertypeController extends Controller
         $data['uid'] = $formFields['uid'];
 
         // No Cost Permission
-        $noEdit = array(14, 5);
-        $noAdd = array(999, 15, 14, 5, 801, 802, 803, 804);
-        $noDelete = array(999, 15, 14,5, 801, 802, 803, 804);
+        $noEdit = Extras::getNoEdit();
+        $noAdd = Extras::getNoAdd();
+        $noDelete = Extras::getNoDel();
 
         $menus = Extras::getMenusList();
         $access = array();

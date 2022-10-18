@@ -142,6 +142,11 @@ class Extras extends Model
         return DB::table('countries')->where('code', $code)->value('description');
     }
 
+    public static function getAccessList(String $code = null, String $username = null)
+    {
+        return DB::table('users')->where('username', $username)->value($code);
+    }
+
     public static function filledDiploma(String $applicant_id = null)
     {
         $diplomaResult =  DB::table('diplomas')->where('applicant_id', $applicant_id)->get();
@@ -263,5 +268,20 @@ class Extras extends Model
         $result = DB::select("SELECT users.*, (SELECT COUNT(*) FROM applicants  WHERE MONTH(oec_flight_departure) = '10' AND YEAR(oec_flight_departure) = YEAR(CURDATE()) AND isactive = 'Active' AND sales_manager = a.id ) AS counter FROM users a WHERE a.`user_type` = 'Sales' ORDER BY counter DESC");
 
         return $result;
+    }
+
+    public static function getNoAdd()
+    {
+        return array(999, 15, 14, 5, 801, 802, 803, 804);
+    }
+
+    public static function getNoDel()
+    {
+        return array(999, 15, 14, 5, 801, 802, 803, 804);
+    }
+
+    public static function getNoEdit()
+    {
+        return array(14, 5);
     }
 }
