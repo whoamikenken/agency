@@ -26,6 +26,7 @@
                             </div>
                         </div>
                     </a>
+                    @if (in_array("999", $readAccess))
                     <a href="#" class="list-group-item list-group-item-action printReport" tag="costbreakdown" report="Cost Breakdown Report" aria-current="true">
                         <div class="row">
                             <div class="col-sm-12 col-md-8">
@@ -39,6 +40,7 @@
                             </div>
                         </div>
                     </a>
+                    @endif
                     <a href="#" class="list-group-item list-group-item-action printReport" tag="infosheet" report="Information Sheet" aria-current="true">
                         <div class="row">
                             <div class="col-sm-12 col-md-8">
@@ -102,7 +104,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action printReport" tag="performance" report="Branch Performance Report" aria-current="true">
+                    {{-- <a href="#" class="list-group-item list-group-item-action printReport" tag="performance" report="Branch Performance Report" aria-current="true">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="d-flex w-100 justify-content-between">
@@ -114,7 +116,7 @@
                                 <i class="bi bi-building"></i>
                             </div>
                         </div>
-                    </a>
+                    </a> --}}
                     <a href="#" class="list-group-item list-group-item-action printReport" tag="termination" report="Applicant Termination Report" aria-current="true">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">

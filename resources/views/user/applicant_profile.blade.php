@@ -157,19 +157,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Total Cost</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-receipt"></i></div>
-                            <input type="number" id="total_cost" name="total_cost" class="form-control validate" placeholder="Enter total_cost" value="{{ $total_cost }}" readonly>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input a cost.
+                    @if (in_array("999", $readAccess))
+                        <div class="col-md-12 col-sm-12">
+                            <label style="font-weight:600">Total Cost</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-receipt"></i></div>
+                                <input type="number" id="total_cost" name="total_cost" class="form-control validate" placeholder="Enter total_cost" value="{{ $total_cost }}" readonly>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a cost.
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="col-md-12 col-sm-12">
@@ -693,6 +695,7 @@
                 </div>
             </div>
         </div>
+        @if (in_array("999", $readAccess))
         <div class="row">
             <div class="col-md-12 col-lg-6">
                 <label style="font-weight:600">Is Done?</label>
@@ -724,6 +727,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <div class="row">
             <div class="col-lg-6 col-sm-12">
                 <label style="font-weight:600">Medical Certificate</label>
@@ -797,6 +801,7 @@
                 </div>
             </div>
         </div>
+        @if (in_array("999", $readAccess))
         <div class="row">
             <div class="col-md-12 col-lg-6">
                 <label style="font-weight:600">Is Done?</label>
@@ -828,6 +833,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <div class="row">
             <div class="col-lg-6 col-sm-12">
                 <label style="font-weight:600">Medical Certificate</label>
@@ -901,6 +907,7 @@
                 </div>
             </div>
         </div>
+        @if (in_array("999", $readAccess))
         <div class="row">
             <div class="col-md-12 col-sm-12 col-lg-6">
                 <label style="font-weight:600">Is Done?</label>
@@ -932,6 +939,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <div class="row">
             <div class="col-lg-6 col-sm-12">
                 <label style="font-weight:600">Medical Certificate</label>
@@ -1005,6 +1013,7 @@
                 </div>
             </div>
         </div>
+        @if (in_array("999", $readAccess))
         <div class="row">
             <div class="col-md-12 col-sm-12 col-lg-6">
                 <label style="font-weight:600">Is Done?</label>
@@ -1036,6 +1045,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <div class="row">
             <div class="col-lg-6 col-sm-12">
                 <label style="font-weight:600">Medical Certificate</label>

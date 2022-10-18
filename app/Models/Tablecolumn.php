@@ -49,6 +49,7 @@ class tablecolumn extends Model
             'address' => 'Address',
             'contact' => 'Contact',
             'color' => 'Color',
+            'email' => 'Email',
             'location' => 'Location',
             'expiration_date' => 'Expiration Date',
             'modified_by' => 'Modified By',

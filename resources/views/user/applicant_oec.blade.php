@@ -104,6 +104,39 @@
                     </div>
                 </div>
             </div>
+            @if (in_array("999", $readAccess))
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-6">
+                    <label style="font-weight:600">Is Done?</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-question-circle-fill"></i></div>
+                        <select name="oec_cost_done" id="oec_cost_done" class="form-control form-select">
+                            <option value="Yes" {{ (isset($oec_cost_done) && $oec_cost_done == "Yes")? "selected":"" }} >Yes</option>
+                            <option value="No" {{ (isset($oec_cost_done) && $oec_cost_done == "No")? "selected":"" }} >No</option>
+                        </select>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please input.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-6">
+                    <label style="font-weight:600">OEC Cost</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-receipt"></i></div>
+                        <input type="number" id="oec_cost" name="oec_cost" class="form-control" placeholder="Enter OEC Cost" value="{{$oec_cost}}">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please input.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
             <h5 class="text-center mt-5">COVID Declaration</h5>
             <hr>
             <div class="row">
@@ -144,6 +177,39 @@
             </div>
             <h5 class="text-center mt-2">Pregnancy Test</h5>
             <hr>
+            @if (in_array("999", $readAccess))
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-6">
+                    <label style="font-weight:600">Is Done?</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-question-circle-fill"></i></div>
+                        <select name="oec_pregnancy_test_done" id="oec_pregnancy_test_done" class="form-control form-select">
+                            <option value="Yes" {{ (isset($oec_pregnancy_test_done) && $oec_pregnancy_test_done == "Yes")? "selected":"" }} >Yes</option>
+                            <option value="No" {{ (isset($oec_pregnancy_test_done) && $oec_pregnancy_test_done == "No")? "selected":"" }} >No</option>
+                        </select>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please input.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-6">
+                    <label style="font-weight:600">PT Cost</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-receipt"></i></div>
+                        <input type="number" id="oec_pregnancy_test_cost" name="oec_pregnancy_test_cost" class="form-control" placeholder="Enter Pregnancy Cost" value="{{$oec_pregnancy_test_cost}}">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please input.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     <label style="font-weight:600">Preg Test</label>

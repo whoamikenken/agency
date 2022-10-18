@@ -83,6 +83,7 @@ class ApplicantController extends Controller
         $data['principal_select'] = DB::table('principals')->get();
         $data['users_select'] = DB::table('users')->where("user_type", "sales")->get();
 
+        $data['readAccess'] = explode(",", Extras::getAccessList("read", Auth::user()->username));
         $data['editAccess'] = explode(",", Extras::getAccessList("edit", Auth::user()->username));
 
         return view('user/applicant_profile', $data);
@@ -138,6 +139,7 @@ class ApplicantController extends Controller
         $data['record'] = DB::table('applicants')->where("applicant_id", $data['uid'])->get();
         $data = json_decode($data['record'], true)[0];
 
+        $data['readAccess'] = explode(",", Extras::getAccessList("read", Auth::user()->username));
         $data['editAccess'] = explode(",", Extras::getAccessList("edit", Auth::user()->username));
 
         return view('user/applicant_oec', $data);

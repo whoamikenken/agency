@@ -119,6 +119,8 @@ return new class extends Migration
             $table->string('visa_er_iscancel', 30)->default('No');
             $table->string('visa_maid_iscancel', 30)->default('No');
             $table->string('oec_number', 30)->nullable();
+            $table->string('oec_cost_done', 30)->nullable()->default('No');
+            $table->text('oec_cost')->nullable();
             $table->date('oec_contract_received')->nullable();
             $table->text('oec_covid_dec')->nullable();
             $table->string('oec_pagibig', 30)->nullable();
@@ -126,6 +128,8 @@ return new class extends Migration
             $table->date('oec_date_filed')->nullable();
             $table->date('oec_date_expiration')->nullable();
             $table->text('oec_pregnancy_test')->nullable();
+            $table->string('oec_pregnancy_test_done', 30)->nullable()->default('No');
+            $table->text('oec_pregnancy_test_cost')->nullable();
             $table->text('oec_swab_test')->nullable();
             $table->date('oec_flight_departure')->nullable();
             $table->text('user_profile')->nullable();
