@@ -50,6 +50,7 @@ class tablecolumn extends Model
             'contact' => 'Contact',
             'color' => 'Color',
             'email' => 'Email',
+            'region' => 'Region',
             'location' => 'Location',
             'expiration_date' => 'Expiration Date',
             'modified_by' => 'Modified By',
