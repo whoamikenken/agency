@@ -123,7 +123,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" id="performanceBar">
     <div class="col-sm-12">
         <div class="card mb-4">
             <div class="card-header bg-info">
@@ -186,6 +186,14 @@ let delayed;
         getBioStatusApplicant();
         getPerformancePerMonth();
         getBranchPerformancePerMonth();
+    });
+
+    $(window).scroll(function () {
+        if ($('#performanceBar').isOnScreen()) {
+            $("#performanceBar").addClass("animate__animated animate__fadeInRight");
+        } else {
+            $("#performanceBar").removeClass("animate__animated animate__fadeInRight");
+        }
     });
 
     function getBioStatusApplicant(){

@@ -195,7 +195,6 @@
     $("#saveModal").unbind("click").click(function(){
         if($("#tag").val() == "hrreport" || $("#tag").val() == "infosheet"){
             var edata = $("input[name=edata]:checked").map(function () {return this.value;}).get().join(","); 
-            var input = document.createElement("input");
             $("#edatalist").val(edata);
         }
 

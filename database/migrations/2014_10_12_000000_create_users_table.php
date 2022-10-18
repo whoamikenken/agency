@@ -25,6 +25,10 @@ return new class extends Migration
             $table->string('status')->default('unverified');
             $table->string('email')->unique();
             $table->string('user_image')->nullable();
+            $table->string('read', 250)->nullable();
+            $table->string('add', 250)->nullable();
+            $table->string('delete', 250)->nullable();
+            $table->string('edit', 250)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();

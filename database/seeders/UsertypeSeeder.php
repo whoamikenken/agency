@@ -19,6 +19,10 @@ class UsertypeSeeder extends Seeder
             'code' => 'Admin',
             'description' => 'Administrator has all the permission on modules',
             'modified_by' => 1,
+            'read' => "5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
+            'add' => "6,12,13,7,8,9,10,11",
+            'delete' => "6,12,13,7,8,9,10,11,801,802,803,804,15,999",
+            'edit' => "6,12,13,7,8,9,10,11",
             'created_by' => 1,
         ]);
 

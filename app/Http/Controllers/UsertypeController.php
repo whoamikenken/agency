@@ -34,23 +34,93 @@ class UsertypeController extends Controller
             'uid' => ['required'],
         ]);
 
+        $readAccess = $editAccess = $addAccess = $delAccess = array();
+
         if ($formFields['uid'] != "add") {
             $data['record'] = DB::table('usertype')->where('id', $formFields['uid'])->get();
             $data = $data['record'][0];
             $data = json_decode(json_encode($data), true);
+            $readAccess = explode(",",$data['read']);
+            $editAccess = explode(",", $data['edit']);
+            $addAccess = explode(",", $data['add']);
+            $delAccess = explode(",", $data['delete']);
         }
 
         $data['uid'] = $formFields['uid'];
 
+        // No Cost Permission
+        $noEdit = array(14, 5);
+        $noAdd = array(999, 15, 14, 5, 801, 802, 803, 804);
+        $noDelete = array(999, 15, 14,5, 801, 802, 803, 804);
+
         $menus = Extras::getMenusList();
-        $data['access'] = "";
+        $access = array();
         foreach ($menus as $key => $value) {
             $getSubmenus = Extras::getSubMenus($value->menu_id);
-            // dd($getSubmenus[0]->menu_id);
-            $data['access'][$value->title][] = array('root_id' => $value->menu_id, "menu_id" => $getSubmenus[0]->menu_id, "title" => $getSubmenus[0]->title);
-
+            if($value->menu_id == 4){
+                $access["Applicant Management"][] = array('root_id' => 888, "menu_id" => 801, "title" => "Profile");
+                $access["Applicant Management"][] = array('root_id' => 888, "menu_id" => 802, "title" => "Records");
+                $access["Applicant Management"][] = array('root_id' => 888, "menu_id" => 803, "title" => "Documents");
+                $access["Applicant Management"][] = array('root_id' => 888, "menu_id" => 804, "title" => "OEC");
+            }
+            foreach ($getSubmenus as $row => $val) {
+                $access[$value->title][] = array('root_id' => $value->menu_id, "menu_id" => $val->menu_id, "title" => $val->title);
+            }
         }
-        
+        $access["System Configuration"][] = array('root_id' => 4, "menu_id" => 999, "title" => "Costs");
+
+        $accessColumn = "<div class='row'>";
+        foreach ($access as $mainMenu => $subMenu) {
+            $accessColumn .= '<div class="col-md-6 col-sm-12 mb-5"><h3 class="text-center fs-bold">' . $mainMenu . '</h3>';
+            $accessColumn .= '<table>
+                <thead>
+                    <tr class="text-center">
+                        <th class="p-1">Menu</th>
+                        <th class="p-1">Read</th>
+                        <th class="p-1">Add</th>
+                        <th class="p-1">Delete</th>
+                        <th class="p-1">Edit</th>
+                    </tr>
+                </thead>';
+
+            foreach ($subMenu as $ky => $subMenuVal) {
+                $subMenuVal = (object) $subMenuVal;
+                $accessColumn .= '</tr>';
+                
+                $accessColumn .= '
+                    <td class="pe-1">
+                        '.$subMenuVal->title.'
+                    </td>';
+                $accessColumn .=  '<td class="pe-1 text-center">
+                    <input class="form-check-input" type="checkbox" name="rAccess" value="' . $subMenuVal->menu_id . '" root="'. $subMenuVal->root_id.'" '.(in_array($subMenuVal->menu_id, $readAccess)?"checked='checked'":"").'>
+                </td>';
+
+                $accessColumn .=  '<td class="pe-1 text-center">';
+                if (!in_array($subMenuVal->menu_id, $noAdd)) {
+                    $accessColumn .=  '<input class="form-check-input" type="checkbox" name="aAccess" value="' . $subMenuVal->menu_id . '" root="'. $subMenuVal->root_id.'" '.(in_array($subMenuVal->menu_id, $addAccess)?"checked='checked'":"").'>';
+                }
+                $accessColumn .=  '</td>';
+
+                $accessColumn .=  '<td class="pe-1 text-center">';
+                if (!in_array($subMenuVal->menu_id, $noDelete)) {
+                    $accessColumn .=  '<input class="form-check-input" type="checkbox" name="dAccess" value="' . $subMenuVal->menu_id . '" root="'. $subMenuVal->root_id.'" '.(in_array($subMenuVal->menu_id, $delAccess)?"checked='checked'":"").'>';
+                }
+                $accessColumn .=  '</td>';
+
+                $accessColumn .=  '<td class="pe-1 text-center">';
+                if(!in_array($subMenuVal->menu_id, $noEdit)){
+                    $accessColumn .=  '<input class="form-check-input" type="checkbox" name="eAccess" value="' . $subMenuVal->menu_id . '" root="'. $subMenuVal->root_id.'" '.(in_array($subMenuVal->menu_id, $editAccess)?"checked='checked'":"").'>';
+                }
+                $accessColumn .=  '</td>';
+
+                $accessColumn .= '</tr>';
+            }
+            $accessColumn .= "</table></div>";
+        }
+        $accessColumn .= "</div>";
+
+        // dd($accessColumn);
+        $data['showAccess'] = $accessColumn;
         return view('user/usertype_modal', $data);
     }
 
@@ -63,16 +133,25 @@ class UsertypeController extends Controller
             'code' => ['required'],
             'description' => ['required']
         ]);
-
+        
+        // dd($request->input("edatalistAdd"));
         if ($formFields['uid'] == "add") {
             unset($formFields['uid']);
             $formFields['created_by'] = Auth::id();
+            $formFields['read'] = $request->input("edatalistRead");
+            $formFields['add'] = $request->input("edatalistAdd");
+            $formFields['delete'] = $request->input("edatalistDel");
+            $formFields['edit'] = $request->input("edatalistEdit");
             $formFields['updated_at'] = "";
             usertype::create($formFields);
             $return = array('status' => 1, 'msg' => 'Successfully added user type', 'title' => 'Success!');
         } else {
             $formFields['updated_at'] = Carbon::now();
             $formFields['modified_by'] = Auth::id();
+            $formFields['read'] = $request->input("edatalistRead");
+            $formFields['add'] = $request->input("edatalistAdd");
+            $formFields['delete'] = $request->input("edatalistDel");
+            $formFields['edit'] = $request->input("edatalistEdit");
             $id = $formFields['uid'];
             unset($formFields['uid']);
             DB::table('usertype')->where('id', $id)->update($formFields);
