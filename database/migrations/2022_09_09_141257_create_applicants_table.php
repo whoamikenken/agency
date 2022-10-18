@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('family_contact_name', 30)->nullable();
             $table->string('family_contact', 30)->nullable();
             $table->string('gender', 30)->default('female');
-            $table->string('is_ex_abroad', 30)->default('No');
+            $table->string('is_ex_abroad', 3)->default('No');
             $table->integer('abroad_experience')->default(0);
             $table->string('is_first', 30)->default('Yes');
             $table->string('is_walkin', 30)->default('Yes');
@@ -56,8 +56,8 @@ return new class extends Migration
             $table->string('bio_availability', 30)->nullable()->default('Signed Up');
             $table->date('jo_received')->nullable();
             $table->date('jo_confirmed')->nullable();
-            $table->string('jo_er_iscancel', 30)->default('No');
-            $table->string('jo_maid_iscancel', 30)->default('No');
+            $table->string('jo_er_iscancel', 3)->default('No');
+            $table->string('jo_maid_iscancel', 3)->default('No');
             $table->date('med_first_date')->nullable();
             $table->string('med_first_result', 30)->nullable();
             $table->string('med_first_clinic', 30)->nullable();
@@ -116,11 +116,11 @@ return new class extends Migration
             $table->date('visa_date_expired')->nullable();
             $table->date('visa_reactive_date')->nullable();
             $table->string('visa_status', 30)->nullable()->default('Pending');
-            $table->string('visa_er_iscancel', 30)->default('No');
-            $table->string('visa_maid_iscancel', 30)->default('No');
+            $table->string('visa_er_iscancel', 3)->default('No');
+            $table->string('visa_maid_iscancel', 3)->default('No');
             $table->string('oec_number', 30)->nullable();
             $table->string('oec_cost_done', 30)->nullable()->default('No');
-            $table->text('oec_cost')->nullable();
+            $table->integer('oec_cost')->nullable()->default(0);
             $table->date('oec_contract_received')->nullable();
             $table->text('oec_covid_dec')->nullable();
             $table->string('oec_pagibig', 30)->nullable();
@@ -129,7 +129,7 @@ return new class extends Migration
             $table->date('oec_date_expiration')->nullable();
             $table->text('oec_pregnancy_test')->nullable();
             $table->string('oec_pregnancy_test_done', 30)->nullable()->default('No');
-            $table->text('oec_pregnancy_test_cost')->nullable();
+            $table->integer('oec_pregnancy_test_cost')->nullable()->default(0);
             $table->text('oec_swab_test')->nullable();
             $table->date('oec_flight_departure')->nullable();
             $table->text('user_profile')->nullable();

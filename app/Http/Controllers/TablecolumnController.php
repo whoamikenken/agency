@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tablecolumn;
+use App\Models\Tablecolumn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -44,7 +44,7 @@ class TablecolumnController extends Controller
         $table = $table[0]->table;
         
         $column = DB::select('SHOW COLUMNS FROM '. $table);
-        $data['column'] = tablecolumn::processColumnName($column);
+        $data['column'] = Tablecolumn::processColumnName($column);
 
         return view('config/tablecolumn_modal', $data);
     }
@@ -56,18 +56,18 @@ class TablecolumnController extends Controller
         unset($formFields['_token']);
 
         $table_id = $formFields['uid'];
-        tablecolumn::where('table_id', $table_id)->delete();
+        Tablecolumn::where('table_id', $table_id)->delete();
         unset($formFields['uid']);
         
         foreach ($formFields as $key => $value) {
             $insert = array();
             $insert['column'] = $key;
-            $insert['title'] = tablecolumn::getColumnDescription($key);
+            $insert['title'] = Tablecolumn::getColumnDescription($key);
             $insert['table_id'] = $table_id;
-            $insert['table'] = tablecolumn::getTableName($table_id);
+            $insert['table'] = Tablecolumn::getTableName($table_id);
             $insert['status'] = "Show";
             $insert['created_by'] = Auth::id();
-            tablecolumn::create($insert);
+            Tablecolumn::create($insert);
         }
 
         $return = array('status' => 1, 'msg' => 'Successfully updated table config', 'title' => 'Success!');

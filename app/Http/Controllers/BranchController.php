@@ -64,6 +64,8 @@ class BranchController extends Controller
         $formFields = $request->validate([
             'uid' => ['required'],
             'code' => ['required'],
+            'region' => ['required'],
+            'color' => ['required'],
             'description' => ['required']
         ]);
 
