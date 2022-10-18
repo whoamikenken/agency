@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Extras;
 use App\Models\Applicant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ApplicantController extends Controller
@@ -57,7 +59,8 @@ class ApplicantController extends Controller
 
         $data['uid'] = $formFields['uid'];
 
-        // dd($data);
+        $data['readAccess'] = explode(",", Extras::getAccessList("read", Auth::user()->username));
+        // dd($data);   
         return view('user/applicant_tab', $data);
     }
 
@@ -80,6 +83,8 @@ class ApplicantController extends Controller
         $data['principal_select'] = DB::table('principals')->get();
         $data['users_select'] = DB::table('users')->where("user_type", "sales")->get();
 
+        $data['editAccess'] = explode(",", Extras::getAccessList("edit", Auth::user()->username));
+
         return view('user/applicant_profile', $data);
     }
 
@@ -97,6 +102,8 @@ class ApplicantController extends Controller
         $data = json_decode($data['record'], true)[0];
         $data['country_select'] = DB::table('countries')->get();
 
+        $data['editAccess'] = explode(",", Extras::getAccessList("edit", Auth::user()->username));
+
         return view('user/applicant_record', $data);
     }
 
@@ -113,6 +120,8 @@ class ApplicantController extends Controller
         $data['record'] = DB::table('applicants')->where("applicant_id", $data['uid'])->get();
         $data = json_decode($data['record'], true)[0];
 
+        $data['editAccess'] = explode(",", Extras::getAccessList("edit", Auth::user()->username));
+
         return view('user/applicant_document', $data);
     }
 
@@ -128,6 +137,8 @@ class ApplicantController extends Controller
 
         $data['record'] = DB::table('applicants')->where("applicant_id", $data['uid'])->get();
         $data = json_decode($data['record'], true)[0];
+
+        $data['editAccess'] = explode(",", Extras::getAccessList("edit", Auth::user()->username));
 
         return view('user/applicant_oec', $data);
     }

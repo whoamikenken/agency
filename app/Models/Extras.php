@@ -282,6 +282,6 @@ class Extras extends Model
 
     public static function getNoEdit()
     {
-        return array(14, 5);
+        return array(14, 5, 13);
     }
 }

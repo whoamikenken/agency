@@ -1089,33 +1089,52 @@
             </div>
         </div>
         <datalist id="datalistOptionsResult">
-            <option value="Fit to work">
-                <option value="Unfit">
-                    <option value="Pending">
-                    </datalist>
-                    <script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
-                    <script>
-                        $(document).ready(function () {
-                            
-                            $('.datepicker').datepicker({
-                                format: 'yyyy-mm-dd'
-                            });
-                            
-                            $('.form-select').select2({
-                                theme: 'bootstrap-5'
-                            });
-                        });
-                        
-                        $('#userVideo').on('hidden.bs.modal', function (e) {
-                            $('video').trigger('pause');
-                        })
-                        
-                        
-                        $("input[type=text], input[type=file], input[type=number], textarea, select").on("change", function(){
-                            
-                            if ($(this).val()) {
-                                saveSingleProfileColumn($(this));
-                            }else return;   
-                        });
-                        
-                    </script>
+        <option value="Fit to work">
+        <option value="Unfit">
+        <option value="Pending">
+        </datalist>
+<script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
+<script>
+    $(document).ready(function () {
+        
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        
+        $('.form-select').select2({
+            theme: 'bootstrap-5'
+        });
+
+        @if (!in_array("801", $editAccess))
+            $("input").attr('disabled','disabled');
+            $("select").attr('disabled','disabled');
+        @endif
+    });
+    
+    $('#userVideo').on('hidden.bs.modal', function (e) {
+        $('video').trigger('pause');
+    })
+    
+    
+    $("input[type=text], input[type=file], input[type=number], textarea, select").on("change", function(){
+        if ($(this).val()) {
+            @if (!in_array("801", $editAccess))
+                Swal.fire({
+                    icon: 'error',
+                    title: "You have no edit permission",
+                    text: "This will be recorded."
+                })
+                $("input").attr('disabled','disabled');
+                $("select").attr('disabled','disabled');
+                setTimeout(() => {
+                    $("#pills-tab").find(".active").click();
+                }, 2000);
+                return false;
+            @else
+                saveSingleProfileColumn($(this));
+            @endif
+            
+        }else return;   
+    });
+    
+</script>

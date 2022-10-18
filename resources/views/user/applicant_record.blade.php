@@ -475,7 +475,21 @@
     $("input[type=text], input[type=file], input[type=number], textarea, select").on("change", function(){
         
         if ($(this).val()) {
-            saveSingleProfileColumn($(this));
+            @if (!in_array("802", $editAccess))
+                Swal.fire({
+                    icon: 'error',
+                    title: "You have no edit permission",
+                    text: "This will be recorded."
+                })
+                $("input").attr('disabled','disabled');
+                $("select").attr('disabled','disabled');
+                setTimeout(() => {
+                    $("#pills-tab").find(".active").click();
+                }, 2000);
+                return false;
+            @else
+                saveSingleProfileColumn($(this));
+            @endif
         }else return;   
     });
 
