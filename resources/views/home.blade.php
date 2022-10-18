@@ -5,7 +5,7 @@
     <h1 class="h2">Dashboard</h1>
 </div>
 
-<div id='loadDashboard'>Admin</div>
+<div id='loadDashboard'></div>
 <script type="text/javascript">
 
     $(document).ready(function () {

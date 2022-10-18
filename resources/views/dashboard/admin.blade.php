@@ -87,7 +87,14 @@
                 <i class="bi bi-bar-chart-line-fill me-1"></i>
                 Performance Report
             </div>
-            <div class="card-body"><canvas id="myBarChart" width="100%" height="47"></canvas></div>
+            <div class="card-body">
+                <div class="d-flex justify-content-center" id="performanceLoader">
+                    <div class="spinner-border text-info" role="status" style="width: 8rem; height: 8rem;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <canvas id="myBarChart" width="100%" height="47"></canvas>
+            </div>
         </div>
     </div>
 
@@ -109,7 +116,14 @@
                 <i class="bi bi-bar-chart-line-fill me-1"></i>
                 Branch Performance
             </div>
-            <div class="card-body"><canvas id="branchBarChart" width="100%" height="47"></canvas></div>
+            <div class="card-body">
+                <div class="d-flex justify-content-center" id="branchPerformanceLoader">
+                    <div class="spinner-border text-info" role="status" style="width: 8rem; height: 8rem;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <canvas id="branchBarChart" width="100%" height="47"></canvas>
+            </div>
         </div>
     </div>
     <div class="col-sm-12 col-md-12 col-xl-4 animate__animated animate__backInRight">
@@ -156,7 +170,7 @@
                                     <div class="col-8">
                                         <div class="card-body">
                                             <h5 class="card-title">{{$item->fname." ".$item->lname}} <span class="float-end">{{$counter}}</span></h5>
-                                            Branch: {{$item->branch}}<br>
+                                            Branch: {{$item->branchdesc}}<br>
                                             Applicant Processed: {{$item->total_sales}}
                                         </div>
                                     </div>
@@ -294,7 +308,7 @@ let delayed;
             data: {},
             dataType: "json",
             success:function(response){
-
+                
                 const config = {
                     type: 'bar',
                     data: {
@@ -349,7 +363,7 @@ let delayed;
             data: {},
             dataType: "json",
             success:function(response){
-                
+                $("#performanceLoader").remove();
                 const config = {
                     type: 'bar',
                     data: {
@@ -428,6 +442,7 @@ let delayed;
             data: {},
             dataType: "json",
             success:function(response){
+                $("#branchPerformanceLoader").remove();
                 const config = {
                     type: 'bar',
                     data: {

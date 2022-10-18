@@ -49,11 +49,11 @@ class HomeController extends Controller
         $data['upcomingDeparture'] = Extras::countUpcomingMonthDeparture();
         $data['active_applicant'] = Extras::countActiveApplicant();
         $data['expired_applicant'] = Extras::countExpiredPassportAndVisa();
-        $data['top_sales'] = DB::table('users')->select("*", DB::raw('(SELECT COUNT(*) FROM applicants  WHERE MONTH(oec_flight_departure) = "10" AND YEAR(oec_flight_departure) = YEAR(CURDATE()) AND isactive = "Active" AND sales_manager = users.id) as total_sales'))->where("user_type", "=", 'Sales')->orderBy("total_sales", "desc")->paginate(8);
+        $data['top_sales'] = DB::table('users')->select("*", DB::raw('(SELECT COUNT(*) FROM applicants  WHERE MONTH(oec_flight_departure) = "10" AND YEAR(oec_flight_departure) = YEAR(CURDATE()) AND isactive = "Active" AND sales_manager = users.id) as total_sales'), DB::raw('(SELECT description FROM branches WHERE code = users.branch) as branchdesc'))->where("user_type", "=", 'Sales')->orderBy("total_sales", "desc")->paginate(8);
         
-        foreach ($data['top_sales'] as $key => $value) {
-            $data['top_sales'][$key]->branch = DB::table('branches')->where('code', $value->branch)->value('description');
-        }
+        // foreach ($data['top_sales'] as $key => $value) {
+        //     $data['top_sales'][$key]->branch = DB::table('branches')->where('code', $value->branch)->value('description');
+        // }
 
         return view('dashboard/admin', $data);
         }else{
