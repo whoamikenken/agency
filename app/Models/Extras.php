@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -283,5 +284,24 @@ class Extras extends Model
     public static function getNoEdit()
     {
         return array(14, 5, 13, 999);
+    }
+
+    public static function requestToEmpsys($link, $type = 'get', $data = null, $token = null){
+        $header =  array(
+            'Authorization' => 'Bearer ' . $token,
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        );
+
+        $response = Http::withHeaders($header)->withOptions([
+            'debug' => fopen('php://stderr', 'w'),
+        ])->$type(
+            $link,
+            $data
+        );
+
+        $responseData = $response->getBody()->getContents();
+        return $responseData;
+       
     }
 }

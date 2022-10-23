@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('address', 50)->nullable();
             $table->string('family_contact_name', 30)->nullable();
             $table->string('family_contact', 30)->nullable();
-            $table->string('gender', 30)->default('female');
+            $table->string('gender', 30)->default('Female');
             $table->string('is_ex_abroad', 3)->default('No');
             $table->integer('abroad_experience')->default(0);
             $table->string('is_first', 30)->default('Yes');
