@@ -136,6 +136,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-6 col-sm-12">
+                <label style="font-weight:600">Date Done</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                    <input type="text" id="oec_date_done" name="oec_date_done" class="form-control datepicker" value="{{ $oec_date_done }}" placeholder="Select date">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please input.
+                    </div>
+                </div>
+            </div>
             @endif
             <h5 class="text-center mt-5">COVID Declaration</h5>
             <hr>
@@ -158,6 +171,54 @@
             </div>
             <h5 class="text-center mt-2">Insurance</h5>
             <hr>
+            @if (in_array("999", $readAccess))
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-6">
+                    <label style="font-weight:600">Is Done?</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-question-circle-fill"></i></div>
+                        <select name="oec_insurance_done" id="oec_insurance_done" class="form-control form-select">
+                            <option value="Yes" {{ (isset($oec_insurance_done) && $oec_insurance_done == "Yes")? "selected":"" }} >Yes</option>
+                            <option value="No" {{ (isset($oec_insurance_done) && $oec_insurance_done == "No")? "selected":"" }} >No</option>
+                        </select>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please input.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-6">
+                    <label style="font-weight:600">Insurance Cost</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-receipt"></i></div>
+                        <input type="number" id="oec_insurance_cost" name="oec_insurance_cost" class="form-control" placeholder="Enter Insurance Cost" value="{{$oec_insurance_cost}}">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please input.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <label style="font-weight:600">Date Done</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                        <input type="text" id="oec_pregnancy_test_date_done" name="oec_pregnancy_test_date_done" class="form-control datepicker" value="{{ $oec_pregnancy_test_date_done }}" placeholder="Select date">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please input.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     <label style="font-weight:600">Insurance</label>
@@ -200,6 +261,21 @@
                     <div class="input-group">
                         <div class="input-group-text"><i class="bi bi-receipt"></i></div>
                         <input type="number" id="oec_pregnancy_test_cost" name="oec_pregnancy_test_cost" class="form-control" placeholder="Enter Pregnancy Cost" value="{{$oec_pregnancy_test_cost}}">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please input.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <label style="font-weight:600">Date Done</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                        <input type="text" id="oec_pregnancy_test_date_done" name="oec_pregnancy_test_date_done" class="form-control datepicker" value="{{ $oec_pregnancy_test_date_done }}" placeholder="Select date">
                         <div class="valid-feedback">
                             Looks good!
                         </div>

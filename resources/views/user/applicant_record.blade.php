@@ -320,6 +320,40 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
+                    <label style="font-weight:600">Is Done?</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-option"></i></div>
+                        <select name="cert_pdos_done" id="cert_pdos_done" class="form-control form-select">
+                            <option value="Yes" {{ (isset($cert_pdos_done) && $cert_pdos_done == "Yes")? "selected":"" }} >Yes</option>
+                            <option value="No" {{ (isset($cert_pdos_done) && $cert_pdos_done == "No")? "selected":"" }} >No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <label style="font-weight:600">Date Done</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                        <input type="text" id="cert_pdos_date_done" name="cert_pdos_date_done" class="form-control datepicker" value="{{ $cert_pdos_date_done }}" placeholder="Select date">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please input.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <label style="font-weight:600">Cost</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-receipt"></i></div>
+                        <input type="number" id="cert_pdos_cost" name="cert_pdos_cost" class="form-control" placeholder="Enter Training Cost" value="{{$cert_pdos_cost}}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
                     <label style="font-weight:600">Certificate</label>
                     <div class="input-group custom-file-button">
                         <label class="input-group-text" for="cert_pdos"><i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;{{($cert_pdos != "")? "Replace":"Upload"}} Certificate</label>
@@ -395,7 +429,7 @@
                     <label style="font-weight:600">Date Enrolled</label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
-                        <input type="text" id="cert_owwa_date" name="cert_owwa_date" class="form-control datepicker" value="{{ $cert_owwa_date }}" placeholder="Select date">
+                        <input type="text" id="cert_nc2_date" name="cert_nc2_date" class="form-control datepicker" value="{{ $cert_nc2_date }}" placeholder="Select date">
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -431,6 +465,31 @@
                     <div class="input-group">
                         <div class="input-group-text"><i class="bi bi-receipt"></i></div>
                         <input type="number" id="cert_nc2_cost" name="cert_nc2_cost" class="form-control" placeholder="Enter Training Cost" value="{{$cert_nc2_cost}}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <label style="font-weight:600">Is Done?</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-option"></i></div>
+                        <select name="cert_nc2_done" id="cert_nc2_done" class="form-control form-select">
+                            <option value="Yes" {{ (isset($cert_nc2_done) && $cert_nc2_done == "Yes")? "selected":"" }} >Yes</option>
+                            <option value="No" {{ (isset($cert_nc2_done) && $cert_nc2_done == "No")? "selected":"" }} >No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <label style="font-weight:600">Date Done</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-calendar-date"></i></div>
+                        <input type="text" id="cert_nc2_date_done" name="cert_nc2_date_done" class="form-control datepicker" value="{{ $cert_nc2_date_done }}" placeholder="Select date">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please input.
+                        </div>
                     </div>
                 </div>
             </div>
