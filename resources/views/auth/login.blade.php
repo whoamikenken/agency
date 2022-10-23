@@ -254,7 +254,7 @@ aria-labelledby="registerLabel" aria-hidden="true">
                     $("#modalclose").click();
                     setTimeout(() => {
                         location.reload();
-                    }, 2500);
+                    }, 1500);
 
                 }else if (response.status == 2) {
                     Swal.fire({
