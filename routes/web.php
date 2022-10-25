@@ -153,6 +153,9 @@ Route::post('/applicant/document', [ApplicantController::class, 'document'])->wi
 Route::post('/applicant/oec', [ApplicantController::class, 'oec'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::get('/applicant/syncDataApplicant', [ApplicantController::class, 'syncApplicantData'])->withoutMiddleware([VerifyCsrfToken::class]);
 
+// Test Email Function
+Route::get('/applicant/testEmail', [ApplicantController::class, 'testEmail'])->withoutMiddleware([VerifyCsrfToken::class]);
+
 // Passport Chop
 Route::post('/passport/table', [PassportchopController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/passport/getModal', [PassportchopController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);

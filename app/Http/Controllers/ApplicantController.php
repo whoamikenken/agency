@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Extras;
 use App\Models\Applicant;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\MailNotify;
 
 class ApplicantController extends Controller
 {
@@ -203,6 +206,8 @@ class ApplicantController extends Controller
 
     public function syncApplicantData(Request $request)
     {
+        set_time_limit(0);
+        
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
         
         $data = array(
@@ -212,6 +217,7 @@ class ApplicantController extends Controller
 
         $resultLogin = Extras::requestToEmpsys("https://api-empsysv3.technic.com.hk/v3/login", "post", $data);
         $resultLogin = json_decode($resultLogin);
+        // dd($resultLogin);
         $token = $resultLogin->token;
 
         $dataApplicantCount = array(
@@ -242,12 +248,13 @@ class ApplicantController extends Controller
         foreach ($applicantList as $key => $value) {
             
             $dataApplicantID = array(
-                // 'id' => $value->id,
-                'id' => '8000',
+                'id' => $value->id,
+                // 'id' => '8000',
             );
+            sleep(2);
             $resultApplicantInfo = Extras::requestToEmpsys("https://api-empsysv3.technic.com.hk/v3/applicant/details", "get", $dataApplicantID, $token);
             $resultApplicantInfo = json_decode($resultApplicantInfo);
-            dd($resultApplicantInfo->data);
+            // dd($resultApplicantInfo);
             $applicantDataEmpSys = $resultApplicantInfo->data->applicant;
             
             $applicantData = array();
@@ -262,23 +269,39 @@ class ApplicantController extends Controller
             $applicantData['mname'] = $applicantDataEmpSys->middle_name;
             $applicantData['lname'] = $applicantDataEmpSys->last_name;
             $applicantData['gender'] = $applicantDataEmpSys->gender;
-            $applicantData['passport_issued'] = ($applicantDataEmpSys->passport_country == "Philippines")? "PH": $applicantDataEmpSys->passport_country;
+            $applicantData['passport_place_issued'] = ($applicantDataEmpSys->passport_country == "Philippines")? "PH": $applicantDataEmpSys->passport_country;
             $applicantData['passport_validity'] = ($applicantDataEmpSys->passport_validity)? date("Y-m-d", strtotime($applicantDataEmpSys->passport_validity)): NULL;
             $applicantData['visa_date_expired'] = ($applicantDataEmpSys->visa_expiry_date) ? date("Y-m-d", strtotime($applicantDataEmpSys->visa_expiry_date)) : NULL;
             $applicantData['bio_availability'] = $applicantDataEmpSys->maid_status;
             $applicantData['created_at'] = ($applicantDataEmpSys->created_at) ? date("Y-m-d", strtotime($applicantDataEmpSys->created_at)) : NULL;
             
-            $applicantChecker = Extras::checkIfExisting 
-
-            dd($applicantData);
+            $applicantChecker = Extras::isExist("applicants", $applicantDataEmpSys->id, "applicant_id");
+            if($applicantChecker){
+                DB::table('applicants')->where('applicant_id', $applicantData['applicant_id'])->update($applicantData);
+            }else{
+                Applicant::create($applicantData);
+            }
+            $syncApplicant++;
         }
         
-        
-
-        // if ($query) {
-        //     $return = array('status' => 1, 'msg' => 'Successfully updated applicant', 'title' => 'Success!');
-        // }
+        if ($syncApplicant != 0) {
+            $return = array('status' => 1, 'msg' => 'Successfully sync '.$syncApplicant.' applicants', 'title' => 'Success!');
+        }
 
         return response()->json($return);
+    }
+
+    public function testEmail(){
+        $data = array(
+                    'subject' => "test",
+                    'body' => "Test email"
+                );
+
+        try {
+            Mail::to("dutertehck@gmail.com")->send(New MailNotify($data));
+            return response()->json(['Check your mail']);
+        } catch (Exception $th) {
+            return response()->json(['Something Went Wrong']);
+        }
     }
 }

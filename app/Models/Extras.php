@@ -295,7 +295,7 @@ class Extras extends Model
 
         $response = Http::withHeaders($header)->withOptions([
             'debug' => fopen('php://stderr', 'w'),
-        ])->$type(
+        ])->retry(3, 60000)->$type(
             $link,
             $data
         );
@@ -303,5 +303,15 @@ class Extras extends Model
         $responseData = $response->getBody()->getContents();
         return $responseData;
        
+    }
+
+    public static function isExist(String $table = null, String $id = null, String $column = null)
+    {
+        $isExistQuery =  DB::table($table)->where($column, "=", $id)->get();
+        if (count($isExistQuery) > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

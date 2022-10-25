@@ -30,11 +30,11 @@ return new class extends Migration
             $table->string('address', 50)->nullable();
             $table->string('family_contact_name', 30)->nullable();
             $table->string('family_contact', 30)->nullable();
-            $table->string('gender', 30)->default('Female');
-            $table->string('is_ex_abroad', 3)->default('No');
+            $table->string('gender', 30)->nullable()->default('Female');
+            $table->string('is_ex_abroad', 3)->nullable()->default('No');
             $table->integer('abroad_experience')->default(0);
-            $table->string('is_first', 30)->default('Yes');
-            $table->string('is_walkin', 30)->default('Yes');
+            $table->string('is_first', 30)->nullable()->default('Yes');
+            $table->string('is_walkin', 30)->nullable()->default('Yes');
             $table->date('date_applied')->nullable();
             $table->text('passport')->nullable();
             $table->string('passport_no', 30)->nullable();
@@ -110,7 +110,7 @@ return new class extends Migration
             $table->date('cert_owwa_release_date')->nullable();
             $table->text('cert_nc2')->nullable();
             $table->date('cert_nc2_date')->nullable();
-            $table->string('cert_nc2_by_applicant', 30)->default('No');
+            $table->string('cert_nc2_by_applicant', 30)->nullable()->default('No');
             $table->string('cert_nc2_payment_status', 30)->nullable();
             $table->integer('cert_nc2_cost')->default(0);
             $table->string('cert_nc2_done', 30)->nullable()->default('No');
