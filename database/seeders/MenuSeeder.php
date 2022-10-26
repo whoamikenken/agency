@@ -22,11 +22,15 @@ class MenuSeeder extends Seeder
             'menu_id' => function () {
                 $max = Menu::count('id'); // returns 0 if no records exist.
                 return $max + 1;
+            }, 
+            'order' => function () {
+                $maxOrder = Menu::where('root','=','0')->count('order'); // returns 0 if no records exist.
+                return $maxOrder + 1;
             },
-            'title' => 'Main',
-            'link' => '',
-            'icon' => '',
-            'description' => ""
+            'title' => 'Dashboard',
+            'link' => 'home',
+            'icon' => 'motherboard',
+            'description' => "Visual display of all of your data"
         ]);
 
         Menu::factory()->create([
@@ -63,22 +67,6 @@ class MenuSeeder extends Seeder
             'link' => '',
             'icon' => '',
             'description' => ""
-        ]);
-    
-        Menu::factory()->create([
-            'root' => '1',
-            'menu_id' => function () {
-                $max = Menu::count('id'); // returns 0 if no records exist.
-                return $max + 1;
-            }, 
-            'order' => function () {
-                $maxOrder = Menu::where('root','=','1')->count('order'); // returns 0 if no records exist.
-                return $maxOrder + 1;
-            },
-            'title' => 'Dashboard',
-            'link' => 'home',
-            'icon' => 'motherboard',
-            'description' => "Visual display of all of your data"
         ]);
 
         Menu::factory()->create([

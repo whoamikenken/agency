@@ -37,46 +37,55 @@
     {{-- BOOTSTRAP --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
-    {{-- DATATABLE --}}
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/r-2.3.0/datatables.min.css"/>
     
-    {{-- SELECT2 CSS --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-    <!-- Or for RTL support -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
-    
-    {{-- DATE PICKER CSS --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     
     {{-- BOOTSTRAP ICON --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+
+    @if ($menuSelected != 1)
+        {{-- For Main --}}
+        {{-- DATATABLE --}}
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/r-2.3.0/datatables.min.css"/>
+        
+        {{-- SELECT2 CSS --}}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+        <!-- Or for RTL support -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
+        
+        {{-- DATE PICKER CSS --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    @endif
     
+
     {{-- JQUERY --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     
-    {{-- SELECT 2 --}}
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
-    {{-- SWEET ALERT --}}
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-    {{-- DATATABLE --}}
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/r-2.3.0/datatables.min.js"></script> 
-    
-    {{-- DATE PICKER --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    @if ($menuSelected == 1)
+        {{-- For Applicant --}}
+        <link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
+        <link href="https://unpkg.com/@videojs/themes@1/dist/sea/index.css" rel="stylesheet"> 
+    @else
+        {{-- MAIN --}}
 
-    <script src="https://cdn.jsdelivr.net/npm/watermarkjs@2.1.1/dist/watermark.min.js"></script>
+        {{-- SELECT 2 --}}
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        
+        {{-- SWEET ALERT --}}
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+        {{-- DATATABLE --}}
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/r-2.3.0/datatables.min.js"></script> 
+        
+        {{-- DATE PICKER --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    @endif
 
-    <link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
-    <link href="https://unpkg.com/@videojs/themes@1/dist/sea/index.css" rel="stylesheet">
-
-    
     <style type="text/css">
         .sweet_loader {
             width: 140px;
@@ -227,15 +236,31 @@ $mainmenu = 1;
                         </button>
                         <div class="collapse navbar-collapse" id="navbarMobile" style="flex-grow: 0;">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                @foreach ($menus as $key => $items)
-                                    @foreach ($items as $item)
-                                    @if (in_array($item->menu_id, $readAccess))
-                                        <li class="nav-item d-block d-sm-none">
-                                            <a class="nav-link menuMobile" style="color: #fff !important;font-size: 20px !important;" menu="{{$item->link}}" nav="{{$mainmenu}}" menu_id="{{$item->menu_id}}" aria-current="page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i> {{$item->title}}</a>
-                                        </li>
+                                @foreach ($menus as $title => $items)
+                                @if (isset($items->menu_id))
+                                    @if (in_array($items->menu_id, $readAccess))
+                                        <li class="nav-item d-block d-sm-none"><a class="link-light rounded menuLink text-decoration-none m-2 p-2 fs-4 {{($menuSelected == $items->menu_id) ? "active":"" }}" menu="{{$items->link}}" nav="{{$mainmenu}}" menu_id="{{$items->menu_id}}" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$items->description}}"><i class="bi bi-{{$items->icon}}"></i>&nbsp;&nbsp;{{$items->title}}</a></li>
                                     @endif
-                                    @endforeach
-                                    <hr class="text-white">
+                                @else
+                                <li class="mb-1 nav-item d-block d-sm-none">
+                                    <button class="btn btn-toggle align-items-center rounded {{(isset($navSelected) && $navSelected == $mainmenu)? "":"collapsed" }}" data-bs-toggle="collapse" data-bs-target="#account-collapse{{$mainmenu}}" aria-expanded="{{(isset($navSelected) && $navSelected == $mainmenu)? "true":"false" }}">
+                                        {{$title}}
+                                    </button>
+                                    <div class="collapse {{(isset($navSelected) && $navSelected == $mainmenu)? "show":"" }}" id="account-collapse{{$mainmenu}}">
+                                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                            @foreach ($items as $val)
+                                            @if (in_array($val->menu_id, $readAccess))
+                                                <li><a class="link-light rounded menuLink m-2 p-2 fs-4 {{($menuSelected == $val->menu_id) ? "active":"" }}" menu="{{$val->link}}" nav="{{$mainmenu}}" menu_id="{{$val->menu_id}}" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$val->description}}"><i class="bi bi-{{$val->icon}}"></i>&nbsp;&nbsp;{{$val->title}}</a></li>
+                                            @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </li>
+                                @php
+                                    $mainmenu++;
+                                @endphp
+                                @endif
+                                <hr class="text-white">
                                 @endforeach
                             </ul>
                             <form class="d-flex text-end justify-content-between">
@@ -273,6 +298,11 @@ $mainmenu = 1;
                     
                     <ul class="list-unstyled ps-0">
                         @foreach ($menus as $title => $item)
+                        @if (isset($item->menu_id))
+                            @if (in_array($item->menu_id, $readAccess))
+                                <li><a class="link-light rounded menuLink text-decoration-none m-2 p-2 fs-4 {{($menuSelected == $item->menu_id) ? "active":"" }}" menu="{{$item->link}}" nav="{{$mainmenu}}" menu_id="{{$item->menu_id}}" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i>&nbsp;&nbsp;{{$item->title}}</a></li>
+                            @endif
+                        @else
                         <li class="border-top my-3"></li>
                         <li class="mb-1">
                             <button class="btn btn-toggle align-items-center rounded {{(isset($navSelected) && $navSelected == $mainmenu)? "":"collapsed" }}" data-bs-toggle="collapse" data-bs-target="#account-collapse{{$mainmenu}}" aria-expanded="{{(isset($navSelected) && $navSelected == $mainmenu)? "true":"false" }}">
@@ -282,12 +312,13 @@ $mainmenu = 1;
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     @foreach ($item as $val)
                                     @if (in_array($val->menu_id, $readAccess))
-                                        <li><a class="link-light rounded menuLink {{($menuSelected == $val->menu_id) ? "active":"" }}" menu="{{$val->link}}" nav="{{$mainmenu}}" menu_id="{{$val->menu_id}}" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$val->description}}"><i class="bi bi-{{$val->icon}}"></i>&nbsp;&nbsp;{{$val->title}}</a></li>
+                                        <li><a class="link-light rounded menuLink m-2 p-2 fs-4 {{($menuSelected == $val->menu_id) ? "active":"" }}" menu="{{$val->link}}" nav="{{$mainmenu}}" menu_id="{{$val->menu_id}}" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$val->description}}"><i class="bi bi-{{$val->icon}}"></i>&nbsp;&nbsp;{{$val->title}}</a></li>
                                     @endif
                                     @endforeach
                                 </ul>
                             </div>
                         </li>
+                        @endif
                         @php
                         $mainmenu++;
                         @endphp
