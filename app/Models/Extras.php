@@ -196,35 +196,32 @@ class Extras extends Model
 
     public static function getDepartureMonth($month = null)
     {
-        $result = DB::select("SELECT visa_date_expired, passport_validity,oec_flight_departure FROM applicants WHERE MONTH(oec_flight_departure) = $month AND YEAR(oec_flight_departure) = YEAR(CURDATE()) AND isactive = 'Active'");
-
-        return count($result);
+        $result = DB::table('applicants')->select('id')->where(DB::raw("MONTH(oec_flight_departure)"), '=', $month)->where(DB::raw("YEAR(oec_flight_departure)"), '=', DB::raw("YEAR(CURDATE())"))->where("isactive", '=', "Active")->count();
+        return $result;
     }
 
     public static function getJobOrderMonth($month = null)
     {
-        $result = DB::select("SELECT visa_date_expired, passport_validity,jo_received FROM applicants WHERE MONTH(jo_received) = $month AND YEAR(jo_received) = YEAR(CURDATE()) AND isactive = 'Active'");
-
-        return count($result);
+        $result = DB::table('applicants')->select('id')->where(DB::raw("MONTH(jo_received)"), '=', $month)->where(DB::raw("YEAR(jo_received)"), '=', DB::raw("YEAR(CURDATE())"))->where("isactive", '=', "Active")->count();
+        return $result;
     }
 
     public static function getApplicantRegistered($month = null)
     {
-        $result = DB::select("SELECT visa_date_expired, passport_validity,date_applied FROM applicants WHERE MONTH(date_applied) = $month AND YEAR(date_applied) = YEAR(CURDATE()) AND isactive = 'Active'");
-
-        return count($result);
+        $result = DB::table('applicants')->select('id')->where(DB::raw("MONTH(date_applied)"), '=', $month)->where(DB::raw("YEAR(date_applied)"), '=', DB::raw("YEAR(CURDATE())"))->where("isactive", '=', "Active")->count();
+        return $result;
     }
 
     public static function getApplicantInBranch($branch = null)
     {
-        $result = DB::select("SELECT visa_date_expired, passport_validity,oec_flight_departure FROM applicants WHERE branch = '$branch' AND isactive = 'Active'");
+        $result = DB::select("SELECT id FROM applicants WHERE branch = '$branch' AND isactive = 'Active'");
 
         return count($result);
     }
 
     public static function getBranchDeployedMonth($month = null, $branch = null)
     {
-        $result = DB::select("SELECT * FROM applicants WHERE branch = '$branch' AND MONTH(oec_flight_departure) = $month AND YEAR(oec_flight_departure) = YEAR(CURDATE()) AND isactive = 'Active'");
+        $result = DB::select("SELECT id FROM applicants WHERE branch = '$branch' AND MONTH(oec_flight_departure) = $month AND YEAR(oec_flight_departure) = YEAR(CURDATE()) AND isactive = 'Active'");
 
         return count($result);
     }

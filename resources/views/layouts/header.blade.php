@@ -42,7 +42,6 @@
     {{-- BOOTSTRAP ICON --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-
     @if ($menuSelected != 1)
         {{-- For Main --}}
         {{-- DATATABLE --}}
@@ -64,11 +63,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     
-    @if ($menuSelected == 1)
-        {{-- For Applicant --}}
-        <link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
-        <link href="https://unpkg.com/@videojs/themes@1/dist/sea/index.css" rel="stylesheet"> 
-    @else
+    @if ($menuSelected != 1)
         {{-- MAIN --}}
 
         {{-- SELECT 2 --}}
@@ -84,6 +79,12 @@
         
         {{-- DATE PICKER --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+        @if ($menuSelected == 12)
+            {{-- For Applicant List --}}
+            <link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
+            <link href="https://unpkg.com/@videojs/themes@1/dist/sea/index.css" rel="stylesheet"> 
+        @endif
     @endif
 
     <style type="text/css">

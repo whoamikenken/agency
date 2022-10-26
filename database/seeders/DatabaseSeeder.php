@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
-            'read' => "5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
+            'read' => "1,5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
             'add' => "6,12,13,7,8,9,10,11",
             'delete' => "6,12,13,7,8,9,10,11",
             'edit' => "6,12,7,8,9,10,11,801,802,803,804,15",
@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
-            'read' => "5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
+            'read' => "1,5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
             'add' => "6,12,13,7,8,9,10,11",
             'delete' => "6,12,13,7,8,9,10,11",
             'edit' => "6,12,7,8,9,10,11,801,802,803,804,15",
@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
-            'read' => "5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
+            'read' => "1,5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
             'add' => "6,12,13,7,8,9,10,11",
             'delete' => "6,12,13,7,8,9,10,11",
             'edit' => "6,12,7,8,9,10,11,801,802,803,804,15",
@@ -84,7 +84,7 @@ class DatabaseSeeder extends Seeder
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
-            'read' => "5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
+            'read' => "1,5,6,12,13,14,7,8,9,10,11,801,802,803,804,15,999",
             'add' => "6,12,13,7,8,9,10,11",
             'delete' => "6,12,13,7,8,9,10,11",
             'edit' => "6,12,7,8,9,10,11,801,802,803,804,15",
@@ -92,7 +92,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory(10)->create();
-        // Applicant::factory(1000)->create();
+        Applicant::factory(2500)->create();
         Medical::factory(10)->create();
         
         $this->call([

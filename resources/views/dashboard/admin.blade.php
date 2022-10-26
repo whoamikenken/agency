@@ -195,10 +195,10 @@
 let delayed;
 
     $(document).ready(function () {
-        getBranchApplicant();
-        getBioStatusApplicant();
         getPerformancePerMonth();
         getBranchPerformancePerMonth();
+        getBranchApplicant();
+        getBioStatusApplicant();
     });
 
     $(window).scroll(function () {
