@@ -19,7 +19,7 @@
         <div class="card-header" style="font-size: 23px;background: #0d6cf9;color: white;">General Information</div>
         <div class="card-body text-secondary">
             <div class="row">
-                <div class="col-sm-12 col-lg-2 text-center">
+                <div class="col-sm-12 col-lg-6 col-xxl-2 text-center">
                     @if ($user_profile_face != "")
                     <img src="{{  Storage::disk('s3')->url($user_profile_face)}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
                     @else
@@ -35,7 +35,7 @@
                         <input type="file" class="form-control form-control-sm" id="user_video" name="user_video">
                     </div>
                 </div>
-                <div class="col-sm-12 col-lg-2 text-center">
+                <div class="col-sm-12 col-lg-6 col-xxl-2 text-center">
                     <form id="PictureForm" enctype="multipart/form-data">
                         @if ($user_profile != "")
                         <img src="{{  Storage::disk('s3')->url($user_profile)}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
@@ -52,7 +52,7 @@
                         @endif
                     </form>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xxl-4">
                     <div class="col-md-12 col-sm-12">
                         <label style="font-weight:600">ER Ref.</label>
                         <div class="input-group">
@@ -173,7 +173,7 @@
                         </div>
                     @endif
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xxl-4">
                     <div class="col-md-12 col-sm-12">
                         <label style="font-weight:600">Maid Ref</label>
                         <div class="input-group">

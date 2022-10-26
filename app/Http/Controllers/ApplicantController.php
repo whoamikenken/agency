@@ -26,7 +26,7 @@ class ApplicantController extends Controller
         if($filter['sales']) $where[] = array('sales_manager', '=', $filter['sales']);
         if($filter['branch']) $where[] = array('branch', '=', $filter['branch']);
         if($filter['jobsite']) $where[] = array('jobsite', '=', $filter['jobsite']);
-        $data['result'] = DB::table('applicants')->where($where)->paginate(8);
+        $data['result'] = DB::table('applicants')->where($where)->paginate(12);
         foreach ($data['result'] as $key => $value) {
             $data['result'][$key]->sales_manager = DB::table('users')->where('id', $value->sales_manager)->value('name');
             $data['result'][$key]->jobsite = DB::table('jobsites')->where('code', $value->jobsite)->value('description');
@@ -284,7 +284,7 @@ class ApplicantController extends Controller
             $syncApplicant++;
         }
         
-        if ($syncApplicant != 0) {
+        if ($syncApplicant != 0) {-
             $return = array('status' => 1, 'msg' => 'Successfully sync '.$syncApplicant.' applicants', 'title' => 'Success!');
         }
 

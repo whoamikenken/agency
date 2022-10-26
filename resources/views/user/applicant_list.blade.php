@@ -9,8 +9,8 @@
             if($item->bio_availability == "Pending") $color = "blue";
             if($item->bio_availability == "Backed out") $color = "#ffc107";
         @endphp
-            <div class="col-sm-12 col-md-6 col-lg-3">
-                <div class="card mb-3 shadow-sm" >
+            <div class="col-sm-12 col-xl-4 col-lg-6 col-md-12">
+                <div class="card mb-3 shadow-sm">
                     <div class="row g-0">
                         <div class="col-4">
                             @if ($item->user_profile)
@@ -22,7 +22,7 @@
                         <div class="col-8">
                             <div class="card-body">
                                 <h5 class="card-title">{{$item->fname." ".$item->lname}}</h5>
-                                <p >Jobsite: {{$item->jobsite}}<br>
+                                <p class="text-wrap">Jobsite: {{$item->jobsite}}<br>
                                 Branch: {{$item->branch}}<br>
                                 Status: <span style="color:{{ ($item->isactive == "Active") ? "green":"red"  }}">{{$item->isactive}}</span><br>
                                 Availability: <span style="color:{{ $color  }}">{{$item->bio_availability}}</span></p>

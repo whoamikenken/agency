@@ -28,7 +28,7 @@ $applicant_select = DB::table('applicants')->where("isactive","Active")->get();
             <form id="applicantListForm">
                 <input type="hidden" name="page" id="page" value="1">
                 <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-6">
                         <div class="row mb-3">
                             <label for="colFormLabel" class="col-sm-2 col-form-label">Applicant</label>
                             <div class="col-sm-10">
@@ -41,7 +41,7 @@ $applicant_select = DB::table('applicants')->where("isactive","Active")->get();
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-6">
                         <div class="row mb-3">
                             <label for="colFormLabel" class="col-sm-2 col-form-label">Sales</label>
                             <div class="col-sm-10">
@@ -54,7 +54,7 @@ $applicant_select = DB::table('applicants')->where("isactive","Active")->get();
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-6">
                         <div class="row mb-3">
                             <label for="colFormLabel" class="col-sm-2 col-form-label">Branch</label>
                             <div class="col-sm-10">
@@ -67,7 +67,7 @@ $applicant_select = DB::table('applicants')->where("isactive","Active")->get();
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-6">
                         <div class="row mb-3">
                             <label for="colFormLabel" class="col-sm-2 col-form-label">Jobsite</label>
                             <div class="col-sm-10">
