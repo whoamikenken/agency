@@ -387,7 +387,6 @@ $mainmenu = 1;
 
     @if (!in_array($menuSelected, $editAccess))
         $(document).ajaxStop(function() {
-            $(".editbtn").remove();
             $(document).on("click", ".editbtn", function () {
                 Swal.fire({
                     icon: 'error',
@@ -397,11 +396,16 @@ $mainmenu = 1;
                 return false;
             });
         });
+        
+        $(document).on( 'draw.dt', function ( e, settings ) {
+            var api = new $.fn.dataTable.Api( settings );
+            $(".editbtn").remove();
+        });
+
     @endif
 
     @if (!in_array($menuSelected, $deleteAccess))
         $(document).ajaxStop(function() {
-            $(".delbtn").remove();
             $(document).on("click", ".delbtn", function () {
                 Swal.fire({
                     icon: 'error',
@@ -410,6 +414,11 @@ $mainmenu = 1;
                 })
                 return false;
             });
+        });
+
+        $(document).on( 'draw.dt', function ( e, settings ) {
+            var api = new $.fn.dataTable.Api( settings );
+            $(".delbtn").remove();
         });
     @endif
 
