@@ -65,8 +65,8 @@
                                     
                                     <div class="col-sm-12 col-sm-6 text-end">
                                         <button type="button" id="login"
-                                        class="btn btn-primary px-4">Login</button>&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-info px-4 text-white" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+                                        class="btn btn-success px-4">Login</button>&nbsp;&nbsp;&nbsp;
+                                        <button type="button" class="btn btn-primary px-4 text-white" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
                                     </div>
                                 </form>
                             </div>
