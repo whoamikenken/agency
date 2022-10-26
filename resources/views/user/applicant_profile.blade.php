@@ -1103,7 +1103,6 @@
         <option value="Unfit">
         <option value="Pending">
         </datalist>
-<script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
 <script>
     $(document).ready(function () {
         

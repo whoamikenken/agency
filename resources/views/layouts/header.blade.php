@@ -84,6 +84,8 @@
             {{-- For Applicant List --}}
             <link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
             <link href="https://unpkg.com/@videojs/themes@1/dist/sea/index.css" rel="stylesheet"> 
+
+            <script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
         @endif
     @endif
 
