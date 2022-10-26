@@ -25,15 +25,5 @@ class LoginController extends Controller
         if(Auth::check()){
             return redirect()->route('home');
         }
-        // dd(Auth::check());
-        // $menus = DB::table('menus')->where('root', '=', '0')->get();
-        // foreach ($menus as $key => $value) {
-        //     $data['menus'][$value->title] = json_decode(DB::table('menus')->where("root", "=", $value->menu_id)->orderBy("order", "asc")->get());
-        // }
-
-        // $data['navSelected'] = 1;
-        // $data['menuSelected'] = 5;
-        // return view('home', $data);
-
     }
 }

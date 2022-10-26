@@ -38,7 +38,7 @@ Auth::routes();
 Route::get('/', [LoginController::class, 'index']);
 
 Route::match(['get', 'post'], '/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
-`
+
 // JobSite
 Route::post('/jobsite/table', [JobsiteController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/jobsite/getModal', [JobsiteController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
