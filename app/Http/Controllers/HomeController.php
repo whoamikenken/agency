@@ -27,19 +27,23 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        // dd(Auth::user()->user_image);
-        // auth()->logout();
-        // $request->session()->invalidate();
-        // $request->session()->regenerateToken();
         $menus = DB::table('menus')->where('root', '=', '0')->get();
-        // dd($data['menus']);
         foreach ($menus as $key => $value) {
-            $data['menus'][$value->title] = json_decode(DB::table('menus')->where("root", "=", $value->menu_id)->orderBy("order", "asc")->get());
+            if ($value->link) $data['menus'][$value->title] = $value;
+            else $data['menus'][$value->title] = json_decode(DB::table('menus')->where("root", "=", $value->menu_id)->orderBy("order", "asc")->get());
         }
-        
-        return view('home', $data);
+
+        $data['navSelected'] = ($request->nav)? $request->nav:0 ;
+        $data['menuSelected'] = ($request->menu_id) ? $request->menu_id : 1;
+        $viewRequest = ($request->route)? $request->route:"home";
+
+        $data['readAccess'] = explode(",", Extras::getAccessList("read", Auth::user()->username));
+        $data['addAccess'] = explode(",", Extras::getAccessList("add", Auth::user()->username));
+        $data['editAccess'] = explode(",", Extras::getAccessList("edit", Auth::user()->username));
+        $data['deleteAccess'] = explode(",", Extras::getAccessList("delete", Auth::user()->username));
+        return view($viewRequest, $data);
     }
 
     public function dashboard(){
@@ -50,10 +54,6 @@ class HomeController extends Controller
         $data['active_applicant'] = Extras::countActiveApplicant();
         $data['expired_applicant'] = Extras::countExpiredPassportAndVisa();
         $data['top_sales'] = DB::table('users')->select("*", DB::raw('(SELECT COUNT(*) FROM applicants  WHERE MONTH(oec_flight_departure) = "10" AND YEAR(oec_flight_departure) = YEAR(CURDATE()) AND isactive = "Active" AND sales_manager = users.id) as total_sales'), DB::raw('(SELECT description FROM branches WHERE code = users.branch) as branchdesc'))->where("user_type", "=", 'Sales')->orderBy("total_sales", "desc")->paginate(8);
-        
-        // foreach ($data['top_sales'] as $key => $value) {
-        //     $data['top_sales'][$key]->branch = DB::table('branches')->where('code', $value->branch)->value('description');
-        // }
 
         return view('dashboard/admin', $data);
         }else{

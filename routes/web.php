@@ -37,42 +37,7 @@ Auth::routes();
 
 Route::get('/', [LoginController::class, 'index']);
 
-Route::get('/home', function(){
-
-    $menus = DB::table('menus')->where('root', '=', '0')->get();
-    foreach ($menus as $key => $value) {
-        if ($value->link) $data['menus'][$value->title] = $value;
-        else $data['menus'][$value->title] = json_decode(DB::table('menus')->where("root", "=", $value->menu_id)->orderBy("order", "asc")->get());
-    }
-
-    $data['navSelected'] = 0;
-    $data['menuSelected'] = 1;
-
-    $data['readAccess'] = explode(",", Extras::getAccessList("read", Auth::user()->username));
-    $data['addAccess'] = explode(",", Extras::getAccessList("add", Auth::user()->username));
-    $data['editAccess'] = explode(",", Extras::getAccessList("edit", Auth::user()->username));
-    $data['deleteAccess'] = explode(",", Extras::getAccessList("delete", Auth::user()->username));
-
-    return view('home', $data);
-
-})->name('home')->middleware('auth');
-
-Route::post('/home', function (Request $request) {
-    $menus = DB::table('menus')->where('root', '=', '0')->get();
-    foreach ($menus as $key => $value) {
-        $data['menus'][$value->title] = json_decode(DB::table('menus')->where("root", "=", $value->menu_id)->orderBy("order", "asc")->get());
-    }
-
-    $data['navSelected'] = $request->nav;
-    $data['menuSelected'] = $request->menu_id;
-
-    $data['readAccess'] = explode(",", Extras::getAccessList("read", Auth::user()->username));
-    $data['addAccess'] = explode(",", Extras::getAccessList("add", Auth::user()->username));
-    $data['editAccess'] = explode(",", Extras::getAccessList("edit", Auth::user()->username));
-    $data['deleteAccess'] = explode(",", Extras::getAccessList("delete", Auth::user()->username));
-    return view($request->route, $data);
-    
-})->middleware('auth');
+Route::match(['get', 'post'], '/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 // JobSite
 Route::post('/jobsite/table', [JobsiteController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
