@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Extras;
 use App\Models\Certificate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -44,7 +45,6 @@ class CertificateController extends Controller
         }
 
         $data['uid'] = $formFields['uid'];
-        // dd($data);
         return view('certificate/certificate_modal', $data);
     }
 
@@ -64,7 +64,9 @@ class CertificateController extends Controller
             $formFields['created_by'] = Auth::id();
             $formFields['updated_at'] = "";
             if ($request->hasFile('certificate')) {
-                $formFields['certificate'] = $request->file('certificate')->store('certificate', 's3');
+                $file = $request->file('certificate');
+                $fileResponse = Extras::uploadToEmpsys($file);
+                $formFields['certificate'] = $fileResponse->data->file_path;
             }
             Certificate::create($formFields);
             $return = array('status' => 1, 'msg' => 'Successfully added certificate', 'title' => 'Success!');
@@ -76,9 +78,11 @@ class CertificateController extends Controller
             if ($request->hasFile('certificate')) {
                 $certificateData = DB::table('certificates')->where('id', $id)->first();
                 if ($certificateData->certificate) {
-                    Storage::disk('empsys')->delete($certificateData->certificate);
+                    $delResponse = Extras::deleteEmpsys($certificateData->certificate);
                 }
-                $formFields['certificate'] = $request->file('certificate')->store('certificate', 's3');
+                $file = $request->file('certificate');
+                $fileResponse = Extras::uploadToEmpsys($file);
+                $formFields['certificate'] = $fileResponse->data->file_path;
             }
             DB::table('certificates')->where('id', $id)->update($formFields);
             $return = array('status' => 1, 'msg' => 'Successfully updated certificate', 'title' => 'Success!');

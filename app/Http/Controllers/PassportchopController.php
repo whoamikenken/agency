@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Extras;
 use App\Models\Tablecolumn;
 use App\Models\Passportchop;
 use Illuminate\Http\Request;
@@ -65,7 +66,9 @@ class PassportchopController extends Controller
             $formFields['created_by'] = Auth::id();
             $formFields['updated_at'] = "";
             if ($request->hasFile('chops')) {
-                $formFields['chops'] = $request->file('chops')->store('chops', 's3');
+                $file = $request->file('chops');
+                $fileResponse = Extras::uploadToEmpsys($file);
+                $formFields['chops'] = $fileResponse->data->file_path;
             }
             Passportchop::create($formFields);
             $return = array('status' => 1, 'msg' => 'Successfully added passport', 'title' => 'Success!');
@@ -77,9 +80,11 @@ class PassportchopController extends Controller
             if ($request->hasFile('chops')) {
                 $passportData = DB::table('passport_chops')->where('id', $id)->first();
                 if ($passportData->chops) {
-                    Storage::disk('empsys')->delete($passportData->chops);
+                    $delResponse = Extras::deleteEmpsys($passportData->chops);
                 }
-                $formFields['chops'] = $request->file('chops')->store('chops', 's3');
+                $file = $request->file('chops');
+                $fileResponse = Extras::uploadToEmpsys($file);
+                $formFields['chops'] = $fileResponse->data->file_path;
             }
             DB::table('passport_chops')->where('id', $id)->update($formFields);
             $return = array('status' => 1, 'msg' => 'Successfully updated passport', 'title' => 'Success!');

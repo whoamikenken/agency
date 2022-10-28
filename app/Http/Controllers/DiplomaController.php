@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Extras;
 use App\Models\Diploma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -65,7 +66,9 @@ class DiplomaController extends Controller
             $formFields['created_by'] = Auth::id();
             $formFields['updated_at'] = "";
             if ($request->hasFile('diploma')) {
-                $formFields['diploma'] = $request->file('diploma')->store('diploma', 's3');
+                $file = $request->file('diploma');
+                $fileResponse = Extras::uploadToEmpsys($file);
+                $formFields['diploma'] = $fileResponse->data->file_path;
             }
             Diploma::create($formFields);
             $return = array('status' => 1, 'msg' => 'Successfully added diploma', 'title' => 'Success!');
@@ -77,9 +80,11 @@ class DiplomaController extends Controller
             if ($request->hasFile('diploma')) {
                 $diplomaData = DB::table('diplomas')->where('id', $id)->first();
                 if ($diplomaData->diploma) {
-                    Storage::disk('empsys')->delete($diplomaData->diploma);
+                    $delResponse = Extras::deleteEmpsys($diplomaData->diploma);
                 }
-                $formFields['diploma'] = $request->file('diploma')->store('diploma', 's3');
+                $file = $request->file('diploma');
+                $fileResponse = Extras::uploadToEmpsys($file);
+                $formFields['diploma'] = $fileResponse->data->file_path;
             }
             DB::table('diplomas')->where('id', $id)->update($formFields);
             $return = array('status' => 1, 'msg' => 'Successfully updated diploma', 'title' => 'Success!');
