@@ -186,7 +186,7 @@ class ApplicantController extends Controller
                     $delResponse = Extras::deleteEmpsys($users->{$column});
                 }
             }
-
+            
             $file = $request->file('file');
             $fileResponse = Extras::uploadToEmpsys($file);
             $value = $fileResponse->data->file_path;
