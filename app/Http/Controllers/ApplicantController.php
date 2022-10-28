@@ -153,7 +153,6 @@ class ApplicantController extends Controller
     public function store(Request $request)
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
-        dd($request->input());
         $formFields = $request->validate([
             'applicant_id' => ['required'],
             'fname' => ['required'],
@@ -195,7 +194,7 @@ class ApplicantController extends Controller
         $formFields = array($column => $value);
         $query = DB::table('applicants')->where('applicant_id', $applicant_id)->update($formFields);
         
-        if ($column == "med_first_cost" || $column == "med_second_cost" || $column == "med_third_cost" || $column == "med_fourth_cost" || $column == "cert_nc2_cost") {
+        if ($column == "med_first_cost" || $column == "med_second_cost" || $column == "med_third_cost" || $column == "med_fourth_cost" || $column =="cert_nc2_cost" || $column =="cert_pdos_cost" || $column =="oec_cost" || $column =="oec_insurance_cost" || $column == "oec_pregnancy_test_cost") {
             $users = DB::table('applicants')->where('applicant_id', $applicant_id)->first();
             $total_cost = $users->med_first_cost + $users->med_second_cost + $users->med_third_cost + $users->med_fourth_cost + $users->cert_nc2_cost;
             $NewTotalCost = array('total_cost' => $total_cost);

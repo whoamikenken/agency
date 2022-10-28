@@ -125,7 +125,7 @@ return new class extends Migration
             $table->string('visa_er_iscancel', 3)->default('No');
             $table->string('visa_maid_iscancel', 3)->default('No');
             $table->string('oec_number', 30)->nullable();
-            $table->string('oec_cost_done', 30)->nullable()->default('No');
+            $table->string('oec_done', 30)->nullable()->default('No');
             $table->integer('oec_cost')->nullable()->default(0);
             $table->date('oec_date_done')->nullable();
             $table->date('oec_contract_received')->nullable();

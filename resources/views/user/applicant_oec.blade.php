@@ -110,9 +110,9 @@
                     <label style="font-weight:600">Is Done?</label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="bi bi-question-circle-fill"></i></div>
-                        <select name="oec_cost_done" id="oec_cost_done" class="form-control form-select">
-                            <option value="Yes" {{ (isset($oec_cost_done) && $oec_cost_done == "Yes")? "selected":"" }} >Yes</option>
-                            <option value="No" {{ (isset($oec_cost_done) && $oec_cost_done == "No")? "selected":"" }} >No</option>
+                        <select name="oec_done" id="oec_done" class="form-control form-select">
+                            <option value="Yes" {{ (isset($oec_done) && $oec_done == "Yes")? "selected":"" }} >Yes</option>
+                            <option value="No" {{ (isset($oec_done) && $oec_done == "No")? "selected":"" }} >No</option>
                         </select>
                         <div class="valid-feedback">
                             Looks good!
