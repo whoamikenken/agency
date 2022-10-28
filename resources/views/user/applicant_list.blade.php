@@ -14,9 +14,9 @@
                     <div class="row g-0">
                         <div class="col-4">
                             @if ($item->user_profile)
-                                <img src="{{  Storage::disk('s3')->url($item->user_profile)}}" id="{{$item->applicant_id}}" class="img-fluid user_photo_list rounded animate__animated animate__fadeIn animate__delay-1s m-2" alt="..." style="height: -webkit-fill-available;">
+                                <img src="{{  Storage::disk('empsys')->url($item->user_profile_face) }}" id="{{$item->applicant_id}}" class="img-fluid user_photo_list rounded animate__animated animate__fadeIn animate__delay-1s m-2" alt="..." style="height: 213px" onerror="this.onerror=null;this.src='{{ asset('images/user.png')}}'">
                             @else
-                                <img src="{{ asset('images/user.png')}}" class="img-fluid user_photo_list rounded animate__animated animate__fadeIn animate__delay-1s" alt="...">
+                                <img src="{{ asset('images/user.png')}}" class="img-fluid user_photo_list rounded animate__animated animate__fadeIn animate__delay-1s" alt="..." id="twa">
                             @endif
                         </div>
                         <div class="col-8">
@@ -44,19 +44,5 @@
 
 <script>
     $(document).ready(function () {
-        // $(".user_photo_list").each(function() {  
-        //     imgsrc = this.src;
-        //     console.log(imgsrc);
-        //     var imgID = $(this).attr("id");
-        //     watermark([imgsrc, "{{ asset('Icon/favicon-96x96.png') }}"])
-        //     // .image(watermark.text.lowerRight('KINGSMANPOWER', '28px serif', '#fff', 0.5))
-        //     .image(watermark.image.upperRight(0.5))
-        //     .then(function (img) {
-        //         $(img).addClass("img-fluid user_photo_list rounded animate__animated animate__fadeIn animate__delay-1s m-2");
-        //         $(img).css("height", "-webkit-fill-available");
-        //         console.log($("#"+imgID));
-        //         $("#"+imgID).replaceWith(img);
-        //     });
-        // });  
     });
 </script>

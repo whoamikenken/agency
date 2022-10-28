@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-sm-12 col-lg-6 col-xxl-2 text-center">
                     @if ($user_profile_face != "")
-                    <img src="{{  Storage::disk('s3')->url($user_profile_face)}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
+                    <img src="{{  Storage::disk('empsys')->url($user_profile_face)}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;" onerror="this.onerror=null;this.src='{{ asset('images/no-image.jpg')}}'">
                     @else
                     <img src="{{ asset('images/user.png')}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
                     @endif
@@ -38,7 +38,7 @@
                 <div class="col-sm-12 col-lg-6 col-xxl-2 text-center">
                     <form id="PictureForm" enctype="multipart/form-data">
                         @if ($user_profile != "")
-                        <img src="{{  Storage::disk('s3')->url($user_profile)}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
+                        <img src="{{  Storage::disk('empsys')->url($user_profile)}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;" onerror="this.onerror=null;this.src='{{ asset('images/user.png')}}'">
                         @else
                         <img src="{{ asset('images/user.png')}}" class="img-fluid rounded-start" alt="..." style="max-height: 268px;">
                         @endif
@@ -1066,7 +1066,7 @@
     </div>
 </div>   
 <div class="modal fade" id="userVideo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userVideoLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="userVideoLabel">{{ $fname." ".$lname}}</h5>
@@ -1078,20 +1078,18 @@
                 class="video-js"
                 controls
                 preload="auto"
-                width="336"
-                height="656"
-                poster="{{  Storage::disk('s3')->url($user_profile)}}"
+                poster="{{  Storage::disk('empsys')->url($user_profile)}}"
                 data-setup="{}"
                 >
-                <source src="{{  Storage::disk('s3')->url($user_video)}}" type="video/mp4" />
+                <source src="{{  Storage::disk('empsys')->url($user_video)}}" type="video/mp4" />
                     <p class="vjs-no-js">
                         To view this video please enable JavaScript, and consider upgrading to a
                         web browser that
-                        <a href="{{  Storage::disk('s3')->url($user_video)}}" target="_blank"
+                        <a href="{{  Storage::disk('empsys')->url($user_video)}}" target="_blank"
                             >supports HTML5 video</a
                             >
                         </p>
-                    </video>
+                </video>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -1105,6 +1103,10 @@
         </datalist>
 <script>
     $(document).ready(function () {
+
+        var player = videojs('my-video', {
+            fluid: true
+        });
         
         $('.datepicker').datepicker({
             format: 'yyyy-mm-dd'

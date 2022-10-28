@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Extras;
+use App\Mail\MailNotify;
 use App\Models\Applicant;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
@@ -11,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use App\Mail\MailNotify;
 
 class ApplicantController extends Controller
 {
@@ -180,9 +181,15 @@ class ApplicantController extends Controller
         $value = $request->input("value");
         if ($request->hasFile('file')) {
             $users = DB::table('applicants')->where('applicant_id', $applicant_id)->first();
+            
                 if ($users->{$column}) {
-                    Storage::disk('s3')->delete($users->{$column});
+                    if(!str_contains($users->{$column}, 'applicants')){
+                        dd($users->{$column});
+                        // Storage::disk('s3')->delete($users->{$column});
+                    }
                 }
+
+            dd($request->file('file'));
                 $value = $request->file('file')->store($column, 's3');
         }
 
@@ -245,46 +252,39 @@ class ApplicantController extends Controller
         $applicantList = $resultAll->data->data;
         
         $syncApplicant = 0;
+        $counter = 0;
         foreach ($applicantList as $key => $value) {
-            
-            $dataApplicantID = array(
-                'id' => $value->id,
-                // 'id' => '8000',
-            );
-            sleep(2);
-            $resultApplicantInfo = Extras::requestToEmpsys("https://api-empsysv3.technic.com.hk/v3/applicant/details", "get", $dataApplicantID, $token);
-            $resultApplicantInfo = json_decode($resultApplicantInfo);
-            // dd($resultApplicantInfo);
-            $applicantDataEmpSys = $resultApplicantInfo->data->applicant;
-            
+            if (strlen($value->first_name) > 30 || strlen($value->last_name) > 30) {
+                continue;
+            }
             $applicantData = array();
             // Assigning Data
-            $applicantData['maid_ref'] = $applicantDataEmpSys->maid_full_code;
-            $applicantData['applicant_id'] = $applicantDataEmpSys->id;
-            $applicantData['applicant_type'] = $applicantDataEmpSys->type;
-            $applicantData['user_profile'] = $applicantDataEmpSys->head_img_path;
-            $applicantData['user_profile_face'] = $applicantDataEmpSys->half_body_img_path;
-            $applicantData['user_video'] = $applicantDataEmpSys->video_path;
-            $applicantData['fname'] = $applicantDataEmpSys->first_name;
-            $applicantData['mname'] = $applicantDataEmpSys->middle_name;
-            $applicantData['lname'] = $applicantDataEmpSys->last_name;
-            $applicantData['gender'] = $applicantDataEmpSys->gender;
-            $applicantData['passport_place_issued'] = ($applicantDataEmpSys->passport_country == "Philippines")? "PH": $applicantDataEmpSys->passport_country;
-            $applicantData['passport_validity'] = ($applicantDataEmpSys->passport_validity)? date("Y-m-d", strtotime($applicantDataEmpSys->passport_validity)): NULL;
-            $applicantData['visa_date_expired'] = ($applicantDataEmpSys->visa_expiry_date) ? date("Y-m-d", strtotime($applicantDataEmpSys->visa_expiry_date)) : NULL;
-            $applicantData['bio_availability'] = $applicantDataEmpSys->maid_status;
-            $applicantData['created_at'] = ($applicantDataEmpSys->created_at) ? date("Y-m-d", strtotime($applicantDataEmpSys->created_at)) : NULL;
-            
-            $applicantChecker = Extras::isExist("applicants", $applicantDataEmpSys->id, "applicant_id");
-            if($applicantChecker){
+            $applicantData['maid_ref'] = $value->maid_full_code;
+            $applicantData['applicant_id'] = $value->id;
+            $applicantData['applicant_type'] = $value->type;
+            $applicantData['user_profile'] = "applicants/". $value->maid_full_code."/".$value->half_body_img_path;
+            $applicantData['user_profile_face'] = "applicants/" . $value->maid_full_code . "/" . $value->head_img_path;
+            $applicantData['user_video'] = $value->video_path;
+            $applicantData['fname'] = $value->first_name;
+            $applicantData['mname'] = $value->middle_name;
+            $applicantData['lname'] = $value->last_name;
+            $applicantData['gender'] = $value->gender;
+            $applicantData['passport_place_issued'] = ($value->passport_country == "Philippines") ? "PH" : $value->passport_country;
+            $applicantData['passport_validity'] = ($value->passport_validity) ? date("Y-m-d", strtotime($value->passport_validity)) : NULL;
+            $applicantData['visa_date_expired'] = ($value->visa_expiry_date) ? date("Y-m-d", strtotime($value->visa_expiry_date)) : NULL;
+            $applicantData['bio_availability'] = $value->maid_status;
+            $applicantData['created_at'] = ($value->created_at) ? date("Y-m-d", strtotime($value->created_at)) : NULL;
+
+            $applicantChecker = Extras::isExist("applicants", $value->id, "applicant_id");
+            if ($applicantChecker) {
                 DB::table('applicants')->where('applicant_id', $applicantData['applicant_id'])->update($applicantData);
-            }else{
+            } else {
                 Applicant::create($applicantData);
             }
             $syncApplicant++;
         }
         
-        if ($syncApplicant != 0) {-
+        if ($syncApplicant != 0) {
             $return = array('status' => 1, 'msg' => 'Successfully sync '.$syncApplicant.' applicants', 'title' => 'Success!');
         }
 
