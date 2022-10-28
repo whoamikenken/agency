@@ -125,9 +125,11 @@ class UserController extends Controller
         $noDelete = Extras::getNoDel();
 
         $menus = Extras::getMenusList();
+        // dd($menus);
         $access = array();
         foreach ($menus as $key => $value) {
             $getSubmenus = Extras::getSubMenus($value->menu_id);
+            // dd($getSubmenus);
             if ($value->menu_id == 4) {
                 $access["Applicant Management"][] = array('root_id' => 888, "menu_id" => 801, "title" => "Profile");
                 $access["Applicant Management"][] = array('root_id' => 888, "menu_id" => 802, "title" => "Records");
