@@ -304,44 +304,18 @@ class Extras extends Model
 
     public static function uploadToEmpsys($file)
     {
+        $fileRes = Http::attach("file", file_get_contents($file), $file->getClientOriginalName())
+            ->post('https://api-empsysv3.technic.com.hk/v3/ph-empsys/upload-file', ['auth_key' => "tYUwRAeGkE7TubXpoiR7Mh3eDEhkbRGS"]);
+        $responseData = $fileRes->getBody()->getContents();
+        return json_decode($responseData);
+    }
 
-        $header =  array(
-            'Authorization' => 'Bearer ' . $token,
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-        );
-
-        $response = Http::withHeaders($header)->withOptions([
-            'debug' => fopen('php://stderr', 'w'),
-        ])->retry(3, 60000)->$type(
-            $link,
-            $data
-        );
-
-        $responseData = $response->getBody()->getContents();
-        return $responseData;
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-empsysv3.technic.com.hk/v3/ph-empsys/upload-file',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('auth_key' => 'tYUwRAeGkE7TubXpoiR7Mh3eDEhkbRGS', 'file' => new CURLFILE('/C:/Users/whoam/OneDrive/PICTURES/Kings Logo/head - 1663904566265.png')),
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLWVtcHN5c3YzLnRlY2huaWMuY29tLmhrXC92M1wvbG9naW4iLCJpYXQiOjE2NjY0OTY4NzgsIm5iZiI6MTY2NjQ5Njg3OCwianRpIjoiaFpLOTM0RlRIRjluSHdLMCIsInN1YiI6MTYsInBydiI6Ijg5MmU1ZTA0OTNkMTMzZDI0ZWYwODUxMTUxMjcyOTFlOGFiNjQwMzciLCJpZCI6MTYsIm5hbWUiOiJrZW5uZWR5IiwiZW1haWwiOiJrZW5uZWR5QGdtYWlsLmNvbSIsImFnZW5jeSI6IltcIktpbmdzXCIsXCJMdXp2aW1pblwiLFwiUmFtYXNpYVwiXSIsInJvbGVfaWQiOjV9.zNVoqcoSEV4lzEoE8ufgtD-ZJarzVx9UKyPH1aT209c'
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        echo $response;
+    public static function deleteEmpsys($filename)
+    {
+        $data = array('auth_key' => "tYUwRAeGkE7TubXpoiR7Mh3eDEhkbRGS", 'delete_list' =>  array($filename));
+        $fileRes = Http::post('https://api-empsysv3.technic.com.hk/v3/ph-empsys/delete-file', $data);
+        $responseData = $fileRes->getBody()->getContents();
+        return json_decode($responseData);
     }
 
     public static function isExist(String $table = null, String $id = null, String $column = null)

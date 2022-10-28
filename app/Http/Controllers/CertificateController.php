@@ -76,7 +76,7 @@ class CertificateController extends Controller
             if ($request->hasFile('certificate')) {
                 $certificateData = DB::table('certificates')->where('id', $id)->first();
                 if ($certificateData->certificate) {
-                    Storage::disk('s3')->delete($certificateData->certificate);
+                    Storage::disk('empsys')->delete($certificateData->certificate);
                 }
                 $formFields['certificate'] = $request->file('certificate')->store('certificate', 's3');
             }

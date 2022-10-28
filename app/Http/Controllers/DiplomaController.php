@@ -77,7 +77,7 @@ class DiplomaController extends Controller
             if ($request->hasFile('diploma')) {
                 $diplomaData = DB::table('diplomas')->where('id', $id)->first();
                 if ($diplomaData->diploma) {
-                    Storage::disk('s3')->delete($diplomaData->diploma);
+                    Storage::disk('empsys')->delete($diplomaData->diploma);
                 }
                 $formFields['diploma'] = $request->file('diploma')->store('diploma', 's3');
             }

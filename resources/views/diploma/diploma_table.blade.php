@@ -15,7 +15,7 @@
             <td class="align-center">
                 <a id="{{ $item->id }}" class="btn btn-primary editbtn" href="#modal-view"><i class="bi bi-pencil-square"></i> Edit</a>&nbsp;&nbsp;
                 <a id="{{ $item->id }}" class="btn btn-danger delbtn"><i class="bi bi-trash"></i> Delete</a>&nbsp;&nbsp;
-                <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($item->diploma)}}"><i class="bi bi-eye"></i> View</a>
+                <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('empsys')->url($item->diploma)}}"><i class="bi bi-eye"></i> View</a>
             </td>
             <td>{{$item->type}}</td>
             <td>{{$item->remarks}}</td>

@@ -77,7 +77,7 @@ class PassportchopController extends Controller
             if ($request->hasFile('chops')) {
                 $passportData = DB::table('passport_chops')->where('id', $id)->first();
                 if ($passportData->chops) {
-                    Storage::disk('s3')->delete($passportData->chops);
+                    Storage::disk('empsys')->delete($passportData->chops);
                 }
                 $formFields['chops'] = $request->file('chops')->store('chops', 's3');
             }

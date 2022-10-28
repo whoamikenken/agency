@@ -740,7 +740,7 @@
                 @if ($med_first_cert != "")
                 <label style="font-weight:600">Medical Certificate</label>
                 <div class="input-group">
-                    <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($med_first_cert)}}"><i class="bi bi-eye"></i> View</a>
+                    <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('empsys')->url($med_first_cert)}}"><i class="bi bi-eye"></i> View</a>
                 </div>
                 @endif
             </div>
@@ -846,7 +846,7 @@
                 @if ($med_second_cert != "")
                 <label style="font-weight:600">Medical Certificate</label>
                 <div class="input-group">
-                    <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($med_second_cert)}}"><i class="bi bi-eye"></i> View</a>
+                    <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('empsys')->url($med_second_cert)}}"><i class="bi bi-eye"></i> View</a>
                 </div>
                 @endif
             </div>
@@ -952,7 +952,7 @@
                 @if ($med_third_cert != "")
                 <label style="font-weight:600">Medical Certificate</label>
                 <div class="input-group">
-                    <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($med_third_cert)}}"><i class="bi bi-eye"></i> View</a>
+                    <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('empsys')->url($med_third_cert)}}"><i class="bi bi-eye"></i> View</a>
                 </div>
                 @endif
             </div>
@@ -1058,7 +1058,7 @@
                 @if ($med_fourth_cert != "")
                 <label style="font-weight:600">Medical Certificate</label>
                 <div class="input-group">
-                    <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('s3')->url($med_fourth_cert)}}"><i class="bi bi-eye"></i> View</a>
+                    <a class="btn btn-info text-white" target="_blank" href="{{  Storage::disk('empsys')->url($med_fourth_cert)}}"><i class="bi bi-eye"></i> View</a>
                 </div>
                 @endif
             </div>
