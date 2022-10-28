@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
-            'read' => "5,11,12,13,6,7,8,9,10,801,802,803,804,14,999",
+            'read' => "1,5,11,12,13,6,7,8,9,10,801,802,803,804,14,999",
             'add' => "5,11,12,6,7,8,9,10",
             'delete' => "5,11,12,6,7,8,9,10",
             'edit' => "5,11,12,6,7,8,9,10,801,802,803,804,14",
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
-            'read' => "5,11,12,13,6,7,8,9,10,801,802,803,804,14,999",
+            'read' => "1,5,11,12,13,6,7,8,9,10,801,802,803,804,14,999",
             'add' => "5,11,12,6,7,8,9,10",
             'delete' => "5,11,12,6,7,8,9,10",
             'edit' => "5,11,12,6,7,8,9,10,801,802,803,804,14",
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
-            'read' => "5,11,12,13,6,7,8,9,10,801,802,803,804,14,999",
+            'read' => "1,5,11,12,13,6,7,8,9,10,801,802,803,804,14,999",
             'add' => "5,11,12,6,7,8,9,10",
             'delete' => "5,11,12,6,7,8,9,10",
             'edit' => "5,11,12,6,7,8,9,10,801,802,803,804,14",
@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
             'status' => 'verified',
             'email_verified_at' => now(),
             'password' => bcrypt('a'), // password
-            'read' => "5,11,12,13,6,7,8,9,10,801,802,803,804,14,999",
+            'read' => "1,5,11,12,13,6,7,8,9,10,801,802,803,804,14,999",
             'add' => "5,11,12,6,7,8,9,10",
             'delete' => "5,11,12,6,7,8,9,10",
             'edit' => "5,11,12,6,7,8,9,10,801,802,803,804,14",
@@ -96,7 +96,6 @@ class DatabaseSeeder extends Seeder
         Medical::factory(10)->create();
         
         $controller = new ApplicantController();
-
         $controller->syncApplicantData();
 
         $this->call([

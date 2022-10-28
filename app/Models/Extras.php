@@ -302,7 +302,7 @@ class Extras extends Model
        
     }
 
-    public static function uploadToEmpsys($file,)
+    public static function uploadToEmpsys($file)
     {
 
         $header =  array(
