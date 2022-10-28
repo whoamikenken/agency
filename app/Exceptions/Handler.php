@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Http\Controllers\LoginController;
 use Throwable;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
