@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <div class="col-sm-12">
+    <div class="col-md-6 col-sm-12">
         <label>Job Site<span class="text-danger">*</span></label>
         <div class="input-group">
             <div class="input-group-text"><i class="bi bi-person-fill"></i></div>

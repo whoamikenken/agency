@@ -113,7 +113,7 @@ class TablecolumnSeeder extends Seeder
             'column' => 'code',
             'status' => 'Show',
             'table_id' => 4,
-            'table' => 'principals',
+            'table' => 'branches',
             'created_by' => 1
         ]);
 
@@ -122,7 +122,7 @@ class TablecolumnSeeder extends Seeder
             'column' => 'description',
             'status' => 'Show',
             'table_id' => 4,
-            'table' => 'principals',
+            'table' => 'branches',
             'created_by' => 1
         ]);
 
@@ -131,7 +131,7 @@ class TablecolumnSeeder extends Seeder
             'column' => 'created_by',
             'status' => 'Show',
             'table_id' => 4,
-            'table' => 'principals',
+            'table' => 'branches',
             'created_by' => 1
         ]);
 
