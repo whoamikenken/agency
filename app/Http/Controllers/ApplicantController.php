@@ -211,7 +211,7 @@ class ApplicantController extends Controller
         return response()->json($return);
     }
 
-    public function syncApplicantData(Request $request)
+    public function syncApplicantData()
     {
         set_time_limit(0);
         
