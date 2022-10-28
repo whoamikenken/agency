@@ -35,7 +35,7 @@ $applicant_select = DB::table('applicants')->where("isactive","Active")->get();
                                 <select name="applicant" id="applicant" class="form-select">
                                     <option value="" selected>All Applicant</option>
                                     @foreach ($applicant_select as $item)
-                                    <option value="{{$item->applicant_id}}" >{{$item->applicant_id." - ".$item->lname." ".$item->fname}}</option>
+                                    <option value="{{$item->applicant_id}}" >{{$item->maid_ref." - ".$item->lname." ".$item->fname}}</option>
                                     @endforeach
                                 </select>
                             </div>

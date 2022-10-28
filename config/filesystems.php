@@ -56,6 +56,13 @@ return [
             'throw' => false,
         ],
 
+        'empsys' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => "https://media-v2.technic.com.hk/",
+            'throw' => false,
+        ],
+
     ],
 
     /*
