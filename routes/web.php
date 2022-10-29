@@ -119,9 +119,6 @@ Route::post('/applicant/document', [ApplicantController::class, 'document'])->wi
 Route::post('/applicant/oec', [ApplicantController::class, 'oec'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::get('/applicant/syncDataApplicant', [ApplicantController::class, 'syncApplicantData'])->withoutMiddleware([VerifyCsrfToken::class]);
 
-// Test Email Function
-Route::get('/applicant/testEmail', [ApplicantController::class, 'testEmail'])->withoutMiddleware([VerifyCsrfToken::class]);
-
 // Passport Chop
 Route::post('/passport/table', [PassportchopController::class, 'getTable'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/passport/getModal', [PassportchopController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
@@ -139,6 +136,12 @@ Route::post('/certificate/table', [CertificateController::class, 'getTable'])->w
 Route::post('/certificate/getModal', [CertificateController::class, 'getModal'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/certificate/add', [CertificateController::class, 'store']);
 Route::post('/certificate/delete', [CertificateController::class, 'delete']);
+
+// Email
+// Test Email Function
+Route::get('/applicant/testEmail', [ApplicantController::class, 'testEmail'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/principal/emailPrincipal', [ApplicantController::class, 'applicantDetail'])->middleware('auth')->withoutMiddleware([VerifyCsrfToken::class]);
+
 
 Route::get('/credits', function(){
     echo "Created by kennedy hipolito<br>";

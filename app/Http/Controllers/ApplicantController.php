@@ -300,4 +300,30 @@ class ApplicantController extends Controller
             return response()->json(['Something Went Wrong']);
         }
     }
+
+    public function applicantDetail(Request $request)
+    {
+        $dataRequest = $request->input();
+        
+        $principalEmail = Extras::getSingleData("principals", "email", "code", $dataRequest['principal']);
+        $docList = Extras::getAllDocument($dataRequest['applicant']);
+        
+        $data = array(
+            'emailtype' => "applicant_document",
+            'subject' => "test",
+            'body' => "Test email",
+            'to' => $principalEmail,
+            'attachment' => $docList
+        );
+
+        try {
+            Mail::to($principalEmail)->send(new MailNotify($data));
+            $return = array('status' => 1, 'title' => 'success', 'msg' => 'Email has been sent to '.$principalEmail);
+            return response()->json($return);
+        } catch (Exception $th) {
+            dump($th);
+            $return = array('status' => 1, 'title' => 'error', 'msg' => 'Please contact developer', 'error' => $th);
+            return response()->json($return);
+        }
+    }
 }

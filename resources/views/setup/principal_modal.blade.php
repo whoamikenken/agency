@@ -74,6 +74,7 @@
             theme: 'bootstrap-5'
         });
     });
+    
     $("#saveModal").unbind("click").click(function() {
         bootstrapForm($("#principalForm"));
         

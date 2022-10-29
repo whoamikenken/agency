@@ -33,7 +33,10 @@
                     <div class="input-group custom-file-button mb-2">
                         <label class="input-group-text" for="user_video">{{($user_video != "")? "Replace":"Upload"}} Video</label>
                         <input type="file" class="form-control form-control-sm" id="user_video" name="user_video">
-                    </div>
+                    </div><br>
+                    @if ($principal != "")
+                        <a class="btn btn-info text-white" id="sendDetailsApplicant" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Send details to principal email" tag="{{$principal}}">Email Details</a>
+                    @endif
                 </div>
                 <div class="col-sm-12 col-lg-6 col-xxl-2 text-center">
                     <form id="PictureForm" enctype="multipart/form-data">
@@ -52,113 +55,223 @@
                         @endif
                     </form>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-6 col-xxl-4">
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">ER Ref.</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-pass"></i></div>
-                            <input type="text" id="er_ref" name="er_ref"
-                            class="form-control" placeholder="Enter ER Ref" value="{{ $er_ref }}">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Applicant ID</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-pass"></i></div>
-                            <input type="text" id="applicant_id" name="applicant_id"
-                            class="form-control" placeholder="Enter Applicant ID" required value="{{ $applicant_id }}">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-8">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">ER Ref.</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-pass"></i></div>
+                                <input type="text" id="er_ref" name="er_ref"
+                                class="form-control" placeholder="Enter ER Ref" value="{{ $er_ref }}">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Branch</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-building"></i></div>
-                            <select name="branch" id="branch" class="form-control form-select">
-                                @foreach ($branch_select as $item)
-                                <option value="{{$item->code}}" {{ (isset($branch) && $branch == $item->code)? "selected":"" }} >{{$item->description}}</option>
-                                @endforeach
-                            </select>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">Maid Ref</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-pass"></i></div>
+                                <input type="text" id="maid_ref" name="maid_ref"
+                                class="form-control" placeholder="Enter Maid Ref" value="{{ $maid_ref }}">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Applicant Type</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-person-rolodex"></i></div>
-                            <select name="applicant_type" id="applicant_type" class="form-control form-select">
-                                <option value="Maid" {{ (isset($applicant_type) && $applicant_type == "Maid")? "selected":"" }} >Maid</option>
-                                <option value="Caregiver" {{ (isset($applicant_type) && $applicant_type == "Caregiver")? "selected":"" }} >Care Giver</option>
-                                <option value="Driver" {{ (isset($applicant_type) && $applicant_type == "Driver")? "selected":"" }} >Driver</option>
-                            </select>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">Applicant ID</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-pass"></i></div>
+                                <input type="text" id="applicant_id" name=""
+                                class="form-control" placeholder="Enter Applicant ID" required value="{{ $applicant_id }}" readonly>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">First Name</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-person"></i></div>
-                            <input type="text" id="fname" name="fname"
-                            class="form-control validate" placeholder="Enter First Name" value="{{ $fname }}">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input a First Name.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Middle Name</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-person"></i></div>
-                            <input type="text" id="mname" name="mname"
-                            class="form-control validate" placeholder="Enter Middle Name" value="{{ $mname }}">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input a Middle Name.
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">Applicant Type</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-person-rolodex"></i></div>
+                                <select name="applicant_type" id="applicant_type" class="form-control form-select">
+                                    <option value="Maid" {{ (isset($applicant_type) && $applicant_type == "Maid")? "selected":"" }} >Maid</option>
+                                    <option value="Caregiver" {{ (isset($applicant_type) && $applicant_type == "Caregiver")? "selected":"" }} >Care Giver</option>
+                                    <option value="Driver" {{ (isset($applicant_type) && $applicant_type == "Driver")? "selected":"" }} >Driver</option>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Address</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-geo-alt"></i></div>
-                            <input type="text" id="address" name="address"
-                            class="form-control validate" placeholder="Enter address" value="{{ $address }}">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input a address.
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">Branch</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-building"></i></div>
+                                <select name="branch" id="branch" class="form-control form-select">
+                                    @foreach ($branch_select as $item)
+                                    <option value="{{$item->code}}" {{ (isset($branch) && $branch == $item->code)? "selected":"" }} >{{$item->description}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @if (in_array("999", $readAccess))
-                        <div class="col-md-12 col-sm-12">
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">Job Site</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-geo"></i></div>
+                                <select name="jobsite" id="jobsite" class="form-control form-select">
+                                    @foreach ($jobsite_select as $item)
+                                    <option value="{{$item->code}}" {{ (isset($jobsite) && $jobsite == $item->code)? "selected":"" }} >{{$item->description}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">Sales Manager</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-file-earmark-person"></i></div>
+                                <select name="sales_manager" id="sales_manager" class="form-control form-select">
+                                    @foreach ($users_select as $item)
+                                    <option value="{{$item->id}}" {{ (isset($sales_manager) && $sales_manager == $item->id)? "selected":"" }} >{{$item->name}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">Principal</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-building"></i></div>
+                                <select name="principal" id="principal" class="form-control form-select">
+                                    @foreach ($principal_select as $item)
+                                    <option value="{{$item->code}}" {{ (isset($principal) && $principal == $item->code)? "selected":"" }} >{{$item->description}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">First Name</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-person"></i></div>
+                                <input type="text" id="fname" name="fname"
+                                class="form-control validate" placeholder="Enter First Name" value="{{ $fname }}">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a First Name.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">Middle Name</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-person"></i></div>
+                                <input type="text" id="mname" name="mname"
+                                class="form-control validate" placeholder="Enter Middle Name" value="{{ $mname }}">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a Middle Name.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">Last Name</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-person"></i></div>
+                                <input type="text" id="lname" name="lname"
+                                class="form-control validate" placeholder="Enter Last Name" value="{{ $lname }}">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a Last Name.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">Account Status</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-person-check"></i></div>
+                                <select name="isactive" id="isactive" class="form-control form-select">
+                                    <option value="Active" {{ (isset($isactive) && $isactive == "Active")? "selected":"" }} >Active</option>
+                                    <option value="Inactive" {{ (isset($isactive) && $isactive == "Inactive")? "selected":"" }} >Terminated</option>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">Contact</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-hash"></i></div>
+                                <input type="text" id="contact" name="contact"
+                                class="form-control validate" placeholder="Enter Contact" value="{{ $contact }}">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a Contact.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label style="font-weight:600">Address</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="bi bi-geo-alt"></i></div>
+                                <input type="text" id="address" name="address"
+                                class="form-control validate" placeholder="Enter address" value="{{ $address }}">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a address.
+                                </div>
+                            </div>
+                        </div>
+                        @if (in_array("999", $readAccess))
+                        <div class="col-md-6 col-sm-12">
                             <label style="font-weight:600">Total Cost</label>
                             <div class="input-group">
                                 <div class="input-group-text"><i class="bi bi-receipt"></i></div>
@@ -171,117 +284,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-6 col-xxl-4">
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Maid Ref</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-pass"></i></div>
-                            <input type="text" id="maid_ref" name="maid_ref"
-                            class="form-control" placeholder="Enter Maid Ref" value="{{ $maid_ref }}">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Job Site</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-geo"></i></div>
-                            <select name="jobsite" id="jobsite" class="form-control form-select">
-                                @foreach ($jobsite_select as $item)
-                                <option value="{{$item->code}}" {{ (isset($jobsite) && $jobsite == $item->code)? "selected":"" }} >{{$item->description}}</option>
-                                @endforeach
-                            </select>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Sales Manager</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-file-earmark-person"></i></div>
-                            <select name="sales_manager" id="sales_manager" class="form-control form-select">
-                                @foreach ($users_select as $item)
-                                <option value="{{$item->id}}" {{ (isset($sales_manager) && $sales_manager == $item->id)? "selected":"" }} >{{$item->name}}</option>
-                                @endforeach
-                            </select>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Principal</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-building"></i></div>
-                            <select name="principal" id="principal" class="form-control form-select">
-                                @foreach ($principal_select as $item)
-                                <option value="{{$item->code}}" {{ (isset($principal) && $principal == $item->code)? "selected":"" }} >{{$item->description}}</option>
-                                @endforeach
-                            </select>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Last Name</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-person"></i></div>
-                            <input type="text" id="lname" name="lname"
-                            class="form-control validate" placeholder="Enter Last Name" value="{{ $lname }}">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input a Last Name.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Contact</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-hash"></i></div>
-                            <input type="text" id="contact" name="contact"
-                            class="form-control validate" placeholder="Enter Contact" value="{{ $contact }}">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input a Contact.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label style="font-weight:600">Account Status</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="bi bi-person-check"></i></div>
-                            <select name="isactive" id="isactive" class="form-control form-select">
-                                <option value="Active" {{ (isset($isactive) && $isactive == "Active")? "selected":"" }} >Active</option>
-                                <option value="Inactive" {{ (isset($isactive) && $isactive == "Inactive")? "selected":"" }} >Terminated</option>
-                            </select>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please input.
-                            </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -1089,13 +1092,14 @@
                             >supports HTML5 video</a
                             >
                         </p>
-                </video>
+                    </video>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
+
         <datalist id="datalistOptionsResult">
         <option value="Fit to work">
         <option value="Unfit">
@@ -1103,7 +1107,7 @@
         </datalist>
 <script>
     $(document).ready(function () {
-
+        
         var player = videojs('my-video', {
             fluid: true
         });
@@ -1115,10 +1119,10 @@
         $('.form-select').select2({
             theme: 'bootstrap-5'
         });
-
+        
         @if (!in_array("801", $editAccess))
-            $("input").attr('disabled','disabled');
-            $("select").attr('disabled','disabled');
+        $("input").attr('disabled','disabled');
+        $("select").attr('disabled','disabled');
         @endif
     });
     
@@ -1130,22 +1134,66 @@
     $("input[type=text], input[type=file], input[type=number], textarea, select").on("change", function(){
         if ($(this).val()) {
             @if (!in_array("801", $editAccess))
-                Swal.fire({
-                    icon: 'error',
-                    title: "You have no edit permission",
-                    text: "This will be recorded."
-                })
-                $("input").attr('disabled','disabled');
-                $("select").attr('disabled','disabled');
-                setTimeout(() => {
-                    $("#pills-tab").find(".active").click();
-                }, 2000);
-                return false;
+            Swal.fire({
+                icon: 'error',
+                title: "You have no edit permission",
+                text: "This will be recorded."
+            })
+            $("input").attr('disabled','disabled');
+            $("select").attr('disabled','disabled');
+            setTimeout(() => {
+                $("#pills-tab").find(".active").click();
+            }, 2000);
+            return false;
             @else
-                saveSingleProfileColumn($(this));
+            saveSingleProfileColumn($(this));
             @endif
             
         }else return;   
+    });
+
+    $("#sendDetailsApplicant").unbind("click").click(function() {
+        swal.fire({
+            html: '<h4>Processing attachments...</h4>',
+            didRender: function() {
+                $('#swal2-html-container').prepend(sweet_loader);
+            }
+        });
+
+        $.ajax({
+            url: "{{ url('principal/emailPrincipal') }}",
+            type: "POST",
+            data: {principal:$(this).attr("tag"), applicant:$("#applicant_id").val()},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status == 1) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: response.title,
+                        text: response.msg,
+                        time: 2500
+                    })
+                }else if (response.status == 2) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: response.title,
+                        text: response.msg
+                    })
+                }else if (response.status == 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: response.title,
+                        text: response.msg
+                    })
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: "System Error",
+                        text: "Please contact developer."
+                    })
+                }
+            }
+        });
     });
     
 </script>

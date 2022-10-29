@@ -621,11 +621,9 @@
                         <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-style: normal; font-weight: bold;">
                         
                             <h2 class="mc-toc-title" style="text-align: left;"><br>
-<strong><span style="font-size:12px">Hi John Doe,&nbsp;<br>
+<strong><span style="font-size:12px">Hi good day this the documents you requested,&nbsp;<br>
 <br>
-This is the current status of the applicant you requested<br>
-<br>
-Applicant Name:</span></strong><br>
+Applicant Name:{{$fullname}}</span></strong><br>
 &nbsp;</h2>
 
                         </td>

@@ -128,6 +128,34 @@ class Extras extends Model
             "oec_flight_departure" => "OEC Departure",
             "user_profile_face" => "Face Photo",
             "user_profile" => "Body Photo",
+            "med_first_cert" => "First Medical Certificate",
+            "med_second_cert" => "Second Medical Certificate",
+            "med_third_cert" => "Third Medical Certificate",
+            "med_fourth_cert" => "Fourth Medical Certificate",
+            "cert_nc2" => "NCII Certificate",
+            "user_video" => "User Video",
+            "passport" => "Passport",
+            "sup_doc_id988a" => "EC/ID988A",
+            "sup_pt6" => "EC pt6 p4",
+            "sup_coe" => "COE",
+            "sup_hq" => "HQ",
+            "sup_polohk" => "POLO HQ",
+            "sup_infosheet" => "INFOSHEET",
+            "sup_privacy_policy" => "Privacy Policy",
+            "sup_affidavit" => "Affidavit",
+            "sup_mmr_vac" => "MMR Vaccination",
+            "cert_ereg" => "E-Registration",
+            "cert_peos" => "PEOS",
+            "cert_pdos" => "PDOS",
+            "cert_owwa" => "OWWA",
+            "cert_ofw_infosheet" => "OFW Infosheet",
+            "visa" => "Visa",
+            "oec_covid_dec" => "Covid Declaration",
+            "oec_insurance" => "Insurance",
+            "oec_pregnancy_test" => "Pregnancy Test",
+            "oec_swab_test" => "Swab Test",
+            "diploma" => "Diploma"
+
         );
         
         return $return[$data];
@@ -163,6 +191,13 @@ class Extras extends Model
         $result = DB::select("SELECT a.applicant_id FROM applicants a LEFT JOIN diplomas b ON a.applicant_id = b.applicant_id WHERE a.`passport` IS NULL OR a.`med_first_cert` IS NULL OR a.`med_second_cert` IS NULL OR a.`med_third_cert` IS NULL OR a.`med_fourth_cert` IS NULL OR a.`sup_doc_id988a` IS NULL OR a.`sup_pt6` IS NULL OR a.`sup_coe` IS NULL OR a.`sup_hq` IS NULL OR a.`sup_polohk` IS NULL OR a.`sup_infosheet` IS NULL OR a.`sup_privacy_policy` IS NULL OR a.`sup_affidavit` IS NULL OR a.`sup_mmr_vac` IS NULL OR a.`cert_ereg` IS NULL OR a.`cert_peos` IS NULL OR a.`cert_pdos` IS NULL OR a.`cert_owwa` IS NULL OR a.`cert_nc2` IS NULL OR a.`cert_ofw_infosheet` IS NULL OR a.`visa` IS NULL OR a.`oec_covid_dec` IS NULL OR a.`oec_insurance` IS NULL OR a.`oec_pregnancy_test` IS NULL OR a.`oec_swab_test` IS NULL OR a.`user_profile` IS NULL OR a.`user_profile_face` IS NULL OR a.`user_video` IS NULL OR b.`diploma`");
 
         return count($result);
+    }
+
+    public static function getAllDocument(String $applicantId = null)
+    {
+        $result = DB::select("SELECT a.`passport`, a.`med_first_cert`, a.`med_second_cert`, a.`med_third_cert`, a.`med_fourth_cert`, a.`sup_doc_id988a`, a.`sup_pt6`, a.`sup_coe`, a.`sup_hq`, a.`sup_polohk`, a.`sup_infosheet`, a.`sup_privacy_policy`, a.`sup_affidavit`, a.`sup_mmr_vac`, a.`cert_ereg`, a.`cert_peos`, a.`cert_pdos`, a.`cert_owwa`, a.`cert_nc2`, a.`cert_ofw_infosheet`, a.`visa`, a.`oec_covid_dec`, a.`oec_insurance`, a.`oec_pregnancy_test`, a.`oec_swab_test`, a.`user_profile`, a.`user_profile_face`, a.`user_video`, b.`diploma`, CONCAT(a.`fname`, ' ', a.`mname`,' ', a.`lname`) as fullname FROM applicants a LEFT JOIN diplomas b ON a.applicant_id = b.applicant_id WHERE a.`applicant_id` = $applicantId");
+
+        return $result;
     }
 
     public static function countApplicantRegistered()
@@ -326,5 +361,10 @@ class Extras extends Model
         } else {
             return false;
         }
+    }
+
+    public static function getSingleData(String $table = null, String $select = null, String $column =null, String $value = null)
+    {
+        return DB::table($table)->where($column, $value)->value($select);
     }
 }
