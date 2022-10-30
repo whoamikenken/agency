@@ -253,6 +253,7 @@ class ApplicantController extends Controller
             if (strlen($value->first_name) > 30 || strlen($value->last_name) > 30) {
                 continue;
             }
+            // dd($value);
             $applicantData = array();
             // Assigning Data
             $applicantData['maid_ref'] = $value->maid_full_code;
@@ -269,6 +270,7 @@ class ApplicantController extends Controller
             $applicantData['passport_validity'] = ($value->passport_validity) ? date("Y-m-d", strtotime($value->passport_validity)) : NULL;
             $applicantData['visa_date_expired'] = ($value->visa_expiry_date) ? date("Y-m-d", strtotime($value->visa_expiry_date)) : NULL;
             $applicantData['bio_availability'] = $value->maid_status;
+            $applicantData['bio_status'] = $value->status;
             $applicantData['created_at'] = ($value->created_at) ? date("Y-m-d", strtotime($value->created_at)) : NULL;
             
             $applicantChecker = Extras::isExist("applicants", $value->id, "applicant_id");
