@@ -70,7 +70,7 @@ class PrincipalController extends Controller
             'jobsite' => ['required'],
             'description' => ['required']
         ]);
-
+        
         if ($formFields['uid'] == "add") {
             unset($formFields['uid']);
             $formFields['created_by'] = Auth::id();

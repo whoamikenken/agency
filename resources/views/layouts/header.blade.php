@@ -242,7 +242,7 @@ $mainmenu = 1;
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 @foreach ($menus as $title => $items)
                                 @if (isset($items->menu_id))
-                                    @if (in_array($items->menu_id, $readAccess) || $items->menu_id == 1)
+                                    @if (in_array($items->menu_id, $readAccess))
                                         <li class="nav-item d-block d-sm-none"><a class="link-light rounded menuMobile text-decoration-none m-1 p-1 fs-5 {{($menuSelected == $items->menu_id) ? "active":"" }}" menu="{{$items->link}}" nav="{{$mainmenu}}" menu_id="{{$items->menu_id}}" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$items->description}}"><i class="bi bi-{{$items->icon}}"></i>&nbsp;&nbsp;{{$items->title}}</a></li>
                                     @endif
                                 @else
@@ -303,7 +303,7 @@ $mainmenu = 1;
                     <ul class="list-unstyled ps-0">
                         @foreach ($menus as $title => $item)
                         @if (isset($item->menu_id))
-                            @if (in_array($item->menu_id, $readAccess)  || $items->menu_id == 1)
+                            @if (in_array($item->menu_id, $readAccess))
                                 <li><a class="link-light rounded menuLink text-decoration-none m-1 p-1 fs-5 {{($menuSelected == $item->menu_id) ? "active":"" }}" menu="{{$item->link}}" nav="{{$mainmenu}}" menu_id="{{$item->menu_id}}" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{$item->description}}"><i class="bi bi-{{$item->icon}}"></i>&nbsp;&nbsp;{{$item->title}}</a></li>
                             @endif
                         @else

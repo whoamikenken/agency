@@ -69,7 +69,7 @@
 <script>
     
     $("#saveModal").unbind("click").click(function() {
-        bootstrapForm($("#branchForm"));
+        // bootstrapForm($("#branchForm"));
         
         var formdata = $("#branchForm").serialize();
 

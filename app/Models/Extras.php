@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -174,6 +176,11 @@ class Extras extends Model
     public static function getAccessList(String $code = null, String $username = null)
     {
         return DB::table('users')->where('username', $username)->value($code);
+    }
+
+    public static function getAccessUserType(String $usertype = null, String $accesstype = null)
+    {
+        return DB::table('usertype')->where('code', $usertype)->value($accesstype);
     }
 
     public static function filledDiploma(String $applicant_id = null)
@@ -366,5 +373,27 @@ class Extras extends Model
     public static function getSingleData(String $table = null, String $select = null, String $column =null, String $value = null)
     {
         return DB::table($table)->where($column, $value)->value($select);
+    }
+
+    public static function ValidateRequest($request, Array $rule)
+    {
+        $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
+
+        $validator = Validator::make($request->all(), $rule);
+
+        if ($validator->fails()) {
+            $errorKey = key($validator->errors()->messages());
+            $msg = $validator->errors()->messages()[$errorKey][0];
+            $return["msg"] = $msg;
+            
+            return $return;
+        }else{
+          
+            $data = $request->input();
+            unset($data["_token"]);
+            $return['status'] = 1;
+            $return['data'] = $data;
+            return $return;
+        }
     }
 }

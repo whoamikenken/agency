@@ -56,8 +56,14 @@ class UserController extends Controller
         // HASH
         $formFields['password'] = bcrypt($formFields['password']);
         $formFields['name'] = $formFields['fname'] . " " . $formFields['lname'];
-        $formFields['user_type'] = 'sales';
+        $formFields['user_type'] = 'Sales';
 
+        // Give Access
+        $formFields['read'] = Extras::getAccessUserType("Sales", "read");
+        $formFields['edit'] = Extras::getAccessUserType("Sales", "edit");
+        $formFields['add'] = Extras::getAccessUserType("Sales", "add");
+        $formFields['delete'] = Extras::getAccessUserType("Sales", "delete");
+        
         // create user
         $user = User::create($formFields);
 
