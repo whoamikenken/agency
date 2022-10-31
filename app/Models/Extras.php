@@ -390,7 +390,7 @@ class Extras extends Model
         }else{
           
             $data = $request->input();
-            unset($data["_token"]);
+        unset($data["_token"]);
             $return['status'] = 1;
             $return['data'] = $data;
             return $return;
