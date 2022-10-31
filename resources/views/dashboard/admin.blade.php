@@ -182,7 +182,7 @@
                         @endphp
                     @endforeach
                 @else
-                        <h2 class="text-center">No Applicant</h2>
+                        <h2 class="text-center">No Data</h2>
                 @endunless
                 </div>
             </div>
