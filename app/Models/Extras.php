@@ -279,7 +279,7 @@ class Extras extends Model
 
     public static function getBioStatusDesc()
     {
-        $result = DB::select("SELECT bio_status FROM applicants GROUP BY bio_status");
+        $result = DB::select("SELECT bio_status FROM applicants WHERE bio_status IS NOT NULL GROUP BY bio_status");
 
         return $result;
     }

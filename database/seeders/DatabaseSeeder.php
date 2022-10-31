@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
         User::factory()->create([
             'username' => "whoamiken",
             'name' => "Kennedy Hipolito",
@@ -33,7 +34,7 @@ class DatabaseSeeder extends Seeder
             'user_type' => 'Admin',
             'status' => 'verified',
             'email_verified_at' => now(),
-            'password' => bcrypt('a'), // password
+            'password' => bcrypt('1q2w3e4r'), // password
             'read' => "1,5,11,12,13,6,7,8,9,10,801,802,803,804,14,999",
             'add' => "5,11,12,6,7,8,9,10",
             'delete' => "5,11,12,6,7,8,9,10",
@@ -50,7 +51,7 @@ class DatabaseSeeder extends Seeder
             'user_type' => 'Admin',
             'status' => 'verified',
             'email_verified_at' => now(),
-            'password' => bcrypt('a'), // password
+            'password' => bcrypt('1q2w3e4r'), // password
             'read' => "1,5,11,12,13,6,7,8,9,10,801,802,803,804,14,999",
             'add' => "5,11,12,6,7,8,9,10",
             'delete' => "5,11,12,6,7,8,9,10",
@@ -67,7 +68,7 @@ class DatabaseSeeder extends Seeder
             'user_type' => 'Admin',
             'status' => 'verified',
             'email_verified_at' => now(),
-            'password' => bcrypt('a'), // password
+            'password' => bcrypt('1q2w3e4r'), // password
             'read' => "1,5,11,12,13,6,7,8,9,10,801,802,803,804,14,999",
             'add' => "5,11,12,6,7,8,9,10",
             'delete' => "5,11,12,6,7,8,9,10",
@@ -84,7 +85,7 @@ class DatabaseSeeder extends Seeder
             'user_type' => 'Admin',
             'status' => 'verified',
             'email_verified_at' => now(),
-            'password' => bcrypt('a'), // password
+            'password' => bcrypt('1q2w3e4r'), // password
             'read' => "1,5,11,12,13,6,7,8,9,10,801,802,803,804,14,999",
             'add' => "5,11,12,6,7,8,9,10",
             'delete' => "5,11,12,6,7,8,9,10",

@@ -224,9 +224,13 @@ let delayed;
                         datasets: [{
                         label: "Bio Status",
                         backgroundColor: [
-                        'rgb(0, 255, 25)',
+                        'rgb(15, 137, 252)',
                         'rgb(255, 0, 21)',
-                        'rgb(0, 153, 255)'
+                        'rgb(30, 234, 50)',
+                        'rgb(2, 237, 249)',
+                        'rgb(10, 2, 249)',
+                        'rgb(255, 0, 0)',
+                        'rgb(174, 255, 0)',
                         ],
                         data: JSON.parse(response.data),
                         }],
