@@ -47,7 +47,7 @@ class UserController extends Controller
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
         
         $validator = Extras::ValidateRequest($request, [
-            'username' => ['required'],
+            'username' => ['required', Rule::unique('users', 'username')],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'fname' => ['required'],
             'lname' => ['required'],

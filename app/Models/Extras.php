@@ -385,12 +385,10 @@ class Extras extends Model
             $errorKey = key($validator->errors()->messages());
             $msg = $validator->errors()->messages()[$errorKey][0];
             $return["msg"] = $msg;
-            
             return $return;
         }else{
-          
             $data = $request->input();
-        unset($data["_token"]);
+            unset($data["_token"]);
             $return['status'] = 1;
             $return['data'] = $data;
             return $return;

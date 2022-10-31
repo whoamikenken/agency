@@ -309,11 +309,17 @@ aria-labelledby="registerLabel" aria-hidden="true">
                         text: response.msg
                     })
                     $("#modalclose").click();
-                } else if (response.trim() == "Unverified") {
+                }else if (response.status == 0) {
                     Swal.fire({
                         icon: 'error',
                         title: response.title,
                         text: response.msg
+                    })
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: "System Error",
+                        text: "Please contact developer."
                     })
                 }
             }

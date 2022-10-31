@@ -131,7 +131,7 @@ class UsertypeController extends Controller
 
         $validator = Extras::ValidateRequest($request, [
             'uid' => ['required'],
-            'code' => ['required', Rule::unique('usertype', 'code')],
+            'code' => ['required', ($request->input()['uid'] == "add")? Rule::unique('usertype', 'code'):""],
             'description' => ['required'],
         ]);
 
@@ -142,24 +142,16 @@ class UsertypeController extends Controller
             $formFields = $validator['data'];
         }
 
-        // dd($request->input("edatalistAdd"));
+        // dd($formFields);
         if ($formFields['uid'] == "add") {
             unset($formFields['uid']);
             $formFields['created_by'] = Auth::id();
-            $formFields['read'] = $request->input("edatalistRead");
-            $formFields['add'] = $request->input("edatalistAdd");
-            $formFields['delete'] = $request->input("edatalistDel");
-            $formFields['edit'] = $request->input("edatalistEdit");
             $formFields['updated_at'] = "";
             usertype::create($formFields);
             $return = array('status' => 1, 'msg' => 'Successfully added user type', 'title' => 'Success!');
         } else {
             $formFields['updated_at'] = Carbon::now();
             $formFields['modified_by'] = Auth::id();
-            $formFields['read'] = $request->input("edatalistRead");
-            $formFields['add'] = $request->input("edatalistAdd");
-            $formFields['delete'] = $request->input("edatalistDel");
-            $formFields['edit'] = $request->input("edatalistEdit");
             $id = $formFields['uid'];
             unset($formFields['uid']);
             DB::table('usertype')->where('id', $id)->update($formFields);
