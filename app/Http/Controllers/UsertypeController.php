@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Extras;
 use App\Models\usertype;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -128,12 +129,19 @@ class UsertypeController extends Controller
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
 
-        $formFields = $request->validate([
+        $validator = Extras::ValidateRequest($request, [
             'uid' => ['required'],
-            'code' => ['required'],
-            'description' => ['required']
+            'code' => ['required', Rule::unique('usertype', 'code')],
+            'description' => ['required'],
         ]);
-        
+
+        if ($validator['status'] == 0) {
+            return response()->json($validator);
+            die;
+        } else {
+            $formFields = $validator['data'];
+        }
+
         // dd($request->input("edatalistAdd"));
         if ($formFields['uid'] == "add") {
             unset($formFields['uid']);

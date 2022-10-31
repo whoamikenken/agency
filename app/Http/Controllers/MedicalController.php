@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Extras;
 use App\Models\Medical;
 use App\Models\Tablecolumn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,13 +68,20 @@ class MedicalController extends Controller
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
 
-        $formFields = $request->validate([
+        $validator = Extras::ValidateRequest($request, [
             'uid' => ['required'],
-            'code' => ['required'],
+            'code' => ['required', Rule::unique('medical', 'code')],
+            'description' => ['required'],
             'jobsite' => ['required'],
             'location' => ['required'],
-            'description' => ['required']
         ]);
+
+        if ($validator['status'] == 0) {
+            return response()->json($validator);
+            die;
+        } else {
+            $formFields = $validator['data'];
+        }
 
         if ($formFields['uid'] == "add") {
             unset($formFields['uid']);

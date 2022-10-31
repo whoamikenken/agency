@@ -54,12 +54,20 @@ class PassportchopController extends Controller
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
 
-        $formFields = $request->validate([
+        $validator = Extras::ValidateRequest($request, [
             'uid' => ['required'],
             'applicant_id' => ['required'],
             'remarks' => ['required'],
-            'chops' => ['required', File::types(['jpg','png','jpeg', 'pdf'])],
+            'chops' => ['required', File::types(['jpg', 'png', 'jpeg', 'pdf'])],
         ]);
+
+        if ($validator['status'] == 0) {
+            return response()->json($validator);
+            die;
+        } else {
+            $formFields = $validator['data'];
+        }
+        
         // dd($request->hasFile('chops'));
         if ($formFields['uid'] == "add") {
             unset($formFields['uid']);

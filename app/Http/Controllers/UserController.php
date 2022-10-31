@@ -45,13 +45,21 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
-        $formFields = $request->validate([
+        
+        $validator = Extras::ValidateRequest($request, [
             'username' => ['required'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'fname' => ['required'],
             'lname' => ['required'],
             'password' => ['required', 'confirmed', 'min:6']
         ]);
+
+        if ($validator['status'] == 0) {
+            return response()->json($validator);
+            die;
+        } else {
+            $formFields = $validator['data'];
+        }
 
         // HASH
         $formFields['password'] = bcrypt($formFields['password']);

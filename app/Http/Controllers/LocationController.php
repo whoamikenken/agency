@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Extras;
 use App\Models\Location;
 use App\Models\Tablecolumn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,8 +43,6 @@ class LocationController extends Controller
             'uid' => ['required'],
         ]);
 
-
-
         if ($formFields['uid'] != "add") {
             $data['record'] = DB::table('location')->where('id', $formFields['uid'])->get();
             $data = $data['record'][0];
@@ -58,11 +58,18 @@ class LocationController extends Controller
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
 
-        $formFields = $request->validate([
+        $validator = Extras::ValidateRequest($request, [
             'uid' => ['required'],
-            'code' => ['required'],
+            'code' => ['required', Rule::unique('jobsites', 'code')],
             'description' => ['required']
         ]);
+
+        if ($validator['status'] == 0) {
+            return response()->json($validator);
+            die;
+        } else {
+            $formFields = $validator['data'];
+        }
 
         if ($formFields['uid'] == "add") {
             unset($formFields['uid']);

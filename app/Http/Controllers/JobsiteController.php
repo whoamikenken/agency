@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Extras;
 use App\Models\Jobsite;
 use App\Models\Tablecolumn;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,11 +64,18 @@ class JobsiteController extends Controller
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
 
-        $formFields = $request->validate([
+        $validator = Extras::ValidateRequest($request, [
             'uid' => ['required'],
-            'code' => ['required'],
+            'code' => ['required', Rule::unique('jobsites', 'code')],
             'description' => ['required']
         ]);
+
+        if ($validator['status'] == 0) {
+            return response()->json($validator);
+            die;
+        } else {
+            $formFields = $validator['data'];
+        }
 
         if ($formFields['uid'] == "add") {
             unset($formFields['uid']);

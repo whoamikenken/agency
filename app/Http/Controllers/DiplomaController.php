@@ -53,13 +53,21 @@ class DiplomaController extends Controller
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
 
-        $formFields = $request->validate([
+        $validator = Extras::ValidateRequest($request, [
             'uid' => ['required'],
             'applicant_id' => ['required'],
             'type' => ['required'],
             'remarks' => ['required'],
             'diploma' => ['required', File::types(['jpg', 'png', 'jpeg', 'pdf'])],
         ]);
+
+        if ($validator['status'] == 0) {
+            return response()->json($validator);
+            die;
+        } else {
+            $formFields = $validator['data'];
+        }
+
         // dd($request->hasFile('diploma'));
         if ($formFields['uid'] == "add") {
             unset($formFields['uid']);

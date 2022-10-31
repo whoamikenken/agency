@@ -7,6 +7,7 @@ use App\Models\Extras;
 use App\Mail\MailNotify;
 use App\Models\Applicant;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -153,8 +154,9 @@ class ApplicantController extends Controller
     public function store(Request $request)
     {
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
-        $formFields = $request->validate([
-            'applicant_id' => ['required'],
+
+        $validator = Extras::ValidateRequest($request, [
+            'applicant_id' => ['required', Rule::unique('applicants', 'applicant_id')],
             'fname' => ['required'],
             'lname' => ['required'],
             'mname' => ['required'],
@@ -163,6 +165,14 @@ class ApplicantController extends Controller
             'jobsite' => ['required'],
             'sales_manager' => ['required'],
         ]);
+
+        if ($validator['status'] == 0) {
+            return response()->json($validator);
+            die;
+        } else {
+            $formFields = $validator['data'];
+        }
+
         
         unset($formFields['uid']);
         Applicant::create($formFields);
