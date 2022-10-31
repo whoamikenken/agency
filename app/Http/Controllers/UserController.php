@@ -67,10 +67,10 @@ class UserController extends Controller
         $formFields['user_type'] = 'Sales';
 
         // Give Access
-        $formFields['read'] = Extras::getAccessUserType("Sales", "read");
-        $formFields['edit'] = Extras::getAccessUserType("Sales", "edit");
-        $formFields['add'] = Extras::getAccessUserType("Sales", "add");
-        $formFields['delete'] = Extras::getAccessUserType("Sales", "delete");
+        $formFields['read'] = "1,".Extras::getAccessUserType("Sales", "read");
+        $formFields['edit'] = "1,".Extras::getAccessUserType("Sales", "edit");
+        $formFields['add'] = "1,".Extras::getAccessUserType("Sales", "add");
+        $formFields['delete'] = "1,".Extras::getAccessUserType("Sales", "delete");
         // dd($formFields);
         // create user
         $user = User::create($formFields);
@@ -245,10 +245,10 @@ class UserController extends Controller
             unset($formFields['uid']);
             $formFields['updated_at'] = "";
             // Give Access
-            $formFields['read'] = Extras::getAccessUserType($formFields['user_type'], "read");
-            $formFields['edit'] = Extras::getAccessUserType($formFields['user_type'], "edit");
-            $formFields['add'] = Extras::getAccessUserType($formFields['user_type'], "add");
-            $formFields['delete'] = Extras::getAccessUserType($formFields['user_type'], "delete");
+            $formFields['read'] = Extras::getAccessUserType("1,".$formFields['user_type'], "read");
+            $formFields['edit'] = Extras::getAccessUserType("1,".$formFields['user_type'], "edit");
+            $formFields['add'] = Extras::getAccessUserType("1,".$formFields['user_type'], "add");
+            $formFields['delete'] = Extras::getAccessUserType("1,".$formFields['user_type'], "delete");
 
             if ($request->hasFile('user_image')) {
                 $file = $request->file('user_image');
