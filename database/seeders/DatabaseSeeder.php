@@ -92,9 +92,6 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10)
         ]);
 
-        User::factory(10)->create();
-        Medical::factory(10)->create();
-        
         $controller = new ApplicantController();
         $controller->syncApplicantData();
 
