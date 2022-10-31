@@ -128,17 +128,20 @@
             </div>
         </div>
     </div>
-    <input type="hidden" name="edatalistRead" id="edatalistRead">
-    <input type="hidden" name="edatalistAdd" id="edatalistAdd">
-    <input type="hidden" name="edatalistEdit" id="edatalistEdit">
-    <input type="hidden" name="edatalistDel" id="edatalistDel">
+    <input type="hidden" name="read" id="edatalistRead">
+    <input type="hidden" name="add" id="edatalistAdd">
+    <input type="hidden" name="edit" id="edatalistEdit">
+    <input type="hidden" name="delete" id="edatalistDel">
 </form>
-<hr class="mt-2">
-<h2 class="text-center">System Access</h2>
-<hr>
-@php
-    echo $showAccess;
-@endphp
+@if ($uid != "add")
+    <hr class="mt-2">
+    <h2 class="text-center">System Access</h2>
+    <hr>
+    @php
+        echo $showAccess;
+    @endphp
+@endif
+
 <script>
     
     $("#saveModal").unbind("click").click(function() {

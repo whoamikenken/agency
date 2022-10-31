@@ -71,7 +71,7 @@ class UserController extends Controller
         $formFields['edit'] = Extras::getAccessUserType("Sales", "edit");
         $formFields['add'] = Extras::getAccessUserType("Sales", "add");
         $formFields['delete'] = Extras::getAccessUserType("Sales", "delete");
-        
+        // dd($formFields);
         // create user
         $user = User::create($formFields);
 
@@ -120,6 +120,11 @@ class UserController extends Controller
         $formFields = $request->validate([
             'uid' => ['required'],
         ]);
+
+        $readAccess = array();
+        $editAccess = array();
+        $addAccess = array();
+        $delAccess = array();
 
         if ($formFields['uid'] != "add") {
             $data['record'] = DB::table('users')->where('id', $formFields['uid'])->get();
@@ -238,11 +243,12 @@ class UserController extends Controller
         // dd($formFields);
         if ($formFields['uid'] == "add") {
             unset($formFields['uid']);
-            $formFields['read'] = $request->input("edatalistRead");
-            $formFields['add'] = $request->input("edatalistAdd");
-            $formFields['delete'] = $request->input("edatalistDel");
-            $formFields['edit'] = $request->input("edatalistEdit");
             $formFields['updated_at'] = "";
+            // Give Access
+            $formFields['read'] = Extras::getAccessUserType($formFields['user_type'], "read");
+            $formFields['edit'] = Extras::getAccessUserType($formFields['user_type'], "edit");
+            $formFields['add'] = Extras::getAccessUserType($formFields['user_type'], "add");
+            $formFields['delete'] = Extras::getAccessUserType($formFields['user_type'], "delete");
 
             if ($request->hasFile('user_image')) {
                 $file = $request->file('user_image');
@@ -254,10 +260,6 @@ class UserController extends Controller
             $return = array('status' => 1, 'msg' => 'Successfully added user', 'title' => 'Success!');
         } else {
             $formFields['updated_at'] = Carbon::now();
-            $formFields['read'] = $request->input("edatalistRead");
-            $formFields['add'] = $request->input("edatalistAdd");
-            $formFields['delete'] = $request->input("edatalistDel");
-            $formFields['edit'] = $request->input("edatalistEdit");
             $id = $formFields['uid'];
             unset($formFields['uid']);
 
