@@ -221,12 +221,12 @@ class UserController extends Controller
 
         $formFields = $request->validate([
             'uid' => ['required'],
-            'username' => ['required'],
+            'username' => ['required', ($request->input()['uid'] == "add") ? Rule::unique('users', 'username') : ""],
             'fname' => ['required'],
             'lname' => ['required'],
             'status' => ['required'],
             'user_type' => ['required'],
-            'email' => ['required']
+            'email' => ['required', 'email', ($request->input()['uid'] == "add") ? Rule::unique('users', 'email') : ""]
         ]);
         if($request->input("password") === null){
             unset($formFields['password']);

@@ -66,7 +66,7 @@ class BranchController extends Controller
 
         $validator = Extras::ValidateRequest($request, [
             'uid' => ['required'],
-            'code' => ['required', Rule::unique('branches', 'code')],
+            'code' => ['required', ($request->input()['uid'] == "add") ? Rule::unique('branches', 'code') : ""],
             'region' => ['required'],
             'color' => ['required'],
             'description' => ['required']

@@ -68,7 +68,7 @@ class PrincipalController extends Controller
         
         $validator = Extras::ValidateRequest($request, [
             'uid' => ['required'],
-            'code' => ['required', Rule::unique('principals', 'code')],
+            'code' => ['required', ($request->input()['uid'] == "add") ? Rule::unique('principals', 'code') : ""],
             'jobsite' => ['required'],
             'description' => ['required']
         ]);

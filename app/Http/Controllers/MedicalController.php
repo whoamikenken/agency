@@ -70,7 +70,7 @@ class MedicalController extends Controller
 
         $validator = Extras::ValidateRequest($request, [
             'uid' => ['required'],
-            'code' => ['required', Rule::unique('medical', 'code')],
+            'code' => ['required', ($request->input()['uid'] == "add") ? Rule::unique('medical', 'code') : ""],
             'description' => ['required'],
             'jobsite' => ['required'],
             'location' => ['required'],

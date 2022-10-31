@@ -60,7 +60,7 @@ class LocationController extends Controller
 
         $validator = Extras::ValidateRequest($request, [
             'uid' => ['required'],
-            'code' => ['required', Rule::unique('jobsites', 'code')],
+            'code' => ['required', ($request->input()['uid'] == "add") ? Rule::unique('location', 'code') : ""],
             'description' => ['required']
         ]);
 
