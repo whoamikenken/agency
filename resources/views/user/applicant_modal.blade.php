@@ -1,20 +1,6 @@
 <form id="applicantForm" class="row g-2 needs-validation" novalidate>
     @csrf
 
-    <div class="col-md-6 col-sm-12">
-        <label>Applicant ID<span class="text-danger">*</span></label>
-        <div class="input-group">
-            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
-            <input type="text" id="applicant_id" name="applicant_id"
-            class="form-control validate" placeholder="Enter Applicant ID" required value="">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                Please input a Applicant ID.
-            </div>
-        </div>
-    </div>
 
     <div class="col-md-6 col-sm-12">
         <label>First Name<span class="text-danger">*</span></label>
@@ -80,7 +66,7 @@
         <label>Branch<span class="text-danger">*</span></label>
         <div class="input-group">
             <div class="input-group-text"><i class="bi bi-person-lines-fill"></i></div>
-            <select name="branch" id="branch" class="form-select validate">
+            <select name="branch" id="branch" class="form-select-modal validate">
                 @foreach ($branch_select as $item)
                     <option value="{{$item->code}}" {{ (isset(Auth::user()->branch) && Auth::user()->branch == $item->code)? "selected":"" }} >{{$item->description}}</option>
                 @endforeach
@@ -95,28 +81,10 @@
     </div>
 
     <div class="col-md-6 col-sm-12">
-        <label>Jobsite<span class="text-danger">*</span></label>
-        <div class="input-group">
-            <div class="input-group-text"><i class="bi bi-person-lines-fill"></i></div>
-            <select name="jobsite" id="jobsite" class="form-select validate">
-                @foreach ($jobsite_select as $item)
-                    <option value="{{$item->code}}">{{$item->description}}</option>
-                @endforeach
-            </select>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                Please select a jobsite.
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12">
         <label>Sales Manager<span class="text-danger">*</span></label>
         <div class="input-group">
             <div class="input-group-text"><i class="bi bi-person-lines-fill"></i></div>
-            <select name="sales_manager" id="sales_manager" class="form-select validate">
+            <select name="sales_manager" id="sales_manager" class="form-select-modal validate">
                 @foreach ($users_select as $item)
                     <option value="{{$item->id}}" {{ (isset(Auth::user()->id) && Auth::user()->id == $item->id)? "selected":"" }}>{{$item->name}}</option>
                 @endforeach
@@ -130,12 +98,27 @@
         </div>
     </div>
 
+    <div class="col-md-12 col-sm-12">
+        <label style="font-weight:600">Address</label>
+        <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-geo-alt"></i></div>
+            <input type="text" id="address" name="address"
+            class="form-control validate" placeholder="Enter address" value="">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please input a address.
+            </div>
+        </div>
+    </div>
+
 </form>
 
 <script>
 
     $(document).ready(function () {
-        $('.form-select').select2({
+        $('.form-select-modal').select2({
             dropdownParent: $('#modal-view'),
             theme: 'bootstrap-5'
         });

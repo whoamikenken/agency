@@ -156,13 +156,12 @@ class ApplicantController extends Controller
         $return = array('status' => 0, 'msg' => 'Error', 'title' => 'Error!');
 
         $validator = Extras::ValidateRequest($request, [
-            'applicant_id' => ['required', Rule::unique('applicants', 'applicant_id')],
             'fname' => ['required'],
             'lname' => ['required'],
             'mname' => ['required'],
             'contact' => ['required'],
             'branch' => ['required'],
-            'jobsite' => ['required'],
+            'address' => ['required'],
             'sales_manager' => ['required'],
         ]);
 
@@ -173,9 +172,22 @@ class ApplicantController extends Controller
             $formFields = $validator['data'];
         }
 
+        $data = $formFields;
+        unset($data['sales_manager']);
+        $branch = $data['branch'];
+        unset($data['branch']);
+        $data['region'] = DB::table('branches')->where('code', $branch)->value('region');
+        $data['branch'] = DB::table('branches')->where('code', $branch)->value('agency_description');
+
+        $resultRegister = Extras::requestToEmpsys("https://api-empsysv3.technic.com.hk/v3/ph-empsys/register-applicant", "post", $data);
+        $resultRegister = json_decode($resultRegister);
+        $applicant_id = $resultRegister->maid_id;
+        $formFields['applicant_id'] = $applicant_id;
+        
         
         unset($formFields['uid']);
         Applicant::create($formFields);
+        
         $return = array('status' => 1, 'msg' => 'Successfully added applicant', 'title' => 'Success!');
         
         return response()->json($return);
@@ -200,8 +212,29 @@ class ApplicantController extends Controller
             $fileResponse = Extras::uploadToEmpsys($file);
             $value = $fileResponse->data->file_path;
         }
+
+        $columnInEmpSys = array(
+                                "fname" => "fname",
+                                "mname" => "mname",
+                                "lname" => "lname",
+                                "gender" => "gender",
+                                "passport_place_issued" => "passport_country",
+                                "passport_validity" => "passport_validity",
+                                "visa_date_expired" => "visa_expiry_date",
+                                "bio_availability" => "maid_status",
+                                "bio_status" => "bio_status");
         $formFields = array($column => $value);
         $query = DB::table('applicants')->where('applicant_id', $applicant_id)->update($formFields);
+
+        if(isset($columnInEmpSys[$column])){
+            $data = array(
+                'maid_id' => $applicant_id,
+                $columnInEmpSys[$column] => $value
+            );
+
+            $resultLogin = Extras::requestToEmpsys("https://api-empsysv3.technic.com.hk/v3/ph-empsys/update-applicant", "post", $data);
+            $resultLogin = json_decode($resultLogin);
+        }
         
         if ($column == "med_first_cost" || $column == "med_second_cost" || $column == "med_third_cost" || $column == "med_fourth_cost" || $column =="cert_nc2_cost" || $column =="cert_pdos_cost" || $column =="oec_cost" || $column =="oec_insurance_cost" || $column == "oec_pregnancy_test_cost") {
             $users = DB::table('applicants')->where('applicant_id', $applicant_id)->first();
@@ -276,7 +309,11 @@ class ApplicantController extends Controller
             $applicantData['mname'] = $value->middle_name;
             $applicantData['lname'] = $value->last_name;
             $applicantData['gender'] = $value->gender;
-            $applicantData['passport_place_issued'] = ($value->passport_country == "Philippines") ? "PH" : $value->passport_country;
+            $applicantData['contact'] = $value->mobile_phone;
+            $applicantData['date_of_birth'] = $value->date_of_birth;
+            $applicantData['branch'] = $value->maid_agency_code;
+            $applicantData['passport_place_issued'] = $value->passport_country;
+            $applicantData['passport_no'] = $value->passport_number;
             $applicantData['passport_validity'] = ($value->passport_validity) ? date("Y-m-d", strtotime($value->passport_validity)) : NULL;
             $applicantData['visa_date_expired'] = ($value->visa_expiry_date) ? date("Y-m-d", strtotime($value->visa_expiry_date)) : NULL;
             $applicantData['bio_availability'] = $value->maid_status;

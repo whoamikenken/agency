@@ -54,7 +54,7 @@
                         <div class="input-group-text"><i class="bi bi-geo-alt"></i></div>
                         <select name="passport_place_issued" id="passport_place_issued" class="form-control form-select">
                             @foreach ($country_select as $item)
-                            <option value="{{$item->code}}" {{ (isset($passport_place_issued) && $passport_place_issued == $item->code)? "selected":"" }} >{{$item->description}}</option>
+                            <option value="{{$item->description}}" {{ (isset($passport_place_issued) && $passport_place_issued == $item->code)? "selected":"" }} >{{$item->description}}</option>
                             @endforeach
                         </select>
                         <div class="valid-feedback">

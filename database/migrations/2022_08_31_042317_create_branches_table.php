@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('code', 20)->nullable()->default('NULL');
             $table->string('description', 100)->nullable()->default('NULL');
+            $table->string('agency_description', 100)->nullable()->default('NULL');
             $table->string('region', 100)->nullable()->default('NULL');
             $table->string('color', 100)->nullable()->default('NULL');
             $table->timestamp('updated_at')->nullable()->useCurrent();

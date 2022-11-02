@@ -35,6 +35,7 @@ return new class extends Migration
             $table->integer('abroad_experience')->default(0);
             $table->string('is_first', 30)->nullable()->default('Yes');
             $table->string('is_walkin', 30)->nullable()->default('Yes');
+            $table->date('date_of_birth')->nullable();
             $table->date('date_applied')->nullable();
             $table->text('passport')->nullable();
             $table->string('passport_no', 30)->nullable();

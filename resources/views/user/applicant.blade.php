@@ -4,9 +4,9 @@
 
 @php
 $jobsite_select = DB::table('jobsites')->get();
-$users_select = DB::table('users')->where("user_type","sales")->get();
+$users_select = DB::table('users')->where("user_type","Sales")->get();
 $branch_select = DB::table('branches')->get();
-$applicant_select = DB::table('applicants')->where("isactive","Active")->get();
+$applicant_select = DB::table('applicants')->select("maid_ref","lname","fname","applicant_id")->where("isactive","Active")->get();
 @endphp
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -33,7 +33,7 @@ $applicant_select = DB::table('applicants')->where("isactive","Active")->get();
                             <label for="colFormLabel" class="col-sm-2 col-form-label">Applicant</label>
                             <div class="col-sm-10">
                                 <select name="applicant" id="applicant" class="form-select">
-                                    <option value="" selected>All Applicant</option>
+                                    <option value="" selected >All Applicant</option>
                                     @foreach ($applicant_select as $item)
                                     <option value="{{$item->applicant_id}}" >{{$item->maid_ref." - ".$item->lname." ".$item->fname}}</option>
                                     @endforeach

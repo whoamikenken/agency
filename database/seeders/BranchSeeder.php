@@ -17,59 +17,53 @@ class BranchSeeder extends Seeder
     {
         //Create Branches
         Branch::factory()->create([
-            'code' => '001',
+            'code' => 'KMM',
             'description' => 'Manila',
+            'agency_description' => 'Kingsmanpower Manila Main Office',
+            'region' => 'Luzon',
             'color' => 'rgb(255, 0, 21)',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
 
         Branch::factory()->create([
-            'code' => '002',
+            'code' => 'KMG',
             'description' => 'Davao',
+            'agency_description' => 'Kingsmanpower Davao',
+            'region' => 'Mindanaos',
             'color' => 'rgb(255, 0, 242)',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
 
         Branch::factory()->create([
-            'code' => '003',
-            'description' => 'CDO',
-            'color' => 'rgb(127, 0, 255)',
-            'modified_by' => 1,
-            'created_by' => 1,
-        ]);
-
-        Branch::factory()->create([
-            'code' => '004',
-            'description' => 'GenSan',
-            'color' => 'rgb(21, 0, 255)',
-            'modified_by' => 1,
-            'created_by' => 1,
-        ]);
-
-        Branch::factory()->create([
-            'code' => '005',
-            'description' => 'Mindoro',
-            'color' => 'rgb(0, 153, 255)',
-            'modified_by' => 1,
-            'created_by' => 1,
-        ]);
-
-        Branch::factory()->create([
-            'code' => '006',
+            'code' => 'KMT',
             'description' => 'Tuguegarao',
+            'agency_description' => 'Kingsmanpower Tuguegarao',
             'color' => 'rgb(0, 255, 25)',
+            'region' => 'Manila',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
 
         Branch::factory()->create([
-            'code' => '007',
+            'code' => 'KMV',
             'description' => 'Vigan',
+            'agency_description' => 'Kingsmanpower Vigan',
             'color' => 'rgb(234, 255, 5)',
+            'region' => 'Visayas',
             'modified_by' => 1,
             'created_by' => 1,
         ]);
-    }
+
+        Branch::factory()->create([
+            'code' => 'KMC',
+            'description' => 'Cebu',
+            'agency_description' => 'Kingsmanpower Cebu',
+            'color' => 'rgb(234, 255, 5)',
+            'region' => 'Visayas',
+            'modified_by' => 1,
+            'created_by' => 1,
+        ]);
+    }   
 }

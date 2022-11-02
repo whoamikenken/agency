@@ -436,7 +436,7 @@
                         <div class="input-group-text"><i class="bi bi-geo-alt"></i></div>
                         <select name="vac_first_country" id="vac_first_country" class="form-control form-select">
                             @foreach ($country_select as $item)
-                            <option value="{{$item->code}}" {{ (isset($vac_first_country) && $vac_first_country == $item->code)? "selected":"" }} >{{$item->description}}</option>
+                            <option value="{{$item->description}}" {{ (isset($vac_first_country) && $vac_first_country == $item->code)? "selected":"" }} >{{$item->description}}</option>
                             @endforeach
                         </select>
                         <div class="valid-feedback">

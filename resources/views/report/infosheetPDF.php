@@ -5,8 +5,8 @@ use App\Models\Extras;
 $pdf = new \Mpdf\Mpdf(array('mode' => 'utf-8', 'format' => 'LETTER', 'orientation' => 'P'));
 $pdf->SetTitle($reportName);
 $pdf->SetMargins(0, 0, 8);
+// $pdf->showImageErrors = true;
 // $pdf->SetProtection(array('print', 'copy'), "KMSI", "KMSIOWN");
-
 
 extract((array) $result[0]);
 
@@ -103,6 +103,19 @@ $info .= "
 			</div>";
 
 if(in_array("GI", $edatalist)){
+	$handle = curl_init($user_profile_face);
+	curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
+
+	$response = curl_exec($handle);
+
+	/* Check for 404. */
+	$httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+	if ($httpCode == 404) {
+		$user_profile_face = "images/no-image.jpg";
+	}
+
+	curl_close($handle);
+	
 $info .= "
 			<div class='content' style='margin-top:.4cm;'>
 				<table  style='background-color: black;'>
