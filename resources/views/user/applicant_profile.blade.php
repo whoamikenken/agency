@@ -1171,7 +1171,7 @@
                         icon: 'success',
                         title: response.title,
                         text: response.msg,
-                        time: 2500
+                        timer: 2000
                     })
                 }else if (response.status == 2) {
                     Swal.fire({

@@ -327,7 +327,7 @@ let delayed;
                     options: {
                     scales: {
                       xAxes: [{
-                        time: {
+                        timer: {
                           unit: 'month'
                         },
                         gridLines: {

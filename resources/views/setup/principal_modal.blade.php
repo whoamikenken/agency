@@ -98,7 +98,7 @@
                         icon: 'success',
                         title: response.title,
                         text: response.msg,
-                        time: 2500
+                        timer: 2000
                     })
                     $("#modalclose").click();
                     PrincipalList();
