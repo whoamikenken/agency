@@ -191,6 +191,16 @@
         });
         
     });
+
+    $(".selectAll").unbind("click").click(function(){
+        var tag = $(this).attr("tag");
+        if($(this).is(':checked')){
+            $("."+tag).prop('checked', true);
+        }else{
+            $("."+tag).prop('checked', false);
+        }
+        
+    });
     
     $("#saveModal").unbind("click").click(function(){
         if($("#tag").val() == "hrreport" || $("#tag").val() == "infosheet"){

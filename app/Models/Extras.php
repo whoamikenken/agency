@@ -15,32 +15,42 @@ class Extras extends Model
     
     public static function returnApplicantCols($desc = "")
     {
-        
+        $colClass = "";
         if ($desc == "General Information") {
+            $colClass = "GenInfo";
             $arrcol = array("applicant_id","er_ref", "maid_ref", "fullname", "fname", "lname", "mname", "contact", "address", "family_contact_name","family_contact","gender", "jobsite","branch", "sales_manager","date_applied","is_first", "abroad_experience","is_walkin", "total_cost", "user_profile", "user_profile_face");
         }elseif($desc == "Passport"){
+            $colClass = "PassInfo";
             $arrcol = array("passport_no", "passport_issued", "passport_validity", "passport_place_issued");
         }elseif($desc == "Vaccination") {
+            $colClass = "VaccInfo";
             $arrcol = array("vac_first_dose_date", "vac_first_brand", "vac_first_country", "vac_second_dose_date", "vac_second_brand","vac_second_country", "vac_booster_dose_date", "vac_booster_brand", "vac_booster_country");
         }elseif($desc == "Bio Status") {
+            $colClass = "BioInfo";
             $arrcol = array("bio_trans_date", "bio_lunch_date", "bio_status", "bio_availability");
         } elseif ($desc == "Job Order") {
+            $colClass = "JoInfo";
             $arrcol = array("jo_received", "jo_confirmed", "jo_er_iscancel", "jo_maid_iscancel");
         } elseif ($desc == "Medical Record") {
+            $colClass = "MedInfo";
             $arrcol = array("med_first_date", "med_first_result", "med_first_clinic", "med_first_cost", "med_second_date", "med_second_result", "med_second_clinic","med_second_cost", "med_third_date", "med_third_result", "med_third_clinic","med_third_cost", "med_fourth_date", "med_fourth_result", "med_fourth_clinic", "med_fourth_cost");
         } elseif ($desc == "Certificate") {
+            $colClass = "CerInfo";
             $arrcol = array("cert_pdos_date", "cert_pdos_release_date", "cert_owwa_date","cert_owwa_release_date", "cert_nc2_by_applicant", "cert_nc2_payment_status","cert_nc2_cost","cert_prc", "cert_driver_license");
         } elseif ($desc == "VISA") {
+            $colClass = "VisaInfo";
             $arrcol = array("visa_number", "visa_date_received", "visa_date_expired", "visa_reactive_date", "visa_status", "visa_er_iscancel", "visa_maid_iscancel");
         } elseif ($desc == "OEC") {
+            $colClass = "OecInfo";
             $arrcol = array("oec_number", "oec_contract_received", "oec_pagibig", "oec_date_filed","oec_date_expiration", "oec_flight_departure");
         }
         
-        $return = '<div class="col-md-6 col-sm-12 col-lg-4"><h6 class="text-center">'.$desc.'</h6>';
+        $return = '<div class="col-md-6 col-sm-12 col-lg-4"><h4 class="text-center">'.$desc. '</h4>
+        <div class="form-check"><input class="form-check-input selectAll" tag="'. $colClass.'" type="checkbox"><label class="form-check-label"><b>Select All</b></label></div>';
         
         foreach ($arrcol as $row) {
             $col = Extras::showDesc($row);
-            $return .= '<div class="form-check"><input class="form-check-input" type="checkbox" name="edata" value="'.$row.'"><label class="form-check-label">'.$col.'</label></div>';
+            $return .= '<div class="form-check"><input class="form-check-input '. $colClass.'" type="checkbox" name="edata" value="'.$row.'"><label class="form-check-label">'.$col.'</label></div>';
         }
         $return .= "</div>";
         return $return;

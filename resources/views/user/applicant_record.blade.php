@@ -632,7 +632,7 @@
                                 icon: 'success',
                                 title: response.title,
                                 text: response.msg,
-                                timer: 2500
+                                timer: 2000
                             })
 
                             passportchopList();

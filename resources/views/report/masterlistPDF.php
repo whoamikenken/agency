@@ -1,4 +1,6 @@
 <?php
+ini_set('max_execution_time', '300');
+ini_set("pcre.backtrack_limit", "5000000");
 
 $pdf = new \Mpdf\Mpdf(array('mode' => 'utf-8','format' => 'LETTER-L', 'orientation' => 'L'));
 $pdf->SetTitle($reportName);
